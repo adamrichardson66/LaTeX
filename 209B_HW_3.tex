@@ -1,0 +1,299 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+\addtolength{\skip\footins}{1pc plus 5pt}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\usepackage{bbm}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209B - Functional Analysis}
+\rightline{Baez, John}
+\rightline{HW 3}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+
+\item Let $\mu,\nu,\lambda$ be $\sigma$-finite measures on a measurable space $(X,\MC{M})$. Suppose that $\lambda\ll\nu$ and $\nu\ll\mu$. Prove that
+\[
+\dd{\lambda}{\mu}=\dd{\lambda}{\nu}\dd{\nu}{\mu}\pspace\mu\text{-a.e.}
+\]
+
+\vspace{5mm}
+\begin{proof}
+Let $\mu,\nu,\lambda$ be $\sigma$-finite measures on a measurable space $(X,\MC{M})$ and suppose that $\lambda\ll\nu$ and $\nu\ll\mu$. First we prove that $\lambda\ll\mu$ (even though it may be simple and/or obvious to some). Since $\lambda\ll\nu$, for every $E\in\MC{M}$, $\lambda(E)=0$ if $\nu(E)=0$. Additionally, since $\nu\ll\mu$, for every $E\in\MC{M}$, $\nu(E)=0$ if $\mu(E)=0$. Consequently, for every $E\in\MC{M}$, $\lambda(E)=0$ if $\mu(E)=0$, so $\lambda\ll\mu$ by definition.
+
+Now, by the Radon-Nikodym theorem, we have that $d\lambda=\dd{\lambda}{\nu}\,d\nu$, $d\nu=\dd{\nu}{\mu}\,d\mu$, and $d\lambda=\dd{\lambda}{\mu}\,d\mu$. Consequently, for any $E\in\MC{M}$,
+
+\begin{align*}
+\lambda(E)&=\int_E\,d\lambda\\[2mm]
+\int_E\,d\lambda&=\int_E\dd{\lambda}{\nu}\,d\nu\\[2mm]
+\int_E\dd{\lambda}{\mu}\,d\mu&=\int_E\dd{\lambda}{\nu}\dd{\nu}{\mu}\,d\mu.\\[2mm]
+\end{align*}
+By Proposotion 2.23(b), 
+\[
+\dd{\lambda}{\mu}=\dd{\lambda}{\nu}\dd{\nu}{\mu}\pspace\mu\text{-a.e.}.
+\]
+\end{proof}
+
+\pagebreak
+
+\item Suppose that $\mu,\nu,\lambda$ are $\sigma$-finite measures on a measurable space $(X,\MC{M})$, and that $\lambda\ll\mu$ and $\nu\ll\mu$. Given constants $a,b\geq0$, there is a $\sigma$-finite measure $a\nu+b\lambda$ defined by
+\[
+(a\nu+b\lambda)(E)=a\nu(E)+b\lambda(E)\pspace\text{for all }E\in\MC{M}.
+\] 
+Prove that 
+\[             a \nu + b \lambda \ll \mu,\text{ and} \]
+\[
+\dd{(a\nu+b\lambda)}{\mu}=a\dd{\nu}{\mu}+b\dd{\lambda}{\mu}\pspace\mu\text{-a.e.}.
+\]
+
+\begin{proof}
+Let $\mu,\nu,\lambda$ be $\sigma$-finite measures on a measurable space $(X,\MC{M})$, and suppose that $\lambda\ll\mu$ and $\nu\ll\mu$. Let the measure $a\nu+b\lambda$ be as defined above with $a,b\geq0$. First, for $E\in\MC{M}$, if $\mu(E)=0$, then by absolute continuity we have $\lambda(E)=0$ and $\nu(E)=0$ as well. Furthermore, we have that $a\nu(E)=a\cdot0=0$ and $b\lambda(E)=b\cdot0=0$, whence $a\nu(E)+b\lambda(E)=0$ when $\mu(E)=0$. Thus, by definition, $a\nu+b\lambda\ll\mu$.
+
+Now, by the Radon-Nikodym theorem, we have $d\lambda=\dd{\lambda}{\mu}\,d\mu$ and $d\nu=\dd{\nu}{\mu}\,d\mu$ so for any $E\in\MC{M}$ we have
+
+\[
+\lambda(E)=\int_E\dd{\lambda}{\mu}\,d\mu\aspace\nu(E)=\int_E\dd{\nu}{\mu}\,d\mu.
+\]
+
+Consequently,
+\begin{align*}
+a\lambda(E)+b\nu(E)&=a\int_E\dd{\lambda}{\mu}\,d\mu+b\int_E\dd{\nu}{\mu}\,d\mu\\[2mm]
+&=\int_E\left(a\dd{\lambda}{\mu}+b\dd{\nu}{\mu}\right)\,d\mu,
+\end{align*}
+
+so by definition, $\displaystyle \dd{(a\nu+b\lambda)}{\mu}=a\dd{\nu}{\mu}+b\dd{\lambda}{\mu}$ \hspace{5mm}$\mu$-a.e.
+\end{proof}
+\vfill
+\pagebreak
+
+
+\item Let $f:[0,1]\rightarrow \MB{R}$ be defined by
+\[
+f(x)=\begin{cases}0 & \text{if }x\in\mathbb{Q}\\ 1 & \text{if }x\in\MB{Q}^c.\end{cases}
+\]
+
+For the above function $f$, compute the Lebesgue integral 
+
+\[
+F(x)=\int_a^xf(t)\,dt
+\]
+
+for $x\in[a,b]$. Prove that this function $F$ is differentiable at every point on the open interval $(a,b)$ and prove that $F'(x)=f(x)$ for almost every $x\in(a,b)$.
+
+\begin{proof}
+By definition of the Lebesgue integral, additivity, and since the set of irrational numbers has full measure\footnote{
+$m(\MB{R})=m(\MB{Q}\cup\MB{Q}^c)=m(\MB{Q})+m(\MB{Q}^c)=0+m(\MB{Q}^c)=m(\MB{Q}^c).$}, we have
+
+\begin{align*}
+F(x)&=\int_a^xf(t)\,dt\\[2mm]
+&=\int_{[a,x]}f(t)\,dm(t)\\[2mm]
+&=\int_{[a,x]\cap\MB{Q}}f(t)\,dm(t)+\int_{[a,x]\cap\MB{Q}^c}f(t)\,dm(t)\\[2mm]
+&=\int_{[a,x]\cap\MB{Q}}0\,dm(t)+\int_{[a,x]\cap\MB{Q}^c}1\,dm(t)\\[2mm]
+&=0+m([a,x]\cap\MB{Q}^c)\\[2mm]
+&=m([a,x]).
+\end{align*}
+
+Thus, $F(x)$ is just the Lebesgue measure of the interval $[a,x]$, i.e. its length. We show this is differentiable directly:
+
+\[
+F'(x)=\lom{h}{0}\frac{F(x+h)-F(x)}{h}=\lom{h}{0}\frac{1}{h}\left(m([a,x+h])-m([a,x])\right)=\lom{h}{0}\frac{1}{h}\,m([x,x+h])=\lom{h}{0}\frac{1}{h}\cdot h=1.
+\]
+
+Therefore, $F$ is differentiable at every $x\in(a,b)$, and since $f(x)=1$ on $\MB{Q}^c$, $F'(x)=f(x)$ a.e.
+\end{proof}
+
+\pagebreak
+
+\item Show that if $F:[a,b]\rightarrow \MB{R}$ has bounded variation, the function $T_F:[a,b]\rightarrow\MB{R}$ given by
+\[
+T_F(x) = \sup \left\{   \sum_{i = 1}^n |F(x_i) - F(x_{i-1})| \, : \; n \in \MB{N}, \;  a = x_0 < x_1 < \cdots < x_n = x \right\}
+\]
+is well-defined, i.e. is finite.
+
+\begin{proof}
+Suppose $F:[a,b]\rightarrow \MB{R}$ has bounded variation. Then by definition its total variation is finite, i.e.
+\[
+\sup \left\{   \sum_{i = 1}^n |F(x_i) - F(x_{i-1})| \, : \; n \in \MB{N}, \;  a = x_0 < x_1 < \cdots < x_n = b \right\}<\infty.
+\]
+Thus, for each $x\in[a,b]$, since $[a,x]\subseteq [a,b]$, we have  $T_F(x)<T_F(b)<\infty$.
+\end{proof}
+
+
+%\item Show that if $F:[a,b]\rightarrow\MB{R}$ has bounded variation, the functions $T_F$ and $T_F-F$ are increasing.
+%
+%
+%\begin{proof}
+%Suppose that $F:[a,b]\rightarrow\MB{R}$ has bounded variation. Since $[a,x_{i-1}]\subseteq[a,x_i]$, $T_F(x_{i-1})\leq T_F(x_i)$, so $T_F$ is an increasing function. Next, since $F$ is of bounded variation and $T_F$ is an increasing function, the total variation of $F$ on any interval $[x_{i-1},x_i]$ is greater than or equal to the net change of $F$ on that interval, i.e.
+%\[
+%T_F(x_i)-T_F(x_{i-1})=|T_F(x_i)-T_F(x_{i-1}|\geq|F(x_i)-F(x_{i-1})|\geq F(x_i)-F(x_{i-1}),\text{ whence}
+%\]
+%\[
+%T_F(x_i)-F(x_i)\geq T_F(x_{i-1})-F(x_{i-1}).
+%\]
+%Therefore $T_F-F$ is an increasing function by definition.
+%\end{proof}
+
+\item Show that if $F:[a,b]\rightarrow\MB{R}$ has bounded variation, the functions $T_F+F$ and $T_F-F$ are increasing.
+
+
+\begin{proof}
+Suppose that $F:[a,b]\rightarrow\MB{R}$ has bounded variation. First, since $[a,x_{i-1}]\subseteq[a,x_i]$, $T_F(x_{i-1})\leq T_F(x_i)$, so $T_F$ is an increasing function. 
+
+Next, since $F$ is of bounded variation and $T_F$ is an increasing function, the total variation of $F$ on any interval $[x_{i-1},x_i]$ is greater than or equal to the net change of $F$ on that interval, i.e.
+\[
+T_F(x_i)-T_F(x_{i-1})=|T_F(x_i)-T_F(x_{i-1}|\geq|F(x_i)-F(x_{i-1})|\geq F(x_i)-F(x_{i-1}),\text{ whence}
+\]
+\[
+T_F(x_i)-F(x_i)\geq T_F(x_{i-1})-F(x_{i-1}).
+\]
+Therefore $T_F-F$ is an increasing function by definition. To show that $T_F+F$ is an increasing function, let $\ve>0$, let $x,y\in[a,b]$ with $x<y$, and by the characterization of supremum we may choose a partition of $[a,x]\subseteq[a,b]$ such that
+\[
+\sum_{j=1}^n|F(x_j)-F(x_{j-1})|\geq T_F(x)-\ve.
+\]
+
+Now, $\sum_{j=1}^n|F(x_j)-F(x_{j-1})|+|F(y)-F(x)|$ is also greater than $T_F-\ve$, and $|F(y)-F(x)|\geq F(y)-F(x)$, so
+\begin{align*}
+T_F(y) +F(y)&\geq\sum_{i=1}^n|F(x_i)+F(x_{i-1})|+|F(y)-F(x)|+F(y)\\[2mm]
+&\geq\sum_{i=1}^n|F(x_i)+F(x_{i-1})|+F(y)-F(x)+F(x)\\[2mm]
+&\geq T_F(x)-\ve +F(x).
+\end{align*}
+
+Since $\ve$ is arbitrary, it follows that $T_f(y)+F(y)\geq T_F(x)+F(x)$, i.e. $T_F+F$ is increasing.
+\end{proof}
+
+%\item[\textbf{5}$^*$] Show that if $F:[a,b]\rightarrow\MB{R}$ has bounded variation, the functions $T_F$ and $T_F-F$ are increasing.
+%
+%
+%\begin{proof}
+%Suppose that $F:[a,b]\rightarrow\MB{R}$ has bounded variation. Since $[a,x_{i-1}]\subseteq[a,x_i]$, $T_F(x_{i-1})\leq T_F(x_i)$, so $T_F$ is an increasing function. Next, since $F$ is of bounded variation and $T_F$ is an increasing function, the total variation of $F$ on any interval $[x_{i-1},x_i]$ is greater than or equal to the net change of $F$ on that interval, i.e.
+%\[
+%T_F(x_i)-T_F(x_{i-1})=|T_F(x_i)-T_F(x_{i-1}|\geq|F(x_i)-F(x_{i-1})|\geq F(x_i)-F(x_{i-1}),\text{ whence}
+%\]
+%\[
+%T_F(x_i)-F(x_i)\geq T_F(x_{i-1})-F(x_{i-1}).
+%\]
+%Therefore $T_F-F$ is an increasing function by definition.
+%\end{proof}
+
+
+\item Show that if $F:[a,b]\rightarrow \MB{R}$ has bounded variation, it is the difference of two increasing functions.
+
+\begin{proof}
+Suppose $F:[a,b]\rightarrow \MB{R}$ has bounded variation. Then we may write $F=T_F-(T_F-F)$ which is the difference of two increasing functions by Problem 5. Similarly, we may also write 
+\[
+F=\frac{1}{2}(T_F+F)-\frac{1}{2}(T_F-F)=F_+-F_-
+\]
+\end{proof}
+
+
+\item Show that if $F:[a,b]\rightarrow\MB{R}$ is the difference of two increasing functions from $[a,b]$ to $\MB{R}$, then $F$ has bounded variation. [Hint: show the total variation of the difference of two functions is less than or equal to the sum of their total variations. The triangle inequality is your friend.]
+
+\begin{proof}
+Suppose that $F:[a,b]\rightarrow\MB{R}$ is the difference of two increasing functions from $[a,b]$ to $\MB{R}$, say $F(x)=G(x)-H(x)$ where $G$ and $H$ are increasing. Note that $G$ and $H$ have bounded variation since they are increasing. Thus, by the triangle inequality and properties of suprema, we have
+
+\begin{align*}
+T_F(x)&=T_{G-H}(x)\\[2mm]
+&=\sup\left\{\sum_{i = 1}^n |G(x_i)-H(x_i)-(G(x_{i-1})-H(x_{i-1}))| : \; n \in \MB{N}, \;  a = x_0 < x_1 < \cdots < x_n = x \right\}\\[2mm]
+&\leq\sup\left\{\sum_{i=1}^n|G(x_i)-G(x_{i-1})|+|H(x_i)-H(x_{i-1})|\right\}\\[2mm]
+&=\sup\left\{\sum_{i=1}^n|G(x_i)-G(x_{i-1})|+\sum_{i=1}^n|H(x_i)-H(x_{i-1})|\right\}\\[2mm]
+&=\sup\left\{\sum_{i=1}^n|G(x_i)-G(x_{i-1})|\right\}+\sup\left\{\sum_{i=1}^n|H(x_i)-H(x_{i-1})|\right\}\\[2mm]
+&=T_G(x)+T_H(x)\\[2mm]
+&<\infty+\infty\\[2mm]
+&=\infty.
+\end{align*}
+
+So $F$ has bounded variation by definition.
+\end{proof}
+
+Behold:
+\textbf{Theorem A.}  A function $F \rightarrow [a,b] \to \MB{R}$ has bounded variation if and only if it is the difference of two increasing functions.
+
+
+
+\end{enumerate}
+
+
+\end{document}

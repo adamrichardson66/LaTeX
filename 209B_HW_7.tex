@@ -1,0 +1,345 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209B - Functional Analysis}
+\rightline{Baez, John}
+\rightline{HW 7}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+
+
+
+
+\item Let $X$ be a compact topological space and $V$ a normed vector space.
+
+\begin{enumerate}
+\itemsep7mm
+\item Prove that $C(X,V)$ becomes a normed vector space if we define addition and scalar multiplication in $C(X,V)$ by
+\[         (f + g)(x) = f(x) + g(x)   \]
+\[        (c f)(x) = c f(x)   \]
+for $f,g \in C(X,V)$, $c \in \MB{R}$ and $x \in X$, and define the \textbf{sup norm} of $f \in C(X,V)$ by
+\[          \|f\|_{\sup} = \sup_{x \in X} \|f(x)\|.    \]
+
+\begin{proof}
+Let $f,g\in C(X,V)$ and let $\lambda\in \MB{R}$. To show that $C(X,V)$ is a vector space, suppose $\<x_\alpha>_{\alpha\in A}\subseteq X$ is a net which converges to $x\in X$. Then by the continuity of $f$ and $g$, 
+\[
+(f+g)(x_\alpha)=f(x_\alpha)+g(x_\alpha)\rightarrow f(x)+g(x)=(f+g)(x),\text{ and}
+\]
+\[
+\lambda f(x_\alpha)\rightarrow \lambda f(x).
+\]
+Thus, $(f+g),\lambda f\in C(X,V)$. The additive identity in $C(X,V)$ is the 0 function $f\equiv 0$, and the multiplicative identity is the unit function $g\equiv 1$. The other properties that define a vector space hold since $V$ is a vector space, and so $C(X,V)$ is a vector space by definition.
+
+Now we proceed by showing that the sup norm defined above is actually a norm. Since $V$ is a normed vector space, 
+\[
+\|\lambda f\|_{\sup}=\sup_{x\in X}\|\lambda f(x)\|=\sup_{x\in X}\{|\lambda|\,\|f(x)\|\}=|\lambda|\sup_{x\in X}\|f(x)\|=|\lambda|\|f\|_{\sup}.
+\]
+Next,
+\[
+\|f+g\|_{\sup}=\sup_{x\in X}\|f(x)+g(x)\|\leq \sup_{x\in X}\|f(x)\|+\sup_{x\in X}\|g(x)\|=\|f\|_{\sup}+\|g\|_{\sup},
+\]
+
+so $\|\cdot\|_{\sup}$ obeys the triangle inequality, so we have that $\|\cdot\|_{\sup}$ is a seminorm. Now, the zero function $f\equiv 0$ is in $C(X,V)$ and $\|0\|_{\sup}=\sup_{x\in X}\|0\|=0$. Suppose $\|f\|_{\sup}=0$. Then $0=\|f\|_{\sup}=\sup_{x\in X}\|f(x)\|\geq\|f(x)\|\geq 0$. Thus it must be the case that $f(x)=0$ for all $x\in X$, so $f\equiv 0$, and it is shown that $\|\cdot\|_{\sup}$ is indeed a norm.
+\end{proof}
+
+\pagebreak
+
+\item If $V$ is a Banach space, prove that the normed vector space $C(X,V)$ is a Banach space.
+
+\begin{proof}
+It suffices to show that $C(X,V)$ is complete with respect to the metric $d(f,g)=\|f-g\|_{\sup}$ induced by the sup norm, i.e. that Cauchy sequences in $C(X,V)$ converge in this metric.
+
+To that end, let $\{f_n\}$ be a Cauchy sequence in $C(X,V)$ and let $\ve> 0$. Since $V$ is a Banach space, it is complete in its metric, so for each $x\in X$, there exists an $f(x)\in  V$ such that $f_n(x)\rightarrow f(x)$. In other words, there exists an $N_x\in \MB{Z}^+$ such that if $n\geq N_x$, then $\|f_n(x)-f(x)\|<\frac{\ve}{2}$. Since this can be done for each $x$, choose $N_1=\sup_{x\in X}\{N_x\}$ and when $n\geq N_1$ we have that $d(f_n,f)=\|f_n-f\|_{\sup}\leq\frac{\ve}{2}$ for all $x$. Note that $N_1<\infty$ since otherwise there would exist a Cauchy sequence of functions in $V$ that does not converge.
+
+
+To show that $f\in C(X,V)$ as well, let $\{x_i\}$ be a sequence in $X$ that converges to $x$ and let $\ve>0$. Then for sufficiently large $i,m,n$, we have
+
+\begin{align*}
+\|f(x_i)-f(x)\|&=\|f(x_i)-f_m(x_i)+f_m(x_i)-f_n(x)+f_n(x)-f(x)\|\\[2mm]
+&\leq \|f(x_i)-f_m(x_i)\|+\|f_m(x_i)-f_n(x)\|+\|f_n(x)-f(x)\|\\[2mm]
+&\leq \frac{\ve}{3}+\frac{\ve}{3}+\frac{\ve}{3}\\[2mm]
+&=\ve.
+\end{align*}
+
+
+Since $\{f_n\}$ is Cauchy, there exists an $N_2\in \MB{Z}^+$ such that for all $x\in X$, if $m,n\geq N_2$, then $d(f_m,f_n)=\|f_m-f_n\|_{\sup}=\sup_{x\in X}\|f_m(x)-f_n(x)\|<\frac{\ve}{2}$. Choose $N=\max\{N_1,N_2\}$. Then when $m,n\geq N$, we have
+
+\begin{align*}
+d(f_n,f)&=\|f_n -f\|_{\sup}\\[2mm]
+&=\sup_{x\in X}\|f_n(x)-f(x)\|\\[2mm]
+&=\sup_{x\in X}\|f_n(x)-f_m(x)+f_m(x)-f(x)\|\\[2mm]
+&\leq\sup_{x\in X}\|f_n(x)-f_m(x)\|+\sup_{x\in X}\|f_m(x)-f(x)\|\\[2mm]
+&=\|f_n-f_m\|_{\sup}+\|f_m-f\|_{\sup}\\[2mm]
+&=d(f_n,f_m)+d(f_m,f)\\[2mm]
+&\leq\frac{\ve}{2}+\frac{\ve}{2}=\ve.
+\end{align*}
+
+Therefore, $f_n\rightarrow f$ in the metric $d$ so $C(X,V)$ is a Banach space by definition.
+\end{proof}
+
+\item What goes wrong when $X$ is not compact? Give an example.
+
+If $X$ is not compact, then $\|f\|_{\sup}$ may not be finite. Consider the non-compact half-open interval $(0,1]$. Then $f:(0,1]\rightarrow \MB{R}$ defined by $f(x)=\frac{1}{x}$ is continuous on $(0,1]$, but $\|f\|_{\sup}=\sup_{x\in(0,1]}\left\|\frac{1}{x}\right\|=\infty$.
+\end{enumerate}
+\end{enumerate}
+
+
+Suppose $V$ and $W$ are normed vector spaces.  We say a linear map $T:V\rightarrow W$ is \textbf{bounded} if there exists a constant $M \geq 0$ such that
+\[       \|Tv\| \le M \|v\| \]
+for all $v \in V$.   Let 
+\[       L(V,W) = \{T: V\rightarrow W \mid T\text{ is a bounded linear map} \} .\]
+
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+
+\item Suppose $V$ and $W$ are normed vector spaces.
+
+\begin{enumerate}
+\itemsep7mm
+
+\item Prove that $L(V,W)$ becomes a normed vector space if we define addition and scalar multiplication in $L(V,W)$ by
+\[         (S + T)(v) = S(v) + T(v)   \]
+\[        (c T)(v) = c T(v)   \]
+for all $S,T \in L(V,W)$, $c \in \MB{R}$ and $v \in V$, and define the \textbf{operator norm}  of $T \in L(V,W)$ by 
+\[        \|T\| = \sup_{v \in V, \, v \neq 0} \frac{\|Tv\|}{\|v\|}    .\]
+
+\begin{proof}
+Let $S,T \in L(V,W)$ and let $\lambda\in \MB{R}$. First we show that the operator norm is indeed a norm. Since $W$ is a vector space, we have
+
+\begin{multicols}{2}
+\begin{align*}
+\|S+T\|&=\sup_{v\neq0}\frac{\|(S+T)(v)\|}{\|v\|}\\[2mm]
+&\leq\sup_{v\neq0}\left(\frac{\|S(v)\|}{\|v\|}+\frac{\|T(v)\|}{\|v\|}\right)\\[2mm]
+&\leq\sup_{v\neq0}\frac{\|S(v)\|}{\|v\|}+\sup_{v\neq0}\frac{\|T(v)\|}{\|v\|}\\[2mm]
+&=\|S\|+\|T\|,\text{ and}
+\end{align*}
+
+
+\begin{align*}
+\|\lambda T(v)\|&=\sup_{v\neq0}\frac{\|\lambda T(v)\|}{\|v\|}\\[2mm]
+&=\sup_{v\neq0}\frac{|\lambda|\,\|T(v)\|}{\|v\|}\\[2mm]
+&=|\lambda|\sup_{v\neq0}\frac{\|\lambda T(v)\|}{\|v\|}\\[2mm]
+&=|\lambda|\,\|T(v)\|.
+\end{align*}
+\end{multicols}
+
+Note that $0\in L(V,W)$ and $\|0\|=\sup_{v\neq0}\frac{\|0\|}{\|v\|}=0$. Suppose $\|T\|=0$. Then $\sup_{v\neq0}\frac{\|T\|}{\|v\|}=0$ so the operator norm is a norm. 
+
+Now we show that $L(V,W)$ is a vector space. Since $T,S\in L(V,W)$, they are linear by definition, so addition and scalar multiplication result in another linear map, i.e. $S+T,\lambda T\in L(V,W)$. Additionally, there exist $M_1,M_2\in \MB{R}$ such that $\|S(v)\|\leq M_1\|v\|$ and $\|T(v)\|\leq M_2\|v\|$. It now suffices to show that $S+T$ and $\lambda T$ are bounded. We have
+
+\[
+\|S+T\|\leq\|S\|+\|T\|\leq M_1\|v\|+M_2\|v\|=(M_1+M_2)\|v\|,\aspace \|\lambda T\|=|\lambda|\,\|T\|\leq\lambda M_2\|v\|,
+\]
+
+so $S+T$ and $\lambda T$ are bounded which means they are in $L(V,W)$. The additive identity is the 0 map and the multiplicative identity is the unit map 1. Since $W$ is a vector space, the other properties of a vector space hold, and thus $L(V,W)$ is a normed vector space.
+\end{proof}
+
+
+\item If $W$ is a Banach space, prove that the normed vector space $L(V,W)$ is a Banach space.
+
+\begin{proof}
+We need to show that $L(V,W)$ is complete with respect to the metric $d(S,T)=\|S-T\|$. Let $\ve>0$ and let $\{T_n\}$ be a Cauchy sequence in $L(V,W)$. Since $W$ is a Banach space, it is complete, so the Cauchy sequences $\{T_n(v)\}$  converge to, say, $T(v)$ for every $v\in V$. In other words, for each $v\in V$, there exists an $N_v\in\MB{Z}^+$ such that if $n\geq N_v$, then $\|T_n(v)-T(v)\|<\frac{\ve}{2}$. Choose $N_1=\sup_{v\in V}\{N_v\}$ and then whenever $n\geq N_1$, we have $d(T_n,T)=\|T_n-T\|_{\sup}\leq\frac{\ve}{2}$. $N_1$ is finite otherwise there would exist a Cauchy sequence of functions in $W$ that does not converge. Note that $T\in L(V,W)$ by properties of convergent limits in $W$.
+
+Since $\{T_n\}$ is a Cauchy sequence, there exists an $N_2\in\MB{Z}^+$ such that if $m,n\geq N_2$, then $d(T_m,T_n)<\frac{\ve}{2}$. Choose $N=\max\{N_1,N_2\}$. Then when $m,n\geq N$, we have 
+
+\vspace*{-5mm}
+\begin{align*}
+d(T_n,T)&=\|T_n-T\|\\[2mm]
+&=\|T_n-T_m+T_m-T\|\\[2mm]
+&\leq\|T_n-T_m\|+\|T_m-T\|\\[2mm]
+&=d(T_n,T_m)+d(T_m,T)\\[2mm]
+&<\frac{\ve}{2}+\frac{\ve}{2}\\[2mm]
+&=\ve.
+\end{align*}
+
+Therefore, $T_n\rightarrow T$ in the metric $d$ so $L(V,W)$ is a Banach space by definition.
+\end{proof}
+\end{enumerate}
+
+\pagebreak
+
+\item \textbf{T}  FALSE
+Suppose $\mu,\nu,\lambda$ are (positive) measures on a measurable space $(X,\MC{M})$.  Then $\nu + \lambda \ll  \mu + \lambda $ implies $\nu \ll \mu$.
+
+Since they are positive measures, removing ``vanishment'' equally to from both measures won't allow $\nu$ to vanish outside of where $\mu$ does. This statement would be false if they were allowed to be signed measures.
+
+\item \textbf{T}  
+Suppose $\mu,\nu,\lambda$ are (positive) measures on a measurable space $(X,\MC{M})$.  Then $\nu \ll \mu$ implies $\nu + \lambda \ll  \mu + \lambda$.
+
+Since they are positive measures, adding in ``vanishment'' equally to both measures won't allow $\nu$ to vanish outside of where $\mu$ does. This statement would still be true if these were signed measures.
+
+\item \textbf{T}  
+If $\mu,\nu,\lambda$ are measures on a measurable space $(X,\MC{M})$ and $\mu \ll \nu$, $\nu \ll \lambda$, then $\mu \ll \lambda$.  
+
+This is because absolute continuity is transitive.
+
+\item \textbf{F}
+If $\mu,\nu,\lambda$ are measures on a measurable space $(X,\MC{M})$ and $\mu \ll \nu$, $\mu \perp \lambda$, then $\nu \perp \lambda$.  
+
+ %$\nu$ can vanish on sets that $\mu$ does not, and one of those sets may be the set required to get the separation required by mutual singularity.
+
+\item \textbf{F} 
+It is impossible to have three measures $\mu,\nu,\lambda$ on a measurable space $(X,\MC{M})$ with $\mu \perp \nu$, $\nu \perp \lambda$ and $\lambda \perp \mu$.
+
+Let $\lambda=\mu$ as a counterexample. This statement is true if the measures all have to be distinct.
+
+\item \textbf{T} 
+If $(X,\MC{M},\mu)$ is a \emph{finite} measure space, $f_n \in L^1(X,\mu)$, and $f_n \to 0$ uniformly then $\int f_n\,d\mu \to 0$.
+
+If $f_n\to0$ uniformly, then given any $\ve>0$, for $n$ sufficiently large we have $|f_n-0|<\ve$, whence by the triangle inequality we have $\left|\int_X f_n\,d\mu-0\right|<\ve$.
+
+\item  \textbf{F}
+If $(X,\MC{M},\mu)$ is a measure space, $f_n \in L^1(X,\mu)$, and $f_n \to 0$ uniformly then $\int f_n\, d\mu \to 0$.
+
+Counterexample: Let $X=\MB{R}^+$ and define the sequence of functions $f_n:\MB{R}^+\rightarrow\{0,1\}$ by
+\[
+f_n(x)=\begin{cases}0 & \text{if }x\in[0,n)\\ 1 & \text{if }x\in[n,\infty).\end{cases}
+\]
+$f_n\to0$ uniformly, but $\int_Xf_n=\infty$ for all $n$, so $\int_Xf_n\not\to0$.
+
+\item \textbf{F}
+If $(X,\MC{M},\mu)$ is a finite measure space, $f_n \in L^1(X,\mu)$, and $f_n \to 0$ pointwise then $\int f_n \mu \to 0$.
+
+Counterexample: Let $X=[0,1]$ and define the sequence of functions $f_n:[0,1]\to\MB{R}$ by
+\[
+f_n(x)=\begin{cases}n & \text{if }x\in\left[0,\frac{1}{n}\right)\\ 0 & \text{if }x\in\left[\frac{1}{n},1\right].\end{cases}
+\]
+$f_n\to0$ pointwise for all $x\in[0,1]$, but $\int_{[0,1]}f_n=1$ for all $n$, so $\int_Xf_n\not\to0$.
+
+
+\item \textbf{F}
+If $f_n$ is a sequence of nonnegative measurable functions on a measure space $(X,\MC{M},\mu)$, then
+\[  \overline{\lim} \int_X f_n\, d\mu = \int_X \overline{\lim}\, f_n\,d\mu. \]
+
+
+
+Counterexample: the same one as above. $\overline{\lim} \int_X f_n\, d\mu=1$ but $\int_X \overline{\lim}\, f_n\,d\mu=0$. Fatou's lemma only guarantee's 
+\[  \overline{\lim} \int_X f_n\, d\mu \geq \int_X \overline{\lim}\, f_n\,d\mu. \]
+
+\item \textbf{T}
+Finite linear combinations of the functions $\{e^{-nx^2}\}_{n \geq 0}$ are dense in $C[0,1]$ with its usual sup norm topology.
+
+The set of finite linear combinations of the functions $\{e^{-nx^2}\}_{n \geq 0}$ form a closed subalgebra of $C([0,1],\MB{R})$ that separates points, so by (a corollary to) the Stone-Weierstrass Theorem, it is dense in $C([0,1])$.
+
+\item \textbf{F}
+Finite linear combinations of the functions $\{e^{-nx^2}\}_{n \geq 0}$ are dense in $C[-1,1]$ with its usual sup norm topology. 
+
+This is false because it does not separate points. This is due the the symmetric nature of the functions.
+
+\item \textbf{F}
+The function $f: [0,1] \to \MB{R}$ given by 
+\[
+f(x)=\begin{cases}x\sin\frac{1}{x} & \text{if }x>0\\0 & \text{if }x=0.\end{cases}
+\]
+is of bounded variation.
+
+It oscillates too much.
+
+\item \textbf{T}
+The function $f: [0,1] \to \MB{R}$ given by 
+\[
+f(x)=\begin{cases}x^2\sin\frac{1}{x} & \text{if }x>0\\0 & \text{if }x=0.\end{cases}
+\]
+is of bounded variation.
+
+It doesn't oscillate enough.
+
+
+\item \textbf{F}
+A function $f : [0,1] \to \MB{R}$ is increasing iff there is a finite Borel measure $\mu$ on $[0,1]$ such that $f(x) = \mu([a,x])$. 
+
+Increasing functions are Borel measurable, but not every Borel measurable function is increasing.
+
+\end{enumerate}
+
+
+
+
+\end{document}

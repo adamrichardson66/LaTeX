@@ -1,0 +1,425 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210A - Complex Analysis}
+\rightline{Wong, Bun}
+\rightline{HW 6}
+\rightline{\today}
+
+\lspace
+
+
+
+\textbf{p. 99:} 3, 4, 7, \textbf{p. 110:} 1, 4, 6, 11, 13ab
+
+\lspace
+
+\textbf{p. 99:} 3, 4, 7
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+\setcounter{enumi}{2}
+
+\item Let $f$ be analytic in $B(a;R)$ and suppose that $f(a)=0$. Show that $a$ is a zero of multiplicity $m$ iff $f^{(m-1)}(a)=\cdots=f(a)=0$ and $f^{(m)}(a)\neq0$.
+
+\begin{proof}
+Suppose $f$ is analytic on $B(a;R)$ and that $f(a)=0$. Then $f$ has a power series expansion in $B(a;R)$:
+\[
+f(z)=\sum_{k=0}^\infty \frac{f^{(k)}(a)}{k!}(z-a)^k
+\]
+
+Now, $f^{(m-1)}(a)=\cdots=f(a)=0$ and $f^{(m)}(a)\neq0$ if and only if
+
+\begin{align*}
+f(z)&=\sum_{k=0}^\infty \frac{f^{(k)}(a)}{k!}(z-a)^k\\[2mm]
+&=\sum_{k=m}^\infty \frac{f^{(k)}(a)}{k!}(z-a)^k\\[2mm]
+&=(z-a)^m \sum_{k=m+1}^\infty \frac{f^{(k)}(a)}{k!}(z-a)^{k-(m+1)}\\[2mm]
+&=(z-a)^mg(z).
+\end{align*}
+$g$ is analytic since $f$ is and $g(a)\neq0$ since $f^{(m)}(a)\neq0$, so by definition $a$ is a zero of multiplicity $m$.
+\end{proof}
+
+\pagebreak
+
+\item Suppose that $f:G\to \MB{C}$ is analytic and one-to-one; show that $f'(z)\neq 0$ for any $z\in G$.
+
+\begin{proof}
+Suppose $f:G\to \MB{C}$ is analytic and one-to-one, and write $f(G)=\Omega$. Then by Corollary 7.6, $f$ has an analytic inverse $f^{-1}:\Omega\to\MB{C}$ and 
+\[
+(f^{-1})'(\omega)=\frac{1}{f'(z)}
+\]
+where $\omega=f(z)$. $f'(z)\neq0$ for any $z\in G$, otherwise $f^{-1}$ would be undefined there, a contradiction.
+\end{proof}
+
+
+\setcounter{enumi}{6}
+\item Use Theorem 7.2 (the Zero-Counting Formula) to give another proof of the Fundamental Theorem of Algebra.
+
+\begin{proof}
+Recall that the FTA says: If $p(z)$ is a nonconstant polynomial, then there is a complex number $a$ with $p(a)=0$.
+
+Let $p(z)$ be a nonconstant polynomial. Then $p(z)=c_0+c_1z+c_2z^2+\cdots+c_nz^n$, whence $p'(z)=c_1+2c_2z+3c_3z^2+\cdots +nc_nz^{n-1}$
+\end{proof}
+
+
+
+\end{enumerate}
+
+\pagebreak
+
+\textbf{p. 110:} 1, 4, 6, 11, 13ab
+
+
+
+\begin{enumerate}
+\itemsep5mm
+
+\item Each of the following functions $f$ has an isolated singularity at $z=0$. Determine its nature; if it is a removable singularity define $f(0)$ so that $f$ is analytic at 0; if it is a pole find the singular part; if it is an essential singularity determine $f(\{z:0<|z|<\delta\})$ for arbitrarily small values of $\delta$.
+
+\begin{enumerate}
+\itemsep5mm
+
+\item $\displaystyle f(z)=\frac{\sin z}{z}$
+
+Since 
+\[
+\lom{z}{0}z\cdot\frac{\sin z}{z}=\lom{z}{0}\sin z=0,
+\]
+by Theorem 1.2 on p. 103 $f$ has a removable singularity at $z=0$. Using l'H\^{o}pital's rule we find that $\lom{z}{0}f(z)=1$, so by defining
+\[
+f(z)=\begin{cases}\frac{\sin z}{z} & \text{if }z\neq0\\ 1 & \text{if }z=0,\end{cases}
+\]
+$f$ becomes analytic at 0.
+
+\item $\displaystyle f(z)=\frac{\cos z}{z}$
+
+By Theorem 1.2, this function does not have a removable singularity, so we need to determine if 0 is a pole or an essential singularity.
+
+It's Laurent series expansion has
+\begin{align*}
+a_{-1}&=\frac{1}{2\pi i}\int_\gamma\frac{\frac{\cos z}{z}}{z^{1-1}}\\[2mm]
+&=\frac{1}{2\pi i}\int_\gamma \frac{\cos z}{z}\,dz\\[2mm]
+&=\frac{1}{2\pi i}\int_\gamma\frac{\left(1-\frac{z^2}{2!}+\frac{z^4}{4!}-\cdots\right)}{z}\,dz\\[2mm]
+&=\frac{1}{2\pi i}\int_\gamma \left(\frac{1}{z}-\frac{z}{2!}+\frac{z^3}{4!}-\cdots\right)\,dz\\[2mm]
+&=\frac{1}{2\pi i}\int_\gamma \frac{1}{z}\,dz+\frac{1}{2\pi i}\int_\gamma \left(-\frac{z}{2!}+\frac{z^3}{4!}-\cdots\right)\,dz\\[2mm]
+&=\frac{1}{2\pi i}\cdot 2\pi i+0=1.
+\end{align*}
+Moreover, for $n\leq -2$, $-(n+2)\geq 0$, so the coefficients become
+\[
+a_{n}=\frac{1}{2\pi i}\int_\gamma z^{-(n+2)}\cos z\,dz=0
+\]
+since $z^{-(n+2)}\cos z$ is analytic at $0$ (end everywhere, in fact). Therefore, 0 is a (simple) pole by Corollary 1.18 on p. 109. Moreover, we have
+\[
+f(z)=\frac{\cos z}{z}=\underbrace{\frac{1}{z}}_{\text{singular part}}-\underbrace{\frac{z}{2!}+\frac{z^3}{4!}-\cdots}_{\text{analytic part}}
+\]
+
+\item $\displaystyle f(z)=\frac{\cos z-1}{z}$
+
+This is a removable singularity by Theorem 1.2 on p. 103 since 
+\[
+\lom{z}{0}z\cdot \frac{\cos z-1}{z}=\lom{z}{0}\cos z-1=1-1=0.
+\]
+By defining
+\[
+f(z)=\begin{cases}\frac{\cos z}{z} & \text{if }z\neq0\\ 1 & \text{if }z=0,\end{cases}
+\]
+$f$ becomes analytic at 0.
+
+\item $f(z)=\exp(z^{-1})=e^{\frac{1}{z}}$
+
+By Theorem 1.2 on p. 103, this is not a removable singularity, so we proceed to check if it is a pole or an essential singularity. Note that
+\[
+e^z=\sum_{n=0}^\infty\frac{z^n}{n!} \quad \implies \quad e^{\frac{1}{z}}=\sum_{n=0}^\infty\frac{1}{n!}\cdot\frac{1}{z^n}.
+\]
+Consequently,
+\begin{align*}
+a_n&=\frac{1}{2\pi i}\int_\gamma \frac{e^{1/z}}{z^{n+1}}\,dz\\[2mm]
+&=\frac{1}{2\pi i}\int_\gamma\frac{\sum_{n=0}^\infty\frac{1}{n!}\cdot\frac{1}{z^n}}{z^{n+1}}\,dz\\[2mm]
+&=\frac{1}{2\pi i}\int_\gamma\sum_{n=0}^\infty\frac{1}{n!}\cdot\frac{1}{z^{2n+1}}\,dz\\[2mm]
+&\neq 0
+\end{align*}
+for infinitely many $n$. Therefore, 0 is an essential singularity of $f(z)=e^{1/z}$. Moreover, by the Casorati-Weierstrass theorem, $\overline{f(\{z:0<|z|<\delta\})}=\MB{C}$ and so $f(\{z:0<|z|<\delta\})$ is either $\MB{C}$ or $\MB{C}-\{a\}$ for some $\{a\}$.
+
+\item $\displaystyle f(z)=\frac{\log(z+1)}{z^2}$
+
+Here we use the power series representation of $\log$:
+
+\[
+f(z)=\frac{\log(z+1)}{z^2}=\frac{1}{z^2}\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}z^n=\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}z^{n-2}=\frac{1}{z}-\frac{1}{2}+\underbrace{\sum_{n=3}^\infty\frac{(-1)^{n+1}}{n}z^{n-2}}_\text{analyitic part}.
+\]
+Thus, $f(z)$ has a simple pole at 0.
+
+\item $\displaystyle f(z)=\frac{\cos(z^{-1})}{z^{-1}}$
+
+Using the Taylor expansion of $\cos z$, we have
+\begin{align*}
+f(z)&=\frac{\cos(z^{-1})}{z^{-1}}\\[2mm]
+&=\frac{\left(1-\frac{(z^{-1})^2}{2!}+\frac{(z^{-1})^4}{4!}-\frac{(z^{-1})^6}{6!}+\cdots\right)}{z^{-1}}\\[2mm]
+&=z=\frac{1}{2!z}+\frac{1}{4!z^3}-\frac{1}{6!z^5}+\cdots,\text{ so}\\[2mm]
+\frac{f(z)}{z^{n+1}}&=\frac{1}{z^n}-\frac{1}{2!z^{n+2}}+\frac{1}{4!z^{n+4}}-\frac{1}{6!z^{n+6}}+\cdots
+\end{align*}
+
+Using the formula for $a_n$ again and Corollary 1.18, we find that 0 is an essential singularity. Moreover, by the Casorati-Weierstrass theorem, $\overline{f(\{z:0<|z|<\delta\})}=\MB{C}$ and so $f(\{z:0<|z|<\delta\})$ is either $\MB{C}$ or $\MB{C}-\{a\}$ for some $\{a\}$.
+
+
+\item $\displaystyle f(z)=\frac{z^2+1}{z(z-1)}$
+
+Using polynomial long division reveals
+\[
+\frac{z^2+1}{z(z-1)}=1+\frac{z+1}{z(z-1)}
+\]
+and partial fraction decomposition yields
+\[
+\frac{z+1}{z(z-1)}=\frac{-1}{z}+\frac{2}{z-1}
+\]
+so
+\[
+f(z)=1-\frac{1}{z}+\frac{2}{z-1}.
+\]
+Thus, $f$ has simple poles at $z=0$ and $z=1$.
+
+\item $\displaystyle \frac{1}{1-e^z}$
+
+Since
+\[
+e^z=\sum_{n=0}^\infty\frac{z^n}{n!}=1+\frac{z}{1!}+\frac{z^2}{2!}+\cdots,
+\]
+\[
+1-e^z=-\frac{z}{1!}-\frac{z^2}{2!}-\cdots=z\left[1-\left(\frac{z}{2!}+\frac{z^2}{3!}+\cdots\right)\right]
+\]
+whence
+\[
+f(z)=\frac{1}{1-e^z}=\frac{1}{z\left[1-\left(\frac{z}{2!}+\frac{z^2}{3!}+\cdots\right)\right]}.
+\]
+Therefore, $f(z)$ has a simple pole at 0. Partial fraction decomposition can be used to find that
+\[
+f(z)=\frac{1}{z}+\frac{g(z)}{\left[1-\left(\frac{z}{2!}+\frac{z^2}{3!}+\cdots\right)\right]}
+\]
+with $g(z)\neq 0$, so the singular part is $\frac{1}{z}$.
+
+\item $\displaystyle f(z)=z\sin\frac{1}{z}$
+
+We have
+\[
+f(z)=z\sin\frac{1}{z}=z\left(z^{-1}-\frac{(z^{-1})^3}{3!}+\frac{(z^{-1})^5}{5!}-\frac{(z^{-1})^7}{7!}+\cdots\right)=1-\frac{z^{-2}}{3!}+\frac{z^{-4}}{5!}-\frac{z^{-6}}{7!}+\cdots
+\]
+so 0 is an essential singularity. Moreover, by the Casorati-Weierstrass theorem, $\overline{f(\{z:0<|z|<\delta\})}=\MB{C}$ and so $f(\{z:0<|z|<\delta\})$ is either $\MB{C}$ or $\MB{C}-\{a\}$ for some $\{a\}$.
+
+\item $\displaystyle f(z)=z^n\sin\frac{1}{z}$
+
+In this case we have
+\[
+f(z)=z^n\sin\frac{1}{z}=z^n\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)!}(z^{-1})^{2k+1}=\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)!}z^{n-(2k+1)}.
+\]
+This shows that 0 is an essential singularity since $n$ is finite, but the analytic part of $f$ consists of all terms such that $n\geq 2k+1$, and the singular part consists of all terms such that $n<2k+1$.
+
+Moreover, by the Casorati-Weierstrass theorem, $\overline{f(\{z:0<|z|<\delta\})}=\MB{C}$ and so $f(\{z:0<|z|<\delta\})$ is either $\MB{C}$ or $\MB{C}-\{a\}$ for some $\{a\}$.
+\end{enumerate}
+
+\setcounter{enumi}{3}
+
+\item Let $\displaystyle f(z)=\frac{1}{z(z-1)(z-2)}$; give the Laurent Expansion of $f(z)$ in each of the following annuli:
+\begin{enumerate}
+\itemsep5mm
+\item $\text{ann}(0;0,1)$
+
+Using partial fraction decomposition, we have
+\begin{align*}
+\frac{1}{z(z-1)(z-2)}&=\frac{1}{z}\left(\frac{1}{(z-1)(z-2)}\right)\\[2mm]
+&=\frac{1}{z}\left(\frac{-1}{z-1}+\frac{1}{z-2}\right)\\[2mm]
+&=\frac{1}{z}\left(\frac{1}{1-z}-\frac{1}{2}\cdot\frac{1}{1-\frac{z}{2}}\right)\\[2mm]
+&=\frac{1}{z}\left(\sum_{n=0}^\infty z^n-\frac{1}{2}\sum_{n=0}^\infty\left(\frac{z}{2}\right)^n\right)\\[2mm]
+&=\sum_{n=0}^\infty z^{n-1}-\sum_{n=0}^\infty \left(\frac{1}{2}\right)^{n+1}z^{n-1}\\[2mm]
+&=\sum_{n=-1}^\infty \left(1-\left(\frac{1}{2}\right)^{n+2}\right)z^n\\[2mm]
+&=\sum_{n=-1}^\infty\left(1-2^{-(n+2)}\right)z^n.
+\end{align*}
+However, note that this representation is only valid when $z\in\{|z|<1\}\cap\{|z|<2\}=\{|z|<1\}$, so it holds on this annulus, but not on the annuli in (b) or (c) to follow.
+
+\item $\text{ann}(0;1,2)$
+
+Using partial fraction decomposition again,
+\begin{align*}
+\frac{1}{z(z-1)(z-2)}&=\frac{1}{z}\left(\frac{1}{(z-1)(z-2)}\right)\\[2mm]
+&=\frac{1}{z}\left(\frac{-1}{z-1}+\frac{1}{z-2}\right)\\[2mm]
+&=\frac{1}{z}\left(\frac{1}{z}\cdot\frac{-1}{1-\frac{1}{z}}-\frac{1}{2}\cdot\frac{1}{1-\frac{z}{2}}\right)\\[2mm]
+&=-\sum_{n=0}^\infty z^{-n-2}-\sum_{n=0}^\infty\left(\frac{1}{2}\right)^{n+1}z^{n-1}\\[2mm]
+&=-\sum_{-\infty}^{-2}z^n-\sum_{n=-1}^\infty\left(\frac{1}{2}\right)^{n+2}z^n.
+\end{align*}
+Note that this representation is only valid when $z\in\{|z|>1\}\cap\{|z|<2\}=\text{ann}(0;1,2)$.
+
+\item $\text{ann}(0;2,\infty)$
+We have
+\begin{align*}
+\frac{1}{z(z-1)(z-2)}&=\frac{1}{z}\left(\frac{1}{(z-1)(z-2)}\right)\\[2mm]
+&=\frac{1}{z}\left(\frac{-1}{z-1}+\frac{1}{z-2}\right)\\[2mm]
+&=\frac{1}{z}\left(\frac{1}{z}\cdot\frac{-1}{1-\frac{1}{z}}+\frac{1}{z}\cdot\frac{1}{1-\frac{2}{z}}\right)\\[2mm]
+&=-\frac{1}{z^2}\sum_{n=0}^\infty \left(\frac{1}{z}\right)^n+\frac{1}{z^2}\sum_{n=0}^\infty \left(\frac{2}{z}\right)^n\\[2mm]
+&=-\sum_{n=0}^\infty z^{-n-2}+\sum_{n=0}^\infty 2^nz^{-n-2}\\[2mm]
+&=\sum_{n=-\infty}^{-2}\left(2^{n+2}-1\right)z^n.
+\end{align*}
+Note that this representation is only valid when $z\in\{|z|>1\}\cap\{|z|>2\}\supset\text{ann}(0;2,\infty)$.
+\end{enumerate}
+
+\setcounter{enumi}{5}
+
+\item If $f:G\to\MB{C}$ is analytic except for poles, show that the poles of $f$ cannot have a limit point in $G$.
+
+\begin{proof}
+Let $\{a_i\}\subset G$ be a set of poles of $f$. Suppose by way of contradiction that this set has a limit point, $a$, in $G$. Since $f$ is analytic except on $\{a_i\}$, it must be analytic at $a$, and thus is continuous in a small neighborhood of $a$. But this means that this neighborhood cannot contain any poles of $f$, so $a$ cannot be a limit point, a contradiction.
+\end{proof}
+
+
+\setcounter{enumi}{10}
+
+\item Give the Laurent series development of $f(z)=e^{\frac{1}{z}}$. Can you generalize this result?
+
+\begin{proof}
+For all $z\in\MB{C}$, we have
+\[
+e^z=\sum_{n=0}^\infty \frac{z^n}{n!},
+\]
+so
+\[
+e^{\frac{1}{z}}=\sum_{n=0}^\infty \frac{z^{-n}}{n!}
+\]
+for all $z\in\MB{C}-\{0\}$.
+\end{proof}
+
+
+\setcounter{enumi}{12}
+
+\item Let $R>0$ and $G=\{z:|z|>R\}$. A function $f:G\to\MB{C}$ has a removable singularity, a pole, or an essential singularity at infinity if $f(z^{-1})$ has, respectively, a removable singularity, a pole, or an essential singularity at $z=0$. If $f$ has a pole at $\infty$ then the order of the pole is the order of the pole of $f(z^{-1})$ at $z=0$.
+
+\begin{enumerate}
+\itemsep5mm
+\item Prove that an entire function has a removable singularity at infinity iff it is a constant.
+
+\begin{proof}
+First suppose that $f$ has a removable singularity at $\infty$. Then $f(z^{-1})$ has a removable singularity at 0, so $\lom{z}{\infty}f(z)=\lom{z}{0}f(z^{-1})$ exists and is finite. In other words, $f$ is bounded on $\{|z|\geq R\}$ for some $R$. Moreover, since $f$ is entire, is continuous on $\{|z|\leq R\}$, and so is bounded there as well since $\{|z|\leq R\}$ is a compact set. Thus $f$ is bounded and entire, so by Liouville's theorem, it is constant.
+
+Suppose conversely that $f\equiv k$, a constant. Then
+\[
+\lom{z}{0}(z-0)f(z^{-1})=\lom{z}{0}kz=0,
+\]
+so $f(z^{-1})$ has a removable singularity at 0.
+\end{proof}
+
+\item Prove that an entire function has a pole at infinity of order $m$ iff it is a polynomial of degree $m$.
+
+\begin{proof}
+If $f$ is entire, then it has a power series representation
+\[
+f(z)=\sum_{n=0}^\infty a_nz^n.
+\]
+Suppose it has a pole at infinity of order $m$. Then $f(z^{-1})$ has a pole at 0 of order $m$ by definition, so, again by defintion, for any $n\geq m+1$, $a_n=0$, yielding
+\[
+f(z^{-1})=\sum_{n=0}^m a_nz^{-n}
+\]
+whence
+\[
+f(z)=\sum_{n=0}^ma_nz^n
+\]
+i.e. $f$ is a polynomial, by definition.
+\end{proof}
+
+\end{enumerate}
+
+
+
+\end{enumerate}
+
+
+\end{document}

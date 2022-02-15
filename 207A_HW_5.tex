@@ -1,0 +1,274 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+%\pagenumbering{gobble}
+
+
+
+\usepackage{comment}
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\ve}{\varepsilon}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{207A - ODE}
+\rightline{Chen, Weitao}
+\rightline{HW 5}
+\rightline{\today}
+
+
+
+\vspace{1cm}
+\begin{enumerate}
+
+%\begin{comment}
+
+
+\vspace{-1cm}
+
+\item Derive Laplace's formula in polar coordinates.
+
+Let $U\subset \R^2$. We can write $u(x,y)=u(r,\theta)$ where $x=r\cos\theta$ and $y=r\sin\theta$. Consequently,
+
+\begin{align*}
+\pp{x}{r}&=\cos\theta & \pp{x}{\theta}&=-r\sin\theta\\[2mm]
+\pp{y}{r}&=\sin\theta & \pp{y}{\theta}&=r\cos\theta
+\end{align*}
+
+Using the chain rule, we have
+
+
+\[
+\pp{u}{r}=\pp{u}{x}\pp{x}{r}+\pp{u}{y}\pp{y}{r}=\pp{u}{x}\cos\theta+\pp{u}{y}\sin\theta,\text{ and}
+\]
+\[
+\pp{u}{\theta}=\pp{u}{x}\pp{x}{\theta}+\pp{u}{y}\pp{y}{\theta}=-r\pp{u}{x}\sin\theta+r\pp{u}{y}\cos\theta.
+\]
+
+Now,
+
+\begin{align*}
+\pp{^2u}{r^2}&=\pp{}{r}\left(\pp{u}{x}\cos\theta+\pp{u}{y}\sin\theta\right)\\[2mm]
+&=\pp{}{r}\pp{u}{x}\cos\theta+\pp{}{r}\pp{u}{y}\sin\theta\\[2mm]
+&=\left(\pp{^2u}{x^2}\pp{x}{r}+\pp{}{y}\pp{u}{x}\pp{y}{r}\right)\cos\theta+\left(\pp{}{x}\pp{u}{y}\pp{x}{r}+\pp{^2u}{y^2}\pp{y}{r}\right)\sin\theta\\[2mm]
+&=\left(\pp{^2u}{x^2}\cos\theta+\pp{}{y}\pp{u}{x}\sin\theta\right)\cos\theta+\left(\pp{}{x}\pp{u}{y}\cos\theta+\pp{^2u}{y^2}\sin\theta\right)\sin\theta\\[2mm]
+&=\pp{^2u}{x^2}\cos^2\theta+\pp{}{y}\pp{u}{x}\sin\theta\cos\theta+\pp{}{x}\pp{u}{y}\cos\theta\sin\theta+\pp{^2u}{y^2}\sin^2\theta\\[2mm]
+&=\cos^2\theta\cdot\pp{^2u}{x^2}+2\cos\theta\sin\theta\pp{^2u}{x\partial y}+\sin^2\theta\cdot\pp{^2u}{y^2},\text{ and}
+\end{align*}
+
+\begin{align*}
+\pp{^2u}{\theta^2}&=\pp{}{\theta}\left(-r\pp{u}{x}\sin\theta+r\pp{u}{y}\cos\theta\right)\\[2mm]
+&=-r\sin\theta\cdot\pp{}{\theta}\pp{u}{x}-r\cos\theta\pp{u}{x}+r\cos\theta\cdot\pp{}{\theta}\pp{u}{y}-r\sin\theta\pp{u}{y}\\[2mm]
+&=-r\sin\theta\cdot\left(\pp{^2u}{x^2}\pp{x}{\theta}+\pp{^2u}{x\partial y}\pp{y}{\theta}\right)-r\cos\theta\pp{u}{x}+r\cos\theta\cdot\left(\pp{^2u}{x\partial y}\pp{x}{\theta}+\pp{^2u}{y^2}\pp{y}{\theta}\right)-r\sin\theta\pp{u}{y}\\[2mm]
+&=-r\sin\theta\cdot\left(-r\sin\theta\cdot\pp{^2u}{x^2}+\pp{^2u}{x\partial y}r\cos\theta\right)-r\cos\theta\pp{u}{x}+r\cos\theta\cdot\left(-r\sin\theta\cdot\pp{^2u}{x\partial y}+\pp{^2u}{y^2}r\cos\theta\right)-r\sin\theta\pp{u}{y}\\[2mm]
+&=r^2\sin^2\theta\cdot\pp{^2u}{x^2}-r^2\sin\theta\cos\theta\pp{^2u}{x\partial y}-r\cos\theta\pp{u}{x}-r^2\cos\theta\sin\theta\cdot\pp{^2u}{x\partial y}+r^2\cos^2\theta\cdot\pp{^2u}{y^2}-r\sin\theta\pp{u}{y}\\[2mm]
+&=r^2\sin^2\theta\cdot\pp{^2u}{x^2}-2r^2\sin\theta\cos\theta\pp{^2u}{x\partial y}-r\cos\theta\pp{u}{x}+r^2\cos^2\theta\cdot\pp{^2u}{y^2}-r\sin\theta\pp{u}{y}.\\[2mm]
+\frac{1}{r^2}\pp{^2u}{\theta^2}&=\sin^2\theta\cdot\pp{^2u}{x^2}-2\sin\theta\cos\theta\pp{^2u}{x\partial y}-\frac{1}{r}\cos\theta\pp{u}{x}+\cos^2\theta\cdot\pp{^2u}{y^2}-\frac{1}{r}\sin\theta\pp{u}{y}.\\[2mm]
+\end{align*}
+
+Notice that $\pp{^2u}{x^2}$ and $\pp{^2u}{y^2}$ appear in both equations, so adding the equations may allow us to solve for the sum of both. Adding these two results together, we get
+
+\begin{align*}
+\pp{^2u}{r^2}+\frac{1}{r^2}\pp{^2u}{\theta^2}&=\cos^2\theta\cdot\pp{^2u}{x^2}+\cancel{2\cos\theta\sin\theta\pp{^2u}{x\partial y}}+\sin^2\theta\cdot\pp{^2u}{y^2}\\[2mm]
+&+\sin^2\theta\cdot\pp{^2u}{x^2}-\cancel{2\sin\theta\cos\theta\pp{^2u}{x\partial y}}-\frac{1}{r}\cos\theta\pp{u}{x}+\cos^2\theta\cdot\pp{^2u}{y^2}-\frac{1}{r}\sin\theta\pp{u}{y}\\[2mm]
+&=\pp{^2u}{x^2}(\cos^2\theta+\sin^2\theta)+\pp{^2u}{y^2}(\cos^2\theta+\sin^2\theta)-\frac{1}{r}\cos\theta\pp{u}{x}-\frac{1}{r}\sin\theta\pp{u}{y}\\[2mm]
+&=\pp{^2u}{x^2}+\pp{^2u}{y^2}-\frac{1}{r}\left(\cos\theta\pp{u}{x}+\sin\theta\pp{u}{y}\right)\\[2mm]
+&=\pp{^2u}{x^2}+\pp{^2u}{y^2}-\frac{1}{r}\pp{u}{r}.
+\end{align*}
+
+Massaging this a bit, we have Laplace's equation in polar coordinates:
+
+\[
+\Delta u=\pp{^2u}{x^2}+\pp{^2u}{y^2}=\pp{^2u}{r^2}+\frac{1}{r^2}\pp{^2u}{\theta^2}+\frac{1}{r}\pp{u}{r}=0.
+\]
+
+
+\item Solve the following equation using characteristics.
+
+\[
+x_1u_{x_1}+x_2u_{x_2}=2u\pspace u(x_1,1)=g(x_1)
+\]
+
+This equation is quasilinear, so we have
+
+\begin{align*}
+\pp{x_1}{t}&=x_1&\Longrightarrow& & x_1&=Ae^t\\[2mm]
+\pp{x_2}{t}&=x_2&\Longrightarrow& & x_2&=Be^t\\[2mm]
+\pp{u}{t}&=2u&\Longrightarrow& & u&=Ce^{2t}\\[2mm]
+\end{align*}
+
+
+To parametrize our curve appropriately, when $t=0$, we must have
+
+\[
+x_1(s,0)=s\pspace x_2(s,0)=1\pspace u(s,0)=g(s)
+\]
+
+
+so we can write
+
+\[
+x_1(s,t)=se^t\pspace x_2(s,t)=e^t\pspace u(s,t)=e^{2t}g(s).
+\]
+
+By the second equation, we have $t=\ln x_2$, and by the first we have $s=x_1e^{-t}$. Combining these yields $s=\frac{x_1}{x_2}$, and thus 
+
+\[
+u(s,t)=e^{2t}g(s)=x_2^2g\left(\frac{x_1}{x_2}\right)=u(x_1,x_2).
+\]
+
+
+\pagebreak
+
+\item We say that $v\in C^2\left(\overline{U}\right)$ is \textit{subharmonic} if $-\Delta v\leq 0\text{ in }U$.
+
+\begin{enumerate}
+\item Prove that for subharmonic $v$, 
+
+\[
+v(x)\leq \dashint_{B(x,r)} v\,dy\text{ for all }B(x,r)\subset U. 
+\]
+
+\begin{proof}
+Suppose $v$ is subharmonic. Using the same technique as in Evans' proof of equality in the case of harmonic functions, define
+
+\[
+\phi(r):=\dashint_{\partial B_r(x)}v(y)\,dS_y.
+\]
+
+
+Employing a change of variables, we can preserve the value of the integral while shifting the region of integration to be centered at the origin and scaled, giving
+
+\[
+\phi(r):=\dashint_{\partial B_1(0)}v(x+rz)\,dS_z\pspace\text{where }y=x+rz,\text{ and so }z=\frac{y-x}{r}.
+\]
+
+\vspace{-0.5cm}
+Differentiating this with respect to $r$ and applying the Divergence theorem, we find
+
+\begin{align*}
+\dd{\phi}{r}&=\dd{}{r}\dashint_{\partial B_1(0)}v(x+rz)\,dS_z\\[2mm]
+&=\dashint_{\partial B_1(0)}Dv(x+rz)\cdot z\,dS_z\\[2mm]
+&=\dashint_{\partial B_1(0)}Dv(x+rz)\cdot \frac{y-x}{r}\,dS_z\\[2mm]
+&=\dashint_{\partial B_1(0)}Dv\cdot \mathbf{n}\,dS_z\\[2mm]
+&=\dashint_{\partial B_1(0)}\pp{v}{\mathbf{n}}\,dS_z\\[2mm]
+&=\dashint_{B_1(0)}\Delta v(x+rz)\,dz\\[2mm]
+&=\frac{r}{n}\dashint_{B_r(x)}\Delta(y)\,dy\geq0.\\[2mm]
+\end{align*}
+
+Thus, the mean value of $v$ over the surface of any sphere inside $U$ is increasing as $r$ increases. We also know that when $r=0$, $\phi(r)=v(x)$, therefore
+
+\[
+\dashint_{B_r(x)} v\,dy\geq v(x)
+\]
+
+as required.
+\end{proof}
+
+\item Prove that, therefore, $\displaystyle \max_{\overline{U}}v=\max_{\partial U}v$.
+
+\begin{proof}
+Suppose $v$ is subharmonic. Again we will follow Evans' proof and suppose there exists a point $x_0\in U$ such that $v(x_0)=\max_{\overline{U}}v$. Let $0<r<\text{dist}(x_0,\partial U)$. Then we may employ part (a) above to yield
+
+\[
+\max_{\overline{U}}v=v(x_0)\leq \dashint_{B_r(x_0)} v\,dy\leq \max_{B_r(x_0)}v\leq\max_{\overline{U}}v.
+\]
+
+Thus $\max_{\overline{U}}v= \dashint_{B_r(x_0)} v\,dy$, which can only be true if $v(y)=\max_{\overline{U}}v$ for all $y\in B_r(x_0)$. Now, let $\Omega=\{x\in \overline{U}\mid v(x)=\max_{\overline{U}}v(x)\}$. This set is closed by the Lemma below. Thus, $\Omega=\overline{\Omega}$. Moreover, $B_r(x_0)\subset U$ as shown above so it follows that $U=\Omega=\overline{\Omega}$ since the argument can be repeated for any $x\in B_r(x_0)$. Since $U=\overline{\Omega}$, $U=\overline{U}$ and it follows that $\displaystyle \max_{\overline{U}}v=\max_{\partial U}v$.
+\end{proof}
+
+\textbf{Lemma.} Suppose $v(x)$ is continuous on $\overline{U}$. Then the set of points at which $v$ attains its maximum value is a closed set.
+
+\begin{proof}
+Suppose $v(x)$ is continuous on $\overline{U}$. By the Extreme Value theorem, $v$ attains a maximum value on $\overline{U}$, so we may let $M=\max_{\overline{U}}v(x)$, and let $\Omega=\{x\in \overline{U}\mid v(x)=M\}$. Then $\Omega^c=\{x\in \overline{U}\mid v(x)<M)\}=v^{-1}((-\infty,M))$. Since $v$ is continuous, $\Omega^c=v^{-1}((-\infty,M))$ is an open set, and so $\Omega$ is closed by definition.
+\end{proof}
+
+\end{enumerate}
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

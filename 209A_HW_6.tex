@@ -1,0 +1,207 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\usepackage{bbm}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209A - Real Analysis}
+\rightline{Zhang, Qi}
+\rightline{HW 6}
+\rightline{\today}
+
+\vspace{-5mm}
+\textbf{Folland: Exercises, p. 69.} 46, 48, 49 
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\setcounter{enumi}{45}
+
+
+
+
+\item Let $X=Y=[0,1]$, $\MC{M}=\MC{N}=\MC{B}_{[0,1]}$, $\mu=$ Lebesgue measure, and $\nu =$ counting measure. If $D=\{(x,x)\mid x\in[0,1]\}$ is the diagonal in $X\times Y$, then $\iint \chi_D\,d\mu\,d\nu$, $\iint \chi_D\,d\mu\,d\nu$, and $\int \chi_D\,d(\mu\times\nu)$ are all unequal. 
+
+\begin{proof}
+First, since $\chi_D\in L^+(X\times Y)$, by Tonelli's theorem, we have
+
+\begin{align*}
+\iint\chi_D(x,y)\,d\mu(x) \,d\nu(y)&=\int\left[\int\chi_D(x,y)\,d\mu(x)\right]\,d\nu(y)\\[2mm]
+&=\int\left[\int\chi_{\{y\}}(x)\,d\mu(x)\right]\,d\nu(y)\\[2mm]
+&=\int\mu(\{y\})\,d\nu\\[2mm]
+&=\int 0\,d\nu(y)\\[2mm]
+&=0,\text{ and}
+\end{align*}
+
+\begin{align*}
+\iint\chi_D(x,y)\,d\nu(y)\,d\mu(x) &=\int \left[\int\chi_D(x,y)\,d\nu(y)\right]\,d\mu(x)\\[2mm]
+&=\int\left[\int\chi_{\{x\}}(y)\,d\nu(y)\right]\,d\mu(x)\\[2mm]
+&=\int\nu(\{x\})\,d\mu(x)\\[2mm]
+&=\int1\,d\mu(x)\\[2mm]
+&=\mu([0,1])\\[2mm]
+&=1.
+\end{align*}
+
+To compute $\int \chi_D(x,y)\,d(\mu\times\nu)(x,y)$ note that, by definition,
+
+\[
+\mu\times\nu(E)=\inf\left\{\sum_{n=1}^\infty\mu(A_n)\nu(B_n)\,\Big|\,(A_n\times B_n)\in\MC{A},\,E\subset\bigcup_{n=1}^\infty(A_n\times B_n)\right\}
+\]
+
+where $A_n\times B_n$ is a rectangle in $X\times Y$. Thus,
+
+\begin{align*}
+\int \chi_D(x,y)\,d(\mu\times\nu)(x,y)&=\mu\times\nu(D)\\[2mm]
+&=\inf\left\{\sum_{n=1}^\infty\mu(A_n)\nu(B_n)\,\Big|\,(A_n\times B_n)\in\MC{A},\,D\subset\bigcup_{n=1}^\infty(A_n\times B_n)\right\}.
+\end{align*}
+
+For any covering $\{A_n\times B_n\}$ of $D$, $\{B_n\}$ is a covering of $Y=[0,1]$. $\nu([0,1])>0$, so $\nu\left(\bigcup B_n)\right)>0$, which implies that $\nu(B_n)>0$ for at least one $n$. Since $B_n$ is a rectangle in $Y$ with positive measure, it must be an interval, and therefore $\nu(B_n)=\infty$. Since our covering was chosen arbitrarily, such a $B_n$ appears in any covering of $D$, and thus
+
+\[
+\int \chi_D\,d(\mu\times\nu)=\inf\left\{\sum_{n=1}^\infty\mu(A_n)\nu(B_n)\,\Big|\,(A_n\times B_n)\in\MC{A},\,D\subset\bigcup_{n=1}^\infty(A_n\times B_n)\right\}=\inf\{\infty\}=\infty.
+\]
+
+\end{proof}
+
+\setcounter{enumi}{47}
+
+\item Let $X=Y=\mathbb{N}$, $\MC{M}=\MC{N}=\MC{P}(\mathbb{N})$, $\mu=\nu=$ counting measure. Define 
+
+\[
+f(m,n)=\begin{cases}1 & \text{ if }m=n\\ -1 & \text{ if } m=n+1\\ 0 & \text{ otherwise}\end{cases}.
+\]
+
+Then $\displaystyle \int |f|\,d(\mu \times \nu)=\infty$, and $\iint f \,d\mu\,d\nu$ and $\iint f \,d\nu\,d\mu$ exist and are unequal.
+
+\begin{proof}
+Sketching the graph of the function on the $\mathbb{N}\mathbb{N}$-plane helps to see that we can decompose $\mathbb{N}\times \mathbb{N}$ as $\mathbb{N}\times \mathbb{N}=\{n\geq m\}\cup\{n< m\}$. Thus,
+
+\begin{align*}
+\int_{\mathbb{N}\times \mathbb{N}}|f|\,d(\mu\times \nu)&=\int_{\{n\geq m\}}|f|\,d(\mu\times \nu)+\int_{\{n<m\}}|f|\,d(\mu\times \nu)\\[2mm]
+&=\int_{\{n\geq m\}}1\,d(\mu\times \nu)+\int_{\{n<m\}}1\,d(\mu\times \nu)\\[2mm]
+&=\mu\times\nu(\{n\geq m\})+\mu\times\nu(\{n<m\})\\[2mm]
+&=\infty +\infty \\[2mm]
+&=\infty.
+\end{align*}
+
+Next, 
+
+\begin{align*}
+\iint f(m,n)=\,d\mu(m)\,d\nu(n)&=\int_Y\left[\int_X f(m,n)\,d\mu(m)\right]\,d\nu(n)\\[2mm]
+&=\int_Y\left[\int_{\{m=n,n+1\}\cup\{m\neq n,n+1\}}f(m,n)\,d\mu(m)\right]\,d\nu(n)\\[2mm]
+&=\int_Y\left[\int_{\{m=n,n+1\}}f(m,n)\,d\mu(m)+\int_{\{m\neq n,n+1\}}f(m,n)\,d\mu(m)\right]\,d\nu(n)\\[2mm]
+&=\int_Y\left[\int_{\{m=n,n+1\}}1-1\,d\mu(m)+\int_{\{m\neq n,n+1\}}0\,d\mu(m)\right]\,d\nu(n)\\[2mm]
+&=\int_Y0\,d\nu(n)\\[2mm]
+&=0.
+\end{align*}
+
+But,
+
+\begin{align*}
+\iint f(m,n)\,d\nu(n)\,d\mu(m)&=\int_X\left[\int_Y f(m,n)\,d\nu(n)\right]\,d\mu(m)\\[2mm]
+&=\int_{\{m=1\}}\left[\int_Y f(m,n)\,d\nu(n)\right]\,d\mu(m)+\int_{\{m>1\}}\left[\int_Y f(m,n)\,d\nu(n)\right]\,d\mu(m)\\[2mm]
+&=\int_{\{m=1\}}\left[\int_{\{n=1\}} f(m,n)\,d\nu(n)+\int_{\{n>1\}} f(m,n)\,d\nu(n)\right]\,d\mu(m)\\[2mm]
+&+\int_{\{m>1\}}\left[\int_{\{n=m,m-1\}\cup\{n\neq m,m-1\}} f(m,n)\,d\nu(n)\right]\,d\mu(m)\\[2mm] 
+&=\int_{\{m=1\}}\left[\int_{\{n=1\}}1\,d\nu(n)+\int_{\{n>1\}} 0\,d\nu(n)\right]\,d\mu(m)+\int_{\{m>1\}}[1-1+0]\,d\mu(m)\\[2mm]
+&=\int_{\{m=1\}}\nu(\{n=1\})\,d\mu(m)+0+0\\[2mm]
+&=\nu(\{n=1\})\int_{\{m=1\}}1\,d\mu(m)\\[2mm]
+&=\nu(\{n=1\})\mu(\{m=1\})\\[2mm]
+&=1\cdot 1\\[2mm]
+&=1.
+\end{align*}
+
+\end{proof}
+
+\item Prove Theorem 2.39 by using Theorem 2.37 and Proposition 2.12 together with the following lemmas.
+
+\begin{enumerate}
+\item If $E\in \MC{M}\times\MC{N}$ and $\mu\times \nu(E)=0$, then $\nu(E_x)=\mu(E^y)=0$ for a.e. $x$ and $y$.
+
+\begin{proof}
+Suppose $\mu\times \nu(E)=0$. Then $0=\int\nu(E_x)\,d\mu(x)=\int\mu(E^y)\,d\nu(y)$, which implies that $\nu(E^x)=\mu(E^y)=0$ for a.e. $x$ and $y$ by Proposition 2.16.
+\end{proof}
+
+\item If $f$ is $\MC{L}$-measurable and $f=0$ $\lambda$-a.e., then $f_x$ and $f^y$ are integrable for a.e. $x$ and $y$, and $\int f_x\,d\nu =\int f^y\,d\mu=0$ for a.e. $x$ and $y$. (Here the completeness of $\mu$ and $\nu$ is needed.)
+
+\begin{proof}
+
+\end{proof}
+
+\end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}

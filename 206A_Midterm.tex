@@ -1,0 +1,269 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\p}{\mathbb{P}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{206A - Probability}
+\rightline{Cho, Heyrim}
+\rightline{Midterm}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+
+\item Consider random variables $X,Y:(\Omega,\MC{F},\mu)\to(\MB{R},\MC{B}(\MB{R}))$. Show that $X+Y$ is a random variable.
+
+\begin{proof}
+Let $X,Y:(\Omega,\MC{F},\mu)\to(\MB{R},\MC{B}(\MB{R}))$ be random variables and let $a\in \MB{R}$. It suffices to show that $(X+Y)^{-1}((-\infty,a])=\{\omega\in\Omega:X(\omega)+Y(\omega)\leq a\}\in \MC{F}$. Note that $X+Y\leq a$ if and only if $X\leq a-Y$. By the Archimdean property of $\MB{R}$, there exists an $r\in \MB{Q}$ such that $X\leq r\leq a-Y$, and we can write this as the two inequalities $X\leq r$ and $Y\leq a-r$. Thus, $\{\omega\in\Omega:X(\omega)+Y(\omega)\leq a\}\in \MC{F}$ if and only if 
+\[
+\bigcup_{r\in\MB{Q}}\{X\leq r\}\cap\{Y\leq a-r\}\in\MC{F}.
+\]
+But this is a countable union of intersections of sets in $\MC{F}$, a sigma algebra, and so is in $\MC{F}$, and we are done.
+\end{proof}
+
+\pagebreak
+
+
+\item Consider a function
+
+\begin{minipage}{0.5\textwidth}
+\[
+F(x)=\begin{cases}1 & x\geq 1\\ \frac{1}{2}+\frac{1}{2}x & 0\leq x<1 \\ 0 & x<0.\end{cases}
+\]
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+
+\scalebox{1.5}{
+\begin{tikzpicture}
+\draw[->] (-1.25,0) -- (2.25,0) node[right]{\tiny$x$};
+\draw[->] (0,-0.1) -- (0, 1.5);
+\draw[thick,domain=-1.25:-0.05, variable=\x, blue] plot ({\x},0);
+\draw[thick,domain=0:1, variable=\x, blue] plot ({\x},0.5*\x+0.5);
+\draw[thick,domain=1:2.2, variable=\x, blue] plot ({\x},1);
+\foreach \i in {-1,0,1,2}{\draw (\i,-0.1) -- (\i,0.1); \draw (\i,-0.1) node[below]{\tiny \i};}
+\draw (-0.1,1) node[left]{\tiny 1} -- (0.1,1);
+\draw (-0.1,1/2) node[left]{\tiny $\frac{1}{2}$} -- (0.1,1/2);
+\fill[blue] (0,1/2) circle[ radius=1.5pt];
+\draw[blue] (0,0) circle[ radius=1.5pt];
+\draw[blue] (1.25,1.25) node {\tiny $F(x)$};;
+\end{tikzpicture}
+}
+\captionof*{figure}{\hspace{-30mm}Graph of $F(x)$}
+
+\end{minipage}
+
+
+Is $F(x)$ a distribution function? Is there a corresponding random variable and density function? If so, explain their properties.
+
+
+
+\lspace
+Yes, $F$ is a distribution function since it is nondecreasing, right continuous, $\lim_{x\to+\infty}F(x)=1$, and $\lim_{x\to-\infty}F(x)=0$. Each of these properties can be read from the graph above. By Theorem 1.2.2 in Durrett, $F$ is the distribution of some random variable $X$. Since $F$ is discontinuous, $X$ will be as well, and $F$ does not have a probability density function because it is discontinuous at 0.
+
+
+
+
+\pagebreak
+
+
+
+
+\item Let $X_n$ be independent identically distributed (i.i.d.) random variables each having the same distribution as $X$. Let $a>0$ and suppose that $E[e^{aX}]$ is finite. Let $S_n=X_1+\cdots+X_n$. Show that
+\[
+\p(S_n\geq t)\leq\frac{(E[e^{aX}])^n}{e^{at}}.
+\]
+
+\begin{proof}
+Let $X_n$ be i.i.d. variables, let $a>0$, and suppose $E[e^{aX}]<\infty$. Since $S_n=S_n^+-S_n^-$, both of which are nonnegative, it suffices to show the result for $S_n\geq 0$. Since the exponential function is nonnegative, by Chebyshev's inequality we have
+\[
+\p\left(e^{aS_n}\geq e^{at}\right)=\p\left(\left|e^{aS_n}\right|\geq e^{at}\right)\leq\frac{E\left[\left|e^{aS_n}\right|\right]}{e^{at}}=\frac{E\left[e^{aS_n}\right]}{e^{at}}.
+\]
+Since all the $X_n$'s have the same distribution as $X$ and $E[e^{aX}]<\infty$, we can apply Fubini's theorem to get
+\begin{align*}
+E\left[e^{aS_n}\right]=\int_\Omega e^{aS_n}\,d\p&=\int_\Omega e^{a(X_1+\cdots+X_n)}\,d\p\\[2mm]
+&=\int_\Omega e^{aX_1}\cdots e^{aX_n}\,d\p\\[2mm]
+&=\int_\Omega e^{aX_1}\,d\p\int_\Omega e^{aX_2}\,d\p\cdots\int_\Omega e^{aX_n}\,d\p\\[2mm]
+&=\left(\int_\Omega e^{aX}\,d\p\right)^n\\[2mm]
+&=\left(E\left[e^{aX}\right]\right)^n.
+\end{align*}
+But since $S_n\geq 0$ and $a>0$, $e^{aS_n}\geq e^{at}$ if and only if $S_n\geq t$, so 
+\[
+\p(S_n\geq t)\leq\frac{(E[e^{aX}])^n}{e^{at}}.\qedhere
+\]
+\end{proof}
+
+
+
+
+
+
+\pagebreak
+
+
+
+
+
+
+
+\item Let $X_n$ be i.i.d. random variables. If $E(|X_1|)<\infty$, show that $\frac{X_n}{n}  \xrightarrow{a.s.}0$.
+
+\begin{proof}
+Let $X_n$ be i.i.d. random variables and suppose $E(|X_1|)<\infty$. Let $\ve>0$ be arbitrary. To show $X_n/n  \xrightarrow{a.s.}0$, it suffices to show that $\p\left(\left|\frac{X_n}{n}-0\right|>\ve\right)\to0$ as $n\to\infty$. To do this, we will show that it holds for the subsequence $\{n^2\}_{n=1}^\infty\subset\{n\}_{n=1}^\infty$, and then show that the limits must be the same. First, by Chebyshev's inequality,
+\[
+\p\left(\left|\frac{X_{n^2}}{n^2}\right|>\ve\right)\leq \frac{E\left[\left|\frac{X_{n^2}}{n^2}\right|\right]}{\ve}=\frac{E\left[\left|X_{n^2}\right|\right]}{n^2\ve}=\frac{E\left[\left|X_{1}\right|\right]}{n^2\ve}.
+\]
+Since $E[|X_1|]<\infty$, we have
+\[
+\sum_{n=1}^\infty \p\left(\left|\frac{X_{n^2}}{n^2}\right|>\ve\right)\leq\sum_{n=1}^\infty \frac{E\left[\left|X_{1}\right|\right]}{n^2\ve}=\frac{E[|X_1|]}{\ve}\sum_{n=1}^\infty\frac{1}{n^2}<\infty.
+\]
+Thus by the Borel-Cantelli Lemma, $\p\left(\left|\frac{X_{n^2}}{n^2}\right|>\ve,\,i.o.\right)=0$. In other words, $\p\left(\left|\frac{X_{n^2}}{n^2}\right|>\ve\right)\to0$ as $n\to\infty$ since there exists some $N\in\MB{N}$ such that for all $n\geq N$, $\left|\frac{X_{n^2}}{n^2}\right|\not>\ve$. Since this is true for all $\ve>0$, we have $\frac{X_{n^2}}{n^2}  \xrightarrow{a.s.}0$.
+
+Next, note that for any $k\in\MB{N}$, there exists an $n\in\MB{N}$ such that $n^2\leq k<(n+1)^2$. Hence, $\frac{1}{n^2}\geq\frac{1}{k}>\frac{1}{(n+1)^2}$, whence $\left|\frac{X_k}{n^2}\right|\geq \left|\frac{X_k}{k}\right|>\left|\frac{X_k}{(n+1)^2}\right|$. Multiplying the lefthand side by $\left|\frac{X_{n^2}}{X_{n^2}}\right|$ and the righthand side by $\left|\frac{X_{(n+1)^2}}{X_{(n+1)^2}}\right|$ yields
+\begin{align*}
+\left|\frac{X_{n^2}}{X_{n^2}}\right|\cdot \left|\frac{X_k}{n^2}\right|&\geq \left|\frac{X_k}{k}\right|>\left|\frac{X_k}{(n+1)^2}\right|\cdot \left|\frac{X_{(n+1)^2}}{X_{(n+1)^2}}\right|\quad\iff\quad
+\left|\frac{X_k}{X_{n^2}}\right|\cdot \left|\frac{X_{n^2}}{n^2}\right|&\geq \left|\frac{X_k}{k}\right|>\left|\frac{X_{(n+1)^2}}{(n+1)^2}\right|\cdot \left|\frac{X_k}{X_{(n+1)^2}}\right|.
+\end{align*}
+Since we know  $\frac{X_{n^2}}{n^2}  \xrightarrow{a.s.}0$ and  $\frac{X_{(n+1)^2}}{(n+1)^2}  \xrightarrow{a.s.}0$ it suffices to show that $\left|\frac{X_k}{X_{n^2}}\right|\to0$ and $\left|\frac{X_k}{X_{(n+1)^2}}\right|\to0$. Observe that, for any $\ve>0$,
+\[
+\sum_{n=1}^\infty\left|\frac{X_k}{X_{n^2}}\right|\leq|X_k|\sum_{n=1}^\infty \frac{1}{|X_{n^2}|}\leq\frac{|X_k|}{\ve}\sum_{n=1}^\infty\frac{1}{n^2}<\infty,
+\]
+so by the Divergence Criterion for infinite series, we must have $\left|\frac{X_k}{X_{n^2}}\right|\to0$. A similar argument holds when we replace $n$ by $n+1$, so we also have  $\left|\frac{X_k}{X_{(n+1)^2}}\right|\to0$, and thus $\p\left(\left|\frac{X_{k}}{k}\right|>\ve\right)\to0$ as $k\to\infty$. Since this is true for all $\ve>0$, we have $\frac{X_{k}}{k}  \xrightarrow{a.s.}0$.
+\end{proof}
+
+
+
+
+
+
+
+
+\pagebreak
+
+
+
+
+
+
+\item Let $X_n$ be uncorrelated random variables with $E(X_n)=\mu_n\,(<\infty)$ and $\frac{\Var(X_n)}{n}\to0$. Let $S_n=\sum_{j=1}^nX_j$ and $\nu_n=\frac{E(S_n)}{n}$. Show that $\frac{S_n}{n}-\nu_n \xrightarrow{p}0$.
+
+\begin{proof}
+Let $X_n$ be uncorrelated random variables and suppose $\frac{\Var(X_n)}{n}\to0$. Let $\ve>0$. Since $\nu_n=\frac{E(S_n)}{n}$, it suffices  to show that
+\begin{align*}
+\p\left(\left|\frac{S_n}{n}-\nu_n\right|>\ve\right)&=\p\left(\frac{|S_n-E(S_n)|}{n}>\ve\right)\\[2mm]
+&=\p\left(\frac{|S_n-E(S_n)|^2}{n^2}>\ve^2\right)\\[2mm]
+&=\p\left(|S_n-E(S_n)|^2>n^2\ve\right)
+\end{align*}
+goes to 0 as $n\to\infty$. Since $\mu_n<\infty$ and the $X_i$'s are uncorrelated, $E(X_i^2)=(E(X_i))^2=\mu_i^2<\infty$. Therefore $\Var(X_1+\cdots+X_n)=\Var(X_1)+\cdots+\Var(X_n)$ by Theorem 2.2.1 in Durrett. Thus by Chebyshev's inequality,
+\begin{align*}
+\p\left(|S_n-E(S_n)|^2>n^2\ve\right)&\leq \frac{E(|S_n-E(S_n)|^2)}{n^2\ve^2}\\[2mm]
+&=\frac{\Var(S_n)}{n^2\ve^2}\\[2mm]
+&=\frac{\Var(X_1+\cdots +X_n)}{n^2\ve^2}\\[2mm]
+&=\frac{\Var(X_1)+\cdots+\Var(X_n)}{n^2\ve^2}\\[2mm]
+&=\frac{1}{n\ve}\left(\frac{\Var(X_1)}{n}+\cdots+\frac{\Var(X_n)}{n}\right),
+\end{align*}
+which goes to 0 as $n\to\infty$ since $\frac{\Var(X_n)}{n}\to0$. Since $\ve>0$ was arbitrary, we have $\frac{S_n}{n}-\nu_n \xrightarrow{p}0$ by definition.
+\end{proof}
+
+\end{enumerate}
+\end{document}

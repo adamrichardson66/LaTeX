@@ -1,0 +1,3417 @@
+\documentclass[11pt,english,
+handout
+]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{babel}
+  
+
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+
+\usepackage{comment}
+\usepackage{bbm}
+\usepackage{multicol}
+%\usepackage{graphicx}
+%\usepackage{adjustbox}
+%\usepackage{amssymb}
+\usepackage{tikz,tikz-3dplot}
+\usetikzlibrary{lindenmayersystems}
+\pgfdeclarelindenmayersystem{cantor set}{
+  \rule{F -> FfF}
+  \rule{f -> fff}
+}
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{3d}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+%\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage[font=tiny]{caption}
+\usepackage{subcaption}
+%\usepackage{adjustbox}
+%\usepackage{bm}
+%\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{commath}
+%\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+%\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+%\usepackage[shortlabels]{enumitem}
+%\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+%\usepackage{color, colortbl}
+%\definecolor{Gray}{gray}{0.9}
+%\usepackage{babel}
+\usepackage{mdframed}
+
+%\usepackage{esint}
+%\usepackage[yyyymmdd]{datetime}
+%\renewcommand{\dateseparator}{--}
+%\usepackage{url}
+%\usepackage[unicode=true,pdfusetitle,
+% bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+% breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+% {hyperref}
+%\hypersetup{urlcolor=blue}
+\hypersetup{colorlinks,linkcolor=,urlcolor=blue}
+\usepackage{pdfpages}
+
+\usepackage{amsthm}
+\theoremstyle{definition}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem*{theorem*}{Theorem}
+\newtheorem{conjecture}{Conjecture}
+\newmdtheoremenv{conj}{Theorem}
+%\newtheorem{corollary}{Corollary}
+%\newtheorem*{lemma}{Lemma}
+\newtheorem*{highlight}{Note}
+\newtheorem*{highlight2}{Lemma}
+%\newtheorem*{example}{Example}
+%\newtheorem*{examples}{Examples}
+%\newtheorem*{definition}{Definition}
+%\newtheorem*{note}{Note}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\renewcommand{\Re}{\text{Re}}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\renewcommand{\qedsymbol}{\textcolor{black}{\openbox}}
+
+
+
+
+ \newcommand\makebeamertitle{\frame{\maketitle}}%
+
+
+
+\makeatletter
+ \AtBeginDocument{%
+   \let\origtableofcontents=\tableofcontents
+   \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
+   \def\gobbletableofcontents#1{\origtableofcontents}
+ }
+\makeatother
+
+
+
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+%  \theoremstyle{plain}
+%  \newtheorem*{thm*}{\protect\theoremname}
+%  \theoremstyle{remark}
+%  \newtheorem*{claim*}{\protect\claimname}
+%  \theoremstyle{plain}
+%  \newtheorem*{prop*}{\protect\propositionname}
+
+
+
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{%
+    \par
+    \def\insertproofname{#1\@addpunct{.}}%
+    \usebeamertemplate{proof begin}#2}
+  {\usebeamertemplate{proof end}}
+\makeatother
+
+
+
+%Footer color controls, opacity in particular.
+\definecolor{beamer@ColorIPN}{RGB}{45,108,192}
+\setbeamercolor{myfootlinetext}{fg=beamer@ColorIPN!70}
+
+
+%Footer information controls.
+\usenavigationsymbolstemplate{}
+\usepackage{textcomp}
+\useoutertheme{infolines}
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+\begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{myfootlinetext}%
+    \usebeamerfont{author in head/foot}\insertauthor%Copyright symbol and author here.
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{myfootlinetext}%
+    \usebeamerfont{title in head/foot}{A Generalized RFD for a Class of Plane-Filling Curves} %Title of document.
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{myfootlinetext}%
+    %\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em} %Date
+    \insertframenumber{} / \inserttotalframenumber{}\hspace*{2ex} %Frame counter
+  \end{beamercolorbox}}
+}
+
+
+
+
+
+\usefonttheme[onlymath]{serif}
+\definecolor{textblue}{RGB}{52, 57, 176}
+
+%\setbeameroption{show notes}
+
+
+
+
+\AtBeginDocument{
+  \def\labelitemi{\(\Rrightarrow\)}
+}
+
+
+
+
+
+\definecolor{UCRblue}{RGB}{45,108,192}
+\definecolor{UCRgray}{RGB}{57,59,65}
+\definecolor{UCRgold}{RGB}{241,171,0}
+\definecolor{UCRgoldfade}{RGB}{255,244,218}
+\setbeamercolor{title}{fg=UCRblue}
+\setbeamercolor{frametitle}{fg=UCRblue}
+\setbeamercolor{structure}{fg=UCRblue}
+\setbeamercolor{block title example}{fg=UCRgold}
+
+
+
+
+
+
+\usebackgroundtemplate{%
+\begin{tikzpicture}
+\node[anchor=south east, opacity=0.07] at (1,0) {\includegraphics[scale=0.4]{ucr_seal_RGB_blue}};
+\end{tikzpicture}
+}
+   
+   
+   
+   
+
+
+\newlength{\bibitemsep}\setlength{\bibitemsep}{.2\baselineskip plus .05\baselineskip minus .05\baselineskip}
+\newlength{\bibparskip}\setlength{\bibparskip}{0pt}
+\let\oldthebibliography\thebibliography
+\renewcommand\thebibliography[1]{%
+  \oldthebibliography{#1}%
+  \setlength{\parskip}{\bibitemsep}%
+  \setlength{\itemsep}{\bibparskip}%
+}
+
+
+
+
+
+
+
+
+
+
+
+ 
+   
+  
+\begin{document}
+
+\title{A Generalized Relative Fractal Drum for a Class of Plane-Filling Curves}
+
+\author{Adam D. Richardson}
+%\institute{University of California, Riverside \\ AMS Western Sectional Meeting Fall 2021}
+%\institute{University of California, Riverside \\ FRG Seminar}
+%\institute{University of California, Riverside \\ MPDS Seminar}
+\institute{University of California, Riverside \\ Oral Examination}
+\date{May 17, 2021}
+\makebeamertitle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Overview}
+\footnotesize
+\begin{multicols}{2}
+\begin{itemize}
+\itemsep5mm
+\item A Question of Fractality
+\item The Theory of Complex Dimensions
+\item Some Important Definitions
+\item Some Important Theorems
+\item Defining a Class of Plane-Filling Curves
+\item The Hilbert Curve RFD
+\item The Generalized Fundamental Unit
+\item The Peano Curve RFD
+\item The Existence of a Geometric Realization
+\item A Nonexample
+\item A Theorem and a Proof
+\item Geometric Oscillations
+\item Some Interesting Properties
+\item Next Steps
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{What is a Fractal?}
+\small
+\pause
+``A fractal is by definition a set for which the Hausdorff-Besicovitch dimension strictly exceeds the topological dimension.'' 
+\begin{flushright}
+\vspace{-2mm}
+--- Benoit Mandelbrot
+
+\textit{The Fractal Geometry of Nature}, 1982
+\end{flushright}\pause
+
+``[The definition's] generality was to prove excessive: not only awkward but genuinely inappropriate. [...] This definition left out many `borderline fractals', yet it took care, more or less, of the frontier `against' Euclid. But the frontier `against' true geometric chaos was left wide open! I know definitions matter little, but this one can still be improved upon.''
+\begin{flushright}
+--- Benoit Mandelbrot
+
+\textit{The Beauty of Fractals} (Peitgen \& Richter), 1986
+\end{flushright}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{What is a Fractal?}
+\small
+
+``My personal feeling is that the definition of a `fractal' should be regarded in the same way as a biologist regards the definition of `life'. There is no hard and fast definition, but just a list of properties characteristic of a living thing, such as the ability to reproduce or to move or to exist to some extent independently of the environment.''
+\begin{flushright}
+\vspace{-2mm}
+--- Kenneth Falconer
+
+\textit{Fractal Geometry: Mathematical Foundations and Applications}, 1990
+\end{flushright}\pause
+
+\lspace
+\begin{highlight}
+These `borderline fractals' are a bit more than borderline. Examples include, for instance, the Cantor function (the Devil's Staircase) and \textit{space-filling curves}.
+%Previous definitions are not entirely accurate since they \textit{exclude} objects that are widely considered to be fractals, like the Cantor function (the Devil's Staircase) and \textit{space-filling curves} in particular.
+\end{highlight}
+
+
+%\vspace{2mm}
+%``A set is called fractal if it has at least one nonreal complex dimension.''
+%\begin{flushright}
+%--- Michel L. Lapidus, Machiel v. Frankenhuijsen
+%
+%\textit{Fractal Geometry, Complex Dimensions and Zeta Functions}, 2006
+%\end{flushright}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Cantor Function}
+\begin{minipage}{0.4\textwidth}
+\scriptsize
+\begin{itemize}
+\itemsep5mm
+\item Continuous
+\item Rectifiable ($L=2$)
+\item Nonconstant
+\item 0 derivative almost everywhere
+\item Self-similarity
+\item Topological dimension 1
+\item Hausdorff dimension 1
+\item Not a fractal?
+\end{itemize}
+
+\end{minipage}\hspace{7mm}%
+\begin{minipage}{0.5\textwidth}
+
+\begin{figure}
+\includegraphics[scale=0.27]{devils_staircase.png}
+\caption{4th approximation to the graph of the Cantor function [FZF]}
+\end{figure}
+\end{minipage}
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Theory of Complex Dimensions in $\MB{R}$}
+\small
+\begin{itemize}
+\itemsep3mm
+\item Can one hear the shape of a \textit{fractal} drum?
+\item Fractal Geometry, Complex Dimensions and Zeta Functions (FGCD)\pause
+\item A fractal drum in $\MB{R}^1$: the Cantor String ($CS$)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\draw[thick] (0,-0.1) -- (0,0.1) node[above]{0};
+\draw[thick] (10,-0.1) -- (10,0.1) node[above]{1};
+\foreach \order in {0,...,6}
+    \draw[thick, yshift=-\order*7mm]  l-system[l-system={cantor set, axiom=F, order=\order, step=100mm/(3^\order)}];
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Theory of Complex Dimensions in $\MB{R}$}
+\small
+\begin{itemize}
+\itemsep3mm
+\item Can one hear the shape of a \textit{fractal} drum?
+\item Fractal Geometry, Complex Dimensions and Zeta Functions (FGCD)
+\item A fractal drum in $\MB{R}^1$: the Cantor String ($CS$)
+\item The geometric zeta function of a fractal string $\MC{L}=\{l_j\}_{j=1}^\infty$:
+\[
+\zeta_\MC{L}(s)=\sum_{j=1}^\infty l_j^s
+\]\vspace*{-\baselineskip}\pause
+\item The set of complex dimensions is the set of poles of the meromorphic continuation of this zeta function.\pause
+\item Nonreal complex dimensions indicate the presence of geometric oscillations in $\MC{L}$ and the tubular neighborhood of $\MC{L}$.
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Theory of Complex Dimensions in $\MB{R}$}
+\begin{minipage}{0.6\textwidth}
+\scriptsize
+\begin{itemize}
+\itemsep5mm
+\item The geometric zeta function of the Cantor string is
+\[
+\zeta_{CS}(s)=\sum_{n=0}^\infty2^n\cdot3^{-(n+1)s}=\frac{3^{-s}}{1-2\cdot3^{-s}}.
+\]
+\item Thus the set of complex dimensions of the Cantor string is
+
+\[
+\MC{D}_{CS}=\{D+in\mbf{p}\}
+\]
+
+\vspace{3mm}
+\linespread{1.6}\selectfont
+where $D=\log_32$, the Minkowski dimension of $CS$, $n\in\MB{Z}$, and $\mbf{p}=\frac{2\pi}{\log3}$, the \textit{oscillatory period} of $CS$.
+\end{itemize}
+\end{minipage}\hspace{5mm}
+\begin{minipage}{0.34\textwidth}
+\begin{figure}
+\includegraphics[scale=0.33]{CS_poles_trans.png}
+\caption{The complex dimensions of $CS$ [FGCD]}
+\end{figure}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Theory of Complex Dimensions in $\MB{R}$}
+
+\begin{minipage}[t][4.3cm]{\textwidth}
+\begin{figure}
+\includegraphics[scale=0.5]{CS_tubular_nbd.png}
+\caption{The inner $\ve$-tubular neighborhood of the Cantor string [FGCD]}
+\end{figure}
+\end{minipage}
+
+\begin{minipage}[t][5cm]{\textwidth}
+\footnotesize
+\begin{itemize}
+\itemsep3mm
+\item Through direct computation, one finds the inner $\ve$-tubular neighborhood of $CS$ is
+\[
+V_{CS}(\ve)=(2\ve)^{1-D}\left(\left(\frac{1}{2}\right)^{\{-\log_3(2\ve)\}}+\left(\frac{3}{2}\right)^{\{-\log_3(2\ve)\}}\right)-2\ve
+\]
+\item This function is multiplicatively periodic.
+\end{itemize}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Theory of Complex Dimensions in $\MB{R}$}
+
+\begin{minipage}[t][4.3cm]{\textwidth}
+\begin{figure}
+\includegraphics[scale=0.5]{CS_tubular_nbd.png}
+\caption{The inner $\ve$-tubular neighborhood of the Cantor string [FGCD]}
+\end{figure}
+\end{minipage}
+
+\begin{minipage}[t][5cm]{\textwidth}
+\footnotesize
+\begin{itemize}
+\itemsep3mm
+\item Computing its Fourier series we have
+\[
+V_{CS}(\ve)=\frac{1}{2\log 3}\sum_{n=-\infty}^\infty\frac{(2\ve)^{1-D-in\mbf{p}}}{(D+in\mbf{p})(1-D-in\mbf{p})}-2\ve
+\]
+so we can see that there are oscillations in the volume of the tubular neighborhood.
+\end{itemize}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Theory of Complex Dimensions in $\MB{R}$}
+
+\begin{minipage}[t][4.3cm]{\textwidth}
+\begin{figure}
+\includegraphics[scale=0.5]{CS_tubular_nbd.png}
+\caption{The inner $\ve$-tubular neighborhood of the Cantor string [FGCD]}
+\end{figure}
+\end{minipage}
+
+\begin{minipage}[t][5cm]{\textwidth}
+\footnotesize
+\begin{itemize}
+\itemsep3mm
+\item Moreover, we can also write this formula in terms of the complex dimensions:
+
+\[
+V_{CS}(\ve)=\frac{1}{2\log 3}\sum_{\omega\in\MC{D}_{CS}}\frac{(2\ve)^{1-\omega}}{\omega(1-\omega)}-2\ve
+\]
+\end{itemize}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Theory of Complex Dimensions in $\MB{R}^N$}
+\small
+\begin{itemize}
+\itemsep3mm
+\item Theory extended to higher dimensional objects
+\item Fractal Zeta Functions and Fractal Drums (FZF)\pause
+\item A fractal drum in $\MB{R}^2$: the (complement of the) Sierpi\'nski gasket ($SG$) in the unit triangle
+\end{itemize}
+\vspace*{-6mm}
+\begin{figure}
+\includegraphics[scale=0.09]{sierpinski_gasket.png}
+\caption{The Sierpi\'{n}ski gasket}
+\end{figure}
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Theory of Complex Dimensions in $\MB{R}^N$}
+\small
+\begin{itemize}
+\itemsep3mm
+\item Theory extended to higher dimensional objects
+\item Fractal Zeta Functions and Fractal Drums (FZF)
+\item A fractal drum in $\MB{R}^2$: the (complement of the) Sierpi\'nski gasket ($SG$) in the unit triangle
+\item The distance zeta function of a bounded set $A\subseteq \MB{R}^N$:
+\[
+\zeta_{A_\delta}(s)=\int_{A_\delta}d(x,A)^{s-N}\,\dif{x}
+\]\vspace*{-\baselineskip}\pause
+\item The set of complex dimensions is the set of poles of the meromorphic continuation of this zeta function.\pause
+\item Nonreal complex dimensions indicate the presence of geometric oscillations in $A$ and the tubular neighborhood of $A$.
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Theory of Complex Dimensions in $\MB{R}^N$}
+\begin{minipage}{0.58\textwidth}
+\footnotesize
+\begin{itemize}
+\itemsep5mm
+\item The \textit{relative} distance zeta function of the Sierpi\'{n}ski gasket is
+\[
+\zeta_{SG,\Omega}(s)=\frac{6(\sqrt{3})^{1-s}2^{-s}}{s(s-1)(2^s-3)}.
+\]
+\item The set of complex dimensions of the Sierpi\'{n}ski gasket is
+\[
+\MC{D}_{SG}=\{0,1\}\cup\{D+in\mbf{p}\}
+\]
+where $D=\log_23$, the Minkowski dimension of $SG$, $n\in\MB{Z}$, and $\mbf{p}=\frac{2\pi}{\log2}$, the oscillatory period of $SG$.
+\end{itemize}
+\end{minipage}\hspace{5mm}%
+\begin{minipage}{0.35\textwidth}
+\begin{figure}
+\includegraphics[scale=0.1]{sierpinski_gasket.png}
+\caption{The Sierpi\'{n}ski gasket}
+\end{figure}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Some Basic Definitions}
+\footnotesize
+
+\begin{definition}
+For a point $x\in\MB{R}^N$ and a set $A\subseteq \MB{R}^N$ we define $d(x,A)$ as
+\[
+d(x,A)\coloneqq\inf_{y\in A}|x-y|
+\]
+where $|\cdot|$ is the standard Euclidean distance.
+\end{definition}
+
+\lspace
+\begin{definition}
+Given a set $A\subseteq\MB{R}^N$ and $t>0$, define the \textbf{tubular neighborhood of $A$} as
+\[
+A_t\coloneqq\{x\in\MB{R}^N\mid d(x,A)<t\}.
+\]
+\end{definition}
+
+
+\begin{definition}
+Given a set $A\subseteq \MB{R}^N$ and a real number $k\in \MB{R}$, we define
+\[
+kA\coloneqq\{kx\in\MB{R}^N\mid x\in A\}=\{(kx_1,kx_2,\ldots, kx_N)\mid (x_1,x_2,\ldots, x_N)\in A\}.
+\]
+\end{definition}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Some Important Definitions}
+\footnotesize
+
+\begin{definition}
+For any $r\in \MB{R}$, the \textbf{upper $r$-dimensional Minkowski content of $A$ relative to $\Omega$} is
+\[
+\MC{M}^{*r}(A,\Omega)=\limsup_{t\to0^+}\frac{|A_t\cap \Omega|}{t^{N-r}},
+\]
+and the \textbf{relative upper box (or Minkowski) dimension} of $A$ with respect to $\Omega$ is
+\begin{align*}
+\overline{\dim}_B(A,\Omega)&=\inf\{r\in\MB{R}\mid \MC{M}^{*r}(A,\Omega)=0\}\\[2mm]
+&=\inf\{r\in\MB{R}\mid \MC{M}^{*r}(A,\Omega)<\infty\}\\[2mm]
+&=\sup\{r\in\MB{R}\mid \MC{M}^{*r}(A,\Omega)=+\infty\}
+\end{align*}
+\end{definition}
+
+\textbf{Note:} The lower $r$-dimensional Minkowski content of $A$ relative to $\Omega$, denoted $\MC{M}_*^r(A,\Omega)$, is defined similarly except the $\liminf$ is taken, and the relative lower box dimension, denoted $\uline{\dim}_B(A,\Omega)$, is defined as above except $\MC{M}_*^r(A,\Omega)$ is used.
+\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}{Some Important Definitions}
+\footnotesize
+\begin{definition}
+The pair $(A,\Omega)$ in the previous definition is called a \textbf{relative fractal drum (RFD)}.
+\end{definition}\pause
+
+\vspace{2mm}
+\begin{definition}
+We say $(A,\Omega)$ is \textbf{Minkowski nondegenerate} if $0<\MC{M}_*^D(A,\Omega)\leq \MC{M}^{*D}(A,\Omega)<\infty.$
+
+\vspace{3mm}
+It follows then that $\uline{\dim}_B(A,\Omega)=\overline{\dim}_B(A,\Omega)=\dim_B(A,\Omega)=D$, called simply the \textbf{relative Minkowski dimension of $(A,\Omega)$}.
+\end{definition}\pause
+
+\vspace{2mm}
+\begin{definition}
+If $\MC{M}_*^D(A,\Omega) =\MC{M}^{*D}(A,\Omega)$, this common value is denoted $\MC{M}^D(A,\Omega)$ and is called the \textbf{relative Minkowski content of $(A,\Omega)$}.
+\end{definition}\pause
+
+\vspace{2mm}
+\begin{definition}
+If $\MC{M}^D(A,\Omega)$ exists and is different from $0$ and $+\infty$, we say $(A,\Omega)$ is \textbf{Minkowski measurable}.
+\end{definition}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Some Important Definitions}
+\lspace
+\footnotesize
+\begin{definition}
+Let $\Omega\subseteq\MB{R}^N$ be an open set of finite $N$-dimensional Lebesgue measure. Let $A\subseteq\MB{R}^N$ such that $\Omega\subseteq A_\delta$ for some $\delta>0$. The \textbf{relative distance zeta function of $A$}, $\zeta_{A,\Omega}$, is defined as
+\[
+\zeta_{A,\Omega}(s)\coloneqq\int_\Omega d(x,A)^{s-N}\dif{x} \quad \iff \quad \zeta_{A,\Omega}(s;\delta)\coloneqq\int_{\Omega\cap A_\delta}d(x,A)^{s-N}\dif{x}
+\]
+for all $s\in\MB{C}$ such that $\Re(s)>\overline{\dim}_B(A,\Omega)$. Moreover, this function can often be meromorphically continued to all of $\MB{C}$. We also denote by $D(\zeta_{A,\Omega})$ the abscissa of convergence of $\zeta_{A,\Omega}$.
+\end{definition}
+
+\lspace
+\textbf{Note:} In practice, $A$ is the fractal of interest and $\Omega$ is an open set whose closure contains $A$.
+
+
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Some Important Definitions}
+\footnotesize
+\begin{definition}
+The set of \textbf{complex dimensions} of $A$ is the set of poles of the meromorphic continuation of $\zeta_{A,\Omega}$ and is denoted $\MC{D}(\zeta_{A,\Omega})$.
+\end{definition}\pause
+
+\lspace
+\begin{definition}[M.L. Lapidus]
+A set is defined as \textbf{\uline{fractal}} if and only if the meromorphic continuation of its associated zeta function has at least one nonreal complex dimension.
+\end{definition}\pause
+
+\lspace
+\begin{highlight}
+This definition of fractality is the most accurate to date, and correctly classifies fractals and nonfractals by the existence of nonreal complex dimensions. The results in this talk further validate the soundness of this definition.
+\end{highlight}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Some Important Theorems}
+\small
+{\linespread{1.4}
+\begin{theorem}[FZF 4.1.17, p. 253]
+\normalfont
+Assume that $\displaystyle \Omega=\bigcup_{j=1}^\infty B_j$ is an open subset in $\MB{R}^N$ of finite $N$-dimensional Lebesgue measure, where $\{B_j\}_{j=1}^\infty$ is a sequence of pairwise disjoint open subsets of $\MB{R}^N$. Also assume that $A\subseteq \MB{R}^N$ and there exists a $\delta>0$ such that $\Omega\subseteq A_\delta$. Then for all $s\in\MB{C}$ such that $\Re(s)> \overline{\dim}_B(A,\Omega)$, we have
+\[
+\zeta_{A,\Omega}(s)=\sum_{j=1}^\infty \zeta_{A,B_j}(s).
+\] 
+\end{theorem}}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Some Important Theorems}
+\small
+{\linespread{1.4}
+\begin{theorem}[\textit{Scaling Property of Relative Distance Zeta Functions}) \\ (FZF 4.1.40, p. 267]
+\normalfont
+Let $\zeta_{A,\Omega}(s)$ be the relative distance zeta function. Then for any positive real number $k$, we have $D(\zeta_{k A,k \Omega})=D(\zeta_{A,\Omega})=\overline{\dim}_B(A,\Omega)$ and
+\[
+\zeta_{kA,k\Omega}(s)=k^s\zeta_{A,\Omega}(s)
+\]
+for all $s\in\MB{C}$ such that $\Re(s)> \overline{\dim}_B(A,\Omega)$.
+\end{theorem}}
+
+\lspace
+\begin{highlight}[cf. FZF Lemma 4.2.23, p. 292]
+The relative distance zeta function is invariant under isometries.
+\end{highlight}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Some Important Theorems}
+\footnotesize
+{\linespread{1.5}
+\begin{theorem}[FZF 4.1.14, p. 253]
+\normalfont
+Suppose that $(A,\Omega)$ is a Minkowski nondegenerate RFD in $\MB{R}^N$, (in particular $\dim_B(A,\Omega)=D$), and $D<N$. If $\zeta_{A,\Omega}(s)$ can be meromorphically extended to a connected open neighborhood of $\{\Re(s)=D\}$, then $D$ is necessarily a simple pole of $\zeta_{A,\Omega}$, the residue $\text{res}(\zeta_{A,\Omega},D)$ is independent of $\delta$ and
+\[
+\MC{M}_*^D(A,\Omega)\leq \frac{\text{res}(\zeta_{A,\Omega},D)}{N-D}\leq \MC{M}^{*D}(A,\Omega).
+\]
+%\[
+%(N-D)\MC{M}_*^D(A,\Omega)\leq \text{res}(\zeta_{A,\Omega},D)}\leq (N-D)\MC{M}^{*D}(A,\Omega).
+%\]
+Furthermore, if $(A,\Omega)$ is Minkowski measurable then
+\[
+\MC{M}^D(A,\Omega)=\frac{\text{res}(\zeta_{A,\Omega},D)}{N-D}.
+\]
+\end{theorem}}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Defining a Class of Plane-Filling Curves}
+\small
+\begin{definition}
+A \textbf{space-filling function} is a function that maps a $1$-dimensional interval onto an $N$-dimensional space for $N\geq0$. %A \textbf{plane-filling function} is a function that maps a 1-dimensional interval onto an $2$-dimensional area.
+\end{definition}
+
+\lspace
+\begin{definition}
+A \textbf{space-filling curve} is the image of a space-filling function. 
+\end{definition}
+
+\lspace
+\textbf{Note:} We will restrict ourselves to a specific class of plane-filling curves ($N=2$) as described below.
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+%
+%
+%\begin{frame}{Defining a Class of Plane-Filling Curves}
+%\small
+%\begin{itemize}
+%\itemsep5mm
+%\item We will be considering sequences $f_n:[0,1]\to[0,1]^2$ where the image of the limit function $f$ is the entire unit square.\pause
+%\item Our curves are constructed as follows: 
+%
+%\vspace{3mm}
+%First, let $\lambda\in \MB{N}$ with $\lambda\neq1$ and partition the unit square into $\lambda^{2n}$ subsquares 
+%
+%of side length $\left(\frac{1}{\lambda}\right)^n$ for each $n\in \MB{N}$.
+%\end{itemize}
+%
+%\end{frame}
+
+
+
+
+
+\begin{frame}{Defining a Class of Plane-Filling Curves}
+\begin{minipage}[t][3cm]{\textwidth}
+\footnotesize
+\begin{itemize}
+\itemsep3mm
+\item We will be considering sequences $f_n:[0,1]\to[0,1]^2$ where the image of the limit function $f$ is the entire unit square.\pause
+\item Our curves are constructed as follows: 
+
+\vspace{2mm}
+Let $\lambda\in \MB{N}$ with $\lambda\neq1$ and partition the unit square into $\lambda^{2n}$ subsquares of
+
+side length $\left(\frac{1}{\lambda}\right)^n$ for each $n\in \MB{N}$.
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t][8cm]{\textwidth}
+\begin{center}
+\visible<1->{\begin{figure}
+\includegraphics[scale=0.3]{hilbert_grid.png}
+\caption{The first three partitions of $[0,1]^2$ with $\lambda=2$}
+\end{figure}}
+\end{center}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Defining a Class of Plane-Filling Curves}
+\begin{minipage}[t][3cm]{\textwidth}
+\small
+\begin{itemize}
+\itemsep4mm
+\visible<1->{\item In each generation determined by $n$, connect the centers of every subsquare by a polygonal path which does not intersect itself. This polygonal path is the $\mathbf{n}$\textbf{th approximation} of the curve.}
+\visible<2->{\item The plane-filling curve itself is the \textit{limit} of these polygonal paths.}
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t][8cm]{\textwidth}
+\begin{center}
+\visible<1->{\begin{figure}
+\includegraphics[scale=0.3]{hilbert1.png}
+\caption{The first three approximations of a plane-filling curve}
+\end{figure}}
+\end{center}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Defining a Class of Plane-Filling Curves}
+\begin{minipage}[t][3cm]{\textwidth}
+\small
+\begin{itemize}
+\itemsep4mm
+\item This construction does not yield an injective map, but it does ensure that, given any point in the unit interval, its images under successive approximations always lie within the previous subsquares.
+\visible<2->{\item This produces a sequence of functions that is uniformly convergent, which yields an existent, continuous limit curve.}
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t][8cm]{\textwidth}
+\begin{center}
+\visible<1->{\begin{figure}
+\includegraphics[scale=0.3]{hilbert1.png}
+\caption{The first three approximations of a plane-filling curve}
+\end{figure}}
+\end{center}
+\end{minipage}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Defining a Class of Plane-Filling Curves}
+\begin{minipage}[t][3cm]{\textwidth}
+\small
+\begin{itemize}
+\itemsep3mm
+\item The plane-filling property follows from the surjectivity of the map $f$.
+\visible<2->{\item The surjectivity of the map arises from density and compactness: every point in $[0,1]^2=I^2$ lies in the closure of the image of $f$, and this image is both dense and compact, hence equal to its closure.}
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t][8cm]{\textwidth}
+\begin{center}
+\visible<1->{\begin{figure}
+\includegraphics[scale=0.3]{hilbert1.png}
+\caption{The first three approximations of a plane-filling curve}
+\end{figure}}
+\end{center}
+\end{minipage}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Problem}
+\small
+\begin{itemize}
+\itemsep7mm
+\item How can we determine the complex dimensions of a space-filling curve?
+\item Can we devise an RFD that will detect the complex dimensions?
+\item Are these plane-filling curves fractals?
+\item The curves themselves are just $[0,1]^2$, which has dimension 2.
+\item They ``look like'' fractals so we expect nonreal complex dimensions.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{A Motivating Model: The Hilbert Curve}
+\begin{minipage}[t][3cm]{\textwidth}
+\small
+\begin{itemize}
+\itemsep4mm
+\item The Hilbert curve is constructed by subdividing the unit square into $4^{n}$ smaller squares of side length $2^{-n}$ where $n\geq1$. (Here $\lambda=2$.)
+\item The Hilbert curve itself, $f$, is the limit of this sequence of paths, which is equal to the unit square.
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t][8cm]{\textwidth}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.3]{hilbert1.png}
+\caption{The first three approximations of the Hilbert Curve}
+\end{figure}
+\end{center}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Constructing the Hilbert Curve RFD}
+\small
+\begin{minipage}{0.5\textwidth}
+\centering
+\begin{figure}
+\includegraphics[scale=0.17]{hilbert_model.png}
+\caption{Top View / Side View}
+\end{figure}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\lspace
+\centering
+\begin{figure}
+%\tdplotsetmaincoords{80}{130}
+%\begin{tikzpicture}[scale=2.25,tdplot_main_coords]
+%%-----Axes-----
+%\draw[->] (-0.3,0,0) -- (1.6,0,0) node[anchor=north east]{$x$};
+%\draw[->] (0,-0.3,0) -- (0,1.6,0) node[anchor=north west]{$y$};
+%\draw [->] (0,0,-0.05) -- (0,0,1) node[anchor=south]{$z$};
+%
+%%-----Square-----
+%\draw[thick, rounded corners =0.01mm] (0,0,0) -- (1.5,0,0) -- (1.5,1.5,0) -- (0,1.5,0) -- cycle;
+%
+%%-----First Gen
+%%\draw[thick,green] (0.75,0.25,0) -- (0.25,0.25,0) -- (0.25,0.75,0) -- (0.75,0.75,0);
+%%\draw[thick,green] (0.75,0.25,0) -- (0.75,0.25,-0.25) -- (0.75,0.375,-0.125) -- cycle;
+%
+%%-----Ticks
+%\end{tikzpicture}
+%\vspace{1cm}
+\caption{Isometric View}
+\end{figure}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Constructing the Hilbert Curve RFD}
+\footnotesize
+\begin{minipage}{0.5\textwidth}
+\centering
+\begin{figure}
+\includegraphics[scale=0.17]{hilbert_model.png}
+\caption{Top View / Side View}
+\end{figure}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\begin{itemize}
+\itemsep5mm
+\item Each generation of approximation admits a \textbf{fundamental length} $\lambda^{-n}=2^{-n}$.
+\item Each generation comprises segments whose lengths are multiples of this fundamental length.
+\item Each generation admits $4^n-1$ segments of fundamental length.
+\item Each triangular prism is an open set, with one edge running along a segment of fundamental length of an approximating curve.
+\end{itemize}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Constructing the Hilbert Curve RFD}
+\footnotesize
+\begin{minipage}{0.5\textwidth}
+\centering
+\begin{figure}
+\includegraphics[scale=0.17]{hilbert_model.png}
+\caption{Top View / Side View}
+\end{figure}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\begin{itemize}
+\itemsep5mm
+\item The Hilbert Curve RFD is the (disjoint) union of \textit{all} of these triangular prisms.
+\item The zeta function of the complete RFD is the sum of the zeta functions of all of the triangular prisms.
+\item Each smaller prism is a scaled version of a basis prism termed \textbf{the fundamental unit}, so we can use the scaling property of the zeta function to easily compute their zeta functions.
+\end{itemize}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}{Constructing the Hilbert Curve RFD}
+\begin{minipage}{0.6\textwidth}
+\tiny
+\begin{align*}
+\zeta_{H,\Omega_0}(s)&=\int_{\Omega_0}d(\vec x, H)^{s-3}\,\dif{\vec x}\\[2mm]
+&=\int_0^1\int_0^{\frac{1}{2}}\int_{y}^{1-y}z^{s-3}\,\dif{z}\,\dif{y}\,\dif{x}\\[2mm]
+&=\frac{1}{s-2}\int_0^{\frac{1}{2}}(1-y)^{s-2}-y^{s-2}\,\dif{y}\\[2mm]
+&=\frac{1}{(s-2)(s-1)}\left[-(1-y)^{s-1}-y^{s-1}\right]_0^{\frac{1}{2}}\\[2mm]
+&=\frac{1}{(s-2)(s-1)}\left[-\left(\frac{1}{2}\right)^{s-1}-\left(\frac{1}{2}\right)^{s-1}+1\right]\\[2mm]
+&=\frac{1}{(s-2)(s-1)}[-2\cdot2^{1-s}+1]\\[2mm]
+&=\frac{(1-2^{2-s})}{(s-2)(s-1)}.
+\end{align*}
+\end{minipage}\hspace{6mm}%
+\begin{minipage}{0.31\textwidth}
+\centering
+\begin{figure}
+%Generalized fundamental unit
+\tdplotsetmaincoords{80}{130}
+\begin{tikzpicture}[scale=2,tdplot_main_coords]
+\coordinate (O) at (0,0,0);
+
+%-----rectangle-----
+\begin{scope}[canvas is yx plane at z=0,transform shape]
+\draw[dotted, fill=blue!20,fill opacity=0.3] (0,1,0) rectangle (1/2,0,0);
+\end{scope}
+
+%------axes-----
+\draw[->] (-0.3,0,0) -- (1.6,0,0) node[anchor=north east]{$x$};
+\draw[->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+\draw[dotted] (0,-0.9,0) -- (O);
+\draw (0,-0.84,0) -- (0,-1.35,0);
+\draw [->] (0,0,1) -- (0,0,1.25) node[anchor=south]{$z$};
+\draw [dotted] (O) -- (0,0,1);
+
+%-----figure-----
+\draw [thick](O) --  (0,0.5,0.5);
+\draw[->]   (0,5/8,1/4) node[right] {\tiny $z=y$} to [in=315,out=180] (0,1/3,1/4);
+
+\draw [thick](1,0,0) -- (1,0.5,0.5);
+
+\draw [thick](1,0.5,0.5) -- (0,0.5,0.5);
+\draw [thick] (1,0.5,0.5) -- (1,0,1);
+
+\draw[thick] (1,0,0) -- (1,0,1);
+\draw[thick,dashed] (0,0,0) -- (0,0,1);
+
+\draw [thick] (0,0.5,0.5) --node[right]{\tiny $z=1-y$} (0,0,1);
+
+
+\draw[thick] (0,0,1) -- (1,0,1);
+\draw [thick,blue](O) -- (1,0,0);
+
+%-----ticks-----
+\draw (1,0,-0.05) -- (1,0,0.05) node [label={[label distance=0.3mm]270:{\tiny$1$}}] {};
+\draw (0,-0.05,1) -- (0,0.05,1) node [label={[label distance=-2mm]5:{\tiny$1$}}] {};
+\draw (0,0.5,-0.05) -- (0,0.5,0.05) node [label={[label distance=0.3mm]270:{\tiny$\frac{1}{2}$}}] {};
+\draw [dotted] (0,0.5,0.5) -- (0,0.5,0);
+\draw [dotted] (1,0.5,0.5) -- (1,0.5,0);
+\end{tikzpicture}
+\centering \caption{The Fundamental Unit, $\Omega_0$, \\ for the Hilbert Curve}
+\end{figure}
+\end{minipage}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Constructing the Hilbert Curve RFD}
+\begin{minipage}{0.6\textwidth}
+\footnotesize
+\begin{itemize}
+\itemsep3mm
+\visible<1->{\item Let $\Omega_i^n$ be any prism in the $n$th generation where $1\leq i\leq 4^n-1$. Then
+\[
+\Omega_i^n=2^{-n}\Omega_0.
+\]}
+\end{itemize}
+\begin{itemize}
+\vspace{-6mm}
+\visible<2->{\item By the scaling property of the distance zeta function:
+\begin{align*}
+\zeta_{H,\Omega_i^n}(s)&=(2^{-n})^s\zeta_{H,\Omega_0}(s)\\[2mm]
+&=\frac{(1-2^{2-s})}{(s-2)(s-1)}\cdot2^{-ns}
+\end{align*}}
+
+\vspace{-3mm}
+\visible<3->{\item Write $\displaystyle \Omega=\bigcup_{n=1}^\infty\bigcup_{i=1}^{4^n-1}\Omega_{i}^n$ and we have the following.}
+\end{itemize}
+
+\end{minipage}\hspace{6mm}%
+\begin{minipage}{0.31\textwidth}
+\centering
+\visible<1->{\begin{figure}
+%Generalized fundamental unit
+\tdplotsetmaincoords{80}{130}
+\begin{tikzpicture}[scale=2,tdplot_main_coords]
+\coordinate (O) at (0,0,0);
+
+%-----rectangle-----
+\begin{scope}[canvas is yx plane at z=0,transform shape]
+\draw[dotted, fill=blue!20,fill opacity=0.3] (0,1,0) rectangle (1/2,0,0);
+\end{scope}
+
+%------axes-----
+\draw[->] (-0.3,0,0) -- (1.6,0,0) node[anchor=north east]{$x$};
+\draw[->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+\draw[dotted] (0,-0.9,0) -- (O);
+\draw (0,-0.84,0) -- (0,-1.35,0);
+\draw [->] (0,0,1) -- (0,0,1.25) node[anchor=south]{$z$};
+\draw [dotted] (O) -- (0,0,1);
+
+%-----figure-----
+\draw [thick](O) -- (0,0.5,0.5);
+\draw[->]   (0,5/8,1/4) node[right] {\tiny $z=y$} to [in=315,out=180] (0,1/3,1/4);
+
+\draw [thick](1,0,0) -- (1,0.5,0.5);
+
+\draw [thick](1,0.5,0.5) -- (0,0.5,0.5);
+\draw [thick] (1,0.5,0.5) -- (1,0,1);
+
+\draw[thick] (1,0,0) -- (1,0,1);
+\draw[thick,dashed] (0,0,0) -- (0,0,1);
+
+\draw [thick] (0,0.5,0.5) --node[right]{\tiny $z=1-y$} (0,0,1);
+
+\draw[thick] (0,0,1) -- (1,0,1);
+\draw [thick,blue](O) -- (1,0,0);
+
+%-----ticks-----
+\draw (1,0,-0.05) -- (1,0,0.05) node [label={[label distance=0.3mm]270:{\tiny$1$}}] {};
+\draw (0,-0.05,1) -- (0,0.05,1) node [label={[label distance=-2mm]5:{\tiny$1$}}] {};
+\draw (0,0.5,-0.05) -- (0,0.5,0.05) node [label={[label distance=0.3mm]270:{\tiny$\frac{1}{2}$}}] {};
+\draw [dotted] (0,0.5,0.5) -- (0,0.5,0);
+\draw [dotted] (1,0.5,0.5) -- (1,0.5,0);
+\end{tikzpicture}
+\centering \caption{The Fundamental Unit, $\Omega_0$, for the Hilbert Curve}
+\end{figure}}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Constructing the Hilbert Curve RFD}
+\begin{minipage}{0.6\textwidth}
+\tiny
+\begin{align*}
+\zeta_{H,\Omega}(s)&=\frac{(1-2^{2-s})}{(s-2)(s-1)}\sum_{n=1}^\infty 2^{-sn}(4^n-1)\\[2mm]
+&=\frac{(1-2^{2-s})}{(s-2)(s-1)}\sum_{n=1}^\infty \left[(2^{2-s})^n-(2^{-s})^n\right]\\[2mm]
+&=\frac{(1-2^{2-s})}{(s-2)(s-1)}\left[\frac{2^{2-s}}{1-2^{2-s}}-\frac{2^{-s}}{1-2^{-s}}\right]\\[2mm]
+&=\frac{\cancel{(1-2^{2-s})}}{(s-2)(s-1)}\left[\frac{2^{2-s}-\cancel{2^{-s}2^{2-s}}-2^{-s}+\cancel{2^{-s}2^{2-s}}}{\cancel{(1-2^{2-s})}(1-2^{-s})}\right]\\[2mm]
+&=\frac{2^{-s}(4-1)}{(s-2)(s-1)(1-2^{-s})}\\[2mm]
+&=\frac{3\cdot2^{-s}}{(s-2)(s-1)(1-2^{-s})}.
+\end{align*}
+\end{minipage}\hspace{4mm}%
+\begin{minipage}{0.31\textwidth}
+\centering
+%Generalized fundamental unit
+\begin{figure}
+\tdplotsetmaincoords{80}{130}
+\begin{tikzpicture}[scale=2,tdplot_main_coords]
+\coordinate (O) at (0,0,0);
+
+%-----rectangle-----
+\begin{scope}[canvas is yx plane at z=0,transform shape]
+\draw[dotted, fill=blue!20,fill opacity=0.3] (0,1,0) rectangle (1/2,0,0);
+\end{scope}
+
+%------axes-----
+\draw[->] (-0.3,0,0) -- (1.6,0,0) node[anchor=north east]{$x$};
+\draw[->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+\draw[dotted] (0,-0.9,0) -- (O);
+\draw (0,-0.84,0) -- (0,-1.35,0);
+\draw [->] (0,0,1) -- (0,0,1.25) node[anchor=south]{$z$};
+\draw [dotted] (O) -- (0,0,1);
+
+%-----figure-----
+\draw [thick](O) -- (0,0.5,0.5);
+\draw[->]   (0,5/8,1/4) node[right] {\tiny $z=y$} to [in=315,out=180] (0,1/3,1/4);
+
+\draw [thick](1,0,0) -- (1,0.5,0.5);
+
+\draw [thick](1,0.5,0.5) -- (0,0.5,0.5);
+\draw [thick] (1,0.5,0.5) -- (1,0,1);
+
+\draw[thick] (1,0,0) -- (1,0,1);
+\draw[thick,dashed] (0,0,0) -- (0,0,1);
+
+\draw [thick] (0,0.5,0.5) --node[right]{\tiny $z=1-y$} (0,0,1);
+
+\draw[thick] (0,0,1) -- (1,0,1);
+\draw [thick,blue](O) -- (1,0,0);
+
+%-----ticks-----
+\draw (1,0,-0.05) -- (1,0,0.05) node [label={[label distance=0.3mm]270:{\tiny$1$}}] {};
+\draw (0,-0.05,1) -- (0,0.05,1) node [label={[label distance=-2mm]5:{\tiny$1$}}] {};
+\draw (0,0.5,-0.05) -- (0,0.5,0.05) node [label={[label distance=0.3mm]270:{\tiny$\frac{1}{2}$}}] {};
+\draw [dotted] (0,0.5,0.5) -- (0,0.5,0);
+\draw [dotted] (1,0.5,0.5) -- (1,0.5,0);
+\end{tikzpicture}
+\centering \caption{The Fundamental Unit, $\Omega_0$, for the Hilbert Curve}
+\end{figure}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Constructing the Hilbert Curve RFD}
+\footnotesize
+\[
+\zeta_{H,\Omega}(s)=\frac{3\cdot2^{-s}}{(s-2)(s-1)(1-2^{-s})}
+\]
+
+\vspace{3mm}
+\textbf{Note:} This function has a meromorphic extension to all of $\MB{C}$.
+
+
+\lspace
+\begin{highlight2}
+The RFD constructed above is Minkowski measurable, and the relative Minkowski dimension of the unit square with respect to $\Omega$ is $D=2$. Moreover, this is true for any $\lambda\in \MB{N},\,\lambda\neq 1$.
+\end{highlight2}\pause
+
+\lspace
+\begin{proof}
+\scriptsize
+A direct calculation of the 2-dimensional Minkowski content reveals that $\MC{M}^2(A,\Omega)=1$.
+\end{proof}
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Constructing the Hilbert Curve RFD}
+\footnotesize
+We have
+\begin{align*}
+\text{res}(\zeta_{H=I^2,\Omega},2)&=\lom{s}{2}\cancel{(s-2)}\cdot\frac{3\cdot2^{-s}}{\cancel{(s-2)}(s-1)(1-2^{-s})}\\[2mm]
+&=\frac{3\cdot2^{-2}}{(1)(1-\frac{1}{4})}=\frac{\frac{3}{4}}{\frac{3}{4}}=1.
+\end{align*}
+
+By the lemma above, theorem 4.1.14 in FZF applies, and since $N=3$, we have
+\[
+\MC{M}^2(I^2,\Omega)=\frac{1}{3-2}=1.
+\]
+
+\pause This is valid initially for $\Re(s)>2$, and then $\zeta_{H,\Omega}$ can be meromorphically continued to all of $\MB{C}$. It follows that the set of relative complex dimensions of the Hilbert Curve must be
+\[
+\MC{D}(\zeta_{H,\Omega})=\left\{0+\frac{2\pi}{\log 2}i\mathbbm{Z}\right\}\cup\{1,2\}.
+\]
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\begin{frame}{Generalizing The Fundamental Unit}
+%\footnotesize
+%
+%\begin{itemize}
+%\itemsep5mm
+%
+%\item This particular prism does not work for all plane-filling curves constructed this way, i.e. for all $\lambda$. There is a relationship between the shape of the prism and the number of fundamental lengths that results in the cancellation witnessed previously.\pause
+%
+%\item Each approximating curve admits a \textbf{fundamental length} $\lambda^{-n}$ which is the reciprocal of $n$th power of the scalar $\lambda$ that determines the size of the partitions of the unit interval and unit square.\pause
+%
+%\item \textbf{The fundamental unit} itself is an appropriately-shaped open triangular prism with one edge contacting the plane.\pause
+%
+%\item Every triangular prism is a scaled copy of this fundamental unit; scaled so that the contacting edge is of fundamental length.\pause
+%
+%\item The complete RFD is a countable disjoint union of these scaled fundamental units.
+%\end{itemize}
+%\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Generalized Fundamental Unit}
+\pause
+\centering
+\begin{figure}
+\begin{minipage}{0.4\textwidth}
+
+%Generalized Fundamental Unit
+
+\tdplotsetmaincoords{80}{145}
+\begin{tikzpicture}[scale=2.5,tdplot_main_coords]
+%-----rectangle-----
+\begin{scope}[canvas is yx plane at z=0,transform shape]
+\draw[dotted, fill=blue!20,fill opacity=0.3] (0,1,0) rectangle (3/4,0,0);
+\end{scope}
+
+%------axes-----
+\draw[->] (-0.3,0,0) -- (1.3,0,0) node[anchor=north east]{$x$};
+\draw[->] (0,0,0) -- (0,1.25,0) node[anchor=north west]{$y$};
+\draw[dotted] (0,-1.4,0) -- (0,0,0);
+\draw (0,-1.7,0) -- (0,-1.42,0);
+\draw [->] (0,0,1) -- (0,0,1.25) node[anchor=south]{$z$};
+\draw [dotted] (0,0,0) -- (0,0,1);
+
+%-----figure-----
+\draw [thick](0,0,0) -- (0,0.75,0.25);
+\draw [thick](1,0,0) -- (1,0.75,0.25);
+
+\draw [thick](1,0.75,0.25) -- (0,0.75,0.25);
+\draw [thick] (1,0.75,0.25) -- (1,0,1);
+
+\draw[thick] (1,0,0) -- (1,0,1);
+\draw[thick,dashed] (0,0,0) -- (0,0,1);
+
+\draw [thick] (0,0.75,0.25) -- (0,0,1);
+
+\draw[thick] (0,0,1) -- (1,0,1);
+\draw [thick,blue](0,0,0) -- (1,0,0);
+
+%-----ticks-----
+\draw (1,0,-0.05) -- (1,0,0.05) node [label={[label distance=0.3mm]270:{\tiny$1$}}] {};
+\draw (0,-0.05,1) -- (0,0.05,1) node [label={[label distance=-2mm]5:{\tiny$1$}}] {};
+\draw (0,0.75,-0.05) -- (0,0.75,0.05) node [label={[label distance=0.3mm]270:{\tiny$1-\frac{1}{\lambda}$}}] {};
+\draw (0,-0.05,1/4) node[left] {\tiny$\frac{1}{\lambda}$} -- (0,0.05,1/4);
+\draw[dotted] (0,0,1/4) -- (0,3/4,1/4);
+\draw [dotted] (0,0.75,0.25) -- (0,0.75,0);
+\draw [dotted] (1,0.75,0.25) -- (1,0.75,0);
+\end{tikzpicture}
+\end{minipage}\hspace{13mm}%
+\begin{minipage}{0.4\textwidth}
+\begin{tikzpicture}[scale=2.5]
+%-----Axes-----
+\draw[->] (-0.1,0) -- (1.25,0) node[right] {$y$};
+\draw[->] (0,-0.1) -- (0,1.25) node[above] {$z$};
+
+%-----Figure-----
+\draw[thick] (0,0) --  (3/4,1/4) --node[right] {\hspace{1mm}\tiny$z=1-y$} (0,1) -- cycle;
+\draw[->]   (1,1/4) node[right] {\tiny $z=\frac{1}{\lambda-1}y$} to [in=290,out=180] (1/2,1/8);
+\fill[blue] (0,0)  circle[radius=0.75pt];
+
+%-----Ticks-----
+\draw (3/4,-0.05) -- (3/4,0.05);
+\draw (3/4,0) node[below] {\tiny $1-\frac{1}{\lambda}$};
+\draw[dotted] (3/4,0) -- (3/4,1/4);
+\draw (-0.05,1) node[left] {\tiny$1$} -- (0.05,1);
+\draw (1,-0.05) node[below] {\tiny $1$} -- (1,0.05);
+\draw (-0.05,1/4) node[left] {\tiny$\frac{1}{\lambda}$} -- (0.05,1/4);
+\draw[dotted] (0,1/4) -- (3/4,1/4);
+\end{tikzpicture}
+\end{minipage}
+\centering \caption{The generalized Fundamental Unit}
+\end{figure}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Some Examples}
+\centering
+\begin{minipage}{0.3\textwidth}
+\begin{tikzpicture}[scale=2]
+%-----Label-----
+\draw (1.05,1.05) node {\fbox{\tiny $\lambda=2$}};
+%-----Axes-----
+\draw[->] (-0.1,0) -- (1.25,0) node[right] {$y$};
+\draw[->] (0,-0.1) -- (0,1.25) node[above] {$z$};
+
+%-----Figure-----
+\draw[thick] (0,0) -- (1/2,1/2) -- (0,1) -- cycle;
+\fill[blue] (0,0)  circle[radius=1pt];
+\draw[->]   (5/8,1/4) node[right] {\tiny $z=y$} to [in=315,out=180] (3/8,5/16);
+
+
+%-----Ticks-----
+\draw (1/2,-0.05) -- (1/2,0.05);
+\draw (1/2,0) node[below] {\tiny $\frac{1}{2}$};
+\draw[dotted] (1/2,0) -- (1/2,1/2);
+\draw (-0.05,1) node[left] {\tiny$1$} -- (0.05,1);
+\draw (1,-0.05) node[below] {\tiny $1$} -- (1,0.05);
+\draw (-0.05,1/2) node[left] {\tiny$\frac{1}{2}$} -- (0.05,1/2);
+\draw[dotted] (0,1/2) -- (1/2,1/2);
+\end{tikzpicture}
+\end{minipage}\hspace{5mm}%
+\begin{minipage}{0.3\textwidth}
+\begin{tikzpicture}[scale=2]
+%-----Label-----
+\draw (1.05,1.05) node {\fbox{\tiny $\lambda=3$}};
+%-----Axes-----
+\draw[->] (-0.1,0) -- (1.25,0) node[right] {$y$};
+\draw[->] (0,-0.1) -- (0,1.25) node[above] {$z$};
+
+%-----Figure-----
+\draw[thick] (0,0) -- (2/3,1/3) -- (0,1) -- cycle;
+\fill[blue] (0,0)  circle[radius=1pt];
+\draw[->]   (3/4,1/5) node[right] {\tiny $z=\frac{1}{2}y$} to [in=300,out=180] (0.48,0.19);
+
+%-----Ticks-----
+\draw (2/3,-0.05) -- (2/3,0.05);
+\draw (2/3,0) node[below] {\tiny $\frac{2}{3}$};
+\draw[dotted] (2/3,0) -- (2/3,1/3);
+\draw (-0.05,1) node[left] {\tiny$1$} -- (0.05,1);
+\draw (1,-0.05) node[below] {\tiny $1$} -- (1,0.05);
+\draw (-0.05,1/3) node[left] {\tiny$\frac{1}{3}$} -- (0.05,1/3);
+\draw[dotted] (0,1/3) -- (2/3,1/3);
+\end{tikzpicture}
+\end{minipage}\hspace{5mm}%
+\begin{minipage}{0.3\textwidth}
+\begin{tikzpicture}[scale=2]
+%-----Label-----
+\draw (1.05,1.05) node {\fbox{\tiny $\lambda=11$}};
+
+%-----Axes-----
+\draw[->] (-0.1,0) -- (1.25,0) node[right] {$y$};
+\draw[->] (0,-0.1) -- (0,1.25) node[above] {$z$};
+
+%-----Figure-----
+\draw[thick] (0,0) -- (10/11,1/11) -- (0,1) -- cycle;
+\fill[blue] (0,0)  circle[radius=1pt];
+\draw[->]   (3/4,1/2) node[right] {\tiny $z=\frac{1}{10}y$} to [in=100,out=180] (0.5,1/10);
+
+%-----Ticks-----
+\draw (10/11,-0.05) -- (10/11,0.05);
+\draw (10/11,0) node[below] {\tiny $\frac{10}{11}$};
+\draw[dotted] (10/11,0) -- (10/11,1/11);
+\draw (-0.05,1) node[left] {\tiny$1$} -- (0.05,1);
+\draw (1,-0.05)  -- (1,0.05) node[above] {\tiny $1$};
+\draw (-0.05,1/11) node[left] {\tiny$\frac{1}{11}$} -- (0.05,1/11);
+\draw[dotted] (0,1/11) -- (10/11,1/11);
+\end{tikzpicture}
+\end{minipage}
+
+\begin{minipage}{0.3\textwidth}
+\begin{tikzpicture}[scale=2]
+%-----Label-----
+\draw (1.05,1.05) node {\fbox{\tiny $\lambda=63$}};
+
+%-----Axes-----
+\draw[->] (-0.1,0) -- (1.25,0) node[right] {$y$};
+\draw[->] (0,-0.1) -- (0,1.25) node[above] {$z$};
+
+%-----Figure-----
+\draw[thick] (0,0) -- (62/63,1/63) -- (0,1) -- cycle;
+\fill[blue] (0,0)  circle[radius=1pt];
+\draw[->]   (3/4,1/2) node[right] {\tiny $z=\frac{1}{62}y$} to [in=100,out=180] (0.5,1/18);
+
+%-----Ticks-----
+\draw (62/63,-0.05) -- (62/63,0.05);
+\draw (62/63,0) node[below] {\tiny $\frac{62}{63}$};
+\draw[dotted] (62/63,0) -- (62/63,1/63);
+\draw (-0.05,1) node[left] {\tiny$1$} -- (0.05,1);
+\draw (1,-0.05) -- (1,0.05) node[above] {\tiny $1$};
+\draw (-0.05,1/63) node[left] {\tiny$\frac{1}{63}$} -- (0.05,1/63);
+\draw[dotted] (0,1/63) -- (62/63,1/63);
+\end{tikzpicture}
+\end{minipage}\hspace{5mm}%
+\begin{minipage}{0.3\textwidth}
+\begin{tikzpicture}[scale=2]
+%-----Label-----
+\draw (1.05,1.05) node {\fbox{\tiny $\lambda\,$``$=$''$\,\infty$}};
+
+%-----Axes-----
+\draw[->] (-0.1,0) -- (1.25,0) node[right] {$y$};
+\draw[->] (0,-0.1) -- (0,1.25) node[above] {$z$};
+
+%-----Figure-----
+\draw[thick] (0,0) -- (1,0) -- (0,1) -- cycle;
+\draw[very thick,blue] (-0.006,0) -- (1,0);
+
+%-----Ticks-----
+\draw (-0.05,1) node[left] {\tiny$1$} -- (0.05,1);
+\draw (1,-0.05) node[below] {\tiny $1$} -- (1,0.05);
+\end{tikzpicture}
+\end{minipage}%
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Generalized Fundamental Unit}
+\begin{minipage}{0.6\textwidth}
+\tiny
+\begin{align*}
+&\zeta_{\Lambda,\Omega_0}(s)=\int_0^1\int_0^{1-\frac{1}{\lambda}}\int_{\frac{1}{\lambda-1}y}^{1-y}z^{s-3}\,\dif{z}\,\dif{y}\,\dif{x}\\[2mm]
+&=\frac{1}{s-2}\int_0^{1-\frac{1}{\lambda}}(1-y)^{s-2}-(\lambda-1)^{2-s}y^{s-2}\,\dif{y}\\[2mm]
+&=\frac{1}{(s-2)(s-1)}\left[-(1-y)^{s-1}-(\lambda-1)^{2-s}y^{s-1}\right]_0^{1-\frac{1}{\lambda}}\\[2mm]
+&=\frac{1}{(s-2)(s-1)}\left[-\left(\frac{1}{\lambda}\right)^{s-1}-(\lambda-1)^{2-s}\left(\frac{\lambda-1}{\lambda}\right)^{s-1}+1\right]\\[2mm]
+&=\frac{1}{(s-2)(s-1)}\left[-\left(\frac{1}{\lambda}\right)^{s-1}-(\lambda-1)\left(\frac{1}{\lambda}\right)^{s-1}+1\right]\\[2mm]
+&=\frac{1}{(s-2)(s-1)}\left[-\lambda\cdot\lambda^{1-s}+1\right]\\[2mm]
+&=\frac{(1-\lambda^{2-s})}{(s-2)(s-1)}.
+\end{align*}
+\end{minipage}\hspace{1mm}%
+\begin{minipage}{0.3\textwidth}
+\hspace{3mm}%
+\begin{minipage}{0.3\textwidth}
+
+\begin{tikzpicture}[scale=2]
+%-----Axes-----
+\draw[->] (-0.1,0) -- (1.25,0) node[right] {$y$};
+\draw[->] (0,-0.1) -- (0,1.25) node[above] {$z$};
+
+%-----Figure-----
+\draw[thick] (0,0) --  (3/4,1/4) --node[right] {\hspace{1mm}\tiny$z=1-y$} (0,1) -- cycle;
+\draw[->]   (1,1/4) node[right] {\tiny $z=\frac{1}{\lambda-1}y$} to [in=290,out=180] (1/2,1/8);
+\fill[blue] (0,0)  circle[radius=1pt];
+
+%-----Ticks-----
+\draw (3/4,-0.05) -- (3/4,0.05);
+\draw (3/4,0) node[below] {\tiny $1-\frac{1}{\lambda}$};
+\draw[dotted] (3/4,0) -- (3/4,1/4);
+\draw (-0.05,1) node[left] {\tiny$1$} -- (0.05,1);
+\draw (1,-0.05) node[below] {\tiny $1$} -- (1,0.05);
+\draw (-0.05,1/4) node[left] {\tiny$\frac{1}{\lambda}$} -- (0.05,1/4);
+\draw[dotted] (0,1/4) -- (3/4,1/4);
+\end{tikzpicture}
+\end{minipage}
+\flushleft
+
+\begin{minipage}{0.3\textwidth}
+
+%Generalized Fundamental Unit 3D
+
+\tdplotsetmaincoords{80}{145}
+\begin{tikzpicture}[scale=2,tdplot_main_coords]
+%-----rectangle-----
+\begin{scope}[canvas is yx plane at z=0,transform shape]
+\draw[dotted, fill=blue!20,fill opacity=0.3] (0,1,0) rectangle (3/4,0,0);
+\end{scope}
+
+%------axes-----
+\draw[->] (-0.3,0,0) -- (1.3,0,0) node[anchor=north east]{$x$};
+\draw[->] (0,0,0) -- (0,1.25,0) node[anchor=north west]{$y$};
+\draw[dotted] (0,-1.4,0) -- (0,0,0);
+\draw (0,-1.7,0) -- (0,-1.45,0);
+\draw [->] (0,0,1) -- (0,0,1.25) node[anchor=south]{$z$};
+\draw [dotted] (0,0,0) -- (0,0,1);
+
+%-----figure-----
+\draw [thick](0,0,0) -- (0,0.75,0.25);
+\draw [thick](1,0,0) -- (1,0.75,0.25);
+
+\draw [thick](1,0.75,0.25) -- (0,0.75,0.25);
+\draw [thick] (1,0.75,0.25) -- (1,0,1);
+
+\draw[thick] (1,0,0) -- (1,0,1);
+\draw[thick,dashed] (0,0,0) -- (0,0,1);
+
+\draw [thick] (0,0.75,0.25) -- (0,0,1);
+
+\draw[thick] (0,0,1) -- (1,0,1);
+\draw [thick,blue](0,0,0) -- (1,0,0);
+
+%-----ticks-----
+\draw (1,0,-0.05) -- (1,0,0.05) node [label={[label distance=0.3mm]270:{\tiny$1$}}] {};
+\draw (0,-0.05,1) -- (0,0.05,1) node [label={[label distance=-2mm]5:{\tiny$1$}}] {};
+\draw (0,0.75,-0.05) -- (0,0.75,0.05) node [label={[label distance=0.3mm]270:{\tiny$1-\frac{1}{\lambda}$}}] {};
+\draw (0,-0.05,1/4) node[left] {\tiny$\frac{1}{\lambda}$} -- (0,0.05,1/4);
+\draw[dotted] (0,0,1/4) -- (0,3/4,1/4);
+\draw [dotted] (0,0.75,0.25) -- (0,0.75,0);
+\draw [dotted] (1,0.75,0.25) -- (1,0.75,0);
+\end{tikzpicture}
+\end{minipage}
+\end{minipage}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Peano Curve: $\lambda=3$}
+\centering
+%\includegraphics[scale=0.17]{Peano_curve.png}
+\begin{figure}
+\begin{minipage}{0.3\textwidth}
+\centering
+\includegraphics[scale=0.18]{Peano1.png}
+\end{minipage}\hspace{3mm}%
+\begin{minipage}{0.3\textwidth}
+\centering
+\includegraphics[scale=0.18]{Peano2.png}
+\end{minipage}\hspace{3mm}%
+\begin{minipage}{0.3\textwidth}
+\centering
+\includegraphics[scale=0.186]{Peano3.png}
+\end{minipage}
+\centering \caption{The first three approximations of a Peano Curve}
+\end{figure}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Peano Curve: $\lambda=3$}
+\footnotesize
+\begin{minipage}[t][2.75cm]{\textwidth}
+\begin{itemize}
+\itemsep4mm
+\item There is overlap in the approximations of this curve so it is necessary to translate the segments and corresponding scaled fundamental units to produce a valid RFD.
+\item In fact, there will be nontrivial overlap for any curve with $\lambda$ odd, so the pieces will have to be moved for all of those curves.
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t][9cm]{\textwidth}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.2]{Peano_overlap.png}
+\centering \caption{The first three approximations overlayed}
+\end{figure}
+\end{center}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Peano Curve: $\lambda=3$}
+\footnotesize
+\begin{minipage}[t][2.75cm]{\textwidth}
+\begin{itemize}
+\itemsep4mm
+\item Recall: the distance zeta function is independent of geometric realization, i.e. these transformations will not alter our results.
+\item The primary concern is if there is ``enough room'' to fit all of the prisms.
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t][9cm]{\textwidth}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.2]{Peano_overlap.png}
+\centering \caption{The first three approximations overlayed}
+\end{figure}
+\end{center}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Peano Curve: $\lambda=3$}
+\begin{minipage}{0.3\textwidth}
+\tiny
+\begin{align*}
+\zeta_{P,\Omega_0}(s)&=\int_0^1\int_0^{\frac{2}{3}}\int_{\frac{1}{2}y}^{1-y}z^{s-3}\,\dif{z}\,\dif{y}\,\dif{x}\\[2mm]
+&=\frac{1}{s-2}\int_0^{\frac{2}{3}}(1-y)^{s-2}-2^{2-s}y^{s-2}\,\dif{y}\\[2mm]
+&=\frac{1}{(s-2)(s-1)}\left[-(1-y)^{s-1}-2^{2-s}y^{s-1}\right]_0^{\frac{2}{3}}\\[2mm]
+&=\frac{1}{(s-2)(s-1)}\left[-\left(\frac{1}{3}\right)^{s-1}-2^{2-s}\left(\frac{2}{3}\right)^{s-1}+1\right]\\[2mm]
+&=\frac{1}{(s-2)(s-1)}[-3^{1-s}-2\cdot3^{1-s}+1]\\[2mm]
+&=\frac{(1-3^{2-s})}{(s-2)(s-1)}.
+\end{align*}
+\end{minipage}\hspace{5mm}%
+\begin{minipage}{0.35\textwidth}
+\centering
+\begin{figure}
+%Generalized fundamental unit
+\tdplotsetmaincoords{80}{130}
+\begin{tikzpicture}[scale=2,tdplot_main_coords]
+\coordinate (O) at (0,0,0);
+
+%-----rectangle-----
+\begin{scope}[canvas is yx plane at z=0,transform shape]
+\draw[dotted, fill=blue!20,fill opacity=0.3] (0,1,0) rectangle (2/3,0,0);
+\end{scope}
+
+%------axes-----
+\draw[->] (-0.3,0,0) -- (1.3,0,0) node[anchor=north east]{$x$};
+\draw[->] (0,0,0) -- (0,1.2,0) node[anchor=north west]{$y$};
+\draw[dotted] (0,-0.9,0) -- (O);
+\draw (0,-0.84,0) -- (0,-1.35,0);
+\draw [->] (0,0,1) -- (0,0,1.25) node[anchor=south]{$z$};
+\draw [dotted] (O) -- (0,0,1);
+
+%-----figure-----
+\draw [thick](0,0,0) -- (0,2/3,1/3) -- (0,0,1);
+\draw[thick,dashed] (0,0,0) -- (0,0,1);
+
+\draw [thick,rounded corners=0.01mm](1,0,0) -- (1,2/3,1/3) -- (1,0,1) -- cycle;
+
+\draw[thick] (0,0,1) -- (1,0,1);
+\draw[thick] (0,2/3,1/3) -- (1,2/3,1/3);
+\draw [thick,blue](O) -- (1,0,0);
+
+%-----ticks-----
+\draw[->]   (0,5/8,1/8) node[right] {\tiny $z=\frac{1}{2}y$} to [in=315,out=170] (0,0.4,0.16);
+
+\draw (1,0,-0.05) -- (1,0,0.05) node [label={[label distance=0.3mm]270:{\tiny$1$}}] {};
+\draw (0,-0.05,1) -- (0,0.05,1) node [label={[label distance=-2mm]5:{\tiny$1$}}] {};
+\draw (0,2/3,-0.05) -- (0,2/3,0.05) node [label={[label distance=0.3mm]270:{\tiny$\frac{2}{3}$}}] {};
+\draw (0,1,-0.05) -- (0,1,0.05) node [label={[label distance=0.3mm]270:{\tiny$1$}}] {};
+\draw [dotted] (0,2/3,1/3) -- (0,2/3,0);
+\draw [dotted] (1,2/3,1/3) -- (1,2/3,0);
+\end{tikzpicture}
+\caption{The fundamental unit for $\lambda=3$}
+\end{figure}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Peano Curve: $\lambda=3$}
+\footnotesize
+Since $\lambda^{-n}=3^{-n}$, we have $(\lambda^{-n})^s=(3^{-n})^s=3^{-sn}$, yielding:
+
+\[
+\zeta_{P,\Omega_i^n}(s)=(3^{-n})^s\zeta_{P,\Omega_0}(s)=\frac{(1-3^{2-s})}{(s-2)(s-1)}\cdot3^{-sn}
+\]
+Thus,
+
+{\tiny
+\begin{align*}
+\zeta_{P,\Omega}(s)&=\frac{(1-3^{2-s})}{(s-2)(s-1)}\sum_{n=1}^\infty 3^{-sn}(3^{2n}-1)=\frac{(1-3^{2-s})}{(s-2)(s-1)}\sum_{n=1}^\infty \left[(3^{2-s})^n-(3^{-s})^n\right]\\[2mm]
+&=\frac{(1-3^{2-s})}{(s-2)(s-1)}\left[\frac{3^{2-s}}{1-3^{2-s}}-\frac{3^{-s}}{1-3^{-s}}\right]\\[2mm]
+&=\frac{\cancel{(1-3^{2-s})}}{(s-2)(s-1)}\left[\frac{3^{2-s}-\cancel{3^{-s}3^{2-s}}-3^{-s}+\cancel{3^{-s}3^{2-s}}}{\cancel{(1-3^{2-s})}(1-3^{-s})}\right]\\[2mm]
+&=\frac{3^{-s}(9-1)}{(s-2)(s-1)(1-3^{-s})}=\frac{8\cdot3^{-s}}{(s-2)(s-1)(1-3^{-s})}.
+\end{align*}
+}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Peano Curve: $\lambda=3$}
+\footnotesize
+Therefore
+\begin{align*}
+\text{res}(\zeta_{P=I^2,\Omega},2)&=\lom{s}{2}\cancel{(s-2)}\cdot\frac{8\cdot3^{-s}}{\cancel{(s-2)}(s-1)(1-3^{-s})}\\[2mm]
+&=\frac{8\cdot3^{-2}}{(1)(1-\frac{1}{9})}=\frac{\frac{8}{9}}{\frac{8}{9}}=1 \text{, and}
+\end{align*}
+
+\[
+\MC{M}^2(P=I^2,\Omega)=\frac{1}{3-2}=1.
+\]
+
+\lspace
+This is valid initially for $\Re(s)>2$, and then  $\zeta_{H,\Omega}$ can be meromorphically continued to all of $\MB{C}$. Thus, the set of relative complex dimensions of the Peano Curve must be
+\[
+\MC{D}(\zeta_{P,\Omega})=\left\{0+\frac{2\pi}{\log 3}i\mathbbm{Z}\right\}\cup\{1,2\}.
+\]
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Existence of a Geometric Realization}
+
+\begin{itemize}
+\itemsep5mm
+\item A valid generalization feels imminent, but we need to prove that a geometric realization exists for all relevant $\lambda$.\pause
+\item This amounts to a ``prism-packing'' problem which reduces to a problem of available area: the height of the cavity under a prism restricts how many prisms of the subsequent generations can fit underneath, and this space restriction is in one-to-one correspondence with a restricted projected area under each prism.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Existence of a Geometric Realization}
+\footnotesize
+\begin{minipage}{0.55\textwidth}
+\begin{itemize}
+\itemsep6mm
+\item A simple calculation shows that for any $\lambda$, the area covered (shadowed) by a single scaled prism in the $n$th generation is 
+\[
+A_n=\frac{\lambda-1}{\lambda^{2n+1}}.
+\]
+\item In each generation, there is a minimum amount of area, $m(n)$, within the closed unit square that must be accessible for intersection with the projected area of the prisms to be placed. Specifically:
+\[
+m(n)=A_n\cdot(\lambda^{2n}-1)=\frac{\lambda-1}{\lambda^{2n+1}}\cdot(\lambda^{2n}-1)
+\]
+\end{itemize}
+\end{minipage}\hspace{5mm}
+\begin{minipage}{0.3\textwidth}
+%Generalized Fundamental Unit
+
+\tdplotsetmaincoords{80}{145}
+\begin{tikzpicture}[scale=2.5,tdplot_main_coords]
+%-----rectangle-----
+\begin{scope}[canvas is yx plane at z=0,transform shape]
+\draw[dotted, fill=blue!20,fill opacity=0.3] (0,1,0) rectangle (3/4,0,0);
+\end{scope}
+
+%------axes-----
+\draw[->] (-0.3,0,0) -- (1.2,0,0) node[anchor=north east]{$x$};
+\draw[->] (0,0,0) -- (0,1.2,0) node[anchor=north west]{$y$};
+\draw[dotted] (0,-1.4,0) -- (0,0,0);
+\draw (0,-1.7,0) -- (0,-1.42,0);
+\draw [->] (0,0,1) -- (0,0,1.2) node[anchor=south]{$z$};
+\draw [dotted] (0,0,0) -- (0,0,1);
+
+%-----figure-----
+\draw [thick](0,0,0) -- (0,0.75,0.25);
+\draw [thick](1,0,0) -- (1,0.75,0.25);
+
+\draw [thick](1,0.75,0.25) -- (0,0.75,0.25);
+\draw [thick] (1,0.75,0.25) -- (1,0,1);
+
+\draw[thick] (1,0,0) -- (1,0,1);
+\draw[thick,dashed] (0,0,0) -- (0,0,1);
+
+\draw [thick] (0,0.75,0.25) -- (0,0,1);
+
+\draw[thick] (0,0,1) -- (1,0,1);
+\draw [thick,blue](0,0,0) -- (1,0,0);
+
+%-----ticks-----
+\draw[->]   (0.75,1,-0.125) node[below] {\tiny $A_n=\frac{\lambda-1}{\lambda^{2n+1}}$} to [in=270,out=90] (0.5,0.5,0);
+
+\draw (1,0,-0.05) -- (1,0,0.05) node [label={[label distance=1mm]270:{\tiny$\frac{1}{\lambda^n}$}}] {};
+\draw (0,-0.05,1) -- (0,0.05,1) node [label={[label distance=-2mm]5:{\tiny$\frac{1}{\lambda^n}$}}] {};
+\draw (0,0.75,-0.05) -- (0,0.75,0.05) node [label={[label distance=0.3mm]270:{\tiny$\frac{\lambda-1}{\lambda^{n+1}}$}}] {};
+\draw (0,-0.05,1/4) node[left] {\tiny$\frac{1}{\lambda^{n+1}}$} -- (0,0.05,1/4);
+\draw[dotted] (0,0,1/4) -- (0,3/4,1/4);
+\draw [dotted] (0,0.75,0.25) -- (0,0.75,0);
+\draw [dotted] (1,0.75,0.25) -- (1,0.75,0);
+\end{tikzpicture}
+
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Existence of a Geometric Realization}
+\small
+\begin{itemize}
+\itemsep5mm
+\item In each generation, there is also some amount of area that is geometrically inaccessible due to the placement of the prisms from all of the previous generations. We denote this accumulative, inaccessible (or restricted) area by $r(n)$.\pause
+\item As long as $r(n)$ does not meet or exceed $m(n)$, i.e. $r(n)<m(n)$, a valid geometric realization will exist since there will be ``enough room'' to place all of the prisms in each generation and thus enough room to place all of the prisms in the RFD.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Existence of a Geometric Realization}
+\begin{minipage}{0.6\textwidth}
+\footnotesize
+\begin{itemize}
+
+\visible<1->{\item A prism in the $(n-1)$th generation restricts $\frac{\lambda-1}{\lambda}$ of the area it covers from being accessed (shadowed) by a prism in the $n$th generation. More specifically, the area restricted from prisms in generation $n$ by a single prism in generation $n-1$ is
+\[
+\frac{\lambda-1}{\lambda}\cdot A_{n-1}=\frac{\lambda-1}{\lambda}\cdot\frac{\lambda-1}{\lambda^{2n-1}}=\frac{(\lambda-1)^2}{\lambda^{2n}}.
+\]}
+\visible<1->{\item The total area restricted from the $n$th generation, $r(n)$, is the sum of the areas restricted by all previous generations.}
+\end{itemize}
+
+\end{minipage}\hspace{5mm}%
+\begin{minipage}{0.33\textwidth}
+\visible<1->{\begin{figure}
+\begin{tikzpicture}[scale=1.9]
+%%-----Label-----
+%\draw (1.05,1.05) node {\fbox{\tiny $\lambda=3$}};
+%-----Axes-----
+\draw[->] (-0.1,0) -- (1.25,0) node[right] {$y$};
+\draw[->] (0,-0.1) -- (0,1.15) node[above] {$z$};
+
+%-----Figure-----
+\draw[thick,rounded corners=0.01mm]  (0,0) -- (2/3,1/3) -- (0,1) -- cycle;
+\draw[thick,rounded corners=0.01mm]  (2/3,0) -- (2/3,1/3) -- (4/9,1/9) -- cycle;
+%\draw[thick,rounded corners=0.01mm] (4/9,0) -- (4/9,1/9) -- (14/27,1/27) -- cycle;
+%\draw[thick,rounded corners=0.01mm] (6/27,0) -- (6/27,1/9) -- (4/27,1/27) -- cycle;
+\draw[very thick,red] (0,0) -- (4/9,0);
+
+
+%-----Ticks-----
+\draw (2/3,-0.05) -- (2/3,0.05);
+\draw (2/3,0) node[below] {\tiny $\frac{\lambda-1}{\lambda^n}$};
+\draw (-0.05,1) node[left] {\tiny$\frac{1}{\lambda^{n-1}}$} -- (0.05,1);
+\draw (1,-0.05) node[below] {\tiny $1$} -- (1,0.05);
+\draw (-0.05,1/3) node[left] {\tiny$\frac{1}{\lambda^n}$} -- (0.05,1/3);
+\draw (0.25,0.4) node {\tiny $n-1$};
+\draw (0.6,0.13) node {\tiny $n$};
+\end{tikzpicture}
+
+
+
+
+\tdplotsetmaincoords{80}{100}
+\begin{tikzpicture}[scale=1.9,tdplot_main_coords]
+\coordinate (O) at (0,0,0);
+
+%-----rectangle-----
+\begin{scope}[canvas is yx plane at z=0,transform shape]
+\draw[dotted, fill=red!40,fill opacity=0.9] (0,1,0) rectangle (4/9,0,0);
+\end{scope}
+
+%------axes-----
+\draw[->] (-0.3,0,0) -- (1.6,0,0) node[anchor=north east]{$x$};
+\draw[->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+\draw[dotted] (0,-0.16,0) -- (O);
+\draw (0,-0.18,0) -- (0,-0.3,0);
+\draw [->] (0,0,1) -- (0,0,1.15) node[anchor=south]{$z$};
+\draw [dotted] (O) -- (0,0,1);
+
+%-----figure-----
+\draw [thick] (0,2/3,1/3) -- (0,0,1);
+\draw[thick,dashed] (0,0,1) -- (0,0,0) -- (0,2/3,1/3);
+
+\draw[thick,dashed] (0,0,0) -- (1,0,0);
+
+\draw [thick,rounded corners=0.01mm](1,0,0) -- (1,2/3,1/3) -- (1,0,1) -- cycle;
+\draw [thick,rounded corners=0.01mm](1,2/3,0) -- (1,2/3,1/3) -- (1,4/9,1/9) -- cycle;
+\draw [thick,rounded corners=0.01mm,dashed](0,2/3,1/3) -- (0,4/9,1/9) -- (0,2/3,0);
+\draw [thick] (0,2/3,0) -- (0,2/3,1/3);
+\draw [thick] (1,2/3,0) -- (0,2/3,0);
+\draw [thick,dashed] (1,4/9,1/9) -- (-0.1,4/9,0.087);
+
+\draw[thick] (0,0,1) -- (1,0,1);
+\draw[thick] (0,2/3,1/3) -- (1,2/3,1/3);
+%\draw [thick,red](O) -- (1,0,0);
+
+\draw[thick] (2/3,2/3,0) -- (2/3,2/3,1/3);
+\draw[thick] (1/3,2/3,0) -- (1/3,2/3,1/3);
+\draw[thick,dashed] (2/3,2/3,0) -- (2/3,4/9,1/9);
+\draw[thick,dashed] (1/3,2/3,0) -- (1/3,4/9,1/9);
+
+%-----ticks-----
+\draw (1,0,-0.05) -- (1,0,0.05) node [label={[label distance=0.1mm]180:{\tiny$\frac{1}{\lambda^{n-1}}$}}] {};
+\draw (0,-0.05,1) -- (0,0.05,1) node [label={[label distance=-2mm]5:{\tiny$\frac{1}{\lambda^{n-1}}$}}] {};
+\draw (0,2/3,-0.05) -- (0,2/3,0.05) node [label={[label distance=-2mm]10:{\tiny$\frac{\lambda-1}{\lambda^n}$}}] {};
+\draw [dotted] (0,4/9,1/9) -- (0,4/9,0);
+\draw [dotted] (1,4/9,1/9) -- (1,4/9,0);
+\end{tikzpicture}
+\caption{The area under a prism in gen. $n-1$ restricted from the prisms in gen. $n$ for $n\geq2$.}
+\end{figure}}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Existence of a Geometric Realization}
+\begin{minipage}{0.6\textwidth}
+\footnotesize
+\begin{itemize}
+\itemsep5mm
+\visible<1->{\item This restriction relationship between \textit{consecutive generations} enables us to count how much accumulated area is restricted for each generation.}
+\visible<2->{\item Considering the number of prisms in any generation and how many prisms of the following generation can fit underneath, we find}
+\end{itemize}
+
+\visible<2->{
+\[
+r(n)=\frac{\lambda-1}{\lambda}\cdot A_{n-1}\sum_{k=1}^n\lambda^{k-1}\left((\lambda^2)^{n-k}-1\right)
+\]
+}
+
+\end{minipage}\hspace{5mm}%
+\begin{minipage}{0.33\textwidth}
+\visible<1->{\begin{figure}
+\begin{tikzpicture}[scale=1.9]
+%%-----Label-----
+%\draw (1.05,1.05) node {\fbox{\tiny $\lambda=3$}};
+%-----Axes-----
+\draw[->] (-0.1,0) -- (1.25,0) node[right] {$y$};
+\draw[->] (0,-0.1) -- (0,1.15) node[above] {$z$};
+
+%-----Figure-----
+\draw[thick,rounded corners=0.01mm]  (0,0) -- (2/3,1/3) -- (0,1) -- cycle;
+\draw[thick,rounded corners=0.01mm]  (2/3,0) -- (2/3,1/3) -- (4/9,1/9) -- cycle;
+\draw[thick,rounded corners=0.01mm] (4/9,0) -- (4/9,1/9) -- (14/27,1/27) -- cycle;
+\draw[thick,rounded corners=0.01mm] (6/27,0) -- (6/27,1/9) -- (4/27,1/27) -- cycle;
+\draw[very thick,red] (14/27,0) -- (2/3,0);
+\draw[very thick,red] (0,0) -- (4/27,0);
+
+
+%-----Ticks-----
+\draw (2/3,-0.05) -- (2/3,0.05);
+\draw (2/3,0) node[below] {\tiny $\frac{\lambda-1}{\lambda^{n}}$};
+%\draw[dotted] (2/3,0) -- (2/3,1/3);
+\draw (-0.05,1) node[left] {\tiny$\frac{1}{\lambda^{n-1}}$} -- (0.05,1);
+\draw (1,-0.05) node[below] {\tiny $1$} -- (1,0.05);
+\draw (-0.05,1/3) node[left] {\tiny$\frac{1}{\lambda^n}$} -- (0.05,1/3);
+\draw (-0.05,1/9) node[left] {\tiny$\frac{1}{\lambda^{n+1}}$} -- (0.05,1/9);
+%\draw (-0.05,1/27) node[left] {\tiny$\frac{1}{\lambda^3}$} -- (0.05,1/27);
+%\draw[dotted] (0,1/3) -- (2/3,1/3);
+\draw (0.25,0.4) node {\tiny $n-1$};
+\draw (0.6,0.13) node {\tiny $n$};
+\end{tikzpicture}
+
+
+
+%Generalized fundamental unit
+\tdplotsetmaincoords{80}{100}
+\begin{tikzpicture}[scale=1.9,tdplot_main_coords]
+\coordinate (O) at (0,0,0);
+
+%-----rectangles-----
+\begin{scope}[canvas is yx plane at z=0,transform shape]
+\draw[dotted, fill=red!40,fill opacity=0.9] (0,1,0) rectangle (4/27,0,0);
+\draw[dotted, fill=red!40,fill opacity=0.9] (14/27,1,0) rectangle (2/3,0,0);
+\end{scope}
+
+%------axes-----
+\draw[->] (-0.3,0,0) -- (1.6,0,0) node[anchor=north east]{$x$};
+\draw[->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+\draw[dotted] (0,-0.16,0) -- (O);
+\draw (0,-0.18,0) -- (0,-0.3,0);
+\draw [->] (0,0,1) -- (0,0,1.15) node[anchor=south]{$z$};
+\draw [dotted] (O) -- (0,0,1);
+
+%-----figure-----
+\draw [thick] (0,2/3,1/3) -- (0,0,1);
+\draw[thick,dashed] (0,0,1) -- (0,0,0) -- (0,2/3,1/3);
+
+\draw[thick,dashed] (0,0,0) -- (1,0,0);
+
+\draw [thick,rounded corners=0.01mm](1,0,0) -- (1,2/3,1/3) -- (1,0,1) -- cycle;
+\draw [thick,rounded corners=0.01mm](1,2/3,0) -- (1,2/3,1/3) -- (1,4/9,1/9) -- cycle;
+\draw [thick,rounded corners=0.01mm,dashed](0,2/3,1/3) -- (0,4/9,1/9) -- (0,2/3,0);
+\draw [thick] (0,2/3,0) -- (0,2/3,1/3);
+\draw [thick] (1,2/3,0) -- (0,2/3,0);
+\draw [thick,dashed] (1,4/9,1/9) -- (-0.1,4/9,0.087);
+
+\draw[thick] (0,0,1) -- (1,0,1);
+\draw[thick] (0,2/3,1/3) -- (1,2/3,1/3);
+
+
+\draw[thick,rounded corners=0.01mm] (1,4/9,0) -- (1,4/9,1/9) -- (1,14/27,1/27) -- cycle;
+\draw[thick,rounded corners=0.01mm] (1,6/27,0) -- (1,6/27,1/9) -- (1,4/27,1/27) -- cycle;
+\draw[thick,rounded corners=0.01mm,dashed] (0,4/9,0) -- (0,4/9,1/9) -- (0,14/27,1/27) -- cycle;
+\draw[thick,rounded corners=0.01mm,dashed] (0,6/27,0) -- (0,6/27,1/9) -- (0,4/27,1/27) -- cycle;
+
+\draw[thick,dashed] (1,4/27,1/27) -- (0,4/27,1/27);
+\draw[thick] (1,6/27,0) -- (0,6/27,0);
+
+\draw[thick,dashed] (1,14/27,1/27) -- (0,14/27,1/27);
+\draw[thick,dashed] (1,4/9,0) -- (0,4/9,0);
+
+\draw[thick] (2/3,2/3,0) -- (2/3,2/3,1/3);
+\draw[thick] (1/3,2/3,0) -- (1/3,2/3,1/3);
+\draw[thick,dashed] (2/3,2/3,0) -- (2/3,4/9,1/9);
+\draw[thick,dashed] (1/3,2/3,0) -- (1/3,4/9,1/9);
+
+\draw[thick] (8/9,6/27,0) -- (8/9,6/27,1/9);
+\draw[thick] (7/9,6/27,0) -- (7/9,6/27,1/9);
+\draw[thick] (6/9,6/27,0) -- (6/9,6/27,0.08);
+\draw[thick] (5/9,6/27,0) -- (5/9,6/27,0.07);
+\draw[thick] (4/9,6/27,0) -- (4/9,6/27,0.06);
+\draw[thick] (3/9,6/27,0) -- (3/9,6/27,0.05);
+\draw[thick] (2/9,6/27,0) -- (2/9,6/27,0.04);
+\draw[thick] (1/9,6/27,0) -- (1/9,6/27,0.03);
+
+
+%\draw [thick,red](O) -- (1,0,0);
+
+%-----ticks-----
+\draw (1,0,-0.05) -- (1,0,0.05) node [label={[label distance=0.1mm]180:{\tiny$\frac{1}{\lambda^{n-1}}$}}] {};
+\draw (0,-0.05,1) -- (0,0.05,1) node [label={[label distance=-2mm]5:{\tiny$\frac{1}{\lambda^{n-1}}$}}] {};
+\draw (0,2/3,-0.05) -- (0,2/3,0.05) node [label={[label distance=-2mm]10:{\tiny$\frac{\lambda-1}{\lambda^n}$}}] {};
+\draw [dotted] (0,4/9,1/9) -- (0,4/9,0);
+\draw [dotted] (1,4/9,1/9) -- (1,4/9,0);
+\end{tikzpicture}
+
+
+
+\caption{The area under prisms in gen. $n-1$ and gen. $n$ restricted from the prisms in gen. $n+1$ for $n\geq2$.}
+\end{figure}}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Existence of a Geometric Realization}
+\footnotesize
+Simplifying, we find
+\begin{align*}
+r(n)&=\frac{\lambda-1}{\lambda}\cdot A_{n-1}\sum_{k=1}^n\lambda^{k-1}\left((\lambda^2)^{n-k}-1\right)\\[2mm]
+&=\frac{\lambda-1}{\lambda}\cdot \frac{\lambda-1}{\lambda^{2n-1}}\cdot\frac{1}{\lambda}\sum_{k=1}^n\lambda^{k}\left(\lambda^{2n-2k}-1\right)\\[2mm]
+&=\frac{(\lambda-1)^2}{\lambda^{2n+1}}\sum_{k=1}^n\left(\lambda^{2n-k}-\lambda^k\right)\\[2mm]
+&=\frac{(\lambda-1)^2}{\lambda^{2n+1}}\cdot\frac{(\lambda^n-1)(\lambda^n-\lambda)}{\lambda-1}\\[2mm]
+&=\frac{(\lambda^n-1)(\lambda^{n-1}-1)(\lambda-1)}{\lambda^{2n}}.
+\end{align*}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Existence of a Geometric Realization}
+\footnotesize
+It suffices to show that $r(n)<m(n)$ for all $n>1$. Observe:
+
+{\scriptsize
+\begin{align*}
+r(n)&<m(n)\\[2mm]
+\frac{(\lambda^n-1)(\lambda^{n-1}-1)(\lambda-1)}{\lambda^{2n}}&<\frac{\lambda-1}{\lambda^{2n+1}}(\lambda^{2n}-1)\\[2mm]
+(\lambda^n-1)(\lambda^{n-1}-1)&<\lambda^{2n-1}-\lambda^{-1}\\[2mm]
+\lambda^{2n-1}-\lambda^n-\lambda^{n-1}+1&<\lambda^{2n-1}-\lambda^{-1}\\[2mm]
+\lambda^{n+1}+\lambda^n-\lambda&>1,
+\end{align*}}
+
+\vspace{-2mm}
+which holds for all $\lambda>1$ and $n\geq1$. \hfill\qedsymbol
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Existence of a Geometric Realization}
+\footnotesize
+\begin{itemize}
+\itemsep5mm
+\item This shows that there is always enough room available in the unit square to place the $\lambda^{2n}-1$ scaled prisms that are required for the $n$th generation of the construction even after all of the previous ones have been placed.\pause
+\item Note: the exact placement does not matter because the square is filled by the curve itself, not by any approximation, but there is at least one geometric realization of the RFD whose projected area has 2-dimensional Lebesgue measure 1. Note also that
+\[
+\lim_{n\to\infty}r(n)=\frac{\lambda-1}{\lambda}= \lim_{n\to\infty} m(n),
+\]
+which goes to 1 as $\lambda\to\infty$.\pause
+\item Hilbert Curves, i.e. any curve where $\lambda=2$, are ``ideal'' in the sense that there is no need to move the segments/prisms around to accommodate them all.
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Equivalent Curves: Peano Example}
+\vspace{3mm}
+\begin{minipage}{0.6\textwidth}
+\centering
+\begin{figure}
+\includegraphics[scale=0.28]{peano_switchback_1.png}
+\caption{A Generation of a Peano Curve of the Switch-back Type}
+\end{figure}
+\vspace{-9mm}
+\begin{figure}
+\includegraphics[scale=0.28]{peano_meander.png}
+\caption{A Generation of a Peano Curve of the Meandering Type}
+\end{figure}
+\end{minipage}\hspace{3mm}%
+\begin{minipage}{0.37\textwidth}
+\vspace{0pt}
+\scriptsize
+\begin{itemize}
+\itemsep5mm
+\item In any of the $272+2$ variations of the Peano curve, each approximating curve contains the same number of segments of fundamental length as the example we explored.\pause
+\item Consequently, the RFD constructed above, its associated zeta function, and the resulting complex dimensions are the same for any of them. Put another way, they are an invariant of the class of curves with $\lambda=3$.
+\end{itemize}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{A Non-Example: The Accordion ``Curve''}
+\centering
+\footnotesize
+\begin{figure}
+\includegraphics[scale=0.3]{accordion.png}
+\caption{The first three ``approximations'' of the accordion ``curve''}
+\end{figure}\pause
+\vspace{-7mm}
+\begin{itemize}
+\itemsep4mm
+\item This is not space-filling. \pause The limit curve does not exist because the sequence of functions ``approximating'' it does not converge. \pause In this case, the construction does not apply because the distance function $d(\vec x,A)$ cannot be taken as the distance to the unit square.\pause 
+\item If, instead, the distance function is taken to be the distance to a segment in an ``approximation'', there will still only be finitely many prisms since the limit curve does not exist. This will yield a simple pole of 1, as expected for a path.
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}%{A Theorem for a Class of Plane-Filling Curves}
+\small
+\begin{conj}[A.D. Richardson, 2021]
+Let $\Lambda$ be a plane-filling curve constructed as described above with scalar $\lambda\in\MB{N}$, $\lambda\neq1$. Let $(\Lambda, \Omega)$ be the associated RFD, constructed as described above using the appropriate fundamental unit. Then a relative distance zeta function for $(\Lambda,\Omega)$ is
+
+\[
+\zeta_{\Lambda,\Omega}(s)=\frac{(\lambda^2-1) \,\lambda^{-s}}{(s-2)(s-1)(1-\lambda^{-s})}.
+\]
+
+\lspace
+Consequently, the set of relative complex dimensions of any curve of this type is
+
+\[
+\MC{D}(\zeta_{\Lambda,\Omega})=\left\{0+\frac{2\pi}{\log \lambda}i\mathbbm{Z}\right\}\cup\{1,2\},
+\]
+
+\lspace
+and therefore plane-filling curves of this type are fractals by definition.
+\end{conj}
+ 
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{A Theorem for a Class of Plane-Filling Curves}
+\small
+\vspace{3mm}
+\begin{proofs}
+We already calculated above that
+\[
+\zeta_{\Lambda,\Omega_0}(s)=\frac{(1-\lambda^{2-s})}{(s-2)(s-1)},
+\]
+so
+\[
+\zeta_{\Lambda,\Omega_i^n}(s)=\zeta_{\Lambda,\Omega_0}(s)\cdot\lambda^{-ns}.
+\]
+
+\lspace
+Writing
+\[
+\Omega=\bigcup_{n=1}^\infty\bigcup_{i=1}^{\lambda^{2n}-1}\Omega_i^n,
+\]
+we have the following.
+\end{proofs}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{A Theorem for a Class of Plane-Filling Curves}
+\footnotesize
+\vspace{3mm}
+\begin{proof}
+
+{\tiny
+\begin{align*}
+\zeta_{\Lambda,\Omega}(s)&=\frac{(1-\lambda^{2-s})}{(s-2)(s-1)}\sum_{n=1}^\infty \lambda^{-sn}(\lambda^{2n}-1)=\frac{(1-\lambda^{2-s})}{(s-2)(s-1)}\sum_{n=1}^\infty \left[(\lambda^{2-s})^n-(\lambda^{-s})^n\right]\\[2mm]
+&=\frac{(1-\lambda^{2-s})}{(s-2)(s-1)}\left[\frac{\lambda^{2-s}}{1-\lambda^{2-s}}-\frac{\lambda^{-s}}{1-\lambda^{-s}}\right]\\[2mm]
+&=\frac{\cancel{(1-\lambda^{2-s})}}{(s-2)(s-1)}\left[\frac{\lambda^{2-s}-\cancel{\lambda^{-s}\lambda^{2-s}}-\lambda^{-s}+\cancel{\lambda^{-s}\lambda^{2-s}}}{\cancel{(1-\lambda^{2-s})}(1-\lambda^{-s})}\right]\\[2mm]
+&=\frac{(\lambda^2-1)\lambda^{-s}}{(s-2)(s-1)(1-\lambda^{-s})}.
+\end{align*}}
+
+This is valid initially for $\Re(s)>2$, and then after meromorphic continuation, we have that the set of relative complex dimensions of $(\Lambda,\Omega)$ is
+
+\[
+\MC{D}(\zeta_{\Lambda,\Omega})=\left\{0+\frac{2\pi}{\log \lambda}i\mathbbm{Z}\right\}\cup\{1,2\}.\qedhere
+\]
+\end{proof}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Geometric Oscillations}
+\footnotesize
+\begin{itemize}
+\itemsep4mm
+\item The set of poles of the distance zeta function is the set of complex dimensions, and these complex dimensions correspond to the relevant dimensions of the object.\pause
+\item The pole $s=2$ corresponds to the 2nd dimension, the Minkowski dimension of the unit square itself.\pause
+\item The pole $s=1$ corresponds to the 1st dimension, the Minkowski dimension of the of the approximating polygonal paths.\pause
+\item The pole $s=0$ corresponds to the 0th dimension, the Minkowski dimension of the points, or the ``corners'' of the approximating polygonal paths.
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Geometric Oscillations}
+\scriptsize
+
+\vspace{3mm}
+\begin{itemize}
+\itemsep5mm
+\item 0 has associated nonreal complex dimensions which correspond to oscillations in the geometry of the curve.
+{\linespread{1.6}
+\item This oscillation can be seen: the images of a point under successive approximations converge to an attractor, and the convergence is exponentially bounded by construction. More specifically, $|{\Lambda}_{n+1}(t)-{\Lambda}_{n}(t)|\leq \sqrt{2}\lambda^{-n}$ for any $n$ and any $t\in[0,1]$.
+}\par \pause
+\item As an example, consider the images of the point $0\in[0,1]$, which gets mapped to the center of the lower left corner square in every generation. These images converge to $(0,0)$, the attractor of $\{{\Lambda}_{n}(0)\}$. Other points will ``spiral'' as they converge.
+\end{itemize}
+\vspace{-3mm}
+\begin{figure}
+\includegraphics[scale=0.25]{hilbert1_attractor.png}
+\caption{The first several images of ${H}_{n}(0)$}
+\end{figure}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Geometric Oscillations}
+\footnotesize
+\begin{itemize}
+\itemsep4mm
+\item The pole $s=2$ corresponds to the unit square so one does not expect there to be nonreal complex dimensions, i.e. geometric oscillations, associated with this pole.\pause
+\item One might think there should be oscillations associated with the pole $s=1$ since it corresponds to all the approximating polygonal paths, but note:
+
+\begin{itemize}
+\footnotesize
+
+\itemsep3mm
+\item The location of the segments does not affect the zeta function (up to equivalence) and thus does not affect the poles.
+\item The length of any approximation is $\ell_\lambda(n)=(\lambda^{2n}-1)\cdot\lambda^{-n}=\lambda^n-\lambda^{-n}$, which is strictly increasing.
+\item Individual segments of an approximating curve do not get mapped to corresponding segments in later generations.
+\end{itemize}
+
+\end{itemize}
+
+%\begin{center}
+%\begin{minipage}{0.4\textwidth}
+%\includegraphics[scale=0.1]{peano_lines2.png}
+%\end{minipage}\hspace{4mm}%
+%\begin{minipage}{0.4\textwidth}
+%\includegraphics[scale=0.1]{peano_lines3.png}
+%\end{minipage}\pause
+%\end{center}
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Geometric Oscillations in the Tubular Neighborhood}
+(cf. the author's forthcoming dissertation.)
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\begin{frame}{Geometric Oscillations in the Tubular Neighborhood}
+%\small
+%
+%\begin{definition}
+%Let $(A,\Omega)$ be a relative fractal drum in $\MB{R}^N$ and let $\delta>0$ be fixed. Then the \textbf{relative tube zeta function of $(A,\Omega)$} is
+%\[
+%\tilde \zeta_{A,\Omega}(s)=\int_0^\delta t^{s-N-1}|A_t\cap\Omega|\,\dif{t}
+%\]
+%
+%for all $s\in\MB{C}$ with $\Re(s)>D$.
+%\end{definition}
+%
+%\end{frame}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%\begin{frame}{Geometric Oscillations in the Tubular Neighborhood}
+%\small
+%
+%\begin{theorem}[FZF, (4.5.2), p. 351]
+%Let $A\subset\MB{R}^N$, and let $\delta>0$ be fixed. Then for all $s\in \MB{C}$ such that $\Re(s)>D$, the following identity holds:
+%\[
+%\int_{A_\delta\cap\Omega}d(x,A)^{s-N}\dif{x}=\delta^{s-N}|A_\delta\cap \Omega|+(N-s)\int_0^\delta t^{s-N-1}|A_t\cap\Omega|\dif{t}.
+%\]
+%
+%In other words, we have the functional equation
+%
+%\[
+%\zeta_{A,A_\delta\cap\Omega}(s)=\delta^{s-N}|A_\delta\cap\Omega|+(N-s)\tilde\zeta_{A,\Omega}(s).
+%\]
+%\end{theorem}
+%
+%\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Some Interesting Properties of the RFD}
+\small
+\begin{itemize}
+\itemsep5mm
+\item The fundamental unit for a given $\lambda$ is not unique. In fact, scaling the height of $\Omega_0$ by any factor $k>0$ produces another fundamental unit that also works. This is handy if you need the maximum height of the RFD to be very small or very large.\pause
+\item Topological considerations: The boundary of the RFD is connected and can be considered as a 2-dimensional surface with infinite genus.
+%\item If $\lambda=\ell^m$ for some $m\in\MB{N}$, the resulting family of partitions is a subset of the family of partitions given by  $\lambda=\ell$, so the fundamental unit used for $\lambda=\ell$ works. Perhaps this suggests the fundamental unit for $\lambda=\ell$ is the ``radical'' of some ``ideal''.
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Next Steps}
+\small
+
+\vspace{8mm}
+\begin{itemize}
+\itemsep4mm
+\item Generalize construction to other plane-filling curves
+
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.12]{Gosper_curve.png}
+\caption{4th generation of the Gosper curve (``flowsnake'').}
+\end{figure}
+\end{center}
+%\pause
+%\item Generalize construction to higher dimensional space-filling curves\pause
+%\item Generalize construction to arbitrary manifolds\pause
+%\item Describe a precise geometric realization for large $\lambda$\pause
+%\item Animate the oscillation of an arbitrary point\pause
+%\item Explore applications to data storage/retrieval and imaging
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Next Steps}
+\small
+
+\begin{itemize}
+\itemsep5mm
+\item Generalize construction to other plane-filling curves
+\item Generalize construction to higher dimensional space-filling curves\pause
+\item Generalize construction to arbitrary manifolds\pause
+\item Describe a precise geometric realization for large $\lambda$\pause
+\item Animate the oscillation of an arbitrary point\pause
+\item Explore applications to data storage/retrieval and imaging
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}
+\vspace{2cm}
+\centering
+{\Huge \bf Thank you!}
+\vspace{2cm}
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}{References}
+\scriptsize
+\bibliographystyle{amsalpha}
+\nocite{*}
+\bibliography{Oral_Exam_biblio}
+\end{frame}
+
+
+
+
+
+\end{document}

@@ -1,0 +1,351 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+\usepackage{comment}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\usepackage{bbm}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{207B - PDE}
+\rightline{Moradifam, Amir}
+\rightline{HW 3}
+\rightline{\today}
+
+
+Exercises are from Chapter 2 of Evans' textbook \textit{Partial Differential Equations}, 1st ed. 
+
+\vspace{5mm}
+\begin{enumerate}
+
+\setcounter{enumi}{14}
+
+
+
+
+
+\item \begin{enumerate} \item Show the general solution of the PDE $u_{xy}=0$ is
+\[u(x,y)=F(x)+G(y)\]
+for arbitrary functions $F$ and $G$.
+
+\begin{proof}
+First, it is clear that if $u(x,y)=F(x)+G(y)$, then $u_{xy}=0$. Next, integrating with respect to $y$ and then $x$, we have
+\begin{align*}
+u_{xy}&=0\\[2mm]
+\iint\pp{}{x}\pp{u}{y}\,dy\,dx&=\iint 0\,dy\,dx\\[2mm]
+\int\pp{u}{x}\,dx&=\int f(x)\,dx\\[2mm]
+u(x,y)&=F(x)+G(y)
+\end{align*}
+by the fundamental theorem of calculus.
+\end{proof}
+
+\item Using the change of variables $\xi=x+t$ and $\eta=x-t$, show that $u_{tt}-u_{xx}=0$ if and only if $u_{\xi\eta}=0$.
+
+\begin{proof}
+We have
+\[
+u_x=u_\xi+u_\eta \aspace u_t=u_\xi-u_\eta,\text{ so}
+\]
+\begin{multicols}{2}
+\begin{align*}
+u_{xx}&=(u_\xi+u_\eta)_\xi\cdot\xi_x+(u_\xi+u_\eta)_\eta\cdot\eta_x\\[2mm]
+&=u_{\xi\xi}+u_{\eta\xi}+u_{\xi\eta}+u_{\eta\eta}\\[2mm]
+&=u_{\xi\xi}+2u_{\xi\eta}+u_{\eta\eta},\text{ and}
+\end{align*}
+
+\begin{align*}
+u_{tt}&=(u_\xi-u_\eta)_\xi\cdot\xi_t+(u_\xi-u_\eta)_\eta\cdot\eta_t\\[2mm]
+&=u_{\xi\xi}-u_{\eta\xi}+(-u_{\xi\eta}+u_{\eta\eta})\\[2mm]
+&=u_{\xi\xi}-2u_{\xi\eta}+u_{\eta\eta}.
+\end{align*}
+\end{multicols}
+Thus
+\[
+u_{tt}-u_{xx}=u_{\xi\xi}-2u_{\xi\eta}+u_{\eta\eta}-(u_{\xi\xi}+2u_{\xi\eta}+u_{\eta\eta})=-4u_{\xi\eta}=0
+\]
+if and only if $u_{\xi\eta}=0$.
+\end{proof}
+
+\item Use (a) and (b) to rederive d'Alembert's formula:
+\[
+u(x,t)=\frac{1}{2}[g(x+t)+g(x-t)]+\frac{1}{2}\int_{x-t}^{x+t}h(y)\,dy\pspace x\in\MB{R},\,t\geq 0.
+\]
+
+\begin{proof}
+Suppose that $u$ satisfies
+\[
+\begin{cases} u_{tt}-u_{xx}=0 & \text{on }\MB{R}\times(0,\infty)\\ u=g,\,u_t=h & \text{on }\MB{R}\times\{t=0\}.\end{cases}
+\]
+
+By part (b), we know that $u_{\xi\eta}=0$, so by part (a), $u(\xi,\eta)=F(\xi)+G(\eta)=F(x+t)+G(x-t)$. Then $u_t=F'(x+t)-G'(x-t)$. When $t=0$, we have $h(x)=u_t(x,0)=F'(x)-G'(x)$ and $g(x)=u(x,0)=F(x)+G(x)$.
+
+Let $H(x)=F(x)-G(x)$. Then $h(x)=H'(x)=F'(x)-G'(x)$. We need to find formulas for $F$ and $G$ in terms of $g$ and $H$. Using the fact that $g(x)=F(x)+G(x)$ and $H(x)=F(x)-G(x)$, we have
+
+\begin{multicols}{2}
+\begin{align*}
+F(x)&=g(x)-G(x)\\[2mm]
+F(x)&=g(x)+H(x)-F(x)\\[2mm]
+2F(x)&=g(x)+H(x)\\[2mm]
+F(x)&=\frac{1}{2}(g(x)+H(x)),\text{ so}
+\end{align*}
+
+\begin{align*}
+G(x)&=g(x)-F(x)\\[2mm]
+G(x)&=g(x)-\frac{1}{2}(g(x)+H(x))\\[2mm]
+G(x)&=\frac{1}{2}(g(x)-H(x))
+\end{align*}
+\end{multicols}
+
+Consequently,
+
+\begin{align*}
+u(x,t)&=F(\xi)+G(\eta)\\[2mm]
+&=F(x+t)+G(x-t)\\[2mm]
+&=\frac{1}{2}(g(x+t)+H(x+t))+\frac{1}{2}(g(x-t)-H(x-t))\\[2mm]
+&=\frac{1}{2}[g(x+t)+g(x-t)]+\frac{1}{2}(H(x+t)-H(x-t))\\[2mm]
+&=\frac{1}{2}[g(x+t)+g(x-t)]+\frac{1}{2}\int_{x-t}^{x+t}h(y)\,dy.
+\end{align*}
+\end{proof}
+\end{enumerate}
+
+\pagebreak
+
+\item Assume $\mathbf{E}=(E^1,E^2,E^3)$ and $\mathbf{B}=(B^1,B^2,B^3)$ solve Maxwell's equations:
+\[
+\begin{cases}\mathbf{E}_t=\text{curl }\mathbf{B}\\ \mathbf{B}_t=-\text{curl }\mathbf{E}\\ \text{div }\mathbf{B}=\text{div }\mathbf{E}=0.\end{cases}
+\]
+Show $u_{tt}-\Delta u=0$.
+
+\begin{proof}
+%Rewriting these using the $\nabla$ notation, we have
+%\[
+%\begin{cases}\mathbf{E}_t=\nabla\times\mathbf{B}\\ \mathbf{B}_t=-\nabla\times \mathbf{E}\\ \nabla\cdot\mathbf{B}=\nabla\cdot\mathbf{E}=0.\end{cases}
+%\]
+
+First, notice that
+\begin{align*}
+\text{curl}(\text{curl }\textbf{B})&=\text{curl}(\mathbf{E}_t)\\[2mm]
+&=\text{curl}\left(\pp{E^1}{t},\pp{E^2}{t},\pp{E^3}{t}\right)\\[2mm]
+&=\begin{vmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k} \\ \pp{}{x} & \pp{}{y} & \pp{}{z} \\ \pp{E^1}{t} & \pp{E^2}{t} & \pp{E^3}{t}\end{vmatrix}\\[2mm]
+&=\left(\pp{^2E^3}{y\partial t}-\pp{^2E^2}{z\partial t},\pp{^2E^3}{x\partial t}-\pp{^2E^1}{z\partial t},\pp{^2E^2}{x\partial t}-\pp{^2E^1}{y\partial t}\right)\\[2mm]
+&=\pp{}{t}\left(\pp{E^3}{y}-\pp{E^2}{z},\pp{E^3}{x}-\pp{E^1}{z},\pp{E^2}{x}-\pp{E^1}{y}\right)\\[2mm]
+&=\pp{}{t}\text{curl }(\mathbf{E})\\[2mm]
+&=\pp{}{t}(-\mathbf{B}_t)\\[2mm]
+&=-\pp{^2}{t^2}(\mathbf{B})\\[2mm]
+&=-\mathbf{B}_{tt}.
+\end{align*}
+
+Next, using the formula 
+\[
+\text{curl}(\text{curl }\mathbf{F})=D(\text{div }\mathbf{F})-\Delta\mathbf{F}
+\]
+from multivariable calculus, we have that
+\[
+\text{curl}(\text{curl }\mathbf{B})=D(D\mathbf{B})-\Delta \mathbf{B}=D(0)-\Delta\mathbf{B}=-\Delta\mathbf{B}.
+\]
+Thus,
+\begin{align*}
+-\mathbf{B}_{tt}&=-\Delta \mathbf{B}\\[2mm]
+\mathbf{B}_{tt}&=\Delta \mathbf{B}\\[2mm]
+\mathbf{B}_{tt}-\Delta \mathbf{B}&=0,
+\end{align*}
+
+so $\mathbf{B}$ satisfies the wave equation. Similarly, 
+
+\[
+\text{curl}(\text{curl }\mathbf{E})=\text{curl}(\text{curl}(-\mathbf{B}_t))=-\mathbf{E}_{tt}\aspace \text{curl}(\text{curl }\mathbf{E})=-\Delta\mathbf{E},\text{ so}
+\]
+\[
+\mathbf{E}_{tt}-\Delta\mathbf{E}=0
+\]
+and $\mathbf{E}$ solves the wave equation as well.
+\end{proof}
+
+\item (Equipartition of energy) Let $u\in C^2(\MB{R}\times[0,\infty))$ solve the initial-value problem for the wave equation in one dimension:
+\[
+\begin{cases}u_{tt}-u_{xx}=0 & \text{in }\MB{R}\times(0,\infty) \\ u=g,\,u_t=h & \text{on }\MB{R}\times\{t=0\}.\end{cases}
+\]
+
+Suppose $g,h$ have compact support. The \textit{kinetic energy} is $k(t):=\frac{1}{2}\int_{-\infty}^\infty u_t^2(x,t)\,dx$ and the \textit{potential energy} is $p(t):=\frac{1}{2}\int_{-\infty}^\infty u_x^2(x,t)\,dx$.
+
+\begin{enumerate}
+\itemsep7mm
+\item Prove $k(t)+p(t)$ is constant in $t$.
+
+\begin{proof}
+To achieve this, we will show that $k'(t)+p'(t)=0$ which implies that $k(t)+p(t)$ is constant. To that end, using integration by parts in the antepenultimate equation below, we have
+\begin{align*}
+k(t)+p(t)&=\frac{1}{2}\int_{-\infty}^\infty u_t^2+u_x^2\,dx,\text{ so}\\[2mm]
+k'(t)+p'(t)&=\pp{}{t}\left(\frac{1}{2}\int_{-\infty}^\infty u_t^2+u_x^2\,dx\right)\\[2mm]
+&=\frac{1}{2}\int_{-\infty}^\infty \pp{}{t}\left(u_t^2+u_x^2\right)\,dx\\[2mm]
+&=\int_{-\infty}^\infty u_t\cdot u_{tt}+u_x\cdot u_{xt}\,dx\\[2mm]
+&=\int_{-\infty}^\infty u_t\cdot u_{tt}\,dx+\int_{-\infty}^\infty u_x\cdot u_{xt}\,dx\\[2mm]
+&=\int_{-\infty}^\infty u_t\cdot u_{tt}\,dx+\int_{-\infty}^\infty u_x\cdot u_{tx}\,dx\\[2mm]
+&=\int_{-\infty}^\infty u_t\cdot u_{tt}\,dx-\int_{-\infty}^\infty u_{xx}\cdot u_{t}\,dx+0\\[2mm]
+&=\int_{-\infty}^\infty u_t\cdot u_{tt}\,dx-\int_{-\infty}^\infty u_t\cdot u_{tt}\,dx\\[2mm]
+&=0.
+\end{align*}
+\end{proof}
+
+\item Prove $k(t)=p(t)$ for all large enough times $t$.
+
+\begin{proof}
+Recall d'Alembert's formula: 
+\[
+u(x,t)=\frac{1}{2}[g(x+t)+g(x-t)]+\frac{1}{2}_{x-t}^{x+t}h(y)\,dy.
+\] 
+
+Differentiating with respect to $t$ and $x$ yields
+
+\[
+u_t=\frac{1}{2}[g'(x+t)-g'(x-t)]+\frac{1}{2}[h(x+t)+h(x-t)]=\frac{1}{2}[G(x+t)+H(x-t)]\text{ and}
+\]
+\[
+u_x=\frac{1}{2}[g'(x+t)+g'(x-t)]+\frac{1}{2}[h(x+t)-h(x-t)]=\frac{1}{2}[G(x+t)-H(x-t)]\text{ where}
+\]
+\[
+G(x+t)=h(x+t)-g'(x+t) \aspace H(x-t)=h(x-t)-g'(x-t).
+\]
+
+Then
+\[
+u_t^2=\frac{1}{4}[G^2+2GH+H^2] \aspace u_x^2=\frac{1}{4}[G^2-2GH+H^2]
+\]
+so
+\[
+u_t^2-u_x^2=GH.
+\]
+
+Now, $g$ and $h$ have compact support, and consequently so do $G$, $H$, and $GH$. Choose $N$ such that $\text{supp}(GH)\subseteq [-N,N]$. Then when $t>N$, 
+\[
+0=GH=u_t^2-u_x^2.
+\]
+Thus, for large enough $t$, 
+
+\[
+0=\frac{1}{2}\int_{-\infty}^\infty u_t^2-u_x^2\,dx=\frac{1}{2}\int_{-\infty}^\infty u_t^2\,dx-\int_{-\infty}^\infty u_x^2\,dx=k(t)-p(t)
+\]
+
+whence $k(t)=p(t)$.
+\end{proof}
+\end{enumerate}
+
+\pagebreak
+
+
+\item Let $u$ solve
+\[
+\begin{cases}u_{tt}-\Delta u=0 & \text{in }\MB{R}^3\times(0,\infty) \\ u=g,\, u_t=h & \text{on }\MB{R}^3\times\{t=0\},\end{cases}
+\]
+where $g,h$ are smooth and have compact support. Show there exists a constant $C$ such that
+\[
+|u(x,t)|\leq \frac{C}{t}\pspace x\in\MB{R}^3,\,t>0.
+\]
+
+\begin{proof}
+Since $g$ has compact support, so does $Dg$. Since $g,Dg$, and $h$ have compact support, the integrals over their supports are finite. Then there exists an $M\in \MB{R}$ such that the values of those integrals is less than $M$ (just choose $M$ to be greater than the maximum of the three upper bounds on the integrals). By Kirchoff's formula, we have
+
+\begin{align*}
+u(x,t)&=\dashint_{\partial B(x,t)}th(y)+g(y)+Dg(y)\cdot(y-x) \,dS(y)\\[2mm]
+|u(x,t)|&\leq\frac{1}{4\pi t^2}\int_{\partial B(x,t)}|th(y)|\,dS+\frac{1}{4\pi t^2}\int_{\partial B(x,t)}|g(y)|\,dS+\frac{1}{4\pi t^2}\int_{\partial B(x,t)}|Dg(y)\cdot(y-x)|\,dS\\[2mm]
+&\leq\frac{1}{4\pi t}\int_{\partial B(x,t)}|h(y)|\,dS+M+M\\[2mm]
+&\leq\frac{1}{4\pi t}3M\\[2mm]
+&=\frac{C}{t},
+\end{align*}
+
+where $C=\frac{3M}{4\pi}$.
+\end{proof}
+
+
+
+\end{enumerate}
+
+\end{document}

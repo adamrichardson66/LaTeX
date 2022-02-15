@@ -1,0 +1,224 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\usepackage{bbm}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209A - Real Analysis}
+\rightline{Zhang, Qi}
+\rightline{HW 5}
+\rightline{\today}
+
+\vspace{-5mm}
+\textbf{Folland: Exercises, p. 63.} 32, 33, 37, 40, 44
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\setcounter{enumi}{31}
+
+
+
+\item Suppose $\mu(X)<\infty$. If $f$ and $g$ are complex-valued measurable functions on $X$, define
+
+\[
+\rho(f,g)=\int\frac{|f-g|}{1+|f-g|}\,d\mu.
+\]
+
+Then $\rho$ is a metric on the space of measurable functions if we identify functions that are equal a.e., and $f_n\rightarrow f$ with respect to this metric iff $f_n\rightarrow f$ in measure.
+
+\begin{proof}
+First, we show $\rho(f,g)=0$ iff $f=g$. If $\rho(f,g)=0$, then by the definition of $\rho$ and Proposition 2.16, $|f-g|=0$ a.e. so $f=g$ a.e. Conversely, if $f=g$ a.e., then 
+
+\[
+\rho(f,g)=\rho(f,f)=\int\frac{|f-f|}{1+|f-f|}\,d\mu=0. 
+\]
+
+Second, 
+
+\[
+\rho(f,g)=\int\frac{|f-g|}{1+|f-g|}\,d\mu=\int\frac{|g-f|}{1+|g-f|}\,d\mu=\rho(g,f).
+\]
+
+Third, $\rho(f,g)\geq0$ since $|f-g|\geq0$ for any $f,g$. And lastly we verify the triangle inequality. Observe that
+
+\begin{align*}
+\frac{|f-h|}{1+|f-h|}&=1-\frac{1}{1+|f-h|}\\[2mm]
+&=1-\frac{1}{1+|f-g+g-h|}\\[2mm]
+&\leq1-\frac{1}{1+|f-g|+|g-h|}\\[2mm]
+&=\frac{1+|f-g|+|g-h|-1}{1+|f-g|+|g-h|}\\[2mm]
+&=\frac{|f-g|}{1+|f-g|+|g-h|}+\frac{|g-h|}{1+|f-g|+|g-h|}\\[2mm]
+&\leq\frac{|f-g|}{1+|f-g|}+\frac{|g-h|}{1+|g-h|}.\\[2mm]
+\end{align*}
+
+Consequently,
+
+\[
+\rho(f,h)=\int\frac{|f-h|}{1+|f-h|}\,d\mu\leq\int\frac{|f-g|}{1+|f-g|}\,d\mu +\int\frac{|g-h|}{1+|g-h|}\,d\mu=\rho(f,g)+\rho(g,h).
+\]
+
+Now we proceed to show that $f_n\rightarrow f$ in this metric iff $f_n\rightarrow f$ in measure. First, suppose that $f_n\rightarrow f$ in this metric. Then $\rho(f_n,f)\rightarrow 0$, so by definition for all $\ve>0$ there exists an $N$ such that for a.e. $x\in X$, when $n\geq N$, $\rho(f_n,f)<\ve$. Let $E_n=\{x\mid \rho(f_n(x),f(x))<\ve\}$. Then $E_n^c=\{x\mid \rho(f_n(x),f(x))\geq\ve\}$. Since $\mu(X)<\infty$, we can write $\mu(E_n^C)=\mu(X)-\mu(E_n)$ and since $\rho(f_n,f)\rightarrow 0$, we have $E_{n+1}\supset E_n$ and $X=\bigcup_{n=1}^\infty E_n$. By continuity from below, $\mu(E_n)\rightarrow \mu(X)$ snd so $\mu(E_n^c)=\mu(\{x\mid \rho(f_n(x),f(x))\geq\ve\})\rightarrow 0$, i.e. $f_n\rightarrow f$ in measure.
+
+Next, suppose $f_n\rightarrow f$ in measure. Then $\mu(\{x\mid \rho(f_n(x),f(x))\geq \ve\})\rightarrow 0$. We can write
+
+\[
+X=\{x\mid \rho(f_n(x),f(x))\geq \ve\}\cup \{x\mid \rho(f_n(x),f(x))< \ve\}.
+\]
+
+We have
+
+\[
+\mu(X)=\mu(\{x\mid \rho(f_n(x),f(x))\geq \ve\})+ \mu(\{x\mid \rho(f_n(x),f(x))< \ve\}),
+\]
+
+and since $\mu(X)<\infty$, $\mu(\{x\mid \rho(f_n(x),f(x))\geq \ve\})\rightarrow 0$ implies that $\mu(\{x\mid \rho(f_n(x),f(x))< \ve\})\rightarrow \mu(X)$. But this implies that 
+
+\[
+X=\bigcup_{n=1}^\infty \{x\mid \rho(f_n(x),f(x))< \ve\},
+\]
+
+so for a.e. $x\in X$, $\rho(f_n(x),f(x))\rightarrow 0$, i.e. $f_n\rightarrow f$ in the metric $\rho$.
+\end{proof}
+
+
+\item If $f_n\geq 0$ and $f_n\rightarrow f$ in measure, then $\int f\leq \liminf \int f_n$.
+
+\begin{proof}
+Suppose $f_n\geq0$ and $f_n\rightarrow f$ in measure. By Proposition 2.30 (p.61) there exists a subsequence $\{f_{n_k}\}$ which converges to $f$ a.e. Consequently, $\liminf f_n(x)\leq f(x)$ a.e. Now we proceed to show that this inequality must actually be an equality. Suppose by way of contradiction that there exists a set $E$ of positive measure such that $\liminf f(x)<f(x)$ for all $x\in E$. Let $E_k=\{x\mid \liminf f_n \leq f-\frac{1}{k}\}$. Then we may write $E=\bigcup_{k=1}^\infty E_k$. Since $\mu(E)>0$, there must exist some $\bar{k}$ such that $\mu(E_{\bar{k}})=\delta>0$. However, $f_n\rightarrow f$ in measure by hypothesis, i.e. for any $\delta>0$ there exists an $N$ such that if $n\geq N$, then $\mu(\{x\mid |f_n(x)-f(x)|\geq\frac{1}{k}\})<\delta$, which is a contradiction. Thus, $\liminf f_n=f$ a.e., and by Fatou's lemma we have
+
+\[
+\int f=\int\liminf f_n\leq\liminf \int f_n.
+\]
+\end{proof}
+
+
+\setcounter{enumi}{36}
+
+\item Suppose $f_n$ and $f$ are measurable complex-valued functions and $\phi:\mathbb{C}\rightarrow\mathbb{C}$.
+
+\begin{enumerate}
+\item If $\phi$ is continuous and $f_n\rightarrow f$ a.e. then $\phi\circ f_n\rightarrow \phi \circ f$ a.e.
+\end{enumerate}
+
+
+\setcounter{enumi}{39}
+
+\item In Egoroff's theorem, the hypothesis ``$\mu(X)<\infty$'' can be replaced by ``$|f_n|\leq g$ for all $n$, where $g\in L^1(\mu)$.''
+
+\begin{proof}
+The condition that $\mu(X)<\infty$ in Egoroff's theorem is included so that we may invoke continuity from above and have that, in the language of Folland's proof,  $\mu(E_n(k))\rightarrow 0$. Instead suppose that $|f_n|\leq g$ for all $n$, where $g\in L^1(\mu)$. Then by the DCT, $f_n\rightarrow f$ in $L^1(\mu)$, i.e. $\int |f_n-f|\rightarrow 0$. First we prove a famous Lemma for $p=1$:
+
+\textbf{Lemma.} (Chebyshev's Inequality) Let $f$ be a measurable function defined on $X$. Then for any real number $\ve>0$,
+
+\[
+\mu (\{x\in X\mid |f(x)|\geq \ve\})\leq \frac{1}{\ve^p}\int _{|f|\geq \ve}|f|^p\,d\mu.
+\]
+
+\begin{proof}
+Observe that
+
+\begin{align*}
+\mu (\{x\in X\mid |f(x)|\geq \ve\})&=\int_X\chi_{\{x\in X\mid |f(x)|\geq \ve\}}\,d\mu\\[2mm]
+&=\int_{\{x\in X\mid |f(x)|\geq \ve\}} 1\,d\mu\\[2mm]
+&=\int_{\{x\in X\mid |f(x)|\geq \ve\}}\frac{\ve}{\ve}\,d\mu\\[2mm]
+&=\frac{1}{\ve}\int_{\{x\in X\mid |f(x)|\geq \ve\}}\ve\,d\mu\\[2mm]
+&\leq\frac{1}{\ve}\int_{\{x\in X\mid |f(x)|\geq \ve\}}|f(x)|\,d\mu\\[2mm]
+&=\frac{1}{\ve}\int_{|f|\geq \ve}|f|\,d\mu.\\[2mm]
+\end{align*}
+\end{proof}
+
+Returning to our original proof, by hypothesis, $\int|f_n-f|\rightarrow 0$, and by Chebyshev's inequality,
+
+\[
+\mu(E_n(k))=\mu\left(\left\{x\,\Big|\, |f_n(x)-f(x)|\geq\frac{1}{k}\right\}\right)=\leq k\int_{|f_n-f|\geq\frac{1}{k}}|f_n-f|\,d\mu\leq k\int_X|f_n-f|\,d\mu\rightarrow 0.
+\]
+
+Consequently, $\mu(E_n(k))\rightarrow 0$ as required, and the rest of the proof of Egoroff's theorem holds.
+\end{proof}
+
+\setcounter{enumi}{43}
+
+\item (\textbf{Lusin's Theorem}) If $f:[a,b]\rightarrow \mathbb{C}$ is Lebesgue measurable and $\ve>0$, there is a compact set $E\subset[a,b]$ such that $\mu(E^c)<\ve$ and $f\mid_E$ is continuous.
+
+\begin{proof}
+Suppose $f:[a,b]\rightarrow \mathbb{C}$ is Lebesgue measurable. By theorem 2.26, there exists a sequence of (integrable) simple functions $\{\phi_k\}$ such that $\phi_k\rightarrow f$ a.e. $x\in [a,b]$ and for sufficiently large $k$, we have $\int|f-\phi_k|<\frac{1}{k}$. By Egoroff's theorem, there exists a set $E\subset[a,b]$ such that $\mu(E)<\frac{1}{k}$ and $\phi_k\rightarrow f$ uniformly on $E^c$. By a result from advanced calculus, it follows that $f\mid_{E^c}$ is continuous. $E^c$ is certainly bounded so it suffices to show that it is closed.
+\end{proof}
+
+
+
+\end{enumerate}
+
+
+\end{document}

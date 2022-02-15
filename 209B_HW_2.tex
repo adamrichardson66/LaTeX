@@ -1,0 +1,292 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\usepackage{bbm}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209B - Functional Analysis}
+\rightline{Baez, John}
+\rightline{HW 2}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+
+
+\item Prove \textbf{Lemma 3.7}: Suppose that $\mu$ and $\nu$ are finite measures on a measurable space $(X,\MC{M})$.  Then either $\nu \perp \mu$ or there exists $\ve > 0$ and a measurable set $E \subseteq X$ such that $\mu(E) > 0$ and $\nu \geq \ve \mu$ on $E$ (that is, every measurable set $S \subseteq E$ has $\nu(S) \geq \ve \mu(S)$).
+
+\begin{proof}
+Let $\mu$ and $\nu$ be finite measures on a measurable space $(X,\MC{M})$. Consider the measure $\nu-\frac{1}{n}\mu$, and let $X=P_n\cup N_n$ be a Hahn decomposition associated with $\nu-\frac{1}{n}\mu$. Let
+
+\[
+P=\bigcup_{n=1}^\infty P_n\aspace N=\bigcap_{n=1}^\infty N_n=X\setminus P.
+\]
+
+Since $N_n$ is a $(\nu-\frac{1}{n}\mu)$-negative set for each $n$, $N$ is a $(\nu-\frac{1}{n}\mu)$-negative set as well since it is contained in each $N_n$. In particular,
+
+\begin{align*}
+\nu(N)-\frac{1}{n}\mu(N)\leq 0\\[2mm]
+0\leq\nu(N)\leq\frac{1}{n}\mu(N)
+\end{align*}
+
+since $\nu:\MC{M}\rightarrow[0,\infty)$. Since this is true for all $n$, we have that $\nu(N)=0$. Now, if $\mu(P)=0$, then $\nu\perp\mu$ by definition. If $\mu(P)>0$, then it must be that $\mu(P_{\bar{n}})>0$ for some ${\bar{n}}$ so $P_{\bar{n}}$ is $(\nu-\frac{1}{{\bar{n}}}\mu)$-positive. In other words,
+
+\begin{align*}
+\nu(P_{\bar{n}})-\frac{1}{{\bar{n}}}\mu(P_{\bar{n}})&\geq0\\[2mm]
+\nu(P_{\bar{n}})&\geq\frac{1}{{\bar{n}}}\mu(P_{\bar{n}}).
+\end{align*}
+
+Let $E=P_{\bar{n}}$ and $\ve=\frac{1}{{\bar{n}}}$ and we have $\nu\geq\ve\mu$ on $E$ as required.
+\end{proof}
+
+\pagebreak
+
+\item Now, suppose that $\mu$ and $\nu$ are finite measures on a measurable space $(X,\MC{M})$. Let 
+
+\[
+\MC{F}=\left\{f:X\rightarrow[0,\infty] \,\Big|\,f\text{ is measurable and }\int_Ef\,d\mu\leq \nu(E)\text{ for all } E\in\MC{M}\right\},
+\]
+
+and let $\displaystyle a=\sup\left\{\int f\,d\mu\mid f\in \MC{F}\right\}$. Note that since $a$ is the supremum of a possibly unbounded set of nonnegative numbers, we start out only knowing that $a\in[0,\infty]$. Show that $a<\infty$.
+
+\begin{proof}
+First, note that $\MC{F}$ is nonempty since $f\equiv 0\in\MC{F}$, so it makes sense to seek a supremum. Recall that $\nu$ is finite, i.e. $\nu(X)<\infty$. Since $X\in\MC{M}$, by the definition of $\MC{F}$, we have that $a\leq\nu(X)<\infty$
+\end{proof}
+
+\item Show that there is a sequence $f_n\in\MC{F}$ such that $\int f_n\,d\mu\rightarrow a$.
+
+\begin{proof}
+By the characterization of supremum, given any $n>0$, there exists an integral $\int f_n\,d\mu\in\left\{\int f\,d\mu\mid f\in \MC{F}\right\}$ such that
+
+\begin{align*}
+a-\frac{1}{n}&<\int f_n\,d\mu\\[2mm]
+a-\int f_n\,d\mu&<\frac{1}{n}\\[2mm]
+\left|a-\int f_n\,d\mu\right|&<\frac{1}{n}.\\[2mm]
+\end{align*}
+
+Since this is true for all $n$, we have $\int f_n\,\mu\rightarrow a$, and $f_n\in\MC{F}$ for each $n$, so $\{f_n\}\subseteq\MC{F}$.
+\end{proof}
+
+\item Choose such a sequence $f_n$ and let $g_n=\max(f_1,\ldots,f_n)$. Show that $g_n\in\MC{F}$%, and $\int g_n\,d\mu\rightarrow a$.
+
+\begin{proof}
+Define $h=\max_{f,g\in\MC{F}}(f,g)$ and $A=\{x\mid f(x)>g(x)\}$. Then for any $E\in\MC{M}$, we can decompose $E$ as follows
+
+\[
+\int_E h\,d\mu=\int_{E\cap A}f\,d\mu+\int_{E\setminus A}g\,d\mu\leq\nu(E\cap A)+\nu(E\setminus A)=\nu(E).
+\]
+
+Thus, $\max(f,g)\in\MC{F}$ by definition, whence it follows that $g_n=\max(f_1,\ldots,f_n)\in\MC{F}$ where $f_1,\ldots,f_n\in\MC{F}$.
+\end{proof}
+
+\item[\textbf{5, 6.}] Let $f=\sup_n f_n$. Show that $g_n\rightarrow f$ pointwise and $f:X\rightarrow [0,\infty]$ is measurable. Also show that $g_{n+1}\geq g_n$.
+
+\begin{proof}
+First, $f$ is measurable by Proposition 2.7 since $f_n$ is measurable for each $n$. Next, since $\{f_1,\ldots,f_n\}\subseteq\{f_1,\ldots,f_n,f_{n+1}\}$, it follows that $g_{n+1}=\max(f_1,\ldots,f_n,f_{n+1})\geq \max(f_1,\ldots,f_n)=g_n$ so $g_n $ is an increasing sequence. Additionally, $\max_{1\leq i\leq n}(f_1(x),\ldots,f_n(x))\leq \sup_nf_n(x)$, so $g_n$ is increasing and bounded above. Consequently, $g_n(x)\rightarrow f(x)$ pointwise. 
+
+As a result, the Monotone Convergence Theorem yields
+
+\[
+\int f\,d\mu=\int\left(\lom{n}{\infty} g_n\right)\,d\mu=\lom{n}{\infty}\int g_n\,d\mu=a<\infty.
+\]
+
+By Proposition 2.20 on page 52, $f<\infty$ a.e.
+
+\end{proof}
+
+\setcounter{enumi}{6}
+\item Use the Monotone Convergence Theorem to show $f\in\MC{F}$.
+
+\begin{proof}
+In order to show $f\in\MC{F}$, it suffices to show that $\int_Ef\,d\mu\leq\nu(E)$ for all $E\in\MC{M}$. Let $E\in\MC{M}$. Then since $g_n$ is measurable, $g_n\leq g_{n+1}$, and $g_n\in\MC{F}$, by the Monotone Convergence Theorem, we have
+
+\[
+\int_Ef\,d\mu=\int_E\lom{n}{\infty}g_n\,d\mu=\lom{n}{\infty}\int_Eg_n\,d\mu\leq\lom{n}{\infty}\nu(E)=\nu(E).
+\]
+
+Therefore, $f\in\MC{F}$ by definition.
+\end{proof}
+
+
+\item Let $\lambda$ be the signed measure $\lambda=\nu-f\mu$. Using Problem 7, show that $\lambda(E)\geq0$ for every measurable set $E\subseteq X$, i.e. $\lambda$ is positive.
+
+\begin{proof}
+Let $E\in\MC{M}$. Since $f\in\MC{F}$, we have
+
+\vspace{-5mm}
+\begin{align*}
+\lambda(E)&=\nu(E)-(f\mu)(E)\\[2mm]
+&\geq\int_Ef\,d\mu-\int_Ef\,d\mu\\[2mm]
+&=\int_Ef-f\,d\mu\\[2mm]
+&=\int_E0\,d\mu\\[2mm]
+&=0.
+\end{align*}
+\end{proof}
+
+\item Show that $\lambda\perp\mu$.
+
+\begin{proof}
+Suppose $\lambda\not\perp\mu$. Then by Problem 1 (Lemma 3.7), there exists an $E\in\MC{M}$ and an $\ve>0$ such that $\mu(E)>0$ and $\lambda\geq\ve\mu$ on $E$. Since $\lambda$ is positive, we have
+
+\begin{align*}
+d\lambda&\geq\ve \,d\mu\\[2mm]
+d\nu-f\,d\mu&\geq \ve\,d\mu\\[2mm]
+d\nu&\geq f\,d\mu+\ve\,d\mu\\[2mm]
+\int_E d\nu&\geq \int_E f\,d\mu+\int_E\ve\,d\mu\\[2mm]
+\nu(E)&\geq \int_Ef+\ve\,d\mu.\\[2mm]
+\end{align*}
+
+\vspace{-5mm}
+Thus, $(f+\ve)\in\MC{F}$ and we have
+\[
+\int_E f+\ve\,d\mu=a+\ve\mu(E)> a,
+\]
+
+a contradiction. Therefore, $\lambda\perp\mu$.
+\end{proof}
+
+\pagebreak
+
+\item Show that $\rho=f\mu$ is a finite measure with $\rho\ll\mu$.
+
+\begin{proof}
+First, since $\mu$ is a finite measure by hypothesis, and $f<\infty$ a.e. by Problems 5, 6, $\rho=f\mu<\infty$. Next, let $E\in\MC{M}$ and suppose $\mu(E)=0$. Then $\rho(E)=f\mu(E)=f\cdot0=0$ as well since $f<\infty$ a.e. Since $E$ was chosen arbitrarily, $\rho\ll\mu$. 
+\end{proof}
+
+\item It is thus shown that $\nu=\lambda+\rho$, $\lambda\perp\mu$, and $\rho\ll\mu$. Suppose we also have that $\nu=\lambda'+\rho'$, $\lambda'\perp\mu$, and $\rho'\ll\mu$. Show that $\lambda=\lambda'$ and conclude also that $\rho=\rho'$.
+
+\begin{proof}
+First we need two lemmas.
+
+\textbf{Lemma 1.} (Exercise 3.2.9) Suppose $\{\nu_j\}$ is a sequence of positive measures. If $\nu_j\perp\mu$ for all $j$, then $\nu=\sum_{j=1}^\infty\nu_j\perp\mu$; and if $\nu_j\ll\mu$ for all $j$, then $\nu=\sum_{j=1}^\infty\ll\mu$.
+
+\begin{proof}
+Let $\{\nu_j\}$ be a sequence of positive measures and suppose first that $\nu_j\perp\mu$ for all $j$. Then by definition, for each $j$,  there exists an $E_j\in\MC{M}$ such that $\nu_j(E_j)=0$ and  $\mu(E_j^c)=0$ as well. Define $E=\bigcup_{j=1}^\infty E_j$ so that $E\cup E^c=X$ and $E\cap E^c=\varnothing$. First, 
+
+\[
+\nu_j(E)=\nu_j\left(\bigcup_{j=1}^\infty E_j\right)\leq\sum_{j=1}^\infty \nu_j(E_j)=\sum_{j=1}^\infty 0=0,
+\]
+
+so $\displaystyle \nu(E)=\sum_{j=1}^\infty\nu_j(E)=0$. Next, since $\mu$ is finite,
+
+\[
+\mu(E^c)=\mu\left(\left(\bigcup_{j=1}^\infty E_j\right)^c\right)=\mu\left(\bigcap_{j=1}^\infty E_j^c\right)\leq\mu(E_{\bar{j}}^c)=0,
+\]
+
+for some $\bar{j}$, so $\nu\perp\mu$. 
+
+Next, suppose that $\nu_j\ll\mu$ for all $j$. Then $\nu_j(E)=0$ iff $\mu(E)=0$ for all $j$ and for all $E\in\MC{M}$. Let $E\in\MC{M}$ and suppose that $\mu(E)=0$. Then $\nu_j(E)=0$ and
+
+\[
+\nu(E)=\sum_{j=1}^\infty\nu_j(E)=\sum_{j=1}^\infty 0=0,\text{ so }\nu\ll\mu.
+\]
+\end{proof}
+
+\textbf{Lemma 2.} Let $\mu$ and $\nu$ be positive measures and let $(X,\MC{M})$ be a measurable space. If $\nu\perp\mu$ and $\nu\ll\mu$, then $\nu\equiv0\equiv\mu$.
+
+\begin{proof}	
+Suppose $\nu\perp\mu$ and $\nu\ll\mu$. Then there exists an $E\in\MC{M}$ such that $\nu(E)=0$ and $\mu(E^c)=0$. Additionally, for any $E\in\MC{M}$, $\nu(E)=0$ iff $\mu(E)=0$. Since $\nu(E)=0$, it follows that $\mu(E)=0$ and $\mu(E^c)=0$ so that $\mu(X)=0$. Consequently, $\mu\equiv0$ by monotonicity. Since $\nu\ll\mu$, $\nu\equiv0$ as well since they must agree on all null sets.
+\end{proof}
+
+Now, we have
+\begin{align*}
+\lambda+\rho&=\lambda'+\rho'\\[2mm]
+\lambda +f\mu&=\lambda'+f'\mu\\[2mm]
+(f-f')\mu&=\lambda'-\lambda.
+\end{align*}
+
+By Lemma 1 above, and since $\lambda\perp\mu$ and $\lambda'\perp\mu$, we have $(\lambda'-\lambda)\perp\mu$. By the same lemma, we have $(f-f')\mu\ll\mu$. Since $(\lambda'-\lambda)\perp\mu$, $(f-f')\mu\ll\mu$, and $(f-f')\mu=\lambda'-\lambda$, by Lemma 2 $(f-f')\mu=\lambda'-\lambda=0$. Consequently, $\lambda=\lambda'$, and by Proposition 2.23(b), $0=(f-f')\mu=\int_Ef-f'\,d\mu$ iff $f=f'$ $\mu$-a.e. Thus $\rho=f\mu=f'\mu=\rho'$.
+\end{proof}
+
+\item Suppose that we also have $\rho=g\mu$ for some other measurable function $g:X\rightarrow[0,\infty]$. Show that $f=g$ $\mu$-a.e.
+
+\begin{proof}
+We already have that $\rho=f\mu$, and since $f\in\MC{F}$, $f$ is $\mu$-integrable and $f:X\rightarrow[0,\infty]$. Now suppose there is another $\mu$-integrable function $g:X\rightarrow[0,\infty]$ where $\rho=g\mu$. Then $d\rho=f\,d\mu=g\,d\mu$ so by definition, for all $E\in\MC{M}$, $\int_Ef\,d\mu=\int_Eg\,d\mu$. By Proposition 2.23(b) it follows that $f=g$ $\mu$-a.e.
+\end{proof}
+
+\item[\textbf{EC.}] \href{http://mathshistory.st-andrews.ac.uk/Biographies/Nikodym.html}{Otton Marcin Nikodym} was born on 1887-08-13 in Zablotow, Galicia, Austria-Hungary (Ukraine) and died on 1974-05-04 in Utica, New York. His wife's name was Stanis\l{}awa.
+\end{enumerate}
+
+
+
+\end{document}

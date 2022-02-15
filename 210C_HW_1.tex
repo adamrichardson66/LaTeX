@@ -1,0 +1,177 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210C - Riemann Surfaces}
+\rightline{Wong, Bun}
+\rightline{HW 1}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+\item Prove that a Riemann surface is orientable.
+
+\begin{proof}
+Let $M$ be a Riemann surface with a complex structure given by $(M,\{U_\alpha,\phi_\alpha\}_{\alpha\in I})$. Let $\alpha,\beta\in I$ and suppose $U_\alpha\cap U_\beta\neq\varnothing$. Let $\phi_{\alpha\beta}=\phi_\beta\circ\phi_\alpha^{-1}$ be the transition function, which is holomorphic by definition. We can write $\phi_{\alpha\beta}=u+iv$, so
+\[
+J(\phi_{\alpha\beta})=\begin{bmatrix}\pp{u}{x} & \pp{u}{y} \\ \pp{v}{x} & \pp{v}{y}\end{bmatrix}=\begin{bmatrix}u_x & u_y \\ v_x & v_y \end{bmatrix}.
+\]
+Then $\det J(\phi_{\alpha\beta})=u_xv_y-u_yv_x$. But since $\phi_{\alpha\beta}$ is holomorphic, it satisfies the Cauchy-Riemann equations, whence $\det J(\phi_{\alpha\beta})=u_x^2+u_y^2$. Similarly, $\det J(\phi_{\alpha\beta})=v_x^2+v_y^2$. Now, if $\det J(\phi_{\alpha\beta})=0$, then $u_x=u_y=v_x=v_y=0$. Consider that $\phi'_{\alpha\beta}=u_x+iv_x$, so we have $\phi'_{\alpha\beta}=0$, but this means that $\phi_{\alpha\beta}$ is constant which implies that it is not one-to-one, a contradiction. Therefore $\det J(\phi_{\alpha\beta})>0$ or $\det J(\phi_{\alpha\beta})<0$, and $M$ is orientable by definition.
+\end{proof}
+
+\item Prove that there exist no non-constant holomorphic functions on a compact Riemann surface.
+
+\begin{proof}
+Let $M$ be a compact Riemann surface and let $f:M\to \MB{C}$ be a holomorphic function. Then it follows that the function $|f|:M\to\MB{R}$ is continuous, and since $M$ is compact, by the Extreme Value Theorem there exists a point $p\in M$ where $|f|$ attains its maximum. Write $K=\max\{|f(x)|: x\in M\}$ and let $\tilde M=\{x\in M:|f(x)|=K\}$. Since $M$ is a Riemann surface, we can choose local coordinates $\{U,\phi\}$ around $p$. Moreover, since $\phi$ is a homeomorphism to $V=\phi(U)\subseteq\MB{C}$, $f\circ\phi^{-1}$ is holomorphic on $V$ and attains its maximum at $\phi(p)\in V$. By the Maximum Modulus Theorem, $f\circ\phi^{-1}$ is constant on $V$, but $\phi^{-1}(V)=U$ so $f$ is constant on $U$. Since $U$ is arbitrary, open, and $U\subseteq \tilde M$, $\tilde M$ is open.
+
+Additionally, $\tilde M$ is closed by continuity of $|f|$, so $\tilde M$ is both open and closed. Since $M$ is a Riemann surface, it is connected and thus $M=\tilde M$, i.e. $f$ is constant on $M$.
+\end{proof}
+
+
+\item Let $N$ be a compact Riemann surface with genus $g=0$, and let $M$ be a compact Riemann surface with positive genus $g>0$. Prove that there exists no non-trivial holomorphic map from $N$ into $M$.
+
+\begin{proof}
+By the Uniformization Theorem (p. 131) $N$ is equivalent to $\MB{C}$ and $M$ is equivalent to $\MB{C}/\Lambda$ where $\Lambda$ is a lattice. INCOMPLETE
+\end{proof}
+
+\item Show that the meromorphic functions on the Riemann sphere have the form $\frac{p(z)}{q(z)}$, where $p(z)$ and $q(z)$ are coprime polynomials.
+
+\begin{proof}
+First, if a function $f:S^2\to\MB{C}$ has the form $\frac{p(z)}{q(z)}$ where $p(z)$ and $q(z)$ are coprime polynomials, then it is meromorphic by definition. Conversely, suppose $f:S^2\to\MB{C}$ is a meromorphic function with a set of zeroes given by $\{a_i\}_i$ with orders $n_i$ respectively, and a set of poles $\{b_j\}_j$ with orders $m_j$ respectively. Define $g:\MB{C}\to\MB{C}$ by
+\[
+g(z)\coloneqq\frac{\prod_j(z-b_j)^{m_j}}{\prod_i (z-a_i)^{n_i}}\cdot f(z).
+\]
+Then $g$ has no poles and no zeroes, so it is bounded and entire. Thus, by Liouville's Theorem, $g$ is constant, from which it follows that $f$ must be a rational function of the form $\frac{p(z)}{q(z)}$, where $p(z)$ and $q(z)$ are coprime polynomials.
+\end{proof}
+
+
+\item Do you how to construct and classify all complex structures on a torus?
+
+Yes. $T^2=S^1\times S^1$ inherits a complex structure from $\MB{C}$ after it is written as a quotient. Let $w_1,w_2\in H$ where $H\subset \MB{C}$ is the upper half plane, such that $w_2\neq \lambda w_1$ for any $\lambda\neq 0$. Consider the set $\Gamma=\{n_1w_1+n_2w_2\mid n_1,n_2\in\MB{Z}\}$. This forms an additive abelian group which acts on $\MB{C}$ by translation. We can write $T^2=\Sigma_1=H/\Gamma$.
+
+\item Let $X$ be a compact Riemann surface. If there exists a meromorphic function having exactly one simple pole on $X$, prove that $X$ is biholomorphic to the Riemann sphere.
+
+\begin{proof}
+Let $f:X\to S^2$ and suppose $f$ has exactly one simple pole. Then we need to show that $f$ is biholomorphic, i.e. $f$ is one-to-one, onto, and $f^{-1}$ is holomorphic. Let $U_\alpha\subseteq X$ be an open set (part of a chart). Then $f(U_\alpha)$ is open by the Open Mapping Theorem. Moreover, since $X$ is compact, there is a finite number of $U_\alpha$ such that
+\[
+X\subseteq \bigcup_{\alpha}U_\alpha=\bigcup_{j=1}^nU_j.
+\]
+But since $f$ is continuous,
+\[
+\bigcup_{j=1}^nf(U_j)=f\left(\bigcup_{j=1}^nU_j\right)=f(X)
+\]
+So $f(X)$ is open in $S^2$. Additionally, since $X$ is compact, so is $f(X)$ from which it follows that $f(X)$ is closed. Since $S^2$ is connected, it must be the case that $f(X)=S^2$, i.e. $f$ is onto.
+
+To show $f$ is one-to-one, recall that $f$ has a single simple pole so $f^{-1}(\infty)$ is a single point. This means that $d(\infty)=1$, and more specifically, $k=1$ where $k$ is as defined in Lemma 2 on page 42 in Donaldson's book. Since $k=1$, locally we can represent $f$ by $z\mapsto z^1$, so $f$ is one-to-one.
+
+Next we need to show that $f^{-1}$ is holomorphic. Recall the Inverse Function Theorem (Lemma 2, p. 42). Since $f$ can be represented my the map $z\mapsto z$ locally and $f$ is onto, $f'$ is a nonzero constant, so $f'(0)\neq 0$ and we can apply the Inverse Function Theorem. This gives $(f^{-1})'(y)=\frac{1}{f'(x)}$, so the inverse exists and is holomorphic. Putting all this together, we see that $X$ is biholomorphic to the Riemann sphere.
+\end{proof}
+
+
+\item Do you know how to classify all two dimensional compact orientable manifolds? What are their universal covering spaces, fundamental groups, and Euler characteristics?
+
+Let $\Sigma_2$ be a compact orientable manifold, let $\Delta=\{z\in \MB{C}:|z|<1\}$ and let $\Gamma\subseteq \text{Aut}(\Delta)$ be a discrete subgroup (acting freely), where $\text{Aut}(\Delta)$ is the automorphism group on $\Delta$. Equivalently,
+\[
+\text{Aut}(\Delta)=\left\{e^{i\theta}\frac{z-a}{1-\bar a z}:a\in \Delta\right\}.
+\]
+Then $\Sigma_2=\Delta/\Gamma$, the covering space is $\Delta$, and $\Gamma=\pi_1(\Sigma_2)$ where $\pi_1$ is the fundamental group. The Euler characteristic is $\chi(\Sigma_2)=2(2)-2=2$.
+
+\end{enumerate}
+\end{document}

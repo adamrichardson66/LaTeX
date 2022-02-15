@@ -1,0 +1,449 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\usepackage{bbm}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{207B - PDE}
+\rightline{Moradifam, Amir}
+\rightline{HW 1}
+\rightline{\today}
+
+
+Exercises are from Chapter 2 of Evans' textbook \textit{Partial Differential Equations}, 1st ed. 
+
+\vspace{5mm}
+\begin{enumerate}
+
+\setcounter{enumi}{2}
+
+\item Modify the proof of the mean value formulas to show for $n\geq3$ that
+
+\[
+u(0)=\dashint_{\partial B(0,r)}g\,dS+\frac{1}{n(n-2)\alpha(n)}\int_{B(0,r)}\left(\frac{1}{|x|^{n-2}}-\frac{1}{r^{n-2}}\right)\,f\,dx,
+\]
+
+provided
+\[
+\begin{cases}-\Delta u=f & \text{in }B^\circ(0,r)\\ \hspace{6.25mm}u=g & \text{on }\partial B(0,r).\end{cases}
+\]
+
+\begin{proof}
+Considering Evans' proof, define
+
+\[
+\phi(r):=\dashint_{\partial B(0,r)} u(y)\,dS(y)=\dashint_{\partial B(0,1)}u(rz)\,dS(z).
+\]
+
+Then since $-\Delta u=f$ in $B^\circ(0,r)$, we find that
+
+\[
+\phi'(r)=\frac{r}{n}\dashint_{B(0,r)}\Delta u(y)\,dy=-\frac{r}{n}\dashint_{B(0,r)}f(y)\,dy
+\]
+
+Now, we can use FTC to yield
+
+\begin{align*}
+\int_0^r\phi'(t)\,dt&=-\int_0^r\left[\frac{t}{n}\dashint_{B(0,t)}f\,dy\right]\,dt\\[2mm]
+\phi(r)-\phi(0)&=-\int_0^r\left[\frac{1}{n\alpha(n)t^{n-1}}\int_{B(0,t)}f\,dy\right]\,dt\\[2mm]
+\dashint_{\partial B(0,r)}u(y)\,dS-u(0)&=-\frac{1}{n\alpha(n)}\int_0^r\left[\frac{1}{t^{n-1}}\int_{B(0,t)}f\,dy\right]\,dt\\[2mm]
+u(0)&=\dashint_{\partial B(0,r)}g\,dS+\frac{1}{n\alpha(n)}\int_0^r\left[\frac{1}{t^{n-1}}\int_{B(0,t)}f\,dy\right]\,dt.
+\end{align*}
+
+Since we have some improper integrals, let $\ve>0$. In order to use integration by parts, let $\displaystyle u(t)=\int_{B(0,t)}f\,dy$ and $\displaystyle v(t)=\frac{1}{t^{n-1}}$. Then $\displaystyle du=\int_{\partial B(0,t)}f\,dy\,dt$ and $\displaystyle v=\frac{1}{2-n}\frac{1}{t^{n-2}}$ and we have
+
+\begin{align*}
+u(0)&=\dashint_{\partial B(0,r)}g\,dS+\frac{1}{n\alpha(n)}\left(\left[\frac{1}{2-n}\frac{1}{t^{n-2}}\int_{B(0,t)}f\,dy\right]_\ve^r-\int_\ve^r\left[\frac{1}{2-n}\frac{1}{t^{n-2}}\int_{\partial B(0,t)}f\,dS\right]\,dt\right)\\[2mm]
+&=\dashint_{\partial B(0,r)}g\,dS+\frac{1}{n(n-2)\alpha(n)}\left(\int_\ve^r\left[\frac{1}{t^{n-2}}\int_{\partial B(0,t)}f\,dS\right]\,dt-\left[\frac{1}{t^{n-2}}\int_{B(0,t)}f\,dy\right]_\ve^r\right)\\[2mm]
+&=\dashint_{\partial B(0,r)}g\,dS+\frac{1}{n(n-2)\alpha(n)}\left(\int_\ve^r\left[\frac{1}{t^{n-2}}\int_{\partial B(0,t)}f\,dS\right]\,dt-\frac{1}{r^{n-2}}\int_{B(0,r)}f\,dy+\frac{1}{\ve^{n-2}}\int_{B(0,\ve)}f\,dy\right)\\[2mm]
+\end{align*}
+
+Considering the last integral in the equation above, since $f$ is bounded, we have
+
+\begin{align*}
+\frac{1}{\ve^{n-2}}\int_{B(0,\ve)}f\,dy&\leq\frac{1}{\ve^{n-2}}\int_{B(0,\ve)}\max_{B(0,\ve)} f\,dy\\[2mm]
+&=\frac{\max_{B(0,\ve)}f}{\ve^{n-2}}\int_{B(0,\ve)}1\,dy\\[2mm]
+&=\frac{\max_{B(0,\ve)}f}{\ve^{n-2}}\cdot\alpha(n)\ve^n\\[2mm]
+&=\max_{B(0,\ve)}f\cdot\alpha(n)\cdot\ve^2\\[2mm]
+&=K\ve^2.
+\end{align*}
+
+$K\ve^2\rightarrow0$ as $\ve\rightarrow 0$ so the integral does as well. Next,
+
+\[
+\int_\ve^r\left[\frac{1}{t^{n-2}}\int_{\partial B(0,t)}f(y)\,dS(y)\right]\,dt=\int_{B(\ve,r)}\frac{1}{|y|^{n-2}}f\,dy.
+\]
+
+Since this integral is continuous in $\ve$, as $\ve\rightarrow 0$, this integral becomes $\displaystyle \int_{B(0,r)}\frac{1}{|y|^{n-2}}f\,dy$. Combining these two results, we have
+
+\begin{align*}
+u(0)&=\dashint_{\partial B(0,r)}g\,dS+\frac{1}{n(n-2)\alpha(n)}\left(\int_\ve^r\left[\frac{1}{t^{n-2}}\int_{\partial B(0,t)}f\,dS\right]\,dt-\frac{1}{r^{n-2}}\int_{B(0,r)}f\,dy+\frac{1}{\ve^{n-2}}\int_{B(0,\ve)}f\,dy\right)\\[2mm]
+u(0)&=\dashint_{\partial B(0,r)}g\,dS+\frac{1}{n(n-2)\alpha(n)}\left(\int_{B(0,r)}\frac{1}{|y|^{n-2}}f\,dy-\frac{1}{r^{n-2}}\int_{B(0,r)}f\,dy+0\right)\\[2mm]
+u(0)&=\dashint_{\partial B(0,r)}g\,dS+\frac{1}{n(n-2)\alpha(n)}\left(\int_{B(0,r)}\frac{1}{|y|^{n-2}}f\,dy-\int_{B(0,r)}\frac{1}{r^{n-2}} f\,dy+0\right)\\[2mm]
+u(0)&=\dashint_{\partial B(0,r)}g\,dS+\frac{1}{n(n-2)\alpha(n)}\int_{B(0,r)}\left(\frac{1}{|y|^{n-2}}-\frac{1}{r^{n-2}}\right) f\,dy,
+\end{align*}
+
+so
+
+\[
+u(0)=\dashint_{\partial B(0,r)}g\,dS+\frac{1}{n(n-2)\alpha(n)}\int_{B(0,r)}\left(\frac{1}{|x|^{n-2}}-\frac{1}{r^{n-2}}\right) f\,dx\\[2mm]
+\]
+
+as required.
+\end{proof}
+
+\vfill
+\pagebreak
+
+
+
+
+\setcounter{enumi}{4}
+
+\item Prove that there exists a constant $C$, depending only on $n$, such that
+
+\[
+\max_{B(0,1)}|u|\leq C\left(\max_{\partial B(0,1)}|g|+\max_{B(0,1)}|f|\right).
+\]
+
+whenever $u$ is a smooth solution of
+
+\[
+\begin{cases}-\Delta u=f & \text{in }B^\circ(0,1)\\ \hspace{6.25mm}u=g & \text{on }\partial B(0,1).\end{cases}
+\]
+
+[Hint: $-\Delta(u+\frac{|x|^2}{2n}\lambda)\leq0$ for $\lambda:=\max_{B(0,1)}|f|$.]
+\begin{proof}
+Utilizing the hint, define $v(x)=u(x)+\frac{|x|^2}{2n}\lambda$ where $\lambda$ is as defined above. First, we have
+
+\[
+-\Delta v=-\Delta u-\Delta\left(\frac{|x|^2}{2n}\lambda\right)=f-\lambda\leq0,
+\]
+
+so $v$ is subharmonic. By Problem 4 (see below), subharmonic functions attain their maximum on the boundary, so we have
+
+\[
+\max_{B(0,1)}|u(x)|\leq\max_{B(0,1)}|v(x)|=\max_{\partial B(0,1)}|v(x)|\leq\max_{\partial B(0,1)}|u(x)|+\max_{\partial B(0,1)}\frac{|x|^2}{2n}\lambda=\max_{\partial B(0,1)}|g|+\frac{1}{2n}\max_{B(0,1)}|f|.
+\]
+
+Thus there exists a constant $C$ such that 
+
+\[
+\max_{B(0,1)}|u|\leq C\left(\max_{\partial B(0,1)}|g|+\max_{B(0,1)}|f|\right).
+\]
+\end{proof}
+
+\pagebreak
+
+\item Use Poisson's formula for the ball to prove
+
+\[
+r^{n-2}\frac{r-|x|}{(r+|x|)^{n-1}}u(0)\leq u(x)\leq r^{n-2}\frac{r+|x|}{(r-|x|)^{n-1}}u(0)
+\]
+
+whenever $u$ is positive and harmonic in $B^\circ(0,r)$. This is an explicit form of Harnack's inequality.
+
+\begin{proof}
+
+Recall that Poisson's Formula for the ball is
+
+\begin{align*}
+u(x)&=\frac{r^2-|x|^2}{n\alpha(n)r}\int_{\partial B(0,r)}\frac{g(y)}{|x-y|^n}\,dS(y)\\[2mm]
+&=r^{n-2}\frac{r^2-|x|^2}{n\alpha(n)r^{n-1}}\int_{\partial B(0,r)}\frac{g(y)}{|x-y|^n}\,dS(y)\\[2mm]
+&=r^{n-2}(r^2-|x|^2)\dashint_{\partial B(0,r)}\frac{g(y)}{|x-y|^n}\,dS(y).\\[2mm]
+\end{align*}
+
+Note also that
+
+\begin{align*}
+u(0)&=\frac{r}{n\alpha(n)}\int_{\partial B(0,r)}\frac{g(y)}{|y|^n}\,dS(y)\\[2mm]
+&=\frac{r}{n\alpha(n)}\int_{\partial B(0,r)}\frac{g(y)}{r^n}\,dS(y)\\[2mm]
+&=\frac{1}{n\alpha(n)r^{n-1}}\int_{\partial B(0,r)}g(y)\,dS(y)\\[2mm]
+&=\dashint_{\partial B(0,r)}g(y)\,dS(y).
+\end{align*}
+
+
+Now, since $y\in\partial B(0,r)$ and $x\in B^\circ(0,r)$, we have $r-|x|\leq |x-y|\leq r+|x|$. Whence
+
+\pagebreak
+
+\begin{multicols}{2}
+\begin{align*}
+u(x)&=r^{n-2}(r^2-|x|^2)\dashint_{\partial B(0,r)}\frac{g(y)}{|x-y|^n}\,dS(y)\\[2mm]
+&\geq r^{n-2}(r^2-|x|^2)\dashint_{\partial B(0,r)}\frac{g(y)}{(r+|x|)^n}\,dS(y)\\[2mm]
+&= r^{n-2}\frac{r^2-|x|^2}{(r+|x|)^n}\dashint_{\partial B(0,r)}g(y)\,dS(y)\\[2mm]
+&= r^{n-2}\frac{(r-|x|)(r+|x|)}{(r+|x|)^n}u(0)\\[2mm]
+&= r^{n-2}\frac{r-|x|}{(r+|x|)^{n-1}}u(0), \text{ and}\\[2mm]
+\end{align*}
+
+\begin{align*}
+u(x)&=r^{n-2}(r^2-|x|^2)\dashint_{\partial B(0,r)}\frac{g(y)}{|x-y|^n}\,dS(y)\\[2mm]
+&\leq r^{n-2}(r^2-|x|^2)\dashint_{\partial B(0,r)}\frac{g(y)}{(r-|x|)^n}\,dS(y)\\[2mm]
+&= r^{n-2}\frac{r^2-|x|^2}{(r-|x|)^n}\dashint_{\partial B(0,r)}g(y)\,dS(y)\\[2mm]
+&= r^{n-2}\frac{(r-|x|)(r+|x|)}{(r-|x|)^n}u(0)\\[2mm]
+&= r^{n-2}\frac{r+|x|}{(r-|x|)^{n-1}}u(0),\\[2mm]
+\end{align*}
+\end{multicols}
+therefore
+
+\[
+r^{n-2}\frac{r-|x|}{(r+|x|)^{n-1}}u(0)\leq u(x)\leq r^{n-2}\frac{r+|x|}{(r-|x|)^{n-1}}u(0).
+\]
+\end{proof}
+
+
+
+\vfill
+\pagebreak
+
+\setcounter{enumi}{8}
+
+\item Let $U^+$ denote the open half-ball $\{x\in\R^n\mid |x|<1,\, x_n>0\}$. Assume $u\in C^2(\bar{U}^+)$ is harmonic in $U^+$, with $u=0$ on $\partial U^+\cap\{x_n=0\}$. Set 
+
+\[
+v(x):=\begin{cases} u(x) & \text{if } x_n\geq0\\ -u(x_1,\ldots,x_{n-1},-x_n) & \text{if } x_n<0\end{cases}
+\]
+
+for $x\in U=B^\circ(0,1)$. Prove $v$ is harmonic in $U$.
+
+
+\begin{proof}
+First, if $x\in U^+$, then $v(x)=u(x)$ which is harmonic. Now, let $x\in U$ with $x_n<0$. Then by definition of $v$, $v_{x_i}=-u_{x_i}$ and $v_{x_ix_i}=-u_{x_ix_i}$ for $1\leq i\leq n-1$, but $v_{x_n}$ and $v_{x_nx_n}$ must be treated separately. We have
+
+\[
+v_{x_n}=\pp{}{x_n}(-u(x_1,\ldots,x_{n-1},-x_n))=-\pp{u}{(-x_n)}\pp{(-x_n)}{x_n}=-\pp{u}{(-x_n)}\cdot(-1)=\pp{u}{(-x_n)}=u_{-x_n}.
+\]
+
+Since we may write $x_i=-(-x_i)$ for any $1\leq i\leq n$, we have $u_{x_i}=-u_{-x_i}$ and $u_{x_ix_i}=u_{(-x_i)(-x_i)}$ so
+
+
+\begin{align*}
+v_{x_nx_n}&=\pp{}{x_n}(u_{-x_n})\\[2mm]
+&=\pp{}{x_n}\left(\pp{u}{(-x_n)}\right)\\[2mm]
+&=\pp{}{x_n}\left(\pp{u}{x_n}\pp{x_n}{(-x_n)}\right)\\[2mm]
+&=\pp{}{x_n}\left(-\pp{u}{(-x_n)}\pp{x_n}{(-x_n)}\right)\\[2mm]
+&=-\pp{^2u}{(-x_n)(-x_n)}\\[2mm]
+&=-u_{(-x_n)(-x_n)}.
+\end{align*}
+
+We proceed by showing that $v\in C^1(U)$ and then $v\in C^2(U)$. Let $x_0=(x_1,x_2,\ldots,x_{n-1},0)$. Write $\lom{x}{x_0^\pm}$ to indicate $x_i\rightarrow x_i$ for $1\leq i\leq n-1$ and  $x_n\rightarrow 0^\pm$ respectively. We have
+
+
+\begin{align*}
+\lom{x}{x_0^-}Dv(x)&=\lom{x}{x_0^-}(v_{x_1}(x),v_{x_2}(x),\ldots,v_{x_{n-1}}(x),v_{x_n}(x))\\[2mm]
+&=\lom{x}{x_0^-}(-u_{x_1}(x),-u_{x_2}(x),\ldots,-u_{x_{n-1}}(x),u_{-x_n}(x))\\[2mm]
+&=\lom{x}{x_0^-}(u_{-x_1}(x),u_{-x_2}(x),\ldots,u_{-x_{n-1}}(x),u_{-x_n}(x))\\[2mm]
+&=\lom{x}{x_0^+}(u_{x_1}(x),u_{x_2}(x),\ldots,u_{x_{n-1}}(x),u_{x_n}(x))\\[2mm]
+&=(u_{x_1}(x_0),u_{x_2}(x_0),\ldots,u_{x_{n-1}}(x_0),u_{x_n}(x_0))\\[2mm]
+&=Du(x_0)\\[2mm]
+&=Dv(x_0),\text{ and}
+\end{align*}
+
+\begin{align*}
+\lom{x}{x_0^+}Dv(x)&=\lom{x}{x_0^+}(v_{x_1}(x),\ldots,v_{x_n}(x))\\[2mm]
+&=\lom{x}{x_0^+}(u_{x_1}(x),\ldots,u_{x_n}(x))\\[2mm]
+&=(u_{x_1}(x_0),\ldots,u_{x_n}(x_0))\\[2mm]
+&=Du(x_0)\\[2mm]
+&=Dv(x_0).
+\end{align*}
+
+Thus, $v\in C^1(U)$. Similarly,
+
+\begin{align*}
+\lom{x}{x_0^+}D^2v(x)&=\lom{x}{x_0^+}(v_{x_1x_1}(x),v_{x_2x_2}(x),\ldots,v_{x_{n-1}x_{n-1}}(x),v_{x_nx_n}(x))\\[2mm]
+&=\lom{x}{x_0^+}(u_{x_1x_1}(x),u_{x_2x_2}(x),\ldots,u_{x_{n-1}x_{n-1}}(x),u_{x_nx_n}(x))\\[2mm]
+&=\lom{x}{x_0^+}(u_{x_1x_1}(x_0),u_{x_2x_2}(x_0),\ldots,u_{x_{n-1}x_{n-1}}(x_0),u_{x_nx_n}(x_0))\\[2mm]
+&=D^2u(x_0)\\[2mm]
+&=D^2v(x_0),\text{ and}
+\end{align*}
+
+\begin{align*}
+\lom{x}{x_0^-}D^2v(x)&=\lom{x}{x_0^-}(v_{x_1x_1}(x),v_{x_2x_2}(x),\ldots,v_{x_{n-1}x_{n-1}}(x),v_{x_nx_n}(x))\\[2mm]
+&=\lom{x}{x_0^-}(-u_{x_1x_1}(x),-u_{x_2x_2}(x),\ldots,-u_{x_{n-1}x_{n-1}}(x),-u_{(-x_n)(-x_n)}(x))\\[2mm]
+&=\lom{x}{x_0^-}(u_{(-x_1)(-x_1)}(x),u_{(-x_2)(-x_2)}(x),\ldots,u_{(-x_{n-1})(-x_{n-1})}(x),u_{(-x_n)(-x_n)}(x))\\[2mm]
+&=\lom{x}{x_0^+}(u_{x_1x_1}(x),u_{x_2x_2}(x),\ldots,u_{x_{n-1}x_{n-1}}(x),u_{x_nx_n}(x))\\[2mm]
+&=(u_{x_1x_1}(x_0),u_{x_2x_2}(x_0),\ldots, u_{x_nx_n}(x_0))\\[2mm]
+&=D^2u(x_0)\\[2mm]
+&=D^2v(x_0).
+\end{align*}
+
+
+Thus, $v\in C^2(U)$, whence $\Delta v=0$ so $v$ is harmonic in $U$.
+%Since $-x_n>0$ and $u\in C^2(\bar{U}^+)$, $-u_{(-x_n)(-x_n)}=v_{x_nx_n}$ is continuous, and we have $v\in C^2(\bar{U}^+)$. Lastly, note that $(x_1,x_2,\ldots,x_{n-1},-x_n)\in U^+$ since $x_n<0$, and $u$ is harmonic there by hypothesis, i.e. $\Delta u=0$. Consequently, 
+%
+%\begin{align*}
+%\Delta v&=\sum_{i=1}^nv_{x_ix_i}\\[2mm]
+%&=v_{x_1x_1}+v_{x_2x_2}+\cdots+v_{x_{n-1}x_{n-1}}+v_{x_nx_n}\\[2mm]
+%&=-u_{x_1x_1}-u_{x_2x_2}-\cdots-u_{x_{n-1}x_{n-1}}-u_{(-x_n)(-x_n)}\\[2mm]
+%&=-(u_{x_1x_1}+u_{x_2x_2}+\cdots+u_{x_{n-1}x_{n-1}}+u_{(-x_n)(-x_n)})\\[2mm]
+%&=-\Delta u\\[2mm]
+%&=0.
+%\end{align*}
+%
+%Thus, $v$ is harmonic in $U$.
+
+\end{proof}
+
+\pagebreak
+
+\setcounter{enumi}{3}
+\item We say that $v\in C^2\left(\overline{U}\right)$ is \textit{subharmonic} if $-\Delta v\leq 0\text{ in }U$.
+
+\begin{enumerate}
+\item Prove that for subharmonic $v$, 
+
+\[
+v(x)\leq \dashint_{B(x,r)} v\,dy\text{ for all }B(x,r)\subset U. 
+\]
+
+\begin{proof}
+Suppose $v$ is subharmonic. Using the same technique as in Evans' proof of equality in the case of harmonic functions, define
+
+\[
+\phi(r):=\dashint_{\partial B_r(x)}v(y)\,dS_y.
+\]
+
+
+Employing a change of variables, we can preserve the value of the integral while shifting the region of integration to be centered at the origin and scaled, giving
+
+\[
+\phi(r):=\dashint_{\partial B_1(0)}v(x+rz)\,dS_z\pspace\text{where }y=x+rz,\text{ and so }z=\frac{y-x}{r}.
+\]
+
+\vspace{-0.5cm}
+Differentiating this with respect to $r$ and applying the Divergence theorem, we find
+
+\begin{align*}
+\dd{\phi}{r}&=\dd{}{r}\dashint_{\partial B_1(0)}v(x+rz)\,dS_z\\[2mm]
+&=\dashint_{\partial B_1(0)}Dv(x+rz)\cdot z\,dS_z\\[2mm]
+&=\dashint_{\partial B_1(0)}Dv(x+rz)\cdot \frac{y-x}{r}\,dS_z\\[2mm]
+&=\dashint_{\partial B_1(0)}Dv\cdot \mathbf{n}\,dS_z\\[2mm]
+&=\dashint_{\partial B_1(0)}\pp{v}{\mathbf{n}}\,dS_z\\[2mm]
+&=\dashint_{B_1(0)}\Delta v(x+rz)\,dz\\[2mm]
+&=\frac{r}{n}\dashint_{B_r(x)}\Delta(y)\,dy\geq0.\\[2mm]
+\end{align*}
+
+Thus, the mean value of $v$ over the surface of any sphere inside $U$ is increasing as $r$ increases. We also know that when $r=0$, $\phi(r)=v(x)$, therefore
+
+\[
+\dashint_{B_r(x)} v\,dy\geq v(x)
+\]
+
+as required.
+\end{proof}
+
+\item Prove that, therefore, $\displaystyle \max_{\overline{U}}v=\max_{\partial U}v$.
+
+\begin{proof}
+Suppose $v$ is subharmonic. Again we will follow Evans' proof and suppose there exists a point $x_0\in U$ such that $v(x_0)=\max_{\overline{U}}v$. Let $0<r<\text{dist}(x_0,\partial U)$. Then we may employ part (a) above to yield
+
+\[
+\max_{\overline{U}}v=v(x_0)\leq \dashint_{B_r(x_0)} v\,dy\leq \max_{B_r(x_0)}v\leq\max_{\overline{U}}v.
+\]
+
+Thus $\max_{\overline{U}}v= \dashint_{B_r(x_0)} v\,dy$, which can only be true if $v(y)=\max_{\overline{U}}v$ for all $y\in B_r(x_0)$. Now, let $\Omega=\{x\in \overline{U}\mid v(x)=\max_{\overline{U}}v(x)\}$. This set is closed by the Lemma below. Thus, $\Omega=\overline{\Omega}$. Moreover, $B_r(x_0)\subset U$ as shown above so it follows that $U=\Omega=\overline{\Omega}$ since the argument can be repeated for any $x\in B_r(x_0)$. Since $U=\overline{\Omega}$, $U=\overline{U}$ and it follows that $\displaystyle \max_{\overline{U}}v=\max_{\partial U}v$.
+\end{proof}
+
+\textbf{Lemma.} Suppose $v(x)$ is continuous on $\overline{U}$. Then the set of points at which $v$ attains its maximum value is a closed set.
+
+\begin{proof}
+Suppose $v(x)$ is continuous on $\overline{U}$. By the Extreme Value theorem, $v$ attains a maximum value on $\overline{U}$, so we may let $M=\max_{\overline{U}}v(x)$, and let $\Omega=\{x\in \overline{U}\mid v(x)=M\}$. Then $\Omega^c=\{x\in \overline{U}\mid v(x)<M)\}=v^{-1}((-\infty,M))$. Since $v$ is continuous, $\Omega^c=v^{-1}((-\infty,M))$ is an open set, and so $\Omega$ is closed by definition.
+\end{proof}
+
+\end{enumerate}
+
+
+
+
+\end{enumerate}
+
+\end{document}

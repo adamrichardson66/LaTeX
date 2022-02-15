@@ -1,0 +1,318 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209C - Real Analysis}
+\rightline{Zhang, Zhenghe}
+\rightline{HW 3}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+\item Show that $(L^p(\MB{T}),\|\cdot\|_p)$ is separable if $1\leq p<\infty$, but that $(L^\infty(\MB{T}),\|\cdot\|_\infty)$ is not separable. Note that as sets, we have $L^\infty(\MB{T})\subset L^p(\MB{T})$ for any $1\leq p<\infty$. It's really the norm that makes things different. 
+
+[Hint: for the last part of this problem, try to construct uncountably many functions $\{f_\alpha\}_{\alpha\in A}$ such that $\|f_\alpha\|_\infty=1$ for all $\alpha\in A$ and $\|f_\alpha-f_\beta\|_\infty=1$ for all $\alpha\neq \beta\in A$.]
+
+\begin{proof}
+First, let $1\leq p<\infty$. Recall that every measurable function can be approximated arbitrarily closely by a sequence of simple functions, and that simple functions are in $L^p(\MB{T})$. Also recall that a simple function is a finite linear combination of characteristic functions where the coefficients are taken in $\MB{C}$. Consequently, for any $f\in L^p(\MB{T})$, we can write
+\[
+f(x)=\lom{n}{\infty}\phi_n(x)=\lom{n}{\infty}\sum_{i=1}^Na_{n,i}\chi_{E_{n,i}}(x)
+\]
+where $a_{n,i}\in\MB{C}$ and $E_{n,i}\subseteq\MB{T}$ for all $n,i$. Note that since $a_{n,i}\in\MB{C}$, it can be decomposed into its real and imaginary parts, each of which are real numbers which can be approximated by a sequence of rational numbers. More specifically,
+\[
+a_{n,i}=\text{Re}\,a_{n,i}+i\,\text{Im}\,a_{n,i}=\lom{k}{\infty}p^{n,i}_k+i\lom{k}{\infty}q_k^{n,i}
+\]
+where $p_k,q_k\in\MB{Q}$. Then we can write
+\begin{align*}
+f(x)&=\lom{n}{\infty}\sum_{i=1}^{N(n)}\left[\lom{k}{\infty}p^{n,i}_k+i\lom{k}{\infty}q_k^{n,i}\right]\chi_{E_{n,i}}(x)\\[2mm]
+&=\lom{n,k}{\infty}\sum_{i=1}^{N(n)}\left[p^{n,i}_k+iq_k^{n,i}\right]\chi_{E_{n,i}}(x)\\[2mm]
+&=\lom{n,k}{\infty}\sum_{i=1}^{N(n)}a_k^{n,i}\chi_{E_{n,i}}(x)\\[2mm]
+&=\lom{n}{\infty}\sum_{i=1}^{N(n)}a_{\ell(n)}^{n,i}\chi_{E_{n,i}}(x)\\[2mm]
+&=\lom{n}{\infty}\psi_n(x)\\[2mm]
+\end{align*}
+Consider the family of simple functions $\{\psi_n\}$ constructed above. $\overline{\{\psi_n\}}\subset L^p(\MB{T})$ since $\overline{\{\psi_n\}}\subset \overline{S}\subset L^p(\MB{T})$ by a result in class. Moreover, any $f\in L^p(\MB{T})$ can be written as a limit of a sequence of these functions, so $L^p(\MB{T})\subset \overline{\{\psi_n\}}$. Consequently $\overline{\{\psi_n\}}=L^p(\MB{T})$, and since $\{\psi_n\}$ is countable, we have shown that $L^p(\MB{T})$ is separable.
+
+Now let $p=\infty$ and consider the family of characteristic functions $\{\chi_{B(0,\ve)}\}_{\ve>0}$. We have $\|\chi_{B(0,\ve)}\|_\infty=1$ for all $\ve>0$, and for any $\delta\neq\ve$, $\|\chi_{B(0,\ve)}-\chi_{B(0,\delta)}\|_\infty=1$ as well.
+
+Suppose by way of contradiction that $L^\infty(\MB{T})$ is separable and there exists a countable dense subset $S$ of $L^\infty(\MB{T})$. Then $S$ must meet our family above, but it can only do so at a countable number of the singletons in our family, say $\{\chi_{B(0,\ve_i)}\}_{i=1}^\infty=S\cap\{\chi_{B(0,\ve)}\}_{\ve>0}$. Now we may write
+\[
+\{\chi_{B(0,\ve)}\}_{\ve>0}=\{\chi_{B(0,\ve_i)}\}_{i=1}^\infty\cup\left(\{\chi_{B(0,\ve_i)}\}_{i=1}^\infty\right)^c.
+\]
+But $\left(\{\chi_{B(0,\ve_i)}\}_{i=1}^\infty\right)^c$ is an uncountable open set since $\{\chi_{B(0,\ve_i)}\}_{i=1}^\infty$ is a countable closed set and $\{\chi_{B(0,\ve)}\}_{\ve>0}$ is uncountable. Consequently, there exists an open set that contains no element of our dense subset $S$, which contradicts the fact that $S$ is dense. Therefore, $L^\infty(\MB{T})$ cannot be separable.
+\end{proof}
+
+
+\item Let $\MB{C}^n$ be equipped with the standard inner product. Let $\Lambda:\MB{C}^n\to\MB{C}$ be a bounded linear functional.
+\begin{enumerate}
+\item Write this linear functional in an explicit formula via the inner product.
+
+Let $\vec x\in\MB{C}^n$ and recall from Homework 1 that we can write $\vec x=\sum^n_{j=1}( \vec x,\vec e^{(j)}) \cdot \vec e^{(j)}$ where $\{\vec e^{(j)}\}$ is a basis for $\MB{C}^n$. Since $\Lambda$ is linear, we have
+\[
+\Lambda(\vec x)=\Lambda\left(\sum^n_{j=1}(\vec x,\vec e^{(j)}) \cdot \vec e^{(j)}\right)=\sum^n_{j=1}( \vec x,\vec e^{(j)}) \cdot \Lambda(\vec e^{(j)}).
+\]
+
+\item Compute the kernel of this functional, where the kernel is $\text{ker}(\Lambda)=\{\uline{x}\in\MB{C}^n\mid\Lambda(\uline{x})=0\}$.
+
+Clearly $0\in \text{ker}(\Lambda)$ since $\Lambda$ is linear. Note that if $(\vec x,\vec e^{(j)})=0$ for all $j$, then $\vec x$ must be orthogonal to all basis vectors $\vec e^{(j)}$. The only such vector is the 0 vector, so given any nonzero $\vec x\in\MB{C}^n$, there must be at least one basis vector $\vec e^{(j)}$ such that $(\vec x,\vec e^{(j)})\neq0$. Then $\Lambda(\vec x)=0$ precisely when $\Lambda(\vec e^{(j)})=0$ for at least $n-1$ $j$'s.
+
+\item Note that $\ker(\Lambda)$ is a subspace of $\MB{C}^n$. What is its dimension?
+
+Let $\vec x, \vec y\in \ker(\Lambda)$ and $\lambda\in \MB{C}$. Then $\Lambda(\vec x)=0$ and $\Lambda(\vec y)=0$, so
+\[
+0=\Lambda(\vec x)+\Lambda(\vec y)=\Lambda(\vec x+\vec y)\aspace0=\lambda\Lambda(\vec x)=\Lambda(\lambda \vec x).
+\]
+Thus, $\vec x+\vec y,\lambda \vec x\in \ker(\Lambda)$, and $\ker(\Lambda)$ is a subspace of $\MB{C}^n$. It's dimension is $n-1$, since $n-1$ basis vectors are required to guarantee every $\vec x\in \ker(\Lambda)$ does in fact get mapped to 0 by $\Lambda$.
+
+\item Compute $\text{ker}(\Lambda)^\perp$ and its dimension.
+
+$\ker(\Lambda)^\perp=\{\vec y\in \MB{C}^n\mid (\vec x,\vec y)=0\text{ for all }\vec x\in \ker(\Lambda)\}$. In other words, $\vec y$ must be orthogonal to any vector in the kernel of $\Lambda$. But this can only be the case if $\vec y$ is the 0 vector since $\ker(\Lambda)$ is $n$-dimensional. Thus, $\ker(\Lambda)^\perp=\{0\}$, which is 0-dimensional.
+
+
+\end{enumerate}
+
+\item Assume in this problem that $\MB{H}$ is merely an inner product space. Prove the polarization identity which expresses the inner product via its induced norm:
+\[
+(x,y)=\frac{1}{4}\sum_{n=1}^4i^n\|x+i^ny\|^2,
+\]
+for all $x,y\in\MB{H}$ and where $i^2=-1$.
+
+\begin{proof}
+We have
+\begin{align*}
+\sum_{n=1}^4i^n\|x+i^ny\|^2&=i\|x+iy\|^2-\|x-y\|^2-i\|x-iy\|^2+\|x+y\|^2\\[2mm]
+&=i(x+iy,x+iy)-(x-y,x-y)-i(x-iy,x-iy)+(x+y,x+y)\\[2mm]
+&=i\left((x,x)+i(x,y)+i(y,x)+(y,y)\right)-\left((x,x)-(x,y)-(y,x)+(y,y)\right)\\[2mm]
+&-i\left((x,x)+i(x,y)-i(y,x)+(y,y)\right)+\left((x,x)+(x,y)+(y,x)+(y,y)\right)\\[2mm]
+&=\cancel{i(x,x)}+(x,y)-\cancel{(y,x)}+\cancel{i(y,y)}-\cancel{(x,x)}+(x,y)+\cancel{(y,x)}-\cancel{(y,y)}\\[2mm]
+&-\cancel{i(x,x)}+(x,y)-\cancel{(y,x)}-\cancel{i(y,y)}+\cancel{(x,x)}+(x,y)+\cancel{(y,x)}+\cancel{(y,y)}\\[2mm]
+&=4(x,y).
+\end{align*}
+Therefore,
+\[
+(x,y)=\frac{1}{4}\sum_{n=1}^4i^n\|x+i^ny\|^2.
+\]
+\end{proof}
+
+\pagebreak
+
+\item Let $M$ be a subspace of $\MB{H}$. Prove that $\left(M^\perp\right)^\perp=\overline{M}$, i.e. the closure of $M$. In particular $M=\left(M^\perp\right)^\perp$ if $M$ is a closed subspace.
+
+\begin{proof}
+Let $M$ be a subspace of $\MB{H}$. First, let $x\in M$. Since $M^\perp$ and $\left(M^\perp\right)^\perp$ are closed subspaces (by Facts stated in lecture), by Theorem 3.5 we can write $x=Py+Qz$ where $Py\in M^\perp$, and $Qz\in \left(M^\perp\right)^\perp$. Then 
+\[
+0=(x,Py)=(Py+Qz,Py)=(Py,Py)+(Qz,Py)=|P|\|y\|^2+0,
+\]
+so $y=0$. Thus, $x=Qz\in\left(M^\perp\right)^\perp$ whence $M\subseteq \left(M^\perp\right)^\perp$. Since $\left(M^\perp\right)^\perp$ is a closed set that contains $M$, we have that $\overline{M}\subseteq\left(M^\perp\right)^\perp$.
+
+
+On the other hand, let $x\in \left(M^\perp\right)^\perp$. By Theorem 3.5 again, we can write $x=Py+Qz$, this time with $Py\in M$ and $Qz\in M^\perp$. Then
+\[
+0=(x,Qz)=(Py+Qz,Qz)=(Py,Qz)+(Qz,Qz)=0+|Q|\|z\|^2,
+\]
+so $z=0$. Thus, $x=Py\in M$ whence $\left(M^\perp\right)^\perp\subseteq M\subseteq \overline{M}$. Therefore $\left(M^\perp\right)^\perp=\overline{M}$, so in particular $M=\left(M^\perp\right)^\perp$ if $M$ is a closed subspace.
+\end{proof}
+
+\item The computation of an operator norm is in general tricky. For instance, even for the following two simple cases, one needs to use non-trivial results.
+
+\begin{enumerate}
+\itemsep5mm
+\item Let $\Lambda:\MB{H}\to\MB{C}$ be a bounded linear functional. Compute the operator norm of $\Lambda$ via the Riesz representation theorem.
+
+Recall that the Reisz representation theorem guarantees the existence of a unique $y\in \MB{H}$ such that $\Lambda(x)=(x,y)$ for all $x\in \MB{H}$. Consequently,
+\[
+\|\Lambda\|=\sup_{\|x\|=1}|\Lambda(x)|=\sup_{\|x\|=1}|(x,y)|.
+\]
+In other words, the operator norm of $\Lambda$ is the supremum of the (absolute value of the) inner product taken over all unit vectors in $\MB{H}$.
+
+\item For simplicity, let's consider $\MB{R}^2$ with the usual inner product $(\cdot,\cdot)$. A linear transformation $\Lambda: \MB{R}^2\to\MB{R}^2$ is given by a $2\times 2$ real matrix $A$, which is always bounded. We know that $A^TA$ (where $A^T$ is the transpose of $A$) is a real symmetric matrix. Thus it is similar to a diagonal matrix via a real orthogonal matrix. Let $\lambda_1$ and $\lambda_2$ be the two eigenvalues of $A^TA$ . Show that $\|A\|=\max\left\{\sqrt{|\lambda_1|},\sqrt{|\lambda_2|}\right\}$.
+\end{enumerate}
+
+\begin{proof}
+Since we are in $\MB{R}^2$, observe that 
+\begin{align*}
+\|A\|^2&=\left[\sup_{\|x\|=1}\|Ax\|\right]^2\\[2mm]
+&=\left[\sup_{\|x\|=1}|(Ax,Ax)|\right]^2\\[2mm]
+&=\left[\sup_{\|x\|=1}|(x,A^TAx)|\right]^2\\[2mm]
+&=\left[\sup_{\|x\|=1}|(x,R^TDRx)|\right]^2\\[2mm]
+&=\left[\sup_{\|x\|=1}|(Rx,DRx)|\right]^2\\[2mm]
+&=\left[\sup_{\|y\|=1}|(y,Dy)|\right]^2,\\[2mm]
+&=\left[\max\{\sqrt{|\lambda_1|},\sqrt{|\lambda_2|}\}\right]^2,
+\end{align*}
+where $R$ is an orthogonal matrix, $D$ is diagonal, and the diagonal entries of $D$ are $\lambda_1,\lambda_2$ since $\lambda_1,\lambda_2$ are the eigenvalues of $A^TA$. Thus, $\|A\|=\max\{\sqrt{|\lambda_1|},\sqrt{|\lambda_2|}\}$.
+\end{proof}
+
+
+
+
+\item Let $\{u_n\}_{n=1}^\infty$ be an orthonormal set of $\MB{H}$.  Show that this gives an example of a closed and bounded set which is not compact. Recall that compactness means any open cover contains a finite subcover.
+
+\begin{proof}
+First note that $\{u_n\}$ is bounded since, for any vector $u_n\in\{u_n\}$, $\|u_n\|=1<\infty$. Next, consider the open cover
+\[
+\bigcup_{n=1}^\infty B(u_n,1)
+\]
+where $B(u_n,1)$ is the open ball centered at $u_n$ with radius 1. Omitting any one of these balls will exclude at least one $u_n$ from the cover, so infinitely many are indeed necessary. Consequently, $\{u_n\}$ is not compact since no finite subcover of this open cover can be selected. To show that $\{u_n\}_{n=1}^\infty$ is closed, let $\{u_{n_k}\}\subset\{u_n\}$ be a convergent sequence. Note that for $j\neq k$,
+
+\begin{align*}
+\|u_{n_j}-u_{n_k}\|^2&=(u_{n_j}-u_{n_k},u_{n_j}-u_{n_k})\\[2mm]
+&=(u_{n_j},u_{n_j})-(u_{n_j},u_{n_k})-(u_{n_k},u_{n_j})+(u_{n_k},u_{n_k})\\[2mm]
+&=\|u_{n_j}\|^2+0+0+\|u_{n_k}\|^2\\[2mm]
+&=2,\text{ i.e.}\\[2mm]
+\|u_{n_j}-u_{n_k}\|&=\sqrt{2}.
+\end{align*}
+Consequently, if $u_{n_k}$ is convergent, then it must converge to some element in $\{u_n\}$ so that \\$\|u_{n_j}-u_{n_k}\|\to0$. In other words $\{u_n\}$ is closed.
+\end{proof}
+
+\item Let $f\in L^2(0,1)$. Show that for any positive integer $n$ there exists a unique polynomial $p_n$ of degree $\leq n$ such that $\|f-p\|_2\geq \|f-p_n\|_2$ for all polynomials $p$ of degree $\leq n$.
+
+\begin{proof}
+Let $f\in L^2(0,1)$ and $n$ be given. First, recall that the set of polynomials is in $L^2(0,1)$ and is in fact a subspace of $L^2(0,1)$. A standard basis for the subspace of polynomials is the set $\{1,x,x^2,\ldots,x^n,\ldots\}$, and via the Gram-Schmidt process we can obtain an orthonormal basis $\{u_i\}$. Then, given any polynomial $p$, its coefficients are given by the inner product $(u_i,p)$ and the polynomial $p_n=\sum_{i=1}^n(u_i,p)u_i$ is unique since an $n$th degree polynomial is determined uniquely by its coefficients. Therefore by Theorem 3.7(b), we have
+\[
+\|f-p_n\|_2\leq \|f-p\|_2.
+\]
+\end{proof}
+
+\item $\MB{H}$ is separable if and only if $\MB{H}$ contains a maximal orthonormal system which is at most countable.
+
+\begin{proof}
+The proof of the converse is given in the notes, but will be reiterated here in the author's own words. Suppose that $\MB{H}$ contains a maximal, countable orthonormal system $\{u_n\}$. We need to show that $\overline{\text{span}\,\{u_n\}}=\MB{H}$. Suppose by way of contradiction that $\overline{\text{span}\,\{u_n\}}\neq\MB{H}$. Then by a corollary to Theorem 3.5, there exists a nonzero element $x\in \left(\overline{\text{span}\,\{u_n\}}\right)^\perp$, i.e. $(x,u_n)=0$ for all $u_n$. But this means that $x$ could be included in our orthonormal system to create a larger one, contradicting the maximality of $\{u_n\}$. Thus, $\overline{\text{span}\,\{u_n\}}$ must be the same as $\MB{H}$.
+
+Conversely, suppose $\MB{H}$ is separable. Then there exists a countable subset $\{x_n\}_{n=1}^\infty\subset\MB{H}$ such that $\overline{\{x_n\}_{n=1}^\infty}=\MB{H}$. Now,
+\[
+\MB{H}=\overline{\{x_n\}_{n=1}^\infty}\subset\overline{\text{span}\,\{x_n\}}\subset\MB{H},
+\]
+so $\overline{\text{span}\,\{x_n\}}=\MB{H}$. Via the Gram-Schmidt process, we can derive a (countable) orthonormal basis $\{u_k\}_{k=1}^\infty$ from $\text{span}\,\{x_n\}$, and by construction it follows that $\overline{\text{span}\,\{u_k\}}=\overline{\text{span}\,\{x_n\}}=\MB{H}$. Moreover, this basis is maximal by construction as well.
+\end{proof}
+
+
+\item Let $f\in C(\MB{T})$. Prove that
+\[
+\pspace\lom{N}{\infty}\frac{1}{N}\sum_{n=1}^Nf(n\alpha)=\int_0^1f(x)\,dx\pspace(*)
+\]
+for all irrational numbers $\alpha$. [Hint: do it first for all $f(x)=e^{2\pi ikx}$, $k\in\MB{Z}$.]
+
+\begin{proof}
+First consider the family of functions $\{e^{2\pi ikx}$, $k\in\MB{Z}\}$. Let $\alpha$ be an irrational number. If $k=0$, then
+\[
+\lom{N}{\infty}\frac{1}{N}\sum_{n=1}^Nf(n\alpha)=\lom{N}{\infty}\frac{1}{N}\sum_{n=1}^Ne^{2\pi i (0)n\alpha}=\lom{N}{\infty}\frac{1}{N}\cdot N=1,\text{ and}
+\]
+\[
+\int_0^1f(x)\,dx=\int_0^1e^{2\pi i(0)x}\,dx=\int_0^1 1\,dx =1,
+\]
+so $(*)$ holds. If $k\neq 0$, then 
+\[
+\int_0^1f(x)\,dx=\int_0^1e^{2\pi ikx}\,dx=\int_0^1\cos2k\pi x\,dx+i\int_0^1\sin2k\pi x\,dx=0+i0=0,\text{ and}
+\]
+\[
+\lom{N}{\infty}\frac{1}{N}\sum_{n=1}^Nf(n\alpha)=\lom{N}{\infty}\frac{1}{N}\sum_{n=1}^Ne^{2\pi i k n\alpha}=\lom{N}{\infty}\frac{1}{N}\sum_{n=1}^N\left(e^{2\pi i k \alpha}\right)^n.
+\]
+Now, observe that $e^{2\pi ik\alpha}\neq0$ when $\alpha$ is irrational. Indeed, the cosine and sine functions above attain their maximum and minimum, $\pm1$ respectively, on a set of rational multiples of $\pi$. Therefore, $\left|e^{2\pi ik\alpha}\right|<1$ for all irrational $\alpha$, whence
+\[
+\lom{N}{\infty}\frac{1}{N}\sum_{n=1}^N\left(e^{2\pi i k \alpha}\right)^n=\lom{N}{\infty}\frac{1}{N}\cdot\frac{e^{2\pi i k\alpha}}{1-e^{2\pi ik\alpha}}\\[2mm]=0,
+\]
+so $(*)$ holds again. Thus, we have shown that $(*)$ holds for the family of functions $\{e^{2\pi ikx}$, $k\in\MB{Z}\}$. By linearity of the integral, it follows that $(*)$ holds for all trigonometric polynomials, i.e. all $p\in \text{span}\,\{e^{2\pi ikx},\,k\in\MB{Z}\}$.
+
+In class it was proven that $\overline{\text{span}\,\{e^{2\pi ikx},\,k\in\MB{Z}\}}$ is dense in $(C(\MB{T}),\|\cdot\|_\infty)$. In other words, given any $f\in C(\MB{T})$ and any $\ve>0$, there is a function $p\in \overline{\text{span}\,\{e^{2\pi ikx},\,k\in\MB{Z}\}}$, $k\in\MB{Z}\}$ such that $\|f-p\|_\infty<\frac{\ve}{2}$. Consequently,
+
+\begin{align*}
+\left\| \lom{N}{\infty}\frac{1}{N}\sum_{n=1}^Nf(n\alpha)-\int_0^1f(x)\,dx\right\|_\infty &= \left\| \lom{N}{\infty}\frac{1}{N}\sum_{n=1}^Nf(n\alpha)-\lom{N}{\infty}\frac{1}{N}\sum_{n=1}^Np(n\alpha)+\int_0^1p(x)\,dx-\int_0^1f(x)\,dx\right\|_\infty  \\[2mm]
+&=\left\|\lom{N}{\infty}\frac{1}{N}\sum_{n=1}^Nf(n\alpha)-p(n\alpha)+\int_0^1p(x)-f(x)\,dx\right\|_\infty\\[2mm]
+&\leq \left\|\lom{N}{\infty}\frac{1}{N}\sum_{n=1}^Nf(n\alpha)-p(n\alpha)\right\|_\infty+\left\|\int_0^1p(x)-f(x)\,dx\right\|_\infty\\[2mm]
+&\leq \limsup_{N\to\infty}\frac{1}{N}\sum_{n=1}^N\|f(n\alpha)-p(n\alpha)\|_\infty+\int_0^1\|p(x)-f(x)\|_\infty\,dx\\[2mm]
+&\leq\limsup_{N\to\infty}\frac{1}{N}\cdot N\cdot\frac{\ve}{2}+\frac{\ve}{2}\\[2mm]
+&\leq\limsup_{N\to\infty}\ve\\[2mm]
+&=\ve.
+\end{align*}
+Since this is true for all $\ve>0$, it follows that $(*)$ holds for any $f\in C(\MB{T})$, provided that $\alpha$ is irrational.
+\end{proof}
+
+\end{enumerate}
+
+
+\end{document}

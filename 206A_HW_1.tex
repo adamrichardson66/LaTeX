@@ -1,0 +1,225 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+\newcommand{\1}{\mathbbm{1}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{206A - Probability}
+\rightline{Cho, Heyrim}
+\rightline{HW 1}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+
+\item \begin{enumerate}\itemsep3mm
+
+\item (Continuity from Above) Let $(\Omega,\MC{F},\mu)$ be a probability space. If $A_1\supseteq A_2\supseteq A_3\supseteq\cdots$ where $A_n\in\MC{F}$ and $A=\bigcap_{n=1}^\infty A_n$, show that $\mu(A)=\lim_{n\to\infty} \mu(A_n)$.
+
+\begin{proof}
+Let $\{A_n\}_{n=1}^\infty\subseteq\MC{F}$ and suppose $A_1\supseteq A_2\supseteq A_3\supseteq\cdots$. Note that $\mu(A_1)<\mu(\Omega)<\infty$ since $(\Omega,\MC{F},\mu)$ is a probability space. Let $A=\bigcap_{n=1}^\infty A_n$ and let $B_i=A_1\setminus A_i$. Then $B_1\subseteq B_2\subseteq \cdots$ and $\mu(B_i)=\mu(A_1\setminus A_i)=\mu(A_1)-\mu(A_i)$. Moreover $\bigcup_{i=1}^\infty B_i=\bigcup_{i=1}^\infty A_1\setminus A_i=A_1\setminus \bigcap_{i=1}^\infty A_i$. Thus by continuity from below applied to $\{B_i\}_{i=1}^\infty$  we have
+\begin{align*}
+\mu\left(\bigcup_{i=1}^\infty B_i\right)&=\mu\left(A_1\setminus \bigcap_{i=1}^\infty A_i\right)\\[2mm]
+&=\mu(A_1)-\mu\left(\bigcap_{i=1}^\infty A_i\right),\text{ so}\\[2mm]
+\mu\left(\bigcap_{i=1}^\infty A_i\right)&=\mu(A_1)-\mu\left(\bigcup_{i=1}^\infty B_i\right)\\[2mm]
+&=\mu(A_1)-\lim_{i\to\infty}\mu(B_i)\\[2mm]
+&=\mu(A_1)-\lim_{i\to\infty}\mu(A_1\setminus A_i)\\[2mm]
+&=\mu(A_1)-\mu(A_1)+\lim_{i\to\infty}\mu(A_i)\\[2mm]
+&=\lim_{i\to\infty}\mu(A_i).\qedhere
+\end{align*}
+\end{proof}
+
+
+\item (a) does not hold in a general measure space without the condition $\mu(A_1)<\infty$. (Note: we can assume without loss of generality that $\mu(A_1)<\infty$ since this is a descending sequence.) Consider the measure space $(\MB{R},B(\MB{R}),\lambda)$ with measure $\lambda([a,b])=b-a$, and show what happens to the statement with $A_n=[n,\infty)$.
+
+Here, $\displaystyle \mu\left(\bigcap_{n=1}^\infty A_n\right)=\mu\left(\bigcap_{n=1}^\infty [n,\infty)\right)=\mu(\varnothing)=0,\text{ but} \lim_{n\to\infty}\mu(A_n)=\lim_{n\to\infty}\infty=\infty\neq0$.
+\end{enumerate}
+
+\pagebreak
+
+
+
+\item If $\mu_1,\ldots,\mu_n$ are probability measures on $(\Omega,\MC{F})$ and $\alpha_1,\ldots,\alpha_n$ are nonnegative real numbers such that $\sum_{i=1}^n\alpha_i=1$, then show that $\mu=\sum_{i=1}^n\alpha_i\mu_i$ is a probability measure on $(\Omega,\MC{F})$.
+
+\begin{proof}
+Let $\mu_1,\ldots,\mu_n$ be probability measures on $(\Omega,\MC{F})$ and suppose $\alpha_1,\ldots,\alpha_n$ are nonnegative real numbers such that $\sum_{i=1}^n\alpha_i=1$. To show that $\mu$ is a probability measure, we need to show that $\mu(\Omega)=1$, and verify that $\mu$ enjoys countable additivity. To show the former, observe that, since $\mu_i$ are probability measures,
+\[
+\mu(\Omega)=\sum_{i=1}^n\alpha_i\mu_i(\Omega)=\sum_{i=1}^n\alpha_i\cdot1=1.
+\]
+To show countable additivity, let $\{A_k\}\subseteq\MC{F}$ and suppose $A_i\cap A_j=\varnothing$ for $i\neq j$. Then
+\[
+\mu\left(\bigcup_{k=1}^\infty A_k\right)=\sum_{i=1}^n\alpha_i\mu_i\left(\bigcup_{k=1}^\infty A_k\right)=\sum_{i=1}^n\alpha_i\sum_{k=1}^\infty\mu_i(A_k)=\sum_{k=1}^\infty\sum_{i=1}^n\alpha_i\mu_i(A_k)=\sum_{k=1}^\infty\mu(A_k).\qedhere
+\]
+\end{proof}
+
+
+\item Let $A$ be the collection of all intervals of the form $(-\infty, c]$ on the real line. Show that $\sigma(A)$ contains all intervals of the form $(a,b)$ where $a<b$. (Because these open intervals generate the Borel sigma algebra, we are showing that $A$ also generates the Borel sigma algebra.)
+
+\begin{proof}
+$\sigma(A)$ is the sigma algebra generated by $A$, so we need to show that $(a,b)$ can be written as a countable union, intersection, and/or complement of elements in $A$. Note that $(-\infty,b]\in A\subseteq\sigma(A)$, and $(-\infty, a]\in A\subseteq\sigma(A)$, so $(-\infty,a]^c=(a,\infty)\in\sigma(A)$. Moreover $(a,\infty)\cap(-\infty,b]=(a,b]\in\sigma(A)$, so any interval of the form $(a,b]$ is in $\sigma(A)$. Thus,
+\[
+(a,b)=\bigcup_{n=1}^\infty\left(a,b-\frac{1}{n}\right]\in\sigma(A).\qedhere
+\]
+\end{proof}
+
+
+\pagebreak
+
+\item Let $X:\Omega\to[0,\infty)$ be a non-negative random variable with cumulative distribution function $F_X(x)$ and a finite expectation $E(X)$. Show that 
+\[
+E(X)=\int_0^\infty1-F_X(t)\,dt.
+\]
+(You can assume that  $X$ has a probability  density function $f_X$.)
+
+\begin{proof}
+Recall that $F_X(t)=P(X\leq t)$, hence $1-F_X(t)=1-P(X\leq t)=P(X>t)$. By Tonelli's theorem,  
+\begin{align*}
+\int_0^\infty1-F_X(t)\,dt&=\int_0^\infty P(X>t)\,dt\\[2mm]
+&=\int_0^\infty\int_\Omega\1_{\{X>t\}}\,dP\,dt\\[2mm]
+&=\int_\Omega\int_0^\infty\1_{\{X>t\}}\,dt\,dP\\[2mm]
+&=\int_\Omega X\,dP\\[2mm]
+&=E(x).
+\end{align*}
+Note since $X$ is nonnegative, $\int_0^\infty\1_{\{X>t\}}\,dt=X$.
+\end{proof}
+
+
+\pagebreak
+
+
+\item Let $(\Omega, \MC{F},\mu)$ be a complete\footnote{A measure space $(\Omega,\MC{F},\mu)$ is called a \textbf{complete} measure space iff $S\subseteq N\in \MC{F}$ and $\mu(N)=0$, then $S\in\MC{F}$ and $\mu(S)=0$.} probability space, and $X,Y,X_n:\Omega\to\MB{R}$.
+\begin{enumerate}
+\itemsep5mm
+
+\item If $X$ is a random variable, and $X=Y$ except on a measure zero set, then show that $Y$ is also a random variable.
+
+\begin{proof}
+Suppose $X=Y$ except for a set $N\in\MC{F}$ where $\mu(N)=0$. We can write $\Omega=\{X=Y\}\cup\{X\neq Y\}=\{x\in\Omega:X(x)=Y(x)\}\cup\{x\in\Omega: X(x)\neq Y(x)\}$. Let $a\in\MB{R}$. Then $X^{-1}((-\infty,a])\in\MC{F}$ since $X$ is a random variable. Observe that
+\begin{align*}
+Y^{-1}((-\infty,a])&=Y^{-1}((-\infty,a])\cap(\{X=Y\}\cup\{X\neq Y\})\\[2mm]
+&=Y^{-1}((-\infty,a])\cap\{X=Y\}\cup Y^{-1}((-\infty,a])\cap\{X\neq Y\}\\[2mm]
+&=X^{-1}((-\infty,a])\cup Y^{-1}((-\infty,a])\cap\{X\neq Y\}\\[2mm]
+&\subseteq X^{-1}((-\infty,a])\cup N\in\MC{F},
+\end{align*}
+since $\MC{F}$ is a sigma algebra. Thus, $Y$ is a random variable.
+\end{proof}
+
+
+
+\item If $X_n$ are random variables, then show that $\inf_n X_n$ and $\liminf_{n\to\infty} X_n$ are also random variables.
+
+\begin{proof}
+Let $X_n$ be random variables, let $X=\inf_n X_n$, and let $Y=\liminf_{n\to\infty}X_n$. Let $a\in\MB{R}$. Then 
+\[
+X^{-1}((-\infty,a])=\{x\in\Omega:\inf X_n\leq a\}=\bigcap_{n=1}^\infty \{x\in \Omega: X_n\leq a\}=\bigcap_{n=1}^\infty X_n^{-1}((-\infty,a])\in\MC{F},
+\]
+so $\inf_n X_n$ is a random variable as well. Furthermore, 
+\[
+Y^{-1}((-\infty,a])=\{x\in \Omega:\liminf_{n\to\infty} X_n\leq a\}=\bigcup_{n=1}^\infty\bigcap_{k\geq n}\{x\in\Omega:X_k\leq a\}\in\MC{F}
+\]
+since $X_n$ is a random variable for all $n$.
+\end{proof}
+
+\end{enumerate}
+
+
+
+\end{enumerate}
+\end{document}

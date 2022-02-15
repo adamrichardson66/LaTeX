@@ -1,0 +1,310 @@
+\documentclass[11pt,oneside,english,reqno]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.65in,rmargin=0.65in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{float}
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\p}{\mathbb{P}}
+\DeclareMathOperator{\sgn}{sgn}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{206B - Numerical Analysis}
+\rightline{Wang, Qixuan}
+\rightline{HW 2}
+\rightline{\today}
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+
+\item Let ${\bf x}=\begin{bmatrix}x_1\\x_2\\x_3\\x_4\\x_5\end{bmatrix}$. Consider the following system of linear equations $A{\bf x}={\bf b}$.
+
+\begin{equation}
+\begin{cases}x_1 +2x_2+3x_3+4x_4=0 \\ x_1+3x_2+4x_3+5x_4=1 \\ x_1+3x_2+5x_3+6x_4=1 \\ x_1+3x_2+5x_3+7x_4=1\end{cases}\quad\implies\quad A=\begin{bmatrix}1 & 2 & 3 & 4  \\ 1 & 3 & 4 & 5   \\ 1 & 3 & 5 & 6   \\ 1 & 3 & 5 & 7 \end{bmatrix}, \aspace {\bf b}=\begin{bmatrix}0 \\ 1 \\ 1 \\ 1\end{bmatrix}
+\end{equation}
+
+\begin{enumerate}
+\itemsep5mm
+\item Find an $LU$ factorization of $A$.
+
+Using the code in the file \verb!LU_decomposition.py! which follows the pseudocode found on page 406 in Burden and Faires' \textit{Numerical Analysis}, an $LU$ decomposition of $A$ is:
+
+\begin{equation}
+L=\begin{bmatrix*}[r]1 & 0 & 0 & 0 \\ 1 & 1 & 0 & 0 \\ 1 & 1 & 1 & 0 \\ 1 & 1 & 1 & 1\end{bmatrix*} \aspace U=\begin{bmatrix}1 & 2 & 3 & 4 \\ 0 & 1 & 1 & 1 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 1\end{bmatrix}
+\end{equation}
+
+\item Try to solve the above system of linear equations using $LU$ factorization.
+
+Computing the inverse of $L$ and $U$ using the code in the file \verb!LU_decomposition.py! gives
+
+\begin{equation}
+L^{-1} = \begin{bmatrix*}[r]1 & 0 & 0 & 0 \\ -1 & 1 & 0 & 0 \\ 0 & -1 & 1 & 0 \\ 0 & 0 & -1 & 1\end{bmatrix*}
+\aspace U^{-1}=\begin{bmatrix*}[r]1 & -2 & -1 & -1 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 1 & -1 \\ 0 & 0 & 0 & 1\end{bmatrix*}
+\end{equation}
+which yields
+\begin{equation}
+{\bf x} = \begin{bmatrix*}[r]-2 \\ 1\\ 0\\ 0\end{bmatrix*}
+\end{equation}
+\end{enumerate}
+
+\item Consider the following matrix:
+\begin{equation}
+C=\begin{bmatrix}1 & 2 & 3 & 4 \\ 2 & 5 & 7 & 9 \\ 3 & 7 & 11 & 14 \\ 4 & 9 & 14 & 19 \end{bmatrix}
+\end{equation}
+Write down the Cholesky factorization of the above matrix.
+
+Using the code in the file \verb!Cholesky_factorization.py!, we find that $C=LL^T$ where
+\begin{equation}
+L=\begin{bmatrix}1 & 0 & 0 & 0 \\ 2 & 1 & 0 & 0 \\ 3 & 1 & 1 & 0 \\ 4 & 1 & 1 & 1\end{bmatrix}
+\end{equation}
+
+
+\vfill
+\pagebreak
+
+
+\item Consider the following matrix:
+\begin{equation}
+A=\begin{bmatrix}2 & 1 & 1\\ 1 & 2 & 1\\ 1 & 1 & 2\end{bmatrix}
+\end{equation}
+
+Use the Power Method (II) from lecture to find the first three iterations, starting with 
+\begin{equation}
+{\bf x}_1=\begin{bmatrix*}[r]1 \\ -1 \\ 2\end{bmatrix*}
+\end{equation}
+
+The code in the file \verb!power_method.py! is configured to produce iterations of the Power Method (II) until the difference in norm of the results is less than $10^{-4}$. The first three iterations can be read off of Table \ref{tbl:3}.
+
+\begin{table}[H]
+\centering
+\caption{The first several iterations of the Power Method (II).}\label{tbl:3}
+\begin{tabular}{|c|l|l|}
+\hline
+$n$ & $\mu$ & ${\bf v}^T$ \\[2mm]
+\hline
+1 & 2.081665999466133 & $(0.58834841, 0.19611614, 0.78446454)^T$ \\[2mm]
+2 & 3.6479709850398074 & $(0.59136366, 0.483843,   0.645124  )^T$ \\[2mm]
+3 & 3.9746305314169366 & $(0.58161238, 0.55456064, 0.59513825)^T$ \\[2mm]
+4 & 3.998398874573454 & $(0.57846246, 0.57169682, 0.58184528)^T$ \\[2mm]
+5 & 3.999899868291026 & $(0.57763121, 0.57593976, 0.57847694)^T$ \\[2mm]
+6 & 3.999993741528292 & $(0.57742069, 0.57699782, 0.57763212)^T$ \\[2mm]
+7 & 3.9999996088445813 & $(0.57736788, 0.57726217, 0.57742074)^T$ \\[2mm]
+8 & 3.999999975552783 & $(0.57735467, 0.57732824, 0.57736789)^T$\\[2mm]
+\hline
+\end{tabular}
+\end{table}
+These results suggest that $\lambda_1=4$.
+
+\vfill
+\pagebreak
+
+\item For a given vector ${\bf v}\in\MB{R}^n$, $\|{\bf v}\|=1$. Consider the associated Householder reflection matrix 
+\begin{equation}
+P=I-2{\bf vv}^T.
+\end{equation}
+
+\begin{enumerate}
+\item Show that $P^T=P$ and $P^2=I$.
+
+\begin{proof}
+Since transposition is a linear operation, we have
+\begin{equation}
+P^T=(I-2{\bf vv}^T)^T=I^T-2({\bf vv}^T)^T=I-2({\bf v}^T)^T{\bf v}^T=I-2{\bf vv}^T=P.
+\end{equation}
+Recall that, for a Householder reflection, ${\bf v}^T{\bf v}=1$. Thus,
+\begin{align*}
+P^2&=(I-2{\bf vv}^T)(I-2{\bf vv}^T)\\[2mm]
+&=I-4{\bf vv}^T+4{\bf vv}^T{\bf vv}^T\\[2mm]
+&=I-4{\bf vv}^T+4{\bf vv}^T({\bf v}^T{\bf v})^T\\[2mm]
+&=I-4{\bf vv}^T+4{\bf vv}^T\\[2mm]
+&=I.\qedhere
+\end{align*}
+\end{proof}
+
+\item Consider the matrix
+\begin{equation}\label{4b1}
+A=\begin{bmatrix}1 & 2 & 3 & 4 \\ 2 & 4 & 9 & 7 \\ 3 & 9 & 1 & 1 \\ 4 & 7 & 1 & 10\end{bmatrix}.
+\end{equation}
+Notice that $A=A^T$. Use Householder reflection(s) to transform $A$ into a tridiagonal matrix $H$.
+
+Using the code in the file \verb!householder_reflection.py! we obtain 
+
+\begin{equation}
+H=\begin{bmatrix*}[r] 1 & 5.38516  & 0 &      0 \\[2mm]
+5.38516 & 14.7931  & 7.18417 & 0\\[2mm]
+0 &       7.18417 & -5.14379  & 0.96201\\[2mm]
+ 0 &      0 &       0.96201 & 5.35069\end{bmatrix*}
+\end{equation}
+
+\item Use the rotations to obtain the QR factorization of the tridiagonal matrix $H$ obtained from the last step.
+
+Using the code in the file \verb!QR_iteration.py! we obtain
+
+\begin{equation}
+R^{(0)}=\begin{bmatrix*}[r]
+5.47722 &15.52765  &7.06342 & 0\\[2mm]   
+0   &    7.63807 & -5.28354  & 0.90484\\[2mm]
+0     &  0  &     1.09028 & 4.56747\\[2mm]
+0    &   0  &    -0   &    2.80622\end{bmatrix*}
+\end{equation}
+
+and
+\begin{equation}
+Q^{(0)} =\begin{bmatrix*}[r]
+ 0.18257434 & 0.3338818  & 0.43518202 &-0.81596946\\[2mm]
+ 0.98319205 &-0.06200035 &-0.08081134 & 0.15152186\\[2mm]
+ 0     &     0.94057371& -0.15980639&  0.29963815\\[2mm]
+ 0     &     0     &     0.8823537  & 0.47058681\end{bmatrix*}
+\end{equation}
+\end{enumerate}
+
+\vfill
+\pagebreak
+
+
+\item \textbf{Computational problem.} Write a code of the $QR$ iteration, following the 2-step algorithm. That is, Step 1: use Householder reflections to transform the original matrix $A$ into an upper Hessenburg matrix $H$; Step 2: perform the $QR$ iterations on $H$, with the $QR$ factorization obtained through rotations.
+
+You can use the matrix $A$ from the previous problem as a text matrix. Let your code print out the following matrices:
+\begin{enumerate}
+\item The initial upper Hessenberg matrix $H$, let it be $H^{(0)}$.
+\item The next $H^{(1)}$.
+\item Finally, the matrices $\{H(k)\}$ converge to some diagonal matrix $\bar H$. Print $\bar H$.
+\item All eigenvalues of $H$, which are also the eigenvalues of the original $A$.
+\end{enumerate}
+
+(\textbf{Warning:} If you are using Matlab, DO NOT directly use the Matlab $QR$ factorization code \verb![Q,R] = qr(A)! to get the answer. Write down your own code.)
+
+See file \verb!QR_iteration!. In that file I used the code in \verb!householder_reflection.py! to create a function \verb!upper_Hessenberg(A)! which converts a matrix $A$ into an upper Hessenberg matrix. The code then proceeds with the $QR$ iteration. Using the matrix in \ref{4b1}, this code produces:
+
+\begin{equation}
+H^{(0)}=\begin{bmatrix*}[r]
+1   &    5.38516 &  0   &     0   \\[2mm]
+ 5.38516 & 14.7931 &   7.18417 &  0     \\[2mm]
+ 0    &    7.18417 & -5.14379 &  0.96201\\[2mm]
+ 0   &     0   &     0.96201 &  5.35069
+\end{bmatrix*}
+\end{equation}
+
+\begin{equation}
+H^{(1)}=\begin{bmatrix*}[r]
+  16.26666 &  7.509690 & 0 & 0\\[2mm]
+  7.509690 & -5.443120 &  1.025490 & -0.00001\\[2mm]
+  0  & 1.025490 &  3.855890 & 2.476080\\[2mm]
+  0 &  0 & 2.476080 &  1.320570
+\end{bmatrix*}
+\end{equation}
+
+After 28 iterations and accounting for small rounding errors, we have
+
+\begin{equation}
+\bar H \approx\begin{bmatrix*}[r]
+18.61767 & 0 & 0 & 0\\[2mm]
+0 & -7.87425 & 0 & 0\\[2mm]
+0 & 0 & 5.41774 & 0\\[2mm]
+0 & 0 & 0 & -0.16115
+\end{bmatrix*}
+\end{equation}
+
+Thus, the eigenvalues of the matrix in \ref{4b1} are approximately
+\begin{equation}
+\lambda_1 =18.61767 \pspace \lambda_2 = -7.87425 \pspace \lambda_3 = 5.41774 \pspace \lambda_4=-0.16115
+\end{equation}
+
+
+
+\end{enumerate}
+\end{document}

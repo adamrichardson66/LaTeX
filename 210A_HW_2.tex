@@ -1,0 +1,266 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210A - Complex Analysis}
+\rightline{Wong, Bun}
+\rightline{HW 2}
+\rightline{\today}
+
+\lspace
+
+
+
+\textbf{p. 67:} 1, 6, 9, 10, 11, 12, 13, 20, 21, 23
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+%\setcounter{enumi}{5}
+
+\item Let $\gamma:[a,b]\to\MB{R}$ be nondecreasing. Show that $\gamma$ is of bounded variation and $V(\gamma)=\gamma(b)-\gamma(a)$.
+
+\begin{proof}
+Suppose that $\gamma$ is nondecreasing. Then $\gamma(t_{k-1})\leq \gamma(t_k)$ for any $t_k\in[a,b]$, $k\in\MB{N}$, i.e. $\gamma(t_k)-\gamma(t_{k-1})\geq0$. Consequently, for any partition $P$ of $[a,b]$, we have
+\[
+v(\gamma;P)=\sum_{k=1}^m|\gamma(t_k)-\gamma(t_{k-1})|=\sum_{k=1}^m\gamma(t_k)-\gamma(t_{k-1})=\gamma(t_m)-\gamma(t_0)=\gamma(b)-\gamma(a).
+\] 
+Thus it follows that $V(\gamma)=\sup\{v(\gamma;P)\}=\sup\{\gamma(b)-\gamma(a)\}=\gamma(b)-\gamma(a)$.
+\end{proof}
+
+\setcounter{enumi}{5}
+
+\item Show that if $\gamma:[a,b]\to\MB{C}$ is a Lipschitz function, then $\gamma$ is of bounded variation.
+
+\begin{proof}
+Suppose that $\gamma$ is a Lipschitz function. Then there exists an $M>0$ such that $|\gamma(t_k)-\gamma(t_{k-1})|\leq M|t_k-t_{k-1}|$. Thus, for any partition $P$,
+\[
+v(\gamma;P)=\sum_{k=1}^m|\gamma(t_k)-\gamma(t_{k-1})|\leq M\sum_{k=1}^m|t_k-t_{k-1}|=M(b-a),
+\]
+i.e. $\gamma$ is of bounded variation.
+\end{proof}
+
+\setcounter{enumi}{8}
+
+\item Define $\gamma:[0,2\pi]\to\MB{C}$ by $\gamma(t)=e^{int}$ where $n\in\MB{Z}$. Show that $\displaystyle \int_\gamma \frac{1}{z}\,dz=2\pi i n$.
+
+\begin{proof}
+By Theorem 1.9, we have
+\[
+\int_\gamma\frac{1}{z}\,dz=\int_0^{2\pi} e^{-int}\cdot ine^{int}\,dt=in \int_0^{2\pi}\,dt=2\pi in.
+\]
+\end{proof}
+
+\pagebreak
+
+\item Define $\gamma(t)=e^{it}$ for $t\in[0,2\pi]$ and find $\int_\gamma z^n\,dz$ for all $n\in \MB{Z}$.
+
+
+First suppose that $n\neq-1$. Then $z^n$ has a primitive, namely $(z^n)'=\frac{z^{n+1}}{n+1}$. Thus, for $n\neq-1$, we have
+\begin{align*}
+\int_\gamma z^n\,dz&=\int_0^{2\pi}e^{int}\cdot ie^{it}\,dt\\[2mm]
+&=i\int_0^{2\pi}e^{it(n+1)}\,dt\\[2mm]
+&=\left.i\cdot\frac{e^{it(n+1)}}{i(n+1)}\right|_0^{2\pi}\\[2mm]
+&=\frac{1}{n+1}[e^{2\pi i(n+1)}-1]\\[2mm]
+&=\frac{1}{n+1}[\cos(2\pi(n+1))+i\sin(2\pi(n+1))-1]\\[2mm]
+&=\frac{1}{n+1}[1+i\cdot0-1]\\[2mm]
+&=0.
+\end{align*}
+Next suppose that $n=-1$. Then
+\[
+\int_\gamma z^n\,dz=\int_\gamma\frac{1}{z}\,dz=\int_0^{2\pi}e^{-it}\cdot ie^{it}\,dt=i\int_0^{2\pi}\,dt=2\pi i.
+\]
+
+
+\item Let $\gamma$ be the closed polygon $[1-i,1+i,-1+i,-1-i,1-i]$. Find $\int_\gamma z^{-1}\,dz$.
+
+We'll compute this piecewise since $\gamma$ is a piecewise smooth curve, and we parameterize in the positive direction. Let $t$ pass between $-1$ and $1$ according to this orientation and write $\gamma=\gamma_1+\gamma_2+\gamma_3+\gamma_4$. Then
+\begin{align*}
+\gamma_1&=[1-i,1+i]&\implies &&\gamma_1(t)&=1+it, & \gamma_1'(t)=i\\[2mm]
+\gamma_2&=[1+i,-1+i]&\implies && \gamma_2(t)&=t+i, & \gamma_2'(t)=1\\[2mm]
+\gamma_3&=[-1+i,-1-i]&\implies && \gamma_3(t)&=-1+it, & \gamma_3'(t)=i\\[2mm]
+\gamma_4&=[-1-i,1-i]&\implies && \gamma_4(t)&=t-i, & \gamma_4'(t)=1\\[2mm]
+\end{align*}
+Then
+\begin{align*}
+\int_\gamma z^{-1}\,dz&=\int_{-1}^1\frac{i}{1+it}\,dt+\int_{1}^{-1}\frac{1}{t+i}\,dz+\int_{1}^{-1}\frac{i}{-1+it}\,dt+\int_{-1}^1\frac{1}{t-i}\,dt\\[2mm]
+&=\int_{-1}^1\frac{i}{1+it}\,dt-\int_{-1}^{1}\frac{i}{-1+it}\,dt+\int_{-1}^1\frac{1}{t-i}\,dt-\int_{-1}^{1}\frac{i}{-1+it}\,dt\\[2mm]
+&=i\int_{-1}^1\frac{1}{1+it}-\frac{1}{-1+it}\,dt+\int_{-1}^1\frac{1}{t-i}-\frac{1}{t+i}\,dt\\[2mm]
+&=2i\int_{-1}^1\frac{1}{1+t^2}\,dt+2i\int_{-1}^1\frac{1}{1+t^2}\,dt\\[2mm]
+&=4i\int_{-1}^1\frac{1}{1+t^2}\,dt\\[2mm]
+&=\left.4i\arctan(t)\right|_{-1}^1\\[2mm]
+&=4i\cdot\frac{\pi}{2}\\[2mm]
+&=2\pi i.
+\end{align*}
+
+\item Let $\displaystyle I(r)=\int_\gamma\frac{e^{iz}}{z}\,dz$ where $\gamma:[0,\pi]\to\MB{C}$ is defined by $\gamma(t)=re^{it}$. Show that $\lom{r}{\infty} I(r)=0$.
+
+(ask)
+
+\item Find $\displaystyle \int_\gamma z^{-1/2}\,dz$ where:
+\begin{enumerate}
+\itemsep5mm
+\item $\gamma$ is the upper half of the unit circle from $+1$ to $-1$.
+
+\[
+\int_\gamma z^{-1/2}\,dz=\int_0^\pi\frac{ie^{it}}{e^{\frac{1}{2}it}}\,dt=\int_0^\pi i e^{\frac{1}{2}it}\,dt=\left.2e^{\frac{1}{2}it}\right|_0^\pi=2\left(\cos\frac{\pi}{2}+i\sin\frac{\pi}{2}\right)-2=-2+2i.
+\]
+
+\item $\gamma$ is the lower half of the unit circle from $+1$ to $-1$.
+
+\[
+\int_\gamma z^{-1/2}\,dz=\int_0^{-\pi}\frac{ie^{it}}{e^{\frac{1}{2}it}}\,dt=\int_0^{-\pi} i e^{\frac{1}{2}it}\,dt=\left.-2e^{\frac{1}{2}it}\right|_0^{-\pi}=-2\left(\cos\left(-\frac{\pi}{2}\right)+i\sin\left(-\frac{\pi}{2}\right)\right)+2=2+2i.
+\]
+
+\end{enumerate}
+
+\pagebreak
+
+\setcounter{enumi}{19}
+
+\item Let $\gamma(t)=1+e^{it}$ for $0\leq t\leq 2\pi$ and find $\int_\gamma (z^2-1)^{-1}\,dz$.
+
+Using partial fraction decomposition, we have
+
+\begin{align*}
+\int_\gamma (z^2-1)^{-1}\,dz&=\int_\gamma\frac{1}{2(z-1)}-\frac{1}{2(z+1)}\,dz\\[2mm]
+&=\frac{1}{2}\int_\gamma\frac{1}{z-1}\,dz-\frac{1}{2}\int_\gamma\frac{1}{z+1}\,dz\\[2mm]
+&=\frac{1}{2}\int_0^{2\pi}\frac{ie^{it}}{e^{it}}\,dt-\frac{1}{2}\int_0^{2\pi}\frac{ie^{it}}{2+e^{it}}\,dt\\[2mm]
+&=\pi i-\frac{1}{2}\left.\log(2+e^{it})\right|_0^{2\pi}\\[2mm]
+&=\pi i.
+\end{align*}
+
+\item Let $\gamma(t)=2e^{it}$ for $-\pi\leq t\leq \pi$ and find $\int_\gamma (z^2-1)^{-1}\,dz$.
+
+\[
+\int_\gamma (z^2-1)^{-1}\,dz=\int_{-\pi}^\pi\frac{2ie^{it}}{4e^{2it}-1}\,dt=\frac{1}{4}\left.\log(4e^{2it}-1)\right|_{-\pi}^\pi=\frac{1}{4}[\log3-\log3]=0.
+\]
+
+\item Show that if $F_1$ and $F_2$ are primitives for $f:G\to\MB{C}$ and $G$ is open and connected then there is a constant $c$ such that $F_1(z)=c+F_2(z)$ for all $z\in G$.
+
+\begin{proof}
+Suppose $F_1$ and $F_2$ are primitives for $f:G\to\MB{C}$, and write $H(z)=F_1(z)-F_z(z)$. Then
+\[
+H'(z)=F_1'(z)-F_2'(z)=f(z)-f(z)=0,
+\]
+so $H(z)$ must be constant. In other words, there exists a $c\in \MB{C}$ such that 
+\[
+H(z)=F_1(z)-F_2(z)=c \quad \iff \quad F_1(z)=c+F_2(z).
+\]
+\end{proof}
+
+
+\setcounter{enumi}{22}
+
+\item Prove the following integration by parts formula. Let $f$ and $g$ be analytic in $G$ and let $\gamma$ be a rectifiable curve from $a$ to $b$ in $G$. Then
+\[
+\int_\gamma fg'=f(b)g(b)-f(a)g(a)-\int_\gamma f'g.
+\]
+
+\begin{proof}
+Suppose $f$ and $g$ are analytic in $G$ and $\gamma$ in $G$ is rectifiable. By the product rule, we have $(fg)'=f'g+fg'$. Then by definition and the fundamental theorem of calculus,
+
+\begin{align*}
+\int_\gamma[f(z)g(z)]'\,dz&=\int_\gamma f'(z)g(z)+f(z)g'(z)\,dz\\[2mm]
+\left.f(z)g(z)\right|_a^b&=\int_\gamma f'(z)g(z)\,dz+\int_\gamma f(z)g'(z)\,dz\\[2mm]
+f(b)g(b)-f(a)g(a)-\int_\gamma f'(z)g(z)\,dz&=\int_\gamma f(z)g'(z)\,dz.
+\end{align*}
+
+
+\end{proof}
+
+\end{enumerate}
+
+
+\end{document}

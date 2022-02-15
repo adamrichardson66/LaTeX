@@ -1,0 +1,221 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209C - Real Analysis}
+\rightline{Zhang, Zhenghe}
+\rightline{HW 4}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+
+
+\item Fix $x_0\in X$. Apply the Riesz representation theorem (Theorem 4.3) to find a regular measure $\mu$ on $X$ that represents the following map:
+\[
+\Lambda:C_c(X)\to \MB{C},\hspace{4mm}\Lambda(f)=f(x_0).
+\]
+
+\begin{proof}
+We can take the $\sigma$-algebra to be the power set of $X$ and then the measure we seek is the Dirac measure $\delta_{x_0}$ since by the Riesz representation theorem,
+\[
+\Lambda(f)=\int_Xf\,d\mu=f(x_0)=\int_Xf(x)\,d(\delta_{x_0}).
+\]
+We proceed to verify the four properties purported by the Riesz representation theorem. Clearly $\delta_{x_0}(K)<\infty$ for all compact $K\subset X$ since $\delta_{x_0}(E)\in\{0,1\}$ for any $E\subset X$. To show outer regularity, let $E\subset X$. If $x_0\in E$, then
+\[
+\inf\{\delta_{x_0}(U)\mid E\subset U,\, U\text{ open }\}=1=\delta_{x_0}(E).
+\]
+Suppose $x_0\notin E$. Since $X$ is an LCH space, every singleton set is closed, so in particular $X-\{x_0\}$ is open and $E\subset X-\{x_0\}$. Then
+\[
+0\leq\inf\{\delta_{x_0}(U)\mid E\subset U,\, U\text{ open }\}\leq\delta_{x_0}(X-\{x_0\})=0=\delta_{x_0}(E),
+\]
+so $\delta_{x_0}$ is outer regular. To show inner regularity, note that since $X$ is an LCH space, singletons are compact since every point is a neighborhood of itself. Thus,
+\[
+\sup\{\delta_{x_0}(K)\mid K\subset E,\,K\text{ compact}\}=\sup\{\delta_{x_0}(\{x_0\})\mid\{x_0\}\subset E\}=\delta_{x_0}(E).
+\]
+Lastly, our $\sigma$-algebra is $2^X$, so $(X,2^X,\delta_{x_0})$ is complete. 
+\end{proof}
+
+
+\item Let $X=[0,1]$. Then $X$ is compact and $C_c([0,1])=C([0,1])=C(X)$.
+\begin{enumerate}
+\item Show that for each $f\in C(X)$, the following limit exists:
+\[
+\lom{n}{\infty}\frac{1}{n}\sum_{k=0}^{n-1}f\left(\frac{k}{n}\right)
+\]
+Denote by $\Lambda(f)$ the limit above. Then we obtain a map $\Lambda:C(X)\to\MB{C}$.
+
+\begin{proof}
+Since $f$ is continuous on $[0,1]$, it is Lebesgue-integrable. Moreover, it is Riemann-integrable, and the set of points $\{x_k\}=\left\{0+\frac{k}{n}\mid0\leq k\leq n-1\right\}$ form a uniform partition of $[0,1]$ where $\Delta x=\frac{1-0}{n}=\frac{1}{n}$. Consequently,
+\[
+\lom{n}{\infty}\frac{1}{n}\sum_{k=0}^{n-1}f\left(\frac{k}{n}\right)=\lom{n}{\infty}\sum_{k=0}^{n-1}f\left(\frac{k}{n}\right)\cdot\frac{1}{n}=\lom{n}{\infty}\sum_{k=0}^{n-1}f(x_k)\Delta x=\int_0^1f(x)\,dx.
+\]
+Therefore, for any $f\in C(X)$, we can write
+\[
+\Lambda(f)=\int_0^1f(x)\,dx=\lom{n}{\infty}\frac{1}{n}\sum_{k=0}^{n-1}f\left(\frac{k}{n}\right).
+\]
+\end{proof}
+
+\item Show that the map $\Lambda:C(X)\to\MB{C}$ defined in part (a) is positive and linear. Thus, it's a positive linear functional on $C(X)$.
+
+\begin{proof}
+Clearly $\Lambda$ is positive since if $f\geq0$,
+\[
+\Lambda(f)=\int_0^1f(x)\,dx=\lom{n}{\infty}\frac{1}{n}\sum_{k=0}^{n-1}f\left(\frac{k}{n}\right)\geq\lom{n}{\infty}\frac{1}{n}\sum_{k=0}^{n-1}0=0.
+\]
+It is also linear by properties of limits: given $f,g\in C(X)$ and $\alpha,\beta\in\MB{C}$,
+\begin{align*}
+\Lambda(\alpha f+\beta g)&=\int_0^1\alpha f(x)+\beta g(x)\,dx\\[2mm]
+&=\lom{n}{\infty}\frac{1}{n}\sum_{k=0}^{n-1}\alpha f\left(\frac{k}{n}\right)+\beta g\left(\frac{k}{n}\right)\\[2mm]
+&=\alpha \lom{n}{\infty}\frac{1}{n}\sum_{k=0}^{n-1}f\left(\frac{k}{n}\right)+\beta \lom{n}{\infty}\frac{1}{n}\sum_{k=0}^{n-1}g\left(\frac{k}{n}\right)\\[2mm]
+&=\alpha\int_0^1f(x)\,dx+\beta\int_0^1g(x)\,dx\\[2mm]
+&=\alpha\Lambda(f)+\beta\Lambda(g).
+\end{align*}
+Thus, $\Lambda$ is a positive linear functional on $C(X)$.
+\end{proof}
+
+\item Apply Theorem 4.3 and one can find a regular measure $\mu$ on $[0,1]$ such that $\Lambda(f)=\int f\,d\mu$ for all $f\in C(X)$. Can you tell what $\mu$ is? Why?
+
+$\mu$ is the Lebesgue measure by Threorem 2.28 on p. 57 of Folland's book.
+\end{enumerate}
+
+\pagebreak
+
+\item Recall that Theorem 4.4 says that $C_c(X)$ is dense in $L^p(X,\mu)$ for all positive Radon measures $\mu$ on $X$ and all $1\leq p<\infty$. Explain why this cannot be true if $p=\infty$.
+
+The proof of the density argument relies on being able to approximate a characteristic function by a continuous function arbitrarily closely in $L^p$ norm. This is not possible if $p=\infty$. To show this, let $\ve=\frac{1}{2}$. Then, as in the proof of Theorem 4.4,
+\[
+\|f-\chi_E\|_\infty\leq\|\chi_V-\chi_K\|_\infty=\|\chi_{V\setminus K}\|_\infty=\text{ess sup}_{x\in X}\,|\chi_{V\setminus K}(x)|=1\not<\frac{1}{2}=\ve. 
+\]
+Consequently the space of continuous functions is not dense in $L^\infty(X,\mu)$.
+
+\item Let $\MC{C}$ be the set of all regular complex measures $\mu$ on $X$. Let $\MC{B}$ be the Borel $\sigma$-algebra on $X$. We know that $\MC{C}$ is a vector space, and we've defined
+\[
+\|\mu\|=\sup\left\{\sum_{i=1}^\infty|\mu(E_i)|\,:\, E_i\in\MC{B},\,i\geq1,\,X=\bigsqcup_{i=1}^\infty E_i\right\}.
+\]
+\begin{enumerate}
+\item Show that $\|\cdot\|$ is a norm on $\MC{C}$.
+
+\begin{proof}
+First note that $\|\cdot\|\geq0$ since $|\mu(E_i)|\geq0$ for any $E_i\in\MC{B}$. Let $\lambda\in\MB{C}$ and $\mu,\nu\in\MC{C}$. Then
+\[
+\|\lambda\mu\|=\sup\left\{\sum_{i=1}^\infty|\lambda \mu(E_i)|\right\}=|\lambda|\sup\left\{\sum_{i=1}^\infty|\mu(E_i)|\right\}=|\lambda|\,\|\mu\|,\text{ and}
+\]
+\begin{align*}
+\|\mu+\nu\|&=\sup\left\{\sum_{i=1}^\infty|(\mu+\nu)(E_i)|\right\}\\[2mm]
+&=\sup\left\{\sum_{i=1}^\infty|\mu(E_i)+\nu(E_i)|\right\}\\[2mm]
+&\leq\sup\left\{\sum_{i=1}^\infty|\mu(E_i)|+|\nu(E_i)|\right\}\\[2mm]
+&=\sup\left\{\sum_{i=1}^\infty|\mu(E_i)|+\sum_{i=1}^\infty|\nu(E_i)|\right\}\\[2mm]
+&\leq\sup\left\{\sum_{i=1}^\infty|\mu(E_i)|\right\}+\sup\left\{\sum_{i=1}^\infty|\nu(E_i)|\right\}\\[2mm]
+&=\|\mu\|+\|\nu\|.
+\end{align*}
+Finally, if $\mu\equiv0$, then clearly $\|\mu\|=0$. If $\|\mu\|=0$, then
+\[
+0=\sup\left\{\sum_{i=1}^\infty|\mu(E_i)|\right\}\geq\sum_{i=1}^\infty|\mu(E_i)|\geq|\mu(E_i)|\geq0,
+\]
+whence $\mu(E_i)=0$ for all $i$, i.e. $\mu\equiv0$. Since these four properties hold, $\|\cdot\|$ is a norm on $\MC{C}$ by definition.
+\end{proof}
+
+\item Use Theorem 4.5 to show that $(\MC{C},\|\cdot\|)$ is a Banach space.
+
+\begin{proof}
+Let $\{\mu_n\}$ be a Cauchy sequence of measures in $\MC{C}$. By Theorem 4.5, there is a corresponding Cauchy sequence of positive linear functionals $\{\phi_n\}\subset C_0(X)^*$ such that $\|\mu_n\|=\|\phi_n\|$. Since $\MB{C}$ is complete, and since the dual space of any normed vector space is complete as long as the field of scalars is complete, it follows that $\{\phi_n\}$ converges to some linear functional $\phi\in C_0(X)^*$ for which there is a corresponding measure $\mu$ to which $\{\mu_n\}$ converges. Therefore $(\MC{C},\|\cdot\|)$ is a Banach space.
+\end{proof}
+
+\end{enumerate}
+
+
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

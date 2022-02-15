@@ -1,0 +1,399 @@
+\documentclass[11pt,oneside,english,reqno]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+\newcommand{\im}{\text{im\,}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\coker}{\text{coker\,}}
+\newcommand{\ev}{\text{ev}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210C - Riemann Surfaces}
+\rightline{Wong, Bun}
+\rightline{HW 3 \& 4}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+\item State and prove the Riemann-Hurwitz formula.
+
+\begin{theorem*}[Riemann-Hurwitz Formula]
+Let $X$ and $Y$ be compact Riemann surfaces of genus $g_X$ and $g_Y$ respectively. Let $f$ be a nonconstant holomorphic map from $X$ to $Y$. Let $d=\deg f$. Then
+\[
+2-2g_X=d\cdot(2-2g_Y)-R_f \pspace\text{i.e.} \pspace \chi(X)=d\cdot\chi(Y)-R_f
+\]
+\end{theorem*}
+
+Note that these hypotheses imply that $f(X)=Y$: Since $f(X)$ is open by the open mapping theorem, and $f(X)$ is closed since it is the compact image of a compact set under a continuous mapping (since $Y$ is Hausdorff). Since $Y$ is connected by definition $f(X)=Y$.
+
+\begin{proof}
+First we use the Hopf principle. Let $\beta$ be a meromorphic 1-form on $Y$. Then its pullback $f^*(\beta)$ is a meromorphic 1-form on $X$. Let $r$ be a branch point of $f$. Outside of the branch locus $f(r)$, a zero or pole of $\beta$ gives rise to $d$ poles or zeroes of $f^*(\beta)$ with the same multiplicity. At $r$, in local coordinates $f$ can be represented by $z\mapsto w=z^k$ where $k=k_r>1$. If $\beta$ is viewed in this local coordinate $w$, then we can write $\beta=g(w)\,dw$ for some meromorphic function $g$. Since $dw=kz^{k-1}\,dz$, we have $\beta=g(z^k)\cdot kz^{k-1}\,dz$ so $f^*(\beta)=g(z^k)\cdot kz^{k-1}$.
+
+Suppose $g$ has a zero of order $\ell$. Then $g(z^k)\cdot kz^{k-1}$ has a zero of order $k\ell+k-1$. Thus the contribution to the count of zeroes/poles of $f^*(\beta)$ from the points $x\in f^{-1}(y)$ is
+\[
+\sum_{x\in f^{-1}(y)}(k_x\ell+k_x-1)=\ell\sum_{x\in f^{-1}(y)}k_x+\sum_{x\in f^{-1}(y)}(k_x-1)=d\ell+R_f.
+\]
+If we repeat this procedure for all $y\in Y$, we get
+\begin{align*}
+Z_X-P_X&=d\cdot(Z_Y-P_Y)+R_f\\
+-\chi(X)&=-d\cdot\chi(Y)+R_f\\
+2-2g_X&=d\cdot(2-2g_Y)-R_f.
+\end{align*}
+
+We could have used a topological argument instead, involving triangulations. Let $R$ be the set of all branch points in $X$ so that $f(R)$ is the branching locus. $f(R)$ is finite because of compactness. Now, there exists a triangulation $\triangle$ of $Y$ such that $f(R)$ is contained in the set of vertices of the triangulation. Moreover, the pullback of the triangulation $\triangle$ from $Y$ to $X$ will be a triangulation of $X$, say $\tilde\triangle$. The Euler characteristic of a triangulation of $Y$ is $\chi(Y)=V-E+F$. Each face or edge of $\triangle$ gives rise to $d$ edges or faces of $\tilde \triangle$. Additionally, outside of $f(R)$, each vertex of $\triangle$ gives rise to $d$ vertices of $\tilde\triangle$. However, at each branch point in $y\in f(R)$, the $k_x$ lifted vertices of $\tilde \triangle$ are only counted as one vertex, so we need to subtract $k_x-1$ vertices at each $x\in f^{-1}(y)$. Adding all the vertices, edges, and faces appropriately yields
+\[
+\chi_{\tilde \triangle}(X)=d\cdot\chi_\triangle(Y)-\sum_{\substack{x\in f^{-1}(y) \\ y\in f(R)}}k_x-1=d\cdot\chi_\triangle(Y)-R_f.
+\]
+\end{proof}
+
+
+\item Let $\Sigma_g$ and $\Sigma_{g'}$ be two compact Riemann surfaces with genus $g$ and $g'$ respectively where $g'>g$. Prove that there exists no nonconstant holomorphic map from $\Sigma_g$ into $\Sigma_{g'}$.
+
+\begin{proof}
+Suppose $f:\Sigma_g\to\Sigma_{g'}$ is a nonconstant holomorphic map. Then $d=\deg f\geq1$ and by the Riemann-Hurwitz formula, we know $2-2g=d(2-2g')-R_f$. But $R_f>0$ since $f$ is holomorphic so
+\begin{align*}
+2-2g&\leq d(2-2g')\\
+1-g&\leq d-dg'\\
+dg'-g&\leq d-1<d\\
+dg'&<d+g\\
+g'&<1+\frac{g}{d}<1+g\\
+g'-g&<1,
+\end{align*}
+which implies $g'=g$, a contradiction. Thus, $f$ cannot be a nonconstant holomorphic map.
+\end{proof}
+
+
+\item Let $x_1,\ldots,x_n$ be $n$ distinct points in a compact Riemann surface $\Sigma$ and let $w_1,\ldots,w_n$ be $n$ distinct points in $\MB{C}$. Show that there is a meromorphic function on $\Sigma$ which maps $x_i$ to $w_i$ for $i=1,2,\ldots,n$. [Exercise 1, p. 117]
+
+\begin{proof}
+By Proposition 26 on p. 113 (a consequence of the $\bar \partial$ method), we are guaranteed the existence of a meromorphic function $f_1:\Sigma\to \MB{C}$ with a simple pole at $x_1$ and zeroes at $x_2,\ldots,x_n$. Let $g(z)=\frac{z}{z+1}$ and consider the composite function
+\[
+h_1(z)=gf_1(z)=\frac{f_1(z)}{f_1(z)+1}.
+\]
+This function has the value 1 at $x_1$ and 0 at $x_2,\ldots,x_n$. Invoking Proposition 26 on p. 113 repeatedly, we can produce $n$ meromorphic functions $f_i:\Sigma\to\MB{C}$ where $f_i$ has a simple pole at $x_i$ and zeroes at $x_j$ for $j\neq i$. Then define $h_i=gf_i$ and these functions will take the value 1 at $x_i$ and 0 at $x_j$ for $j\neq i$. Lastly, write
+\[
+\phi(z)=\sum_{i=1}^nw_ih_i(z),
+\]
+and we have a meromorphic function that maps $x_i$ to $w_i$ for all $i=1,\ldots,n$.
+\end{proof}
+\pagebreak
+
+
+\item Let $X$ be a compact Riemann surface of genus $g$.
+\begin{enumerate}
+\item Prove that there is a nonconstant meromorphic function on $X$. [Corollary 5, p. 114]
+
+\begin{proof}
+Let $D=\{p_1,\ldots,p_{g+1}\}$ consist of $g+1$ points on $X$. Using the $\bar \partial$ method and a cutoff function as on p. 112, we can construct a meormorphic function $f$ with simple poles at some subset of $D$: First, we have $\dim_\MB{C}H^{0,1}_X=g$. For $1\leq i\leq g+1$, choose cutoff functions $\beta_i$ defined on local charts around each $p_i\in D$ and define $A_i=\bar\partial\left(\beta_i\cdot\frac{1}{z}\right)$ so that $[A_i]\in H^{0,1}_X$. Then since $H^{0,1}_X$ is $g$-dimensional, there exist $\lambda_i$ not all equal to 0 such that 
+\[
+\lambda_1[A_1]+\lambda_2[A_2]+\cdots+\lambda_g[A_g]+\lambda_{g+1}[A_{g+1}]=[0].
+\]
+Consequently, we have that $\sum_{i=1}^{g+1}\lambda_iA_i\in\bar\partial(\Omega^0)$ since $H^{0,1}=\Omega^{0,1}/\bar\partial(\Omega^0)$. Thus there exists an $h\in \Omega^0$ such that
+\begin{align*}
+\bar\partial h&=\sum_{i=1}^{g+1}\lambda_iA_i\\
+\bar\partial h&=\sum_{i=1}^{g+1}\bar\partial\left(\lambda_i\beta_i\cdot\frac{1}{z}\right)\\
+\bar\partial h-\sum_{i=1}^{g+1}\bar\partial\left(\lambda_i\beta_i\cdot\frac{1}{z}\right)&=0\\
+\bar\partial \left(\underbrace{h-\sum_{i=1}^{g+1}\lambda_i\beta_i\cdot\frac{1}{z}}_{f}\right)&=0\\
+\end{align*}
+and $f$ is the meromorphic function required. Note that it is nonconstant as well.
+\end{proof}
+
+
+
+\item Prove that there exists a nontrivial meromorphic 1-form on $X$.
+
+\begin{proof}
+By the result in part (a), we have a meromorphic function $f$ on $X$ and so $\bar\partial f$ is a meromorphic (0,1)-form. By Problem 8 below (Theorem 6 on p. 114), $\bar\partial f$ is a meromorphic 1-form. This must be nontrivial since otherwise $f$ would be trivial and we would have
+\[
+h=\sum_{i=1}^{g+1}\beta_i\cdot\frac{1}{z}
+\]
+which is a contradiction since $h$ is smooth.
+\end{proof}
+\end{enumerate}
+
+
+
+\item Let $\Sigma_g$ be a compact Riemann surface of genus $g$. Prove that there exists a branch cover $f:\Sigma_g\to S^2$ with total ramification index $R_f=2(g+r-1)$ and $r\leq g+1$ where $r$ represents the number of sheets in the cover.
+
+\begin{proof}
+By Problem 8 below (or Theorem 6 on p. 114) we have that
+\[
+\dim_\MB{C}\{\text{the vector space of all holomorphic 1-forms on }\Sigma_g\}=g.
+\]
+Thus, a holomorphic function $f:\Sigma_g\to S^2$ exists. Since $f$ is holomorphic, in a local coordinate $z$, $f$ can be written as $z^r$. If $g=0$, then $f$ must be constant so $r=1$ and the statement follows. If $g\geq1$, then $f$ cannot be constant so we can apply the Riemann-Hurwitz formula to obtain the following:
+\begin{align*}
+2-2g&=r(2-2(0))-R_f\\
+R_f&=2g+2r-2\\
+R_f&=2(g+r-1).\qedhere
+\end{align*}
+\end{proof}
+
+
+
+\item Prove that, topologically, $S^2$ admits only one complex structure.
+
+\begin{proof}
+Let $\Sigma_0$ be a compact Riemann surface of genus $g=0$. By Theorem 6.2 and 6.3 on p. 114, we have that $\dim H^{0,1}_{\Sigma_0}=g=0$. Let $p$ be a point on $\Sigma_0$. Then by Proposition 26 there is a meromorphic function on $\Sigma_0$ with a simple pole at $p$ so by Corollary 1 on p. 45 we have that $\Sigma_0\cong S^2$ in terms of complex structure.
+\end{proof}
+
+
+\item Prove that $H^{1,1}_X=\MB{C}$, where $X$ is a compact Riemann surface.
+
+\begin{proof}
+Let $X$ be a compact Riemann surface, and define the evaluation map $\ev:H^{1,1}_X\to\MB{C}$ by $\rho\mapsto \iint_X\rho$. We claim that this map is an isomorphism between $H^{1,1}_X$ and $\MB{C}$. First we show that this map is well-defined. Observe that $\bar\partial(\Omega^{1,0})=d(\Omega^{1,0})\subset d(\Omega^1)$. This is because, for any $\alpha\in \Omega^{1,0}$ we have
+\[
+d\alpha=\partial\alpha+\bar\partial\alpha=\partial(f\,dz)+\bar\partial(f\,dz)=\pp{f}{z}\,dz\wedge dz+\pp{f}{\bar z}\,dz\wedge d\bar z=0+\pp{f}{\bar z}\,dz\wedge d\bar z=\bar\partial\alpha,
+\]
+and the second containment above follows because $\Omega^1_X=\Omega^{0,1}_X\bigoplus\Omega^{1,0}_X$. So, let $\rho\in\bar\partial(\Omega^{1,0})$ and $w\in d(\Omega^1)$ and suppose $\rho=dw$. Then
+\[
+\iint_X\rho=\iint_Xdw=\int_{\text{b}X}w=0
+\]
+by Stokes' theorem since $X$ is compact. In other words, $\ev(\rho)=\ev(dw)$ so $\ev$ is well-defined. 
+
+Next we show that $\ev$ is injective. Let $\rho$ be a $(1,1)$ form. We need to show that, if $\ev(\rho)=0$, then $\rho$ is in the 0 class in $H^{1,1}_X=\Omega^{1,1}_X/\bar\partial(\Omega^{1,0})$, i.e. $\rho\in\bar\partial(\Omega^{1,0})$. Suppose $\ev(\rho)=0$. Then $\iint_X\rho=0$ so by the ``main theorem'' (Theorem 5, p. 113) there exists a smooth function $f$ such that $\Delta f=\rho$. Recall that $\Delta=\bar\partial\partial$ in this context, so we can write $\theta=\partial f$ and consider $\bar\partial\theta$. Well, $\partial f=\pp{f}{z}\,dz\in\Omega^{1,0}_X$, i.e. $\theta$ is a $(1,0)$-form. Thus, $\rho=\bar\partial\theta$ is in the 0 class of $H^{1,1}_X$.
+
+Now we show that $\ev$ is surjective. Let $\rho$ be any $(1,1)$-form such that $\ev(\rho)=c\neq0$. Let $b\in\MB{C}$ and consider the $(1,1)$-form $\tilde\rho=\frac{b}{c}\rho$. We have
+\[
+\ev(\tilde\rho)=\iint_X\tilde\rho=\iint_X\frac{b}{c}\rho=\frac{b}{c}\iint_X\rho=\frac{b}{c}\cdot c=b,
+\]
+so $\ev$ is surjective, and thus is an isomorphism. It follows that $H^{1,1}_X\cong \MB{C}$.
+\end{proof}
+
+
+\item Let $\Sigma_g$ be a compact Riemann surface of genus $g$. Prove 
+\[
+\dim_\MB{C}\{\text{the vector space of all holomorphic 1-forms on }\Sigma_g\}=\dim_\MB{C}\left(H^{1,0}_{\Sigma_g}\oplus H^{0,1}_{\Sigma_g}\right)=g.
+\]
+
+\begin{proof}
+Recall the first de Rham cohomology group $H^1(\Sigma_g)$. We know that $H^1(\Sigma_g)\cong\MB{R}^{2g}\cong\MB{C}^g$ by Example 5 on p. 69 so $\dim_\MB{C} (H^1(\Sigma_g))=g$. We proceed by constructing an isomorphism 
+\[
+i:H^{1,0}_{\Sigma_g}\oplus H^{0,1}_{\Sigma_g}\to H^1(\Sigma_g).
+\]
+Define $i:H^{1,0}\to H^1$ by 
+\[
+i(\alpha,\theta)=i(a)+i(\sigma^{-1}(\theta))
+\]
+where $i(\alpha)$ is the cohomology class of $\alpha$ in $H^1$ and $\sigma$ is complex conjugation. We have $H^{1,0}\cong \overline{H^{0,1}}\cong (H^{1,0})^*$ from parts 1 and 2 of Theorem 6 on p. 114.
+
+First we show that $i$ is surjective, let $\beta\in H^1(\Sigma_g)$. Then we can write $\beta=\beta_1+\beta_2$ where (as we will see), $\beta_1\in\Omega^{1,0}_{\Sigma_g}$ and $\beta_2\in\Omega^{1,0}_{\Sigma_g}$. We need to find $\alpha\in H^{1,0}$ and $\theta\in H^{0,1}$ such that $(\alpha,\theta)\mapsto \beta_1+\beta_2=\beta$. 
+
+Write $\beta_1=f\,dz$ and $\beta_2=g\,d\bar z$. By calculations we've done previously, $\bar\partial \beta_1=d\beta_1$ where $d=\partial+\bar\partial$. Also,
+\[
+d\beta_1=\bar\partial \beta_1=\pp{f}{\bar z}\,d\bar z\wedge dz=-\pp{f}{\bar z}\,dz\wedge d\bar z
+\]
+which is a 2-form. Hence,
+\[
+\iint_{\Sigma_g}-d\beta_1=\int_{\text{b}\Sigma_g}-\beta_1=0
+\]
+by Stokes' theorem since $\Sigma_g$ is compact. Thus by the ``main theorem'', there exists a function $u\in \Omega^0$ such that $\bar\partial\partial u=-\bar\partial\beta_1$. Consequently,
+\begin{align*}
+\bar\partial\partial u&=-\bar\partial\beta_1\\
+\bar\partial\beta_1+\bar\partial\partial u&=0\\
+\bar\partial(\beta_1+\partial u)&=0.
+\end{align*}
+In other words, $\beta_1+\partial u\in\ker\bar\partial=H^{1,0}$, so we can write $\alpha=\beta_1+\partial u$.
+
+
+
+
+
+Next, we claim that $\beta_2+\bar\partial u\in H^{0,1}$. Note that
+\[
+\beta_2+\bar\partial u=g\,d\bar z+\pp{u}{\bar z}\,d\bar z=\left(g+\pp{u}{\bar z}\right)\,d\bar z.
+\]
+Now, remember that $\beta\in H^1(\Sigma_g)$ so $d\beta=0$ by definition. But observe that $d\beta=0$ if and only if
+\begin{align*}
+0&=d\beta\\
+&=(\partial+\bar\partial)(\beta_1+\beta_2)\\
+&=\vdots\\
+&=\left(\pp{f}{z}\,dz+\pp{f}{\bar z}\,d\bar z\right)\wedge dz+\left(\pp{g}{z}\,dz+\pp{g}{\bar z}\,d\bar z\right)\wedge d\bar z\\
+&=\pp{f}{\bar z}\,d\bar z\wedge dz+\pp{g}{z}\,dz\wedge d\bar z\\
+&=\left(\pp{g}{z}-\pp{f}{\bar z}\right)\,dz\wedge d\bar z,
+\end{align*}
+if and only if
+\[
+\pp{g}{z}=\pp{f}{\bar z}.\tag{$*$}
+\]
+By the result above on $\beta_1$, we have
+\begin{align*}
+-\pp{f}{\bar z}\,dz\wedge d\bar z&=\bar\partial\partial u\\
+-\pp{f}{\bar z}\,dz\wedge d\bar z&=\pp{^2u}{z\partial\bar z}\,dz\wedge d\bar z\\
+\pp{f}{\bar z}&=-\pp{^2u}{z\partial\bar z}\\
+\pp{g}{z}&=-\pp{^2u}{z\partial\bar z}\pspace\text{by $(*)$}\\
+\partial\left(g+\pp{u}{\bar z}\right)&=0.
+\end{align*}
+In other words, $g+\pp{u}{\bar z}$ is (anti)holomorphic, and so is in $H^{0,1}$. This completes the proof of surjectivity.
+
+Next we show injectivity. It suffices to show that $i=i\mid_{H^{1,0}}:H^{1,0}\to H^1$ is injective. Let $[\alpha]=[f\,dz]\in H^{1,0}$ and suppose that $i(\alpha)=0$. Then $i(\alpha)$ is in the zero class of $H^1$, i.e $i(\alpha)\in d(\Omega^0)$ so there exists a $u\in \Omega^0$ such that $du=i(\alpha)=0$. But notice that
+\[
+0=du=\pp{u}{z}\,dz+\pp{u}{\bar z}\,d\bar z=f\,dz
+\]
+so $\pp{u}{\bar z}\,d\bar z=0$, which means the C-R equations are satisfied. Thus, $f$ is holomorphic on $\Sigma_g$. Since $\Sigma_g$ is compact, $u$ must be constant. Thus $f=\pp{u}{z}=0$ so $\alpha=f\,dz=0$ so $i$ is injective.
+
+Finally, putting all these results together, we have that $i$ is an isomorphism, whence
+
+\[
+\dim_\MB{C}\left(H^{1,0}_{\Sigma_g}\oplus H^{0,1}_{\Sigma_g}\right)=\dim_\MB{C} (H^1(\Sigma_g))=g.
+\]
+\end{proof}
+
+
+\item Let $\Sigma_g$ be a compact Riemann surface of genus $g$.
+\begin{enumerate}
+\itemsep5mm
+\item If $g\geq 2$, prove that every holomorphic 1-form on $\Sigma_g$ vanishes somewhere.
+
+\begin{proof}
+Since $g\geq 2$, the Euler characteristic of $\Sigma_g$ is $\chi(\Sigma_g)=2-2g\leq2-4=-2$, so $-\chi(\Sigma_g)\geq 2$. Let $\alpha$ be a 1-form on $\Sigma_g$. Then by the Hopf principle (Proposition 17, p. 98), the number of zeroes of $\alpha=-\chi(\Sigma_g)\geq2$, so $\alpha$ must vanish somewhere. 
+\end{proof}
+
+\item If $g=1$, prove that every nontrivial holomorphic 1-form doesn't vanish anywhere on $\Sigma_1$.
+
+\begin{proof}
+If $g=1$, then $-\chi(\Sigma_1)=0$, so by the Hopf principle again, the number of zeroes of any 1-form is 0, i.e. any 1-form on $\Sigma_1$ doesn't vanish.
+\end{proof}
+
+\end{enumerate}
+
+\item Prove that $\Sigma_1=\MB{C}/\Gamma$ where $\Gamma$ is a lattice. [Hint: read Theorem 3 on pp. 84-86.]
+
+\item Prove that $\Sigma_1$ can be represented as a two sheeted cover $f:\Sigma_1\to S^2$ with four branch points.
+
+\begin{proof}
+Let $f$ be a holomorphic function from $\Sigma_1$ to $S^2$, i.e. a meromorphic function on $\Sigma_1$. Let $p_1$ and $p_2$ be two distinct points on $\Sigma_1$. Then by Corollary 5 on p. 113 there exists a nonconstant meromorphic function on $\Sigma_1$ with simple poles contained in $\{p_1,p_2\}$. If $f$ has a (simple) pole only at one of $p_1$ or $p_2$, then $\Sigma_1\cong S^2$ by Corollary 1 on p. 45, which is a contradiction since the genus of $S^2=0<1$. So $f$ must have simple poles at both $p_1$ and $p_2$. Next, the Riemann-Hurwitz formula yields
+\begin{align*}
+\chi(\Sigma_1)&=d\cdot\chi(S^2)-R_f\\
+2-2(1)&=d\cdot(2-2(0))-R_f\\
+0&=2d-R_f\\
+R_f&=2d.
+\end{align*}
+Since $f^{-1}(\infty)=\{p_1,p_2\}$, $d\leq2$. If $d=1$, then $\Sigma_1\cong S^2$ again by Corollary 1 on p. 45, a contradiction. Thus, $d=2$, whence $R_f=2d=4$, so $f$ has four branch points.
+\end{proof}
+
+\pagebreak
+
+\item Let $X$ be a compact Riemann surface.
+\begin{enumerate}
+\itemsep5mm
+\item If $\Delta f=\rho$ where $f\in \Omega_X^0$ and $\rho\in\Omega_X^{1,1}$, prove $\displaystyle \iint_X\rho=0$. %See p. 75 of 210C lecture notes.
+
+\begin{proof}
+Let $\Delta f=\rho$ where $f\in \Omega_X^0$ and $\rho\in\Omega_X^{1,1}$. Recall that $\Delta=\bar\partial\partial$. Thus,
+\begin{align*}
+\Delta f&=\bar\partial\partial f\\
+&=\bar\partial\left(\pp{f}{z}\,dz\right)\\
+&=\pp{^2f}{\bar z\partial z}\,d\bar z\wedge dz\\
+&=-\pp{^2f}{\bar z\partial z}\,dz\wedge d\bar z\\
+&=-\pp{}{\bar z}\pp{f}{z}\,dz\wedge d\bar z\\
+&=\frac{1}{2}\pp{}{\bar z}\left(\pp{f}{x}-i\pp{f}{y}\right)\,dz\wedge d\bar z\\
+&=\frac{1}{4}\left[\pp{^2f}{x^2}+i\pp{^2f}{x\partial y}-i\pp{^2f}{x\partial y}-i^2\pp{^2f}{y^2}\right]\,dz\wedge d\bar z\\
+&=\frac{1}{4}\left[\pp{^2f}{x^2}+\pp{^2f}{y^2}\right]\,dz\wedge d\bar z.
+\end{align*}
+But since $f$ is holomorphic it satisfies the C-R equations, so the expression in brackets above is 0, whence $\iint_X\rho=\iint_X\Delta f=0$.
+\end{proof}
+
+\item Read Chapter 9 for the converse of (a). 
+\end{enumerate}
+
+
+
+
+\end{enumerate}
+\end{document}

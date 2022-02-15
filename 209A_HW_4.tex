@@ -1,0 +1,664 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\usepackage{bbm}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209A - Real Analysis}
+\rightline{Zhang, Qi}
+\rightline{HW 4}
+\rightline{\today}
+
+\vspace{-5mm}
+\textbf{Folland: Exercises, p. 52.} 13, 14, 15, 16, 17
+
+\vspace{5mm}
+\begin{enumerate}
+\setcounter{enumi}{12}
+
+\item Suppose $\{f_n\}\subset\MC{L}^+$, $f_n\rightarrow f$ pointwise, and $\int f=\lim \int f_n<\infty$. Then $\int_E f=\lim \int_E f_n$ for all $E\in\MC{M}$. However, this need not be true if $\int f=\lim \int f_n=\infty$.
+
+\begin{proof}
+Suppose $\{f_n\}\subset\MC{L}^+$, $f_n\rightarrow f$ pointwise, and $\int f=\lim \int f_n<\infty$. Let $E\in\MC{M}$. Since $f_n\rightarrow f$, $f_n\chi_E\rightarrow f\chi_E$. Additionally, 
+
+\[
+\int_X f=\int_{E\cup E^c}f=\int_E f+\int_{E^c} f\pspace\text{and}\pspace \int_X f_n=\int_{E\cup E^c}f_n=\int_E f_n +\int_{E^c} f_n.
+\]
+
+By Fatou's lemma, we have
+
+\[
+\int_E f=\int_X f\chi_E=\int_X\liminf_{n\rightarrow\infty} f_n\chi_E\leq \liminf_{n\rightarrow\infty}\int_X f_n\chi_E=\liminf_{n\rightarrow\infty}\int_E f_n.
+\]
+
+\vspace{-5mm}
+Now, using the equations above,
+\begin{align*}
+\int_X f-\int_E f=\int_{E^c}f&=\int_{X}f\chi_{E^c}\\[2mm]
+&=\int_X\liminf_{n\rightarrow\infty}f_n\chi_{E^c}\\[2mm]
+&\leq\liminf_{n\rightarrow\infty}\int_Xf_n\chi_{E^c}\\[2mm]
+&=\liminf_{n\rightarrow\infty}\int_{E^c} f_n\\[2mm]
+&=\liminf_{n\rightarrow\infty}\left(\int_X f_n-\int_{E}f_n\right)\\[2mm]
+&=\liminf_{n\rightarrow\infty}\int_X f_n-\limsup_{n\rightarrow\infty}\int_{E} f_n\\[2mm]
+&=\int_X f-\limsup_{n\rightarrow\infty}\int_{E} f_n.\\[2mm]
+\end{align*}
+
+Since $\int_X f<\infty$, we can subtract it from both sides of the inequality, and then multiplying by $-1$ reveals
+
+\[
+\limsup_{n\rightarrow\infty}\int_E f_n \leq \int_E f.
+\]
+
+Consequently,
+
+\[
+\limsup_{n\rightarrow\infty}\int_E f_n \leq \int_E f\leq \liminf_{n\rightarrow\infty} \int_E f_n
+\]
+
+and so $\displaystyle \lom{n}{\infty} \int_E f_n=\int _E f$.
+
+To show that we need $\int f=\lim \int f_n<\infty$ for the result above to hold, we construct a counterexample where $\int f=\lim \int f_n=\infty$ and $\lim\int_E f_n\neq\int_E f$. Consider the sequence of functions $f_n=\chi_{E_n}$ where $E_n=(-\infty,0)\cup[n,n+1)$. $f_n\rightarrow 0$ pointwise as $n\rightarrow\infty$ and by the MCT we have
+
+\[
+\int_X f=\int_X \lom{n}{\infty}f_n=\lom{n}{\infty}\int_X f_n=\lom{n}{\infty}\int_X \chi_{E_n}=\lom{n}{\infty}\int_{E_n}1=\lom{n}{\infty}\int_{(-\infty,0)\cup[n,n+1)}1=\infty.
+\]
+
+But $\displaystyle \int_{[0,\infty)}f=0$ and $\displaystyle \int_{[0,\infty)}f_n=1$ for all $n$ so $\displaystyle \lom{n}{\infty} \int_{[0,\infty)} f_n=1\neq 0$.
+
+\end{proof}
+
+\item If $f\in\MC{L}^+$, let $\lambda(E)=\int_Ef\,d\mu$ for $E\in\MC{M}$. Then $\lambda$ is a measure on $\MC{M}$ and for any $g\in\MC{L}^+$, $\int g\,d\lambda=\int fg\,d\,\mu$. (First suppose that $g$ is simple.)
+
+\begin{proof}
+Let $f\in\MC{L}^+$ and define $\lambda(E)=\int_Ef\,d\mu$. Note that $\lambda(E)\geq0$ for all $E\in\MC{M}$ since $f\in\MC{L}^+$. To proceed, we verify the two properties of a measure. First, calling upon the convention that $\infty\cdot0=0$ if necessary,
+
+\[
+\lambda(\varnothing)=\int_\varnothing f\,d\mu\leq\int_\varnothing\sup f\,d\mu=(\sup f)\cdot\mu(\varnothing)=0.
+\]
+
+Next, let $\{E_j\}\subset\MC{M}$ be a sequence of disjoint sets and write $\displaystyle E=\bigcup_{j=1}^\infty E_j$. Then
+
+\[
+\lambda(E)=\int_Ef\,d\mu=\int_{\bigcup_{j=1}^\infty E_j}f\,d\mu=\sum_{j=1}^\infty \int_{E_j}f\,d\mu=\sum_{j=1}^\infty\lambda(E_j)
+\]
+
+by linearity of the Lebesgue integral. Therefore, $\lambda$ is a measure by definition.
+
+Next, let $g\in\MC{L}^+$ and suppose $g$ is a simple function. Write $g=\sum_{j=1}^n a_j\chi_{E_j}$, and then by definition we have $\int g\,d\lambda=\sum_{j=1}^na_j\lambda(E_j)$. It follows that
+
+\begin{align*}
+\int fg\,d\mu&=\int f\cdot\sum_{j=1}^n a_j\chi_{E_j}\,d\mu\\[2mm]
+&=\int\sum_{j=1}^nf\cdot a_j\chi_{E_j}\,d\mu\\[2mm]
+&=\sum_{j=1}^n\int f\cdot a_j\chi_{E_j}\,d\mu\\[2mm]
+&=\sum_{j=1}^na_j\int_{E_j} f\,d\mu\\[2mm]
+&=\sum_{j=1}^na_j\lambda(E_j)\\[2mm]
+&=\int g\,d\lambda.
+\end{align*}
+
+Now release the requirement that $g$ be simple and simply let $g\in\MC{L}^+$. By Propositon 2.10, there exists a sequence of nondecreasing simple functions $\{\phi_n\}\subset\MC{L}^+$ such that $\phi_n\rightarrow g$ pointwise. Consequently, $f\phi_n\rightarrow fg$ pointwise and by the result for simple functions and the MCT we have
+
+\begin{align*}
+\int fg\,d\mu&=\int f\left(\lom{n}{\infty}\phi_n\right)\,d\mu\\[2mm]
+&=\int\lom{n}{\infty}f\phi_n\,d\mu\\[2mm]
+&\stackrel{\text{MCT}}{=}\lom{n}{\infty}\int f\phi_n\,d\mu\\[2mm]
+&=\lom{n}{\infty}\int\phi_n\,d\lambda\\[2mm]
+&\stackrel{\text{MCT}}{=}\int\lom{n}{\infty}\phi_n\,d\lambda\\[2mm]
+&=\int g\,d\lambda.
+\end{align*}
+\end{proof}
+
+\item If $\{f_n\}\subset\MC{L}^+$, $f_n$ decreases pointwise to $f$, and $\int f_1<\infty$, then $\int f=\lim\int f_n$.
+
+\begin{proof}
+Let $\{f_n\}\subset\MC{L}^+$ and suppose $f_n$ decreases pointwise to $f$ and $\int f_1<\infty$. Define $g_n=f_1-f_n$. Since $f_n\geq f_{n+1}$, 
+
+\[
+g_{n+1}=f_1-f_{n+1}\geq f_1-f_n=g_n
+\]
+
+so $g_n$ is nondecreasing. Also $\{g_n\}\subset\MC{L}^+$ by linearity of the Lebesgue integral, nonegativity of $f_n$, and the fact that $f_n$ is decreasing. Moreover, $\lom{n}{\infty}g_n=\lom{n}{\infty}f_1-f_n=f_1-f$. Thus, by the MCT and linearity of the Lebesgue integral,
+
+\[
+\lom{n}{\infty}\int f_n=\lom{n}{\infty}\int f_1-g_n=\int f_1-\lom{n}{\infty}\int g_n=\int f_1-\int \lom{n}{\infty} g_n=\int f_1-\int f_1-f=\int f.
+\]
+\end{proof}
+
+
+\item If $f\in \MC{L}^+$ and $\int f<\infty$, for every $\ve>0$ there exists an $E\in \MC{M}$ such that $\mu(E)<\infty$ and $\int_Ef>(\int f)-\ve$.
+
+\begin{proof}
+Let  $f\in \MC{L}^+$ and suppose  $\int f<\infty$. Define $E_n=\{x\in X \mid f(x)>\frac{1}{n}\}$ and $f_n=f\chi_{E_n}$. Then $f_n$ increases to $f$, and by the MCT, 
+
+\[
+\lom{n}{\infty}\int_X f_n=\lom{n}{\infty}\int_X f\chi_{E_n}=\int_X \lom{n}{\infty} f\chi_{E_n}=\int_X f.
+\]
+
+Thus, by construction, for every $n$ there exists an $E_n$ such that $\mu(E_n)<\infty$ and 
+
+\[
+\int_{E_n} f=\int_Xf_n> \left(\int_X f\right)-\frac{1}{n}.
+\]
+\end{proof}
+
+\item Assume Fatou's lemma and deduce the Monotone Convergence Theorem from it. 
+
+\begin{proof}
+Suppose Fatou's lemma is true. Let $\{f_n\}\subset\MC{L}^+$ and suppose $f=\lom{n}{\infty} f_n$ where $f_j\leq f_{j+1}$. Since $f_n\leq f$ for all $n$, $\limsup f_n\leq f$ and so $\int\limsup f_n\leq \int f$. By Fatou's lemma we have
+
+\[
+\int\limsup f_n\leq \int f\leq\liminf\int f_n
+\]
+
+and so $\lim\int f_n=\int f$. Thus, the Monotone Convergence Theorem is proven, and it is shown that Fatou's lemma is equivalent to the MCT.
+\end{proof}
+\end{enumerate}
+
+\pagebreak
+
+\textbf{Exercises, p. 59.} 18, 19, 20, 21, \textit{23}, 26, 27, 28, 29, 30
+
+\vspace{5mm}
+\begin{enumerate}
+\setcounter{enumi}{17}
+
+\item Fatou's lemma remains valid if the hypothesis that $f_n\in L^+$ is replaced by the hypothesis that $f_n$ is measurable and $f_n\geq -g$ where $g\in L^+\cap L^1$. What is the analogue of Fatou's lemma for nonpositive functions?
+
+\begin{proof}
+Let $\{f_n\}$ be a sequence of measurable functions and suppose $f_n\rightarrow f$. Additionally, let $g\in L^+\cap L^1$ and suppose $f_n\geq -g$. Then $f_n+g\geq0$, so by Fatou's lemma,
+
+\begin{align*}
+\int\liminf f_n+\int g&=\int(\liminf f_n) +g\\[2mm]
+&=\int\liminf(f_n+g)\\[2mm]
+&\leq\liminf\int f_n+g\\[2mm]
+&=\liminf \left(\int f_n +\int g\right)\\[2mm]
+&=\liminf\int f_n +\liminf \int g\\[2mm]
+&=\liminf\int f_n +\int g.\\[2mm]
+\end{align*}
+
+Since $g\in L^1$, $\int g<\infty$ and so we can subtract that value from both sides of the inequality to yield the desired result.
+\end{proof}
+
+\item Suppose $\{f_n\}\subset L^1(\mu)$ and $f_n\rightarrow f$ uniformly.
+
+\begin{enumerate}
+\item If $\mu(X)<\infty$, then $f\in L^1(\mu)$ and $\int f_n\rightarrow \int f$.
+
+\begin{proof}
+Let $\{f_n\}\subset L^1(\mu)$ suppose $f_n\rightarrow f$ uniformly. Then for all $\ve>0$, there exists an $N$ such that when $n\geq N$, $|f_n-f|<\ve$. Let $\ve$ be arbitrary but fixed. Since $\mu(X)<\infty$, $\int_X\ve\,d\mu=\ve\mu(X)<\infty$ so by the DCT, $f_n-f$ is in $L^1(\mu)$ for sufficiently large $n$ and 
+
+\[
+\lom{n}{\infty}\int f_n-f=\int \lom{n}{\infty}(f_n-f)=\int0=0.
+\]
+
+By Proposition 2.21 (linearity of the integral) $f_n-(f_n-f)=f$ is in $L^1(\mu)$. Consequently, by Proposition 2.22,
+
+\[
+\left|\int f_n-\int f\right|=\left|\int f_n-f\right|\leq \int|f_n-f|\rightarrow0,
+\]
+
+so $\int f_n\rightarrow \int f$.
+\end{proof}
+
+\item If $\mu(X)=\infty$, the conclusions of (a) can fail. (Find examples on $\R$ with Lebesgue measure.)
+
+Let $X=\R$. We'll first find a counterexample to the first conclusion that $f\in L^1(m)$ where $m$ is the Lebesgue measure. Consider the sequence of functions $f_n=\chi_{[0,n)}$. For each $n$, $f_n\in L^1(m)$ (in fact $\int_\R f_n=n$), and $f_n\rightarrow 1\equiv f$ uniformly, but $\int_\R f=\int_\R 1=1\cdot m(\R)=\infty$, so $f\notin L^1(m)$.
+
+Next we find a counterexample to the second conclusion that $\int f_n\rightarrow \int f$. Consider the sequence of functions $f_n=\frac{1}{n}\chi_{[0,n]}$. Then $f_n\rightarrow 0$ uniformly since, given any $\ve>0$, simply choose $N>\frac{1}{\ve}$ and $\left|\frac{1}{n}\chi_{[0,n]}\right|<\ve$ for all $x\in \R$ whenever $n\geq N$. Note that $\int_\R f_n=1$ for all $n$ by construction, so $\lim\int_\R f_n=1$, but $\int_\R f=\int_\R 0=0\neq 1$, so $\int f_n\not\rightarrow\int f$ in this case.
+\end{enumerate}
+
+\item (A generalized Dominated Convergence Theorem) If $f_n,g_n,f,g\in L^1$, $f_n\rightarrow f$ and $g_n\rightarrow g$ a.e., $|f_n|\leq g_n$, and $\int g_n\rightarrow \int g$, then $\int f_n\rightarrow \int f$.
+
+\begin{proof}
+In this case, since $|f_n|\leq g_n$, we have $g_n+f_n\geq0$ and $g_n-f_n\geq0$ so by Fatou's lemma,
+
+\[
+\int g +\int f=\int g+f\leq \liminf \int g_n + f_n= \liminf\int g_n +\liminf\int f_n=\int g+\liminf \int f_n\text{ and}
+\]
+
+\[
+\int g -\int f=\int g-f\leq \liminf \int g_n -f_n= \liminf\int g_n +\liminf\int -f_n=\int g-\limsup \int f_n.
+\]
+
+Since $g\in L^1$, $\int g<\infty$ so we can subtract it from both sides of both of these inequalities to reveal 
+
+\[
+\limsup \int f_n \leq \int f\leq \liminf \int f_n,
+\]
+
+whence $\int f_n\rightarrow \int f$.
+\end{proof}
+
+\item Suppose $f_n, f\in L^1$ and $f_n\rightarrow f$ a.e. Then $\int |f_n-f|\rightarrow 0$ iff $\int |f_n|\rightarrow \int |f|$.
+
+\begin{proof}
+First, suppose $\int |f_n-f|\rightarrow 0$ and let $\ve>0$. Then there exists an $N$ such that whenever $n\geq N$ we have $\left|\int |f_n-f|-0\right|=\int |f_n-f|<\ve$. Now, by Proposition 2.22 and the reverse triangle inequality, 
+
+\[
+\left|\int |f_n|-\int |f|\right|=\left|\int |f_n|-|f|\right|\leq\int||f_n|-|f||\leq\int |f_n-f|<\ve,
+\]
+
+and so $\int |f_n|\rightarrow \int |f|$.
+
+Next, suppose $\int |f_n|\rightarrow \int |f|$. Since $f_n$ and $f$ are integrable, so are $|f_n|$ and $|f|$. Now, $|f_n-f|\leq |f_n|+|f|\leq2|f|$ which is integrable by linearity of the integral, and 
+
+\[
+\lom{n}{\infty}\int|f_n|+|f|=\lom{n}{\infty}\left(\int |f_n|+\int |f|\right)=\lom{n}{\infty}\int |f_n|+\lom{n}{\infty}\int |f|=\int |f|+\int |f|=\int 2|f|
+\]
+
+by the generalized DCT proven in Excercise 20, we have $f_n-f$ is integrable and 
+
+\[
+\lom{n}{\infty}\int f_n-f=\int \lom{n}{\infty}(f_n-f)=\int 0=0.
+\]
+
+Finally, since $f_n-f$ is integrable, so is $|f_n-f|$, and since $f_n-f\rightarrow0$, 
+
+\[
+\lom{n}{\infty}\int |f_n-f|=\int \lom{n}{\infty}|f_n-f|=\int 0=0.
+\]
+\end{proof}
+
+\setcounter{enumi}{22}
+
+\item Given a bounded function $f:[a,b]\rightarrow \R$, let
+
+\[
+H(x)=\lim_{\delta\rightarrow 0}\sup_{|y-x|\leq \delta}f(y)\aspace h(x)=\lim_{\delta\rightarrow 0}\inf_{|y-x|\leq \delta}f(y).
+\]
+
+Prove Theorem 2.28b by establishing the following lemmas:
+
+\begin{enumerate}
+\item $H(x)=h(x)$ iff $f$ is continuous at $x$.
+
+\begin{proof}
+First suppose that $H(x)=h(x)$. Then by definition,
+
+\[
+H(x)=\lim_{\delta\rightarrow 0}\sup_{|y-x|\leq \delta}f(y)=\lim_{\delta\rightarrow 0}\inf_{|y-x|\leq \delta}f(y)=h(x).
+\]
+
+Since the $\limsup$ and $\liminf$ agree, the limit must exist, and we have 
+
+\[
+\lim_{\delta\rightarrow 0}\sup_{|y-x|\leq \delta}f(y)=\lim_{y\rightarrow x}f(y)=f(x)
+\]
+
+so $f$ is continuous. Conversely, suppose that $f$ is continuous at $x$. Then, by definition, 
+
+\[
+f(x)=\lom{y}{x}f(y)=\liminf_{y\rightarrow x}f(y)=\lim_{y\rightarrow x}\inf_{|x-y|\leq \delta}f(y)=\lim_{\delta\rightarrow 0}\inf_{|x-y|\leq \delta}f(y)=h(x),\text{ and}
+\]
+
+\[
+f(x)=\lom{y}{x}f(y)=\limsup_{y\rightarrow x}f(y)=\lim_{y\rightarrow x}\sup_{|x-y|\leq \delta}f(y)=\lim_{\delta\rightarrow 0}\sup_{|x-y|\leq \delta}f(y)=H(x),
+\]
+
+so $H(x)=h(x)$.
+
+\end{proof}
+
+
+\item In the notation of the proof of Theorem 2.28a, $H=G$ a.e. and $h=g$ a.e. Hence $H$ and $h$ are Lebesgue measurable, and $\int_{[a,b]}H\,dm=\overline{I}_a^b(f)$ and $\int_{[a,b]}h\,dm=\uline{I}_a^b(f)$.
+
+\begin{proof}
+Recall that $G=\lim G_{P_k}$ where $\{P_k\}$ is a sequence of nested partitions and 
+
+\[
+G_{P_k}=\sum_{j=1}^nM_j\chi_{(t_{j-1},t_j]} \aspace  M_j=\sup_{y\in[t_{j-1},t_j]}f(y)
+\]
+
+Choose $k$ large enough that $|t_j-t_{j-1}|<\delta$, then 
+\end{proof}
+
+\end{enumerate}
+
+\setcounter{enumi}{25}
+\item If $f\in L^1(m)$ and $F(x)=\int_{-\infty}^xf(t)\,dt$, then $F$ is continuous on $\R$.
+
+\begin{proof}
+Let $f\in L^1(m)$ and write $F(x)=\int_{-\infty}^xf(t)\,dt$. It suffices to show that for all $\ve>0$, there exists a $\delta>0$ such that when $|x-x_0|<\frac{\delta}{n}$,
+
+\[
+|F(x)-F(x_0)|=\left|\int_{-\infty}^xf(t)\,dt-\int_{-\infty}^{x_0}f(t)\,dt\right|=\left|\int_x^{x_0}f(t)\,dt\right|<\ve.
+\]
+
+Define $f_n=|f|\cdot\mathbbm{1}_{\left(x_0-\frac{\delta}{n},x_0+\frac{\delta}{n}\right)}$. Then $f_n\rightarrow 0$ a.e. as $n\rightarrow \infty$ and since $|f_n|\leq|f|$, by the DCT $\int f_n\rightarrow\int 0=0$. Thus, for all $\ve>0$, there exists an $N$ such that if $n\geq N$, then $\left|\int f_n\right|<\ve$. Let $\ve>0$ be given and choose $n\geq N$. Then when $|x-x_0|<\frac{\delta}{n}$, we have
+
+\begin{align*}
+|F(x)-F(x_0)|&=\left|\int_x^{x_0}f(t)\,dt\right|\\[2mm]
+&=\left|\int f\cdot\mathbbm{1}_{[x,x_0]}\right|\\[2mm]
+&\leq\int|f|\cdot\mathbbm{1}_{[x,x_0]}\\[2mm]
+&\leq\int |f|\cdot\mathbbm{1}_{\left(x_0-\frac{\delta}{n},x_0+\frac{\delta}{n}\right)}\\[2mm]
+&=\int f_n\\[2mm]
+&=\left|\int f_n\right|\\[2mm]
+&<\ve.
+\end{align*}
+
+Thus, $F$ is continuous by definition.
+\end{proof}
+
+\item Let $f_n(x)=ae^{-nax}-be^{-nbx}$ where $0<a<b$.
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep5mm
+
+\item $\displaystyle \sum_{n=1}^\infty\int_0^\infty|f_n(x)|\,dx=\infty$
+
+\begin{proof}
+Since $f_n$ is continuous for any $n$, it is Riemann integrable on any interval, say, $[\alpha,\beta]$, and we can compute the integral directly using the FTC. First we find the zero of the function for each $n$:
+
+\begin{align*}
+ae^{-nax}-be^{-nbx}&=0\\[2mm]
+ae^{-nax}&=be^{-nbx}\\[2mm]
+\frac{a}{b}&=e^{nax-nbx}\\[2mm]
+\frac{a}{b}&=e^{x(na-nb)}\\[2mm]
+\log \frac{a}{b}&=x(na-nb)\\[2mm]
+x&=\frac{1}{n}\cdot\frac{\log \frac{a}{b}}{a-b}.
+\end{align*}
+
+
+Let $p_n:=\frac{1}{n}\cdot\frac{\log \frac{a}{b}}{a-b}$ for each $n$. Then $f_n(x)<0$ when $x<p_n$, and so
+
+\begin{align*}
+\int_0^\infty|f_n(x)|\,dx&=\int_0^{p_n}be^{-nbx}-ae^{-nax}\,dx+\lom{t}{\infty}\int_{p_n}^tae^{-nax}-be^{-nbx}\,dx\\[2mm]
+&=\left[-\frac{e^{-nbx}}{n}+\frac{e^{-nax}}{n}\right]_{x=0}^{x=p_n}+\lom{t}{\infty}\left[-\frac{e^{-nax}}{n}+\frac{e^{-nbx}}{n}\right]_{x=p_n}^{x=t}\\[2mm]
+&=\frac{1}{n}\left(-e^{-nbp_n}+e^{-ap_n}+1-1\right)+\frac{1}{n}\lom{t}{\infty}\left(-e^{-nat}+e^{-nbt}+e^{-nap_n}-e^{-nbp_n}\right)\\[2mm]
+&=\frac{2}{n}\left(e^{-nap_n}-e^{-nbp_n}\right)\\[2mm]
+&=\frac{2}{n}\left(e^{-na\cdot\frac{1}{n}\cdot\frac{\log \frac{a}{b}}{a-b}}-e^{-nb\cdot\frac{1}{n}\cdot\frac{\log \frac{a}{b}}{a-b}}\right)\\[2mm]
+&=\frac{2}{n}\left(e^{\log\frac{a}{b}\cdot\frac{a}{b-a}}-e^{\log\frac{a}{b}\cdot\frac{b}{b-a}}\right)\\[2mm]
+&=\frac{2}{n}\left(\left(\frac{a}{b}\right)^{\frac{a}{b-a}}-\left(\frac{a}{b}\right)^{\frac{b}{b-a}}\right).
+\end{align*}
+
+Consequently,
+
+\[
+\sum_{n=1}^\infty\int_0^\infty|f_n(x)|\,dx=\sum_{n=1}^\infty\frac{2}{n}\left(\left(\frac{a}{b}\right)^{\frac{a}{b-a}}-\left(\frac{a}{b}\right)^{\frac{b}{b-a}}\right)=\left(\left(\frac{a}{b}\right)^{\frac{a}{b-a}}-\left(\frac{a}{b}\right)^{\frac{b}{b-a}}\right) \sum_{n=1}^\infty \frac{2}{n}=\infty.
+\]
+\end{proof}
+
+\item $\displaystyle \sum_{n=1}^\infty\int_0^\infty f_n(x)\,dx=0$
+
+\begin{proof}
+\begin{align*}
+\sum_{n=1}^\infty\int_0^\infty f_n(x)\,dx&=\sum_{n=1}^\infty\left(\lom{t}{\infty}\int_0^t ae^{-nax}-be^{-nbx}\,dx\right)\\[2mm]
+&=\sum_{n=1}^\infty\left(\frac{1}{n}\lom{t}{\infty}\left[e^{-nat}+e^{-nbt}+1-1\right]\right)\\[2mm]
+&=\sum_{n=1}^\infty\frac{1}{n}\cdot0\\[2mm]
+&=0.
+\end{align*}
+\end{proof}
+
+\item $\displaystyle \sum_{n=1}^\infty f_n\in L^1([0,\infty),m)$ and $\displaystyle \int_0^\infty\sum_{n=1}^\infty f_n(x)\,dx =\log\frac{a}{b}$
+
+\begin{proof}
+First, observe that
+
+\begin{align*}
+\sum_{n=1}^\infty f_n(x)&=\sum_{n=1}^\infty ae^{-nax}-be^{-nbx}\\[2mm]
+&=\sum_{n=1}^\infty\frac{a}{e^{nax}}-\frac{b}{e^{nbx}}\\[2mm]
+&=\sum_{n=1}^\infty ae^{-ax}\cdot\left(\frac{1}{e^{ax}}\right)^{n-1}-be^{-bx}\cdot\left(\frac{1}{e^{bx}}\right)^{n-1}\\[2mm]
+&=\frac{ae^{-ax}}{1-e^{-ax}}-\frac{be^{-bx}}{1-e^{-bx}}\\[2mm]
+&=\frac{a}{e^{ax}-1}-\frac{b}{e^{bx}-1}\\[2mm]
+&=\frac{ae^{bx}-a-be^{ax}-b}{(e^{ax}-1)(e^{bx}-1)}\\[2mm]
+&=f(x).
+\end{align*}
+
+This function is continuous on any subinterval of $(0,\infty)$ so it is Riemann integrable, and thus Lebesgue integrable, there and we have $f(x)\in L^1((0,\infty),m)$. To show that $f(x)\in L^1([0,\infty),m)$, we take limits:
+
+\begin{align*}
+\int_0^\infty\sum_{n=1}^\infty f_n(x)\,dx&=\int_0^\infty f(x)\,dx\\[2mm]
+&=\lim_{t\rightarrow \infty}\int_{\frac{1}{t}}^t\frac{ae^{-ax}}{1-e^{-ax}}-\frac{be^{-bx}}{1-e^{-bx}}\,dx\\[2mm]
+&=\lim_{t\rightarrow \infty}\int_{\frac{1}{t}}^t\frac{ae^{-ax}}{1-e^{-ax}}\,dx-\lim_{t\rightarrow \infty}\int_{\frac{1}{t}}^t\frac{be^{-bx}}{1-e^{-bx}}\,dx\\[2mm]
+&=\lim_{t\rightarrow \infty}\int_{e^{-\frac{a}{t}}}^{e^{-at}}\frac{1}{1-u}\,du-\lim_{t\rightarrow \infty}\int_{e^{-\frac{b}{t}}}^{e^{-bt}}\frac{1}{1-v}\,dv\\[2mm]
+&=\lim_{t\rightarrow \infty}\left[-\log|1-u|\right]_{e^{-\frac{a}{t}}}^{e^{-at}}+\lim_{t\rightarrow \infty}\left[\log|1-v|\right]_{e^{-\frac{b}{t}}}^{e^{-bt}}\\[2mm]
+&=\lom{t}{\infty}\left.\log\left(\frac{1-e^{-bx}}{1-e^{-ax}}\right)\right|_{\frac{1}{t}}^t\\[2mm]
+&=\lom{t}{\infty}\left[\log\left(\frac{1-e^{-bt}}{1-e^{-at}}\right)-\log\left(\frac{1-e^{-\frac{b}{t}}}{1-e^{-\frac{a}{t}}}\right)\right]\\[2mm]
+&=\lom{t}{\infty}\log\left(\frac{1-e^{-\frac{a}{t}}}{1-e^{-\frac{b}{t}}}\right)\\[2mm]
+&=\log\left(\lom{t}{\infty}\frac{1-e^{-\frac{a}{t}}}{1-e^{-\frac{b}{t}}}\right)\\[2mm]
+&\stackrel{\text{l'H}}{=}\log\left(\lom{t}{\infty}\frac{\frac{a}{t^2}\cdot e^{-a/t}}{\frac{b}{t^2}\cdot e^{-b/t}}\right)\\[2mm]
+&=\log\left(\frac{a}{b}\right).
+\end{align*}
+
+Thus, $f(x)\in L^1([0,\infty),m)$, and it is equal to $\log\left(\frac{a}{b}\right)$.
+\end{proof}
+
+\end{enumerate}
+
+\item Compute the following limits and justify the calculations.
+
+\begin{enumerate}
+
+\item $\displaystyle \lom{n}{\infty}\int_0^\infty \frac{\sin\frac{x}{n}}{\left(1+\frac{x}{n}\right)^n}\,dx$
+
+Let $f_n(x)=\frac{\sin\frac{x}{n}}{\left(1+\frac{x}{n}\right)^n}$. This function is continuous on $[0,\infty)$ so it is Riemann integrable there. Since $\left(1+\frac{x}{n}\right)^n\rightarrow e^x$, for sufficiently large $n$,
+
+\[
+|f_n(x)|=\left|\frac{\sin\frac{x}{n}}{\left(1+\frac{x}{n}\right)^n}\right|\leq\frac{1}{\left(1+\frac{x}{n}\right)^n}\leq \frac{1}{e^x}.
+\]
+
+Since $\int_0^\infty \frac{1}{e^x}\,dx=1$, by the comparison test for integrals $\int_0^\infty|f_n(x)|\,dx<\infty$ for each $n$ and so $f_n\in L^1([0,\infty),m)$ for each $n$.
+
+Additionally, since $g(x)=\frac{1}{e^x}$ is Riemann integrable on $[0,\infty)$, by the DCT we have
+
+\[
+\lom{n}{\infty}\int_0^\infty \frac{\sin\frac{x}{n}}{\left(1+\frac{x}{n}\right)^n}\,dx=\int_0^\infty \lom{n}{\infty}\frac{\sin\frac{x}{n}}{\left(1+\frac{x}{n}\right)^n}\,dx=\int_0^\infty0\,dx=0.
+\]
+
+\item $\displaystyle \lom{n}{\infty}\int_0^1\frac{1+nx^2}{(1+x^2)^n}\,dx$
+
+Let $f_n(x)=\frac{1+nx^2}{(1+x^2)^n}$. First note that $f_n$ is continuous in $x$ on $[0,1]$, so it is Reimann integrable and thus $f_n\in L^1([0,1],m)$ for each $n$. Next, $f_1(x)=\frac{1+x^2}{1+x^2}=1$. Additionally, $f_n$ is a decreasing sequence:
+
+\begin{align*}
+f_{n+1}(x)&\leq f_n(x)\\[2mm]
+\frac{1+(n+1)x^2}{(1+x^2)^{n+1}}&\leq \frac{1+nx^2}{(1+x^2)^n}\\[2mm]
+\frac{1+(n+1)x^2}{(1+x^2)^{n+1}}&\leq \frac{(1+nx^2)(1+x^2)}{(1+x^2)^{n+1}}\\[2mm]
+1+(n+1)x^2&\leq (1+nx^2)(1+x^2)\\[2mm]
+1+nx^2+x^2&\leq 1+x^2+nx^2+nx^4\\[2mm]
+0&\leq nx^4.
+\end{align*}
+
+Since $\int_0^1 1\,dx<\infty$ it is in $L^1([0,1],m)$, so by the DCT, 
+
+\[
+\lom{n}{\infty}\int_0^1\frac{1+nx^2}{(1+x^2)^n}\,dx=\int_0^1 \lom{n}{\infty}\frac{1+nx^2}{(1+x^2)^n}\,dx.
+\]
+
+Note that $f_n(0)=1$, so we compute $\lim f_n(x)$ for $x>0$. Invoking continuity and convergence and passing to a continuous variable, we can employ l'H\^{o}pital's rule.
+
+\begin{align*}
+\lom{n}{\infty}f_n(x)&=\lom{n}{\infty}\frac{1+nx^2}{(1+x^2)^n}\\[2mm]
+&=\lom{t}{\infty}\frac{1+tx^2}{(1+x^2)^t}\\[2mm]
+&\stackrel{\text{l'H}}{=}\lom{t}{\infty}\frac{x^2}{(1+x^2)^t\log (1+x^2)}\\[2mm]
+&=0.
+\end{align*}
+
+Therefore $f_n(x)\rightarrow 0$ for a.e. $x\in[0,1]$, and so 
+
+\[
+\lom{n}{\infty}\int_0^1\frac{1+nx^2}{(1+x^2)^n}\,dx=\int_0^1\lom{n}{\infty}\frac{1+nx^2}{(1+x^2)^n}\,dx=\int_0^10\,dx=0.
+\]
+
+
+
+\item $\displaystyle \lom{n}{\infty}\int_0^\infty \frac{n\sin\frac{x}{n}}{x(1+x^2)}\,dx$
+
+Let $f_n(x)=\frac{n\sin\frac{x}{n}}{x(1+x^2)}$. For $x>0$, $f_n$ is continuous and so is Riemann integrable on any finite subinterval of $(0,\infty)$. Moreover
+
+\[
+|f_n(x)|=\left|\frac{n\sin\frac{x}{n}}{x(1+x^2)}\right|=\left|\frac{n}{x}\cdot\frac{\sin\frac{x}{n}}{1+x^2}\right|= \left|\frac{\sin\frac{x}{n}}{\frac{x}{n}(1+x^2)}\right|=\left|\frac{\sin\frac{x}{n}}{\frac{x}{n}}\right|\cdot\left|\frac{1}{1+x^2}\right|\leq1\cdot\frac{1}{1+x^2},\text{ and}
+\]
+
+\[
+\int_0^\infty \frac{1}{1+x^2}\,dx=\lom{t}{\infty}\int_{1/t}^t\dd{}{x}\tan^{-1}(x)\,dx=\lom{t}{\infty}\left.\tan^{-1}(x)\right|_{1/t}^t=\lom{t}{\infty}\tan^{-1}(t)-\tan^{-1}(1/t)=\frac{\pi}{2},
+\]
+
+so $|f_n(x)|$ is bounded by a function in $L^1([0,\infty),m)$ and $f_n\in L^1([0,\infty))$ for each $n$.  In fact $f_n(x)\rightarrow\frac{1}{1+x^2}$, so by the DCT,
+
+\[
+\lom{n}{\infty}\int_0^\infty \frac{n\sin\frac{x}{n}}{x(1+x^2)}\,dx=\int_0^\infty \lom{n}{\infty}\frac{n\sin\frac{x}{n}}{x(1+x^2)}\,dx=\int_0^\infty\frac{1}{1+x^2}\,dx= \frac{\pi}{2}.
+\]
+
+\pagebreak
+
+\item $\displaystyle \lom{n}{\infty} \int_a^\infty \frac{n}{1+n^2x^2}\,dx$. 
+
+(The answer depends on whether $a>0$, $a=0$, or $a<0$. How does this accord with the various convergence theorems?)
+
+Let $f_n(x)=\frac{n}{1+n^2x^2}$. First, by passing to a continuous variable and employing l'H\^{o}pital's rule, for $x\neq 0$ we have
+
+\[
+\lom{n}{\infty}\frac{n}{1+n^2x^2}\stackrel{\text{l'H}}{=}\lom{n}{\infty}\frac{0}{2nx^2}=0
+\]
+
+so $f_n(x)\rightarrow 0$ for a.e. $x\in \R$. Additionally, $f_n$ is continuous on $\R$ for each $n$, so they are Riemann integrable and hence, $f_n\in L^1(\R,m)$ for all $n$. Now,
+
+\[
+\int_a^\infty \frac{n}{1+n^2x^2}\,dx=\lom{t}{\infty}\left.\tan^{-1}(nx)\right|_{x=a}^{x=t}=\lom{t}{\infty}\tan^{-1}(nt)-\tan^{-1}(na)=\frac{\pi}{2}-\tan^{-1}(na)
+\]
+
+so our limit of integrals depends on $a$:
+
+\[
+\lom{n}{\infty}\int_a^\infty \frac{n}{1+n^2x^2}\,dx=\begin{cases} \pi & \text{if }a<0\\ \frac{\pi}{2} & \text{if }a=0 \\ 0 & \text{if }a>0\end{cases}
+\]
+
+\end{enumerate}
+
+\item Show that $\int_0^\infty x^ne^{-x}\,dx=n!$ by differentiating the equation $\int_0^\infty e^{-tx}\,dx=\frac{1}{t}$. Similarly, show that $\int_{-\infty}^\infty x^{2n}e^{-x^2}\,dx=(2n)!\sqrt{\pi}/(4^nn!)$ by differentiating the equation $\int_{-\infty}^\infty e^{-tx^2}\,dx=\sqrt{\frac{\pi}{t}}$. 
+
+
+By Theorem 2.27 we can pass the differential operator into the integral, so via repeated differentiation, we have
+
+\begin{align*}
+\pp{}{t}\frac{1}{t}&=\pp{}{t}\int_0^\infty e^{-tx}\,dx\\[2mm]
+t^{-2}&=\int_0^\infty xe^{-tx}\,dx\\[2mm]
+1\cdot2t^{-3}&=\int_0^\infty x^2e^{-tx}\,dx\\[2mm]
+1\cdot2\cdot3t^{-4}&=\int_0^\infty x^3e^{-tx}\,dx\\[2mm]
+1\cdot2\cdot3\cdot4t^{-5}&=\int_0^\infty x^4e^{-tx}\,dx\\[2mm]
+\vdots &\\[2mm]
+1\cdot2\cdots(n-1)\cdot nt^{-(n+1)}&=\int_0^\infty x^ne^{-tx}\,dx\\[2mm]
+n!\cdot t^{-(n+1)}&=\int_0^\infty x^ne^{-tx}\,dx.\\[2mm]
+\end{align*}
+
+Choosing $t=1$ yields $\int_0^\infty x^ne^{-x}\,dx=n!$.
+
+Similarly, for the second integral equation, repeated differentiation yields
+
+\begin{align*}
+\sqrt{\frac{\pi}{t}}&=\int_{-\infty}^\infty e^{-tx^2}\,dx\\[2mm]
+\frac{1}{2}\cdot\sqrt{\pi}t^{-3/2}&=\int_{-\infty}^\infty x^2e^{-tx^2}\,dx\\[2mm]
+\frac{1}{2}\cdot\frac{3}{2}\cdot\sqrt{\pi}t^{-5/2}&=\int_{-\infty}^\infty x^4e^{-tx^2}\,dx\\[2mm]
+\frac{1}{2}\cdot\frac{3}{2}\cdot\frac{5}{2}\cdot\sqrt{\pi}t^{-7/2}&=\int_{-\infty}^\infty x^6e^{-tx^2}\,dx\\[2mm]
+\frac{1}{2}\cdot\frac{3}{2}\cdot\frac{5}{2}\cdot\frac{7}{2}\cdot\sqrt{\pi}t^{-9/2}&=\int_{-\infty}^\infty x^8e^{-tx^2}\,dx\\[2mm]
+\vdots &
+\end{align*}
+
+Now,
+
+\begin{align*}
+\frac{1}{2}\cdot\frac{3}{2}\cdot\frac{5}{2}\cdot\frac{7}{2}\cdot\sqrt{\pi}t^{-9/2}&=\int_{-\infty}^\infty x^8e^{-tx^2}\,dx\\[2mm]
+\frac{1}{2}\cdot\frac{2}{2}\cdot\frac{3}{2}\cdot\frac{4}{4}\cdot\frac{5}{2}\cdot\frac{6}{2}\cdot\frac{7}{2}\cdot\frac{8!}{8!}\sqrt{\pi}t^{-9/2}&=\int_{-\infty}^\infty x^8e^{-tx^2}\,dx\\[2mm]
+\frac{8!}{4^4\cdot4!}\sqrt{\pi}t^{-9/2}&=\int_{-\infty}^\infty x^8e^{-tx^2}\,dx\\[2mm]
+\vdots &\\[2mm]
+\frac{(2n)!}{4^nn!}\sqrt{\pi}t^{(n+1)/2}&=\int_{-\infty}^\infty x^{2n}e^{-tx^2}\,dx.\\[2mm]
+\end{align*}
+
+Choosing $t=1$ yields $\int_{-\infty}^\infty x^{2n}e^{-x^2}\,dx=(2n)!\sqrt{\pi}/(4^nn!)$.
+
+\item Show that $\displaystyle \lom{k}{\infty} \int_0^kx^n(1-k^{-1}x)^k\,dx=n!$.
+
+First observe that $\lom{k}{\infty}(1-k^{-1}x)^k=e^{-x}$ by results from Calc I and II. Write $f_k(x)=\left(1-\frac{x}{k}\right)^k$. Then 
+
+\[
+\dd{f}{k}(x)=\left(1-\frac{x}{k}\right)^k\log\left(1-\frac{x}{k}\right)\left(-\frac{x}{k^2}\right)\geq0
+\]
+
+Since the first factor is positive and the other two factors are negative. In other words, $f_k(x)$ is a nondecreasing function of $k$. Let $k=\frac{1}{2}$. Then $f_{1/2}(x)=\sqrt{1-2x}$. $f_{1/2}(x)\leq e^{-x}$ for all $x\geq0$ since
+
+\begin{align*}
+\sqrt{1-2x}&\leq e^{-x}\\[2mm]
+1-2x&\leq e^{-2x}\\[2mm]
+1&\leq e^{-2x}+2x
+\end{align*}
+
+which is true for all $x\geq 0$. Consequently, $(1-k^{-1}x)^k\leq e^{-x}$, and $(1-k^{-1}x)^k\rightarrow e^{-x}$ which is in $L^1([0,\infty))$, so by the DCT, and Exercise 29,
+
+\[
+\lom{k}{\infty} \int_0^kx^n(1-k^{-1}x)^k\,dx= \int_0^\infty\lom{k}{\infty}x^n(1-k^{-1}x)^k\,dx=\int_0^\infty x^ne^{-x}\,dx=n!
+\]
+\end{enumerate}
+
+
+\end{document}

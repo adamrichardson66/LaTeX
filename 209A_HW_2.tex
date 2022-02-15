@@ -1,0 +1,490 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209A - Real Analysis}
+\rightline{Zheng, Qi}
+\rightline{HW 2}
+\rightline{\today}
+
+
+\textbf{Exercises, p. 32.}
+
+\vspace{1cm}
+\begin{enumerate}
+\setcounter{enumi}{16}
+
+
+\item If $\mu^*$ is an outer measure on $X$ and $\{A_j\}_1^\infty$ is a sequence of disjoint $\mu^*$-measurable sets, then
+
+\[
+\mu^*\left(E\cap\bigcup_{j=1}^\infty A_j\right)=\sum_{j=1}^\infty\mu^*(E\cap A_j).
+\]
+
+for any $E\subset X$.
+
+\begin{proof}
+Since each $A_j$ is $\mu^*$-measurable, so is $\bigcup_{j=1}^\infty A_j$, and by subadditivity of $\mu^*$,
+
+\[
+\mu^*\left(E\cap \bigcup_{j=1}^\infty A_j\right)=\mu^*\left(\bigcup_{j=1}^\infty E\cap A_j\right)\leq\sum_{j=1}^\infty\mu^*(E\cap A_j)
+\]
+\end{proof}
+
+\item Let $\MC{A}\subset\MC{P}(X)$ be an algebra, $\MC{A}_\sigma$ the collection of countable unions of sets in $\MC{A}$, and $\MC{A}_{\sigma\delta}$ the collection of countable intersections of sets in $\MC{A}_\sigma$. Let $\mu_0$ be a premeasure on $\MC{A}$ and $\mu^*$ the induced outer measure.
+
+\begin{enumerate}
+\item For any $E\subset X$ and $\ve>0$ there exists an $A\in \MC{A}_\sigma$ with $E\subset A$ and $\mu^*(A)\leq \mu^*(E)+\ve$
+
+\begin{proof}
+Let $E\subset X$ and $\ve>0$. Then, by the definition of outer measure (and the characterization of infimum), there exists an $A\in\MC{A}_\sigma$, say, $A=\bigcup_{j=1}^\infty A_j$ where $A_j\in\MC{A}$ for all $j$, such that $E\subset A$ and $\sum_{j=1}^\infty\mu_0(A_j)\leq\mu^*(E)+\ve$. Since $A=\bigcup_{j=1}^\infty A_j$, by the fact that $\mu^*|\MC{A}=\mu_0$ (Proposition 1.13(a)) and the subadditivity of $\mu_0$,
+
+\[
+\mu^*(A)=\mu_0(A)\leq\sum_{j=1}^\infty\mu_0(A_j)\leq\mu^*(E)+\ve.
+\]\end{proof}
+
+\item If $\mu^*(E)<\infty$, then $E$ is $\mu^*$-measurable iff there exists $B\in \MC{A}_{\sigma\delta}$ with $E\subset B$ and $\mu^*(B-E)=0$.
+
+\begin{proof}
+Let $E\subset X$ and suppose $\mu^*(E)<\infty$. If $E=\varnothing$ then simply choose $B=\varnothing$ and we are done, so let's assume that $E$ is nonempty.
+
+To prove the forward direction of the equivalence, suppose that $E$ is $\mu^*$-measurable. By part (a), there exist $A_j\in \MC{A}_\sigma$ with $E\subset A_j$ and $\mu^*(A_j)\leq\mu^*(E)+\frac{1}{j}$ for every $j\in\mathbb{Z}^+$. Write $B=\bigcap_{j=1}^\infty A_j$. Then $B\in\MC{A}_{\sigma\delta}$, $E\subset B$, and by monotonicity,
+
+\[
+\mu^*(B)\leq\mu^*(A_j)\leq\mu^*(E)+\frac{1}{j}
+\]
+
+for every $j$. Consequently, $\mu^*(B)\leq\mu^*(E)$. Now, since $E$ is measurable, we can write in particular
+
+\[
+\mu^*(B)=\mu^*(B\cap E)+\mu^*(B\cap E^c)=\mu^*(E)+\mu^*(B\cap E^c)\geq\mu^*(E).
+\]
+
+Since $\mu^*(B)\leq\mu^*(E)$ and $\mu^*(B)\geq\mu^*(E)$, it must be the case that $\mu^*(B)=\mu^*(E)$. Since $\mu^*(E)<\infty$, it follows $\mu^*(B-E)=\mu^*(B\cap E^c)=0$.
+
+To prove the converse, suppose that there exists a $B\in \MC{A}_{\sigma\delta}$ with $E\subset B$ and $\mu^*(B-E)=0$. Note that we can write $B=E\cup(B-E)$ and so $E=B\cap(B-E)^c$. Since $\mu^*(B-E)=0$, $B-E$ is measurable by Carath\'{e}odory's Theorem and thus $(B-E)^c$ is as well. Additionally, $B$ is $\mu^*$-measurable since $B\in\MC{A}_{\sigma\delta}$, and thus, since each factor of the intersection is $\mu^*$-measurable, so is $E$.
+\end{proof}
+
+\item If $\mu_0$ is $\sigma$-finite, the restriction $\mu^*(E)<\infty$ in (b) is superfluous.
+
+\begin{proof}
+
+If $\mu_0$ is $\sigma$-finite, then we can decompose $E$ into a countable union of sets of finite measure. Then we can apply the construction in part (b) to each set.
+ 
+ 
+%Suppose $\mu_0$ is $\sigma$-finite. Then there exist disjoint sets $X_n\in\MC{A}$ such that $X=\bigcup_{n=1}^\infty X_n$ and $\mu_0(X_n)<\infty$. Suppose $E$ is $\mu^*$-measurable. Then so is $E_n=E\cap X_n$, and moreover $E=\bigsqcup_{n=1}^\infty E_n$ and $\mu_0(E_n)<\infty$. By part (b) above, for each $n$, there exists a $B_n\in\MC{A}_{\sigma\delta}$ such that $E_n\subset B_n$ and $\mu^*(B_n-E_n)=0$. Letting $B=\bigcup_{n=1}^\infty B_n$, we have
+
+%\[
+%E\subset B=\bigcup_{n=1}^\infty B_n.
+%\]
+%
+%Since $B_n\in\MC{A}_{\sigma\delta}$, we can write 
+%
+%\[
+%B_n=\bigcap_{j=1}^\infty \bigcup_{k=1}^\infty A_k^{n_j}
+%\]
+%
+%where $A_k^{n_j}\in\MC{A}$, and thus
+%
+%\[
+%E\subset B=\bigcup_{n=1}^\infty B_n=\bigcup_{n=1}^\infty \bigcap_{j=1}^\infty \bigcup_{k=1}^\infty A_k^{n_j}
+%\]
+
+
+\end{proof}
+
+\end{enumerate}
+
+\pagebreak
+
+
+\item Let $\mu^*$ be an outer measure on $X$ induced from a finite premeasure $\mu_0$. If $E\subset X$, define the \textbf{inner measure} of $E$ to be $\mu_*(E)=\mu_0(X)-\mu^*(E^c)$. Then $E$ is $\mu^*$-measurable iff $\mu^*(E)=\mu_*(E)$. (Use Exercise 18.)
+
+\begin{proof}
+
+
+
+Let $E\subset X$. First, suppose that $E$ is $\mu^*$-measurable. Then for any set $A\in\MC{M}$, $\mu^*(A)=\mu^*(A\cap E)+\mu^*(A\cap E^c)$. In particular,
+
+\begin{align*}
+\mu^*(X)&=\mu^*(X\cap E)+\mu^*(X\cap E^c)\\[2mm]
+\mu_0(X)&=\mu^*(E)+\mu^*(E^c)\\[2mm]
+\mu_0(X)-\mu^*(E^c)&=\mu^*(E)\\[2mm]
+\mu_*(E)=\mu_0(X)-\mu^*(E^c)&=\mu^*(E).\\[2mm]
+\end{align*}
+
+
+Second, suppose instead that $\mu^*(E)=\mu_*(E)$. Then, since $\mu_0(X)<\infty$,
+
+\begin{align*}
+\mu^*(E)&=\mu_0(X)-\mu^*(E^c)\\[2mm]
+\mu_0(X)&=\mu^*(E)+\mu^*(E^c)\\[2mm]
+\mu^*(X)&=\mu^*(E)+\mu^*(E^c).
+\end{align*}
+
+Now, by part (a), for every $j>0$, there exists a set $A_j\in\MC{A}_\sigma$ such that $E\subset A_j$ and $\mu^*(A_j)\leq\mu^*(E)+\frac{1}{j}$. Write $A=\bigcap_{j=1}^\infty A_j$. Then $E\subset A\subset A_j$ for all $j$, and thus $\mu^*(E)\leq\mu^*(A)\leq\mu^*(A_j)\leq\mu^*(E)+\frac{1}{j}$. Since this is true for all $j$, $\mu^*(E)=\mu^*(A)$. Moreover, $\mu^*(E^c)=\mu^*(A^c)$. Now, $A$ is measurable since it is a countable intersection of sets in $\MC{A}$, and we are going to leverage this measurability. Since $A$ is measurable, we have, in particular
+
+\begin{align*}
+\mu^*(E)+\mu^*(E^c)&=\mu^*(E)+\mu^*(A \cap E^c)+\mu^*(A^c \cap E^c)\\[2mm]
+&=\mu^*(E)+\mu^*(A \cap E^c)+\mu^*(A^c)\\[2mm]
+&=\mu^*(E)+\mu^*(A \cap E^c)+\mu^*(E^c)\\[2mm]
+\end{align*}
+
+which implies that $\mu^*(A-E)=0$. Note that $A\in\MC{A}_{\sigma\delta}$ and $\mu^*(E-A)=0$. Thus, by part (b) above, $E$ is measurable.
+
+
+
+
+
+
+\end{proof}
+
+\end{enumerate}
+
+
+
+\textbf{Exercises, p. 39.}
+
+\begin{enumerate}
+\setcounter{enumi}{24}
+
+\item Complete the proof of Theorem 1.19:
+
+\begin{theorem*}[1.19]
+Let $\mu$ be a complete Lebesgue-Stieltjes measure on $\R$, and let $E\subset \R$. Then the following are equivalent:
+\begin{enumerate}
+\item $E\in\MC{M}_\mu$.
+\item $E=V-N_1$ where $V$ is a $G_\delta$ set and $\mu(N_1)=0$.
+\item $E=H\cup N_2$ where $H$ is an $F_\sigma$ set and $\mu(N_2)=0$.
+\end{enumerate}
+\end{theorem*} 
+
+\begin{proof}
+To clarify what Folland has failed to, we are being asked to assume that $\mu(E)=\infty$ and show that (a) implies (b) and (c). Note that his proof already establishes that (b) and (c) imply (a) in the infinite measure case since the result simply follows from the completeness of $\mu$.
+
+To that end, suppose $\mu(E)=\infty$. Additionally, since $\mu$ is a Lebesgue-Stieltjes measure, it is $\sigma$-finite so we may write $X=\bigcup_{n=1}^\infty X^n$ where $\mu(X^n)<\infty$. Let $E^n= E\cap X^n$. Then $\mu(E^n)<\infty$, and by Theorem 1.18, for every $j$ there exists a an open set $U_j^n\supset E^n$ where $\mu(U_j^n)<\mu(E^n)+\frac{1}{n2^j}$. Now, write $U_j^n=E^n\cup(U_j^n-E^n)$. This is a disjoint union so
+
+\[
+\mu(U_j^n)=\mu(E^n)+\mu(U_j^n-E^n)
+\]
+
+which implies that $\mu(U_j^n-E^n)< \frac{1}{n2^j}$. Let $U^n=\bigcup_{j=1}^\infty U_j^n$. Then $U^n$ is open, $E\subset U^n$, and 
+
+\[
+U^n-E=\bigcup_{j=1}^\infty (U_j^n-E^n)\text{, so}
+\]
+\[
+\mu(U^n-E)\leq \sum_{j=1}^\infty\mu(U_j^n-E^n)<\sum_{j=1}^\infty\frac{1}{n2^j}=\frac{1}{n}.
+\]
+
+Now define $V=\bigcap_{n=1}^\infty U^n$. Then $V$is a $G_\delta$ set and $E\subset V$. Moreover,
+
+\[
+\mu(V-E)\leq\mu(U^n-E)<\frac{1}{n}
+\]
+
+and since this is true for all $n$, $\mu(V-E)=0$. Write $N_1=V-E$ and we have $E=V-N_1$ where $V$ is a $G_\delta$ set and $\mu(N_1)=0$.
+
+Next we show that (a) implies (c). The argument is similar to that of the previous proof. Suppose $\mu(E)=\infty$ and write $X=\bigcup_{n=1}^\infty X^n$ where $\mu(X^n)<\infty$. Write $E^n=E\cap X^n$. Then $\mu(E^n)<\infty$ and by Proposition 1.18, for each $j$ there exists a compact set $K^n_j$ such that $K^n_j\subset E^n$ and $\mu(K^n_j)>\mu(E^n)-\frac{1}{j}$. Writing $E^n=K^n_j\cup(E^n-K^n_j)$ yields that $\mu(E^n-K^n_j)<\frac{1}{j}$. Let $K^n=\bigcup_{j=1}^\infty K^n_j$. Then $K^n$ is an $F_\sigma$ set and $K^n\subset E^n$ for each $n$. By construction, $E^n-K^n\subset E^n-K^n_j$ for each $j$, so  $\mu(E^n-K^n)\leq\mu(E^n-K^n_j)\leq\frac{1}{j}$. Since this is true for all $j$, it must be the case that $\mu(E^n-K^n)=0$. Now, for each $n$ we may write $E^n$ as the disjoint union $E^n=K^n\cup(E^n-K^n)$ where $K^n$ is an $F_\sigma$ set and $\mu(E^n-K^n)$ is a null set. Finally, let $H=\bigcup_{n=1}^\infty K^n$ and $N_2=\bigcup_{n=1}^\infty (E^n-K^n)$. Then
+
+\[
+E=\bigcup_{n=1}^\infty E^n=\bigcup_{n=1}^\infty [K^n\cup(E^n-K^n)]=\left(\bigcup_{n=1}^\infty K^n\right)\cup\left(\bigcup_{n=1}^\infty(E^n-K^n)\right)=H\cup N_2.
+\]
+
+A countable union of $F_\sigma$ sets is an $F_\sigma$, and a countable union of null sets is a null set, so we are done.
+and we are done.
+\end{proof}
+
+
+%\item Complete the proof of Theorem 1.20. (Use Theorem 1.18):
+%
+%\begin{theorem*}[1.20]
+%If $E\in\MC{M}_\mu$ and $\mu(E)<\infty$, then for every $\ve>0$ there is a set $A$ that is a finite union of open intervals such that $\mu(E\triangle A)<\ve$.
+%\end{theorem*} 
+%
+%\begin{proof}
+%Let $E\in\MC{M}_\mu$ and suppose $\mu(E)<\infty$. Let $\ve>0$ be given. By Theorem 1.18, there exists a compact set $K_j\subset E$ such that $\mu(K_j)>\mu(E)-\frac{\ve}{2^j}$. Write $K=\bigcup_{j=1}^\infty K_j$. Then $K\subset E$ and $\mu(K)\leq\sum_{j=1}^\infty\mu(K_j)$ by subadditivity. Now write $E=K\cup(E-K)$. Then
+%
+%\begin{align*}
+%\mu(E)&=\mu(K)\cup\mu(E-K)\\[2mm]
+%&\geq
+%\end{align*}
+%
+%\end{proof}
+
+\setcounter{enumi}{26}
+
+\item Prove Proposition 1.22(a). (Show that if $x,y\in C$ and $x<y$, there exists a $z\notin C$ such that $x<z<y$.
+
+\begin{proposition*}[1.22(a)] The Cantor set $\MC{C}$ is compact, nowhere dense, and totally disconnected (i.e. the only connected subsets of $\MC{C}$ are single points). Moreover, $\MC{C}$ has no isolated points.
+\end{proposition*}
+
+\begin{proof}
+First, by construction, the complement of $\MC{C}$, $\MC{C}^c$, is open since it is a countable union of open intervals. It follows then that $(\MC{C}^c)^c=\MC{C}$ is closed. Since $\MC{C}\subset[0,1]$ as well, it is closed and bounded i.e. compact. 
+
+Moreover, since it is closed, it is equal to its closure. Suppose by way of contradiction that $\MC{C}$ has nonempty interior, and let $x\in\MC{C}^\circ$. Then there exists an open interval $(a,b)\subset \MC{C}$ such that $x\in (a,b)$. By part (b) of Proposition 1.22, $m(\MC{C})=0$, so we have $m((a,b))\leq m(\MC{C})=0$, which is a contradiction. Thus, the Cantor set must be nowhere dense. 
+
+Next we show that the Cantor set is totally disconnected. Let $x,y\in\MC{C}$ with $x<y$. Then each have a ternary expansion
+
+\[
+\sum_{j=1}^\infty\frac{x_j}{3^j}\aspace\sum_{j=1}^\infty\frac{y_j}{3^j}
+\]
+
+where $x_n<y_n$ for some $n\in\mathbb{Z}^+$. Since $x$ and $y$ are both in $\MC{C}$, it must be the case that $x_n=0$ and $y_n=2$. Choose
+
+\[
+z=\sum_{j=1}^{n-1}\frac{x_j}{3^j}+\frac{1}{3^n}+\sum_{j=n+1}^\infty\frac{y_j}{3^j}.
+\]
+
+Then $x<z<y$ and $z\notin\MC{C}$. Since $x$ and $y$ were chosen arbitrarily, $z$ exists for any pair of points in $\MC{C}$, so $\MC{C}$ must be totally disconnected.
+
+Let $x\in\MC{C}$. Then $x$ must lie in some interval $\MC{C}^k$ in the construction of $\MC{C}$ for some $k\in\mathbb{Z}^+$ so that $|x-y_k|\leq\frac{1}{3^k}$ for one endpoint $y_k$. Then $\left[x-\frac{1}{3^k},x\right)\cup\left(x,x+\frac{1}{3^k}\right]$intersects $\MC{C}$ for all $k$, so $\MC{C}$ has no isolated points.
+\end{proof}
+
+\setcounter{enumi}{28}
+
+\item Let $E$ be a Lebesgue measurable set.
+
+\begin{enumerate}
+\item If $E\subset N$ where $N$ is the nonmeasurable set described in section 1.1, then $m(E)=0$.
+
+\begin{proof}
+Let $E\subset N$ and let $E_r\subset N_r$ for each $r\in R$ as in Vitali's construction. Then $E_r\cap E_s=\varnothing$ for $r,s\in\mathbb{Q}$, and since $\bigcup_{r\in R}N_r=[0,1)$, we have
+
+\[
+1=m([0,1))=\sum_{r\in R} m(N_r)\geq\sum_{r\in R} m(E_r)=\sum_{r\in R}m(E)
+\]
+
+by monotonicity and translation invariance. If $m(E)>0$, then the sum on the right diverges, thus $m(E)=0$.
+
+\end{proof}
+
+
+\item If $m(E)>0$, then $E$ contains a nonmeasurable set. (It suffices to assume that $E\subset[0,1]$. In the notation of section 1.1, $E=\bigcup_{r\in R}E\cap N_r$.)
+
+\begin{proof}
+Let $E$ be Lebesgue measurable and suppose that $m(E)>0$. Assume further that $E\subset[0,1]$, and write $E_r=E\cap N_r$ for each $r\in R$. Then, since $\bigsqcup_{r\in R}N_r=[0,1)$,
+
+\[
+E=\bigsqcup_{r\in R}E_r.
+\]
+
+Now, suppose $E_r$ is measurable for some $r\in R$. Then, since $E_r\subset N_r$, and $m(N)=m(N_r)$, we have that $m(E_r)=0$ by part (a) and translation invariance. Thus,
+
+\[
+m(E)=\sum_{r\in R}m(E_r)=\sum_{r\in R}0=0,
+\]
+
+but this contradicts the fact that $m(E)>0$. Consequently at least one $E_r$ must be nonmeasurable, and since $E_r=E\cap N_r\subset E$, $E$ contains a nonmeasurable set.
+
+\end{proof}
+
+\end{enumerate}
+
+\item If $E\in \MC{L}$ and $m(E)>0$, for any $\alpha<1$ there is an open interval $I$ such that $m(E\cap I)>\alpha m(I)$.
+
+\begin{proof}
+
+Let $E\in\MC{L}$ and suppose that $m(E)>0$. We will split this into three cases:
+
+\textit{Case 1:} $m(E)<\infty$ and $0\leq \alpha <1$.
+
+By Theorem 1.18, we can choose on open set $U\supset E$ such that $\alpha m(U)<m(E)$. Since $U$ is an open set, it is a countable union of disjoint open intervals, say,
+
+\[
+U=\bigsqcup_{j=1}^\infty I_j.
+\]
+
+Then by countable additivity, we have
+
+\[
+\alpha \sum_{j=1}^\infty m(I_j)=\alpha m(U)<m(E)=\sum_{j=1}^\infty m(I_j\cap E)
+\]
+
+Note that $(I_j\cap E)\subset I_j$ for each $j$, so by construction there must be a $\widehat{j}$ such that $\alpha m(I_{\widehat{j}})<m(I_{\widehat{j}}\cap E)$. Let $I=I_{\widehat{j}}$, and then we have $m(E\cap I)>\alpha m(I)$. 
+
+\pagebreak
+\textit{Case 2:} $m(E)=\infty$ and $0\leq \alpha <1$.
+
+Choose an interval $J$ such that $m(J\cap E)<\infty$. Then by a construction similar to that above, we can find an open interval $I$ such that $\alpha m(I)<m((J\cap E)\cap I)<m(E\cap I)$ by monotonicity.
+
+\textit{Case 3:} $m(E)<\infty$ or $m(E)=\infty$, and $\alpha <0$.
+
+Since $m(E)>0$, by Theorem 1.18, we can find a compact set $K\subset E$ such that $m(K)>0$. Since $K$ is compact, $a=\min\{x\mid x\in K\}$ and $b=\max\{x\mid x\in K\}$ exist and are contained in $K$. Let $I=[a,b)$. Then  $E\cap I=I$ and thus
+
+\[
+m(E\cap I)=m(I)>0>\alpha m(I).
+\]
+
+
+\end{proof}
+
+
+
+\item If $E\in \MC{L}$ and $m(E)>0$, the set $E-E=\{x-y\mid x,y\in E\}$ contains an interval centered at 0. (If $I$ is as in exercise 30 with $\alpha >\frac{3}{4}$, then $E-E$ contains $\left(-\frac{1}{2}m(I),\frac{1}{2}m(I)\right)$.)
+
+\begin{proof}
+
+Let $E\in \MC{L}$ and suppose $m(E)>0$. Utilizing Exercise 30, let $\alpha=\frac{3}{4}$ so that there exists an interval $I=(x_0-\ve,x_0+\ve)$ such that $m(E\cap I)>\frac{3}{4}m(I)$. Since $m(E)>0$, it is nonempty, and thus $0\in E-E$ since there exists an $x\in E$. 
+
+Suppose by way of contradiction that $E-E$ does not contain $\left(-\frac{1}{2}m(I),\frac{1}{2}m(I)\right)$. Then there exists a $\delta\in (0,\ve)$ such that $x-y\neq \delta$ for all $x,y\in E$. Define
+
+\[
+E_1=E\cap (x_0-\ve, x_0]\aspace E_2=E\cap (x_0,x_0+\ve).
+\]
+
+Then for all $x\in E_1$, $x+\delta\subset I$ but $x+\delta \notin E$ so $x\in I\setminus E$, so we have $E_1\subset I\setminus E$. Using a similar argument, for all $x\in E_2$, $x-\delta\in I\setminus E$, so we have that $E_2\subset I\setminus E$. By translation invariance and monotonicity of the Lebesgue measure, as well as the definition of measurability we have
+
+\begin{align*}
+m(E_1)&=m(E_1+\delta)\leq m(I\setminus E)=m(I\cap E^c)=m(I)-m(E\cap I)\text{, and}\\[2mm]
+m(E_2)&=m(E_2-\delta)\leq m(I\setminus E)=m(I\cap E^c)=m(I)-m(E\cap I).
+\end{align*}
+
+
+Consequently, 
+
+\begin{align*}
+m(E\cap I)=m(E_1)+m(E_2)&\leq 2m(I)-2m(E\cap I)\\[2mm]
+3m(E\cap I)&\leq 2m(I)\\[2mm]
+m(E\cap I)&\leq\frac{2}{3}m(I)\\[2mm]
+\frac{3}{4}m(I)<m(E\cap I)&\leq\frac{2}{3}m(I),
+\end{align*}
+
+which is a contradiction. Therefore, $E-E$ contains an interval centered at 0.
+
+
+\end{proof}
+
+
+\setcounter{enumi}{32}
+
+\item There exists a Borel set $A\subset [0,1]$ such that $0<m(A\cap I)<m(I)$ for every subinterval $I$ of $[0,1]$. (Hint: every subinterval of $[0,1]$ contains Cantor-type sets of positive measure.)
+
+\begin{proof}
+
+To show this, we begin by constructing a fat Cantor set which has positive measure. Let $\MC{C}$ be the middle-fourths Cantor set, i.e. the set formed in the same way as the middle-thirds Cantor set, but removing the middle-fourths instead. Let $C_k$ be the finite union of intervals in the $k$th iteration of the process. Then $\MC{C}=\bigcap_{k=1}^\infty C_k$. Moreover, let $c_{k,j}$ be any one of the $2^j$ intervals comprising $C_k$, e.g.
+
+\begin{align*}
+ C_1&=c_{1,1}\cup c_{1,2}=\left[0,\frac{3}{8}\right]\cup\left[\frac{5}{8},1\right]\\[2mm]
+ C_2&=c_{2,1}\cup c_{2,2}\cup c_{2,3}\cup c_{2,4}=\left[0,\frac{5}{32}\right]\cup\left[\frac{7}{32},\frac{12}{32}\right]\cup\left[\frac{20}{32},\frac{25}{32}\right]\cup\left[\frac{27}{32},1\right]\\[2mm]
+ \vdots&\\[2mm]
+ C_k&=\bigcup_{j=1}^{2^k}c_{k,j}.
+\end{align*}
+
+%Then, in particular, we have $m(c_{k,j})=\frac{2^k+1}{2^{2k+1}}$.
+
+%\begin{align*}
+%m(C_1)&=\frac{3}{4}\\[2mm]
+%m(C_2)&=\frac{5}{8}\\[2mm]
+%m(C_3)&=\frac{9}{16}\\[2mm]
+%\vdots&\\[2mm]
+%m(C_k)&=\frac{?}{?}
+%\end{align*}
+
+
+Now, define $A=[0,1]\setminus \MC{C}$. Then $A$ is a countable union of open intervals. As such it is an open set and it is Borel. The measure $m(A)$ of this set is the sum of the lengths of all of the removed intervals in the construction of $\MC{C}$, i.e. 
+
+\[
+m(A)=\frac{1}{4}+\frac{2}{16}+\frac{4}{64}+\cdots=\sum_{k=1}^\infty\frac{2^{k-1}}{4^k}=\frac{\frac{1}{4}}{1-\frac{1}{2}}=\frac{1}{2},
+\]
+
+so it is of positive measure as required. Finally, let $I$ be any subinterval of $[0,1]$, say $I=[a,b]$, and consider the set 
+
+\[
+B=(b-a)^{-1}A+\frac{a+b}{2}=\left\{\frac{1}{b-a}x+\frac{a+b}{2}\mid x\in A\right\},
+\]
+
+that is, the set of elements in $A$ after a scaling by the length of $I$ and shift to be centered in $I$. Note that $B\subset I$, and $m(B)=m(A)>0$. Thus, by Theorem 1.21,
+
+\[
+0<m(B)=m(B\cap I)<m(I)
+\]
+
+
+
+
+%Next we show that $\MC{C}$ is nowhere dense, which will yield that $A$ is a dense subset of $[0,1]$. Let $x,y\in\MC{C}$ be distinct points and suppose without loss of generality that $x<y$. By the Archimedian property we can find a $k$ such that $y-x>\frac{2^k+1}{2^{2k+1}}$, whence $x$ and $y$ must lie in different subintervals in $\MC{C}$. Since $x$ and $y$ were chosen arbitrarily, $\MC{C}$ cannot contain any intervals and hence is nowhere dense by definition. Consequently $A$ is dense in $[0,1]$ so it intersects every subset of $[0,1]$ by definition, and in particular every subinterval.
+
+
+\end{proof}
+
+\end{enumerate}
+
+
+
+
+
+\end{document}

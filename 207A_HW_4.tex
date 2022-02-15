@@ -1,0 +1,172 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{comment}
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\ve}{\varepsilon}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{207A - ODE}
+\rightline{Chen, Weitao}
+\rightline{HW 4}
+\rightline{\today}
+
+
+
+\vspace{1cm}
+\begin{enumerate}
+
+%\begin{comment}
+
+
+
+
+\item[\textbf{4.5.1.}] Prove equation $(4.37)$.
+
+\begin{proof}
+First, as per the hint in the book, we will show that $|\mathbf{z}(t)|$ is bounded on $0\leq t<\infty$ where 
+
+\[
+\mathbf{z}(t)=\mathbf{y}(t)-U_1(t)\mathbf{y}(0)-\int_0^tU_1(t-s)\mathbf{g}(\mathbf{y}(s))\,ds+\int_t^\infty U_2(t-s)\mathbf{g}(\mathbf{y}(s))\,ds
+\]
+
+Note that $|\mathbf{g}(\mathbf{y}(t))|$ is bounded whenever $|\mathbf{y}(t)|<\delta$; by hypothesis $\left|\pp{\mathbf{g}}{y_j}\right|\rightarrow 0$ so, in particular, $\mathbf{g}$ is differentiable on the interval $[0,\delta]$ and thus continuous there which means it takes on extreme values in the interval. Write $|\mathbf{g}(\mathbf{y}(t))|\leq M$ for all $|\mathbf{y}|\leq \delta$. Then we have
+
+\begin{align*}
+\mathbf{z}(t)&=\mathbf{y}(t)-U_1(t)\mathbf{y}(0)-\int_0^tU_1(t-s)\mathbf{g}(\mathbf{y}(s))\,ds+\int_t^\infty U_2(t-s)\mathbf{g}(\mathbf{y}(s))\,ds\\[2mm]
+|\mathbf{z}(t)|&=\left|\mathbf{y}(t)-U_1(t)\mathbf{y}(0)-\int_0^tU_1(t-s)\mathbf{g}(\mathbf{y}(s))\,ds+\int_t^\infty U_2(t-s)\mathbf{g}(\mathbf{y}(s))\,ds\right|\\[2mm]
+&\leq|\mathbf{y}(t)|+|U_1(t)||\mathbf{y}(0)|+\int_0^t|U_1(t-s)||\mathbf{g}(\mathbf{y}(s))|\,ds+\int_t^\infty |U_2(t-s)||\mathbf{g}(\mathbf{y}(s))|\,ds\\[2mm]
+&\leq\delta+ke^{-\mu t}+M\int_0^te^{-\mu(t-s)}\,ds+M\int_t^\infty e^{\lambda(t-s)}\,ds\\[2mm]
+&=\delta+ke^{-\mu t}+Me^{-\mu t}\int_0^te^{\mu s}\,ds+Me^{\lambda t}\int_t^\infty e^{-\lambda s}\,ds\\[2mm]
+&=\delta+ke^{-\mu t}+Me^{-\mu t}\left(\frac{1}{\mu}e^{\mu t}-\frac{1}{\mu}\right)+Me^{\lambda t}\left(0+\frac{1}{\lambda}e^{-\lambda t}\right)\\[2mm]
+&=\delta+ke^{-\mu t}+\frac{M}{\mu}(1-e^{-\mu t})+\frac{M}{\lambda}\\[2mm]
+&<\infty \hspace{3mm}\text{ for all $t\geq0$.}
+\end{align*}
+
+
+\begin{align*}
+z'(t)&=\mathbf{y}'(t)-U_1'(t)\mathbf{y}(0)-\dd{}{t}\int_0^tU_1(t-s)\mathbf{g}(\mathbf{y}(s))\,ds+\dd{}{t}\int_t^\infty U_2(t-s)\mathbf{g}(\mathbf{y}(s))\,ds\\[2mm]
+&=A\mathbf{y}+\mathbf{g}(\mathbf{y})-U_1'(t)\mathbf{y}(0)-U_1(t-t)\mathbf{g}(\mathbf{y}(t))\cdot 1-U_1(t-0)\mathbf{g}(\mathbf{y}(0))\cdot0+\int_0^t\pp{}{t}U_1(t-s)\mathbf{g}(\mathbf{y}(s))\,ds\\[2mm]
+&+\lom{N}{\infty}U_2(t-N)\mathbf{g}(\mathbf{y}(N))\cdot0-U_2(t-t)\cdot\mathbf{g}(\mathbf{y}(t))\cdot1+\lom{N}{\infty}\int_t^N\pp{}{t}U_2(t-s)\mathbf{g}(\mathbf{y}(s))\,ds\\[2mm]
+&=A\mathbf{y}+\mathbf{g}(\mathbf{y})-U_1'(t)\mathbf{y}(0)-U_1(0)\mathbf{g}(\mathbf{y}(t))-U_2(0)\mathbf{g}(\mathbf{y}(t))\\[2mm]
+&-\int_0^t\pp{}{t}U_1(t-s)\mathbf{g}(\mathbf{y}(s))\,ds+\lom{N}{\infty}\int_t^N\pp{}{t}U_2(t-s)\mathbf{g}(\mathbf{y}(s))\,ds\\[2mm]
+&=A\mathbf{y}+\mathbf{g}(\mathbf{y})-U_1'(t)\mathbf{y}(0)-\begin{pmatrix}1 & 0\\ 0 & 1\end{pmatrix}\mathbf{g}(\mathbf{y}(t))-\int_0^t\begin{pmatrix}-\mu e^{-\mu t} & 0 \\ 0 & 0 \end{pmatrix}\mathbf{g}(\mathbf{y}(s))\,ds+\int_t^\infty\begin{pmatrix}0 & 0\\ 0 & \lambda e^{\lambda t}\end{pmatrix}\mathbf{g}(\mathbf{y}(s))\,ds\\[2mm]
+&=A\mathbf{y}+\mathbf{g}(\mathbf{y})+AU_1(t)\mathbf{y}(0)-E\mathbf{g}(\mathbf{y}(t))-\int_0^tAU_1(t-s)\mathbf{g}(\mathbf{y}(s))\,ds+\int_t^\infty AU_2(t-s)\mathbf{g}(\mathbf{y}(s))\,ds\\[2mm]
+&=A\mathbf{y}+AU_1(t)\mathbf{y}(0)-\int_0^tAU_1(t-s)\mathbf{g}(\mathbf{y}(s))\,ds+\int_t^\infty AU_2(t-s)\mathbf{g}(\mathbf{y}(s))\,ds\\[2mm]
+&=A\left(\mathbf{y}+U_1(t)\mathbf{y}(0)-\int_0^tU_1(t-s)\mathbf{g}(\mathbf{y}(s))\,ds+\int_t^\infty U_2(t-s)\mathbf{g}(\mathbf{y}(s))\,ds\right)\\[2mm]
+&=Az.
+\end{align*}
+
+\end{proof}
+
+\pagebreak
+
+\item[\textbf{4.5.2.}] Prove by induction that $\displaystyle |\mathbf{w}_{k+1}(t)-\mathbf{w}_k(t)|\leq\frac{|\mathbf{y}(0)|}{2^k}e^{-\alpha t}\hspace{7mm}(t\geq 0)$
+
+
+\begin{proof}
+
+The base case when $k=0$ has already been shown so it suffices to show the inductive step. Suppose the inequality holds for some $k-1\geq 0$. Then it suffices to show that it holds for $k$. Observe that
+
+\begin{align*}
+|\mathbf{w}_{k+1}(t)-\mathbf{w}_k(t)|&=\left| U_1(t)\mathbf{y}(0)+\int_0^t U_1(t-s)\mathbf{g}(\mathbf{w}_k(s))\,ds-\int_t^\infty U_2(t-s)\mathbf{g}(\mathbf{w}_k(s))\,ds\right.\\[2mm]
+&-\left. U_1(t)\mathbf{y}(0)-\int_0^t U_1(t-s)\mathbf{g}(\mathbf{w}_{k-1}(s))\,ds+\int_t^\infty U_2(t-s)\mathbf{g}(\mathbf{w}_{k-1}(s))\,ds\right|\\[2mm]
+&=\left|\int_0^tU_1(t-s)[\mathbf{g}(\mathbf{w}_k(s))-\mathbf{g}(\mathbf{w}_{k-1}(s))]\,ds-\int_t^\infty U_2(t-s)[\mathbf{g}(\mathbf{w}_k(s))-\mathbf{g}(\mathbf{w}_{k-1}(s))]\,ds\right|\\[2mm]
+&\leq \int_0^t|U_1(t-s)||\mathbf{g}(\mathbf{w}_k(s))-\mathbf{g}(\mathbf{w}_{k-1}(s))|\,ds+\int_t^\infty |U_2(t-s)||\mathbf{g}(\mathbf{w}_k(s))-\mathbf{g}(\mathbf{w}_{k-1}(s))|\,ds\\[2mm]
+&\leq \ve\int_0^t|U_1(t-s)||\mathbf{w}_k(s)-\mathbf{w}_{k-1}(s)|\,ds+\ve\int_t^\infty |U_2(t-s)||\mathbf{w}_k(s)-\mathbf{w}_{k-1}(s)|\,ds\\[2mm]
+&\leq \ve\cdot \frac{|\mathbf{y}(0)|}{2^{k-1}}e^{-\alpha t}\int_0^t|U_1(t-s)|\,ds+ \ve\cdot \frac{|\mathbf{y}(0)|}{2^{k-1}}e^{-\alpha t}\int_t^\infty |U_2(t-s)|\,ds\\[2mm]
+&\leq \ve\cdot \frac{|\mathbf{y}(0)|}{2^{k-1}}e^{-\alpha t}\int_0^te^{-(\alpha+\sigma)(t-s)}\,ds+ \ve\cdot \frac{|\mathbf{y}(0)|}{2^{k-1}}e^{-\alpha t}\int_t^\infty e^{\sigma(t-s)}\,ds\\[2mm]
+&= \ve\cdot \frac{|\mathbf{y}(0)|}{2^{k-1}}\left(\frac{e^{-\alpha t}}{\alpha +\sigma}-\frac{e^{-2\alpha t-\sigma t}}{\alpha+\sigma}\right)+ \ve\cdot \frac{|\mathbf{y}(0)|}{2^{k-1}}\left(\frac{1}{\sigma}e^{-\alpha t}\right)\\[2mm]
+&=\frac{|\mathbf{y}(0)|}{2^{k-1}}e^{-\alpha t}\left(\frac{\ve}{\alpha+\sigma}-\frac{\ve e^{-t(\alpha +\sigma)}}{\alpha +\sigma}+\frac{\ve e^{-\alpha t}}{\sigma}\right)\\[2mm]
+&\leq\frac{|\mathbf{y}(0)|}{2^{k-1}}e^{-\alpha t}\left(\frac{\ve}{\sigma}-\frac{\ve e^{-t(\alpha +\sigma)}}{\sigma}+\frac{\ve e^{-\alpha t}}{\sigma}\right)\\[2mm]
+&\leq\frac{|\mathbf{y}(0)|}{2^{k-1}}e^{-\alpha t}\left(\frac{1}{4}-\frac{e^{-t(\alpha +\sigma)}}{4}+\frac{ e^{-\alpha t}}{4}\right)\\[2mm]
+&\leq\frac{|\mathbf{y}(0)|}{2^{k-1}}e^{-\alpha t}\left(\frac{1}{4}-\frac{1}{4}+\frac{1}{4}\right)\\[2mm]
+&\leq\frac{|\mathbf{y}(0)|}{2^{k-1}}e^{-\alpha t}\left(\frac{1}{4}\right)\\[2mm]
+%&\leq\frac{|\mathbf{y}(0)|}{2^{k-1}}e^{-\alpha t}\left(\frac{1}{2}\right)\\[2mm]
+&\leq\frac{|\mathbf{y}(0)|}{2^{k}}e^{-\alpha t}.\\[2mm]
+\end{align*}
+\end{proof}
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

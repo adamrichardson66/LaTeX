@@ -1,0 +1,287 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+%\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209A - Real Analysis}
+\rightline{Zhang, Qi}
+\rightline{HW 3}
+\rightline{\today}
+
+
+\textbf{Folland: Exercises, p. 48.} 2, 3, 4, 6, 8, 9, 10
+
+\vspace{1cm}
+\begin{enumerate}
+\setcounter{enumi}{1}
+
+
+\item Suppose $f,g:X\rightarrow \overline{\R}$ are measurable.
+
+\begin{enumerate}
+\item $fg$ is measurable (where $0\cdot(\pm\infty)=0$).
+
+\begin{proof}
+Suppose $f,g$ are measurable and let $a\geq0$. Additionally, suppose $f,g\geq0$ and let $I$ be an enumeration of the positive rational numbers. Then
+
+\[
+(fg)^{-1}((a,\infty))=\{x\mid f(x)g(x)>a\}=\bigcup_{r\in I}\{x\mid f(x)>r\}\cap\{x\mid g(x)>a/r\}
+\]
+
+The right hand side of the set equality above is a countable union of measurable sets since $f$ and $g$ are measurable, and thus $fg$ is measurable when $a\geq0$ and $f,g\geq0$. Now suppose $a<0$. Then $(fg)^{-1}((a,\infty))=\{x\mid f(x)g(x)>a\}=X$ since $f,g\geq0$ (and by exercise 2.1.1). Therefore, $fg$ is measurable whenever $a\in\R$.
+
+Now, recall that we can write $f=f^+-f^-$ and $g=g^+-g^-$ where $f^+,f^-,g^+,g^-\geq0$. Then
+
+\[
+fg=(f^+-f^-)(g^+-g^-)=f^+g^+-f^+g^--f^-g^++f^-g^-.
+\]
+
+By our previous result, all of the terms of this sum are measurable, and so the sum is measurable, i.e. $fg$ is a measurable function.
+\end{proof}
+
+\pagebreak
+
+\item Fix $a\in\overline{\R}$ and define $h(x)=a$ if $f(x)=-g(x)=\pm\infty$ and $h(x)=f(x)+g(x)$ otherwise. Then $h$ is measurable.
+
+\begin{proof}
+
+
+%
+%\begin{align*}
+%h^{-1}(\overline{\R}\setminus \{a\})&=(f+g)^{-1}(\overline{\R}\setminus\{a\})\\[2mm]
+%&=\{x\mid f(x)+g(x)\in\overline{\R}\setminus\{a\}\}\\[2mm]
+%&=\{x\mid f(x)+g(x)>a\}\cup\{x\mid f(x)+g(x)<a\}\\[2mm]
+%&=(f+g)^{-1}((a,\infty])\cup(f+g)^{-1}([-\infty,a)).
+%\end{align*}
+
+First, observe that
+
+\begin{align*}
+h^{-1}(\{a\})&=\{x\mid f(x)=-g(x)=\pm\infty\}\\[2mm]
+&=\left(\{x\mid f(x)=+\infty\}\cap\{x\mid g(x)=-\infty\}\right)\cup(\{x \mid f(x)=-\infty\}\cap \{x\mid g(x)=+\infty\})\\[2mm]
+&=\left(f^{-1}(\{+\infty\})\cap g^{-1}(\{-\infty\})\right)\cup\left(f^{-1}(\{-\infty\})\cap g^{-1}(\{+\infty\})\right)
+\end{align*}
+
+
+By exercise 2.1.1, these are all measurable sets since $f$ and $g$ are measurable. Now, let $b\in\overline{\R}$. Then 
+
+\begin{align*}
+h^{-1}((b,\infty])&=\begin{cases}(f+g)^{-1}((b,\infty]) & \text{if }b>a\\ (f+g)^{-1}((b,a))\cup h^{-1}(\{a\})\cup(f+g)^{-1}((a,\infty]) & \text{if }b\leq a\end{cases}\\[2mm]
+&=\begin{cases}(f+g)^{-1}((b,\infty))\cup(f+g)^{-1}(\{\infty\}) & \text{if }b>a\\ (f+g)^{-1}((b,a))\cup h^{-1}(\{a\})\cup(f+g)^{-1}((a,\infty))\cup(f+g)^{-1}(\{\infty\}) & \text{if }b\leq a\end{cases}\\[2mm]
+\end{align*}
+
+Since $f$ and $g$ are measurable, so is their sum, and this combined with exercise 2.1.1 yields that $h^{-1}((b,\infty])$ is measurable, and so $h$ is measurable by definition.
+\end{proof}
+
+
+\end{enumerate}
+
+\pagebreak
+
+\item If $\{f_n\}$ is a sequence of measurable functions on $X$, then $\{x\mid \lim f_n(x)\text{ exists}\}$ is a measurable set.
+
+\begin{proof}
+
+Suppose $\{f_n\}$ is a sequence of measurable functions on $X$. If this sequence converges nowhere, then $\{x\mid \lim f_n(x)\text{ exists}\}=\varnothing$ which is measurable so we'll assume that $\{x\mid \lim f_n(x)\text{ exists}\}\neq\varnothing$. Using Folland's notation, we have
+
+\begin{align*}
+\{x\mid \lim f_n(x)\text{ exists}\}&=\{x\mid \liminf f_n(x)=\limsup f_n(x)\}\\[2mm]
+&=\{x \mid g_4(x)=g_3(x)\}\\[2mm]
+&=\{ x\mid g_3(x)-g_4(x)=0\}\\[2mm]
+&=(g_3-g_4)^{-1}(\{0\})\\[2mm]
+&=(g_3-g_4)^{-1}\left(\bigcap_{k=1}^\infty\left(-\frac{1}{k},\frac{1}{k}\right)\right)\\[2mm]
+&=\bigcap_{k=1}^\infty(g_3-g_4)^{-1}\left(\left(-\frac{1}{k},\frac{1}{k}\right)\right).
+\end{align*}
+
+Since $g_3,g_4$ are measurable, so is their difference, and the above equation shows that $\{x\mid \lim f_n(x)\text{ exists}\}$ is a countable intersection of measurable sets, and so it is measurable.
+\end{proof}
+
+
+\item If $f:X\rightarrow \overline{\R}$ and $f^{-1}((r,\infty])\in\MC{M}$ for each $r\in\mathbb{Q}$, then $f$ is measurable.
+
+\begin{proof}
+Suppose $f^{-1}((r,\infty])\in\MC{M}$ for each $r\in\mathbb{Q}$ and let $a\in \R$ be arbitrary but fixed. If $a\in\mathbb{Q}$, then we are done, so we may assume that $a$ is irrational. Consequently, there exists a sequence of rational numbers $\{r_k\}_{k=1}^\infty$ such that $a<r_k$ for all $k$ and $r_k\rightarrow a$ as $k\rightarrow\infty$. Thus,
+
+\begin{align*}
+(a,\infty]&=\bigcup_{k=1}^\infty(r_k,\infty]\text{ so}\\[2mm]
+f^{-1}((a,\infty])&=f^{-1}\left(\bigcup_{k=1}^\infty(r_k,\infty]\right)\\[2mm]
+&=\bigcup_{k=1}^\infty f^{-1}((r_k,\infty])\\[2mm]
+\end{align*}
+so $f$ is measurable when $a\in \R$. In the case where $a=+\infty$, we have $f^{-1}((a,\infty])=f^{-1}((\infty,\infty])=f^{-1}(\varnothing)$ which is measurable, and in the case where $a=-\infty$, we have 
+
+\[
+f^{-1}((a,\infty])=f^{-1}((-\infty,\infty])=f^{-1}\left(\bigcup_{r=1}^\infty(-r,\infty]\right)=\bigcup_{r=1}^\infty f^{-1}((-r,\infty]).
+\]
+
+Since each preimage is measurable, the countable union is measurable and so $f$ is measurable when $a\in\overline{\R}$.
+\end{proof}
+
+\setcounter{enumi}{5}
+\item The supremum of an uncountable family of measurable $\overline{\R}$-valued functions on $X$ can fail to be measurable (unless the $\sigma$-algebra $\MC{M}$ is very special).
+
+\begin{proof}
+Let $\MC{N}$ be the standard nonmeasurable set constructed in Folland's text. For each $\alpha\in \MC{N}$ let $\mathbbm{1}_\alpha$ be the characteristic function defined on the singleton set $\{\alpha\}$. Then the uncountable family of functions $\{\mathbbm{1}\}_\alpha$ converges to 1, and $f^{-1}([a,\infty))=f^{-1}(\{1\})=\MC{N}$ for all $a\leq1$. Consequently, $f$ is nonmeasurable by definition.
+\end{proof}
+
+\setcounter{enumi}{7}
+\item If $f:\R\rightarrow\R$ is monotone, then $f$ is Borel measurable.
+
+\begin{proof}
+Suppose $f$ is monotone, and assume without loss of generality that $f$ is monotone increasing. Let $a\in\R$. If $f$ is continuous, then it is Borel measurable so we may assume that $f$ is discontinuous at at least one point in its domain. If $f^{-1}([a,\infty))=\varnothing$, then we are done since $\varnothing\in\MC{B}_\R$, so we may assume that $f^{-1}([a,\infty))\neq\varnothing$. Let $x\in f^{-1}([a,\infty))$. Choose $y>x$. Then $a<f(x)<f(y)$ so $y\in f^{-1}([a,\infty))$. Since $y$ was chosen arbitrarily and the domain of $f$ is all of $\R$, $f^{-1}([a,\infty))$ must be an interval and thus is Borel. Then by definition, $f$ is Borel measurable.
+\end{proof}
+
+\item Let $f:[0,1]\rightarrow[0,1]$ be the Cantor function and let $g(x)=f(x)+x$.
+
+\begin{enumerate}
+\item $g$ is a bijection from $[0,1]$ to $[0,2]$ and $h=g^{-1}$ is continuous from $[0,2]$ to $[0,1]$.
+
+\begin{proof}
+Recall from a previous homework problem that $f(x)=f(y)$ if and only if $x$ and $y$ are endpoints of the same deleted interval in the construction of the Cantor set $\MC{C}$. But in this case $g(x)=f(x)+x=f(y)+x\neq g(y)=f(y)+y$ unless $x=y$, ergo $f$ is injective. Moreover $g$ is strictly monotone since $f$ is monotone and for $x<y$, $g(x)=f(x)+x<f(y)+y=g(y)$, and it is continuous since it is a sum of continuous functions. To show $g$ is onto, observe that $g(0)=f(0)+0=0$ and $g(1)=f(1)+1=2$. Since $g$ is continuous, by the Intermediate Value Theorem, $g$ attains all values between $0$ and $2$ and so is surjective.
+
+To show $h=g^{-1}$ is continuous, let $(a,b)\subset [0,1]$. Then since $g$ is bijective, $h^{-1}(a)=(g^{-1})^{-1}(a)=g(a)=f(a)+a$ and $h^{-1}(b)=(g^{-1})^{-1}(b)=g(b)=f(b)+b$. Since $a<b$, $h^{-1}(a)<h^{-1}(b)$, and since $a$ and $b$ were chosen arbitrarily, $h$ maps open intervals to open intervals.
+\end{proof}
+
+
+
+\item If $\MC{C}$ is the Cantor set, then $m(g(\MC{C}))=1$.
+
+\begin{proof}
+
+To show this, we first find the length of the images of the intervals removed in the construction of the Cantor set. Let $x,y\in[0,1]\setminus\MC{C}$ with $x<y$. Then $m((g(x),g(y)))=|g(y)-g(x)|=|f(y)+y-f(x)-x|=|f(y)+y-f(y)-x|=|y-x|=m((x,y))$. Consequently, $m(g([0,1]\setminus\MC{C}))=m([0,1]\setminus\MC{C})=1$. For ease, let $[0,1]\setminus \MC{C}=\MC{C}^c$. Now, since $g$ is bijective,
+
+\begin{align*}
+m([0,2])&=m(g(\MC{C}^c)\cup([0,2]\setminus g(\MC{C}^c)))\\[2mm]
+&=m(g(\MC{C}^c))+m([0,2]\setminus g(\MC{C}^c)),\text{ so}\\[2mm]
+2&=1+m(g([0,1])\setminus g(\MC{C}^c))\\[2mm]
+1&=m(g([0,1]\setminus\MC{C}^c))\\[2mm]
+1&=m(g(\MC{C})).
+\end{align*}
+
+\end{proof}
+
+\item By Exercise 29 of Chapter 1, $g(\MC{C})$ contains a Lebesgue nonmeasurable set $A$. Let $B=g^{-1}(A)$. Then $B$ is Lebesgue measurable but not Borel.
+
+\begin{proof}
+Let $A\subset g(\MC{C})$ be a Lebesgue nonmeasurable set and write $B=g^{-1}(A)$. First, $B=g^{-1}(A)\subset g^{-1}(g(\MC{C}))=\MC{C}$, since $g$ is bijective, and since $m(\MC{C})=0$, $m(B)=0$ by monotonicity and thus is Lebesgue measurable. Suppose by way of contradiction that $B$ is Borel measurable. By part (a) above, $g^{-1}$ is continuous so its inverse, $g$, maps open sets to open sets, and thus maps Borel sets to Borel sets. Now, $g(B)=g(g^{-1}(A))=A$ and since $B$ is Borel measurable, so is the nonmeasurable set $A$, a contradiction. Therefore, $B$ is Lebesgue measurable, but not Borel measurable
+\end{proof}
+
+\item There exists a Lebesgue measurable function $F$ and a continuous function $G$ on $\R$ such that $F\circ G$ is not Lebesgue measurable.
+
+\begin{proof}
+Let $F=\mathbbm{1}_B$ and $G=g^{-1}$ where $B$ and $g^{-1}$ are as in part (c) above. Then $F$ is Lebesgue measurable because the preimage of any infinite interval $[a,\infty)$ is either $\varnothing$ or $B$. $G$ is continuous as shown above in part (a). Now, $F\circ G:[0,2]\rightarrow \R$, so let $a<1$ be a real number, and we have
+
+\begin{align*}
+(F\circ G)^{-1}([a,\infty))&=(G^{-1}\circ F^{-1})([a,\infty))\\[2mm]
+&=G^{-1}(F^{-1}([a,\infty))\\[2mm]
+&=G^{-1}(B)\\[2mm]
+&=(g^{-1})^{-1}(B)\\[2mm]
+&=g(g^{-1}(A))\\[2mm]
+&=A,
+\end{align*}
+
+which is Lebesgue nonmeasurable. Thus, $F\circ G$ is Lebesgue nonmeasurable.
+\end{proof}
+
+\end{enumerate}
+
+\item Prove Proposition 2.11:
+
+\textbf{Proposition 2.11.} The following implications are valid iff the measure $\mu$ is complete:
+\begin{enumerate}
+\item If $f$ is measurable and $f=g$ $\mu$-a.e., then $g$ is measurable.
+
+\begin{proof}
+Suppose $f$ is measurable and $f=g$ $\mu$-a.e. Then $f=g$ except for on a null set so for any $a\in\R$,  $g^{-1}([a,\infty))=f^{-1}([a,\infty))\cup Z$ where $\mu(Z)=0$. Then $g$ is measurable if and only if $\mu$ is complete, so that $Z$ is in the sigma algebra associated with $\mu$, $\MC{M}$, whence $f^{-1}([a,\infty))\cup Z\in\MC{M}$. Then $g^{-1}([a,\infty))=f^{-1}([a,\infty))\cup Z$ is measurable and so $g$ is measurable.
+\end{proof}
+
+\item If $f_n$ is measurable for $n\in\mathbb{Z}^+$ and $f_n\rightarrow f$ $\mu$-a.e., then $f$ is measurable.
+
+\begin{proof}
+Suppose $f_n:X\rightarrow Y$ is measurable for $n\in\mathbb{Z}^+$ and $f_n\rightarrow f$ $\mu$-a.e. $x\in X$. Then we can write
+
+\[
+X=\{x\mid \lim f_n(x)\text{ exists}\}\cup\{x\mid \lim f_n(x)\text{ does not exist}\}=E\cup N
+\]
+
+where $N$ is a null set. By Exercise 3 above, $E$ is measurable, and by Proposition 2.7, $f$ is measurable on $E$. Thus, $f$ will be measurable on $X$ if and only if $N$ is measurable, if and only if $X$ is measurable, if and only if $\mu$ is a complete measure. So the statment ``If $f_n$ is measurable for $n\in\mathbb{Z}^+$ and $f_n\rightarrow f$ $\mu$-a.e., then $f$ is measurable,'' is true if and only if $\mu$ is a complete measure.
+\end{proof}
+
+\end{enumerate}
+
+\end{enumerate}
+
+
+
+\end{document}

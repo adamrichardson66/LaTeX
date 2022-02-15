@@ -1,0 +1,223 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210A - Complex Analysis}
+\rightline{Wong, Bun}
+\rightline{HW 7}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+\item Find the residues of the singularities of the following.
+
+\begin{enumerate}
+\itemsep5mm
+
+\item $\displaystyle f(z)= \frac{1}{z^2+5z+6}=\frac{1}{(z+2)(z+3)}$
+
+This function has simples poles at $z=-3$ and $z=-2$. Thus,
+\[
+\Res(f,-3)=\lom{z}{-3}f(z)(z+3)=\lom{z}{-3}\frac{1}{z+2}=-\frac{1}{2}.
+\]
+and
+\[
+\Res(f,-2)=\lom{z}{-2}f(z)(z+2)=\lom{z}{-2}\frac{1}{z+3}=1.
+\]
+
+\item $\displaystyle f(z)=\frac{1}{(z^2-1)^2}=\frac{1}{(z-1)^2(z+1)^2}$ 
+
+This function has poles of order 2 at $z=-1$ and $z=1$. First write $g(z)=(z-1)^2f(z)=\frac{1}{(z+1)^2}$. Then $g'(z)=-\frac{2}{(z+1)^3}$, so by Proposition 2.4 (p. 113)
+\[
+\Res(f,1)=g'(1)=-\frac{2}{2^3}=-\frac{1}{4}
+\]
+Next write $g(z)=(z+1)^2f(z)=\frac{1}{(z-1)^2}$. Then $g'(z)=-\frac{2}{(z-1)^3}$, so by Proposition 2.4  (p. 113),
+\[
+\Res(f,-1)=g'(-1)=-\frac{2}{(-2)^3}=\frac{1}{4}.
+\]
+
+\item $\displaystyle f(z)=\frac{e^z}{(z-a)(z-b)}$
+
+This function has simple poles at $z=a$ and $z=b$. Thus
+\[
+\Res(f,a)=\lom{z}{a}f(z)(z-a)=\lom{z}{a}\frac{e^z}{z-b}=\frac{e^a}{a-b}
+\]
+and
+\[
+\Res(f,b)=\lom{z}{b}f(z)(z-b)=\lom{z}{b}\frac{e^z}{z-a}=\frac{e^b}{b-a}.
+\]
+
+
+\item $\displaystyle \frac{1}{\sin z}=\frac{1}{z-\frac{z^3}{3!}+\frac{z^5}{5!}-\cdots}=\frac{1}{z}\cdot\frac{1}{1-\frac{z^2}{3!}+\frac{z^4}{5!}-\cdots}$
+
+This function has simple poles at $z=k\pi$ for $k\in\MB{Z}$. Thus,
+\[
+\Res(f,k\pi)=\lom{z}{k\pi}(z-k\pi)f(z)=\lom{z}{k\pi}\frac{z-k\pi}{\sin z}=\lom{z}{0}\frac{z}{\sin(z+k\pi)}\lhe \lom{z}{0}\frac{1}{\cos(z+k\pi)}=\begin{cases}1 & \text{if $k$ is even}\\-1 & \text{if $k$ is odd.}\end{cases}
+\]
+
+\item $\displaystyle f(z)=\frac{1}{\sin^2z}$
+
+This function has poles of order two at $z=k\pi$ for $k\in \MB{Z}$. However, $f(z)$ is also an even function, and since it is periodic, the residue at each $k\pi$ is the same. Let $\gamma$ be the unit circle centered at 0. Since $f$ is an even functions,m directly, we have
+\begin{align*}
+\Res(f;0)&=\frac{1}{2\pi i}\int_\gamma \frac{1}{\sin^2z}\,dz\\[2mm]
+&=\frac{1}{2\pi}\int_0^{2\pi}\frac{e^{it}}{\sin^2(e^{it})}\,dt\\[2mm]
+&=\frac{1}{2\pi}\int_0^{\pi}\frac{e^{it}}{\sin^2(e^{it})}\,dt+\frac{1}{2\pi}\int_\pi^{2\pi}\frac{e^{it}}{\sin^2(e^{it})}\,dt\\[2mm]
+&=\frac{1}{2\pi}\int_0^{\pi}\frac{e^{it}}{\sin^2(e^{it})}\,dt+\frac{1}{2\pi}\int_\pi^{0}\frac{-e^{it}}{\sin^2(-e^{it})}\,(-dt)\\[2mm]
+&=\frac{1}{2\pi}\int_0^{\pi}\frac{e^{it}}{\sin^2(e^{it})}\,dt-\frac{1}{2\pi}\int_0^{\pi}\frac{e^{it}}{\sin^2(e^{it})}\,dt\\[2mm]
+&=0.
+\end{align*}
+Thus $\Res(f;k\pi)=0$.
+
+\item $\displaystyle \frac{1}{\tan z}=\cot z=\frac{\cos z}{\sin z}$
+
+This function has simple poles for $z=k\pi$, in particular $z=0$, and by periodicity the residue will be the same. We have
+\[
+\Res(f;0)=\lom{z}{0}(z-0)f(z)=\lom{z}{0}\frac{z\cos z}{\sin z}=\lom{z}{0}\frac{\cos z}{\frac{\sin z}{z}}=\frac{\lom{z}{0}\cos z}{\lom{z}{0}\frac{\sin z}{z}}=1.
+\]
+By periodicity we have $\Res(f;k\pi)=1$.
+
+\item $\displaystyle f(z)= \frac{1}{z^m(1-z)^n}$ where $m,n\in \MB{Z}^+$. 
+
+This function has poles of order $m$ and $n$ respectively First, by partial fraction decomposition, we have
+\[
+f(z)= \frac{1}{z^m(1-z)^n}=\frac{1}{z^m}+\frac{1}{(1-z)^n}.
+\]
+Let $\gamma_0$ be a circle of radius $<1$ centered at 0. Then by direct computation we have
+\begin{align*}
+\Res(f;0)&=\frac{1}{2\pi i}\int_{\gamma_0}\frac{1}{z^{m+1}}+\frac{1}{(1-z)^n}\,dz\\[2mm]
+&=\frac{1}{2\pi i}\int_{\gamma_0}\frac{1}{z^{m+1}}\,dz+\frac{1}{2\pi i}\int_{\gamma_0}\frac{1}{(1-z)^n}\,dz\\[2mm]
+&=\frac{1}{2\pi i}\int_{\gamma_0}\frac{1}{z^{m+1}}\,dz+0\\[2mm]
+&=0,
+\end{align*}
+since $m\geq 1$. Similarly, let $\gamma_1$ be a circle of radius $<1$ centered at 1. Then we have
+\begin{align*}
+\Res(f;1)&=\frac{1}{2\pi i}\int_{\gamma_1} \frac{1}{z^m(1-z)^n(z-1)}\,dz\\[2mm]
+&=-\frac{1}{2\pi i}\int_{\gamma_1} \frac{1}{z^m(1-z)^{n+1}}\,dz\\[2mm]
+&=-\frac{1}{2\pi i}\int_{\gamma_1}\frac{1}{z^m}\,dz-\frac{1}{2\pi i }\int_{\gamma_1}\frac{1}{(1-z)^{n+1}\,dz}\\[2mm]
+&=0-\frac{1}{2\pi i }\int_{\gamma_1}\frac{1}{(1-z)^{n+1}\,dz}\\[2mm]
+&=\frac{(-1)^{n+1}}{2\pi i}\int_{\gamma_1}\frac{1}{(z-1)^{n+1}}\,dz\\[2mm]
+&=0,
+\end{align*}
+since $n\geq1$. 
+\end{enumerate}
+
+\item Evaluate the following integrals.
+
+\begin{enumerate}
+\itemsep5mm
+\item $\displaystyle \int_0^\infty \frac{x^2}{x^4+x^2+1}\,dx$
+
+Here we factor the denominator first. By completing the square on the denominator, we find 
+\[
+z^4+z^2+1=(z^2-z+1)(z^2+z+1)=(2z+1-\sqrt{3}i)(2z+1+\sqrt{3}i)(2z-1-\sqrt{3}i)(2z-1+\sqrt{3}i)
+\]
+More generally, the zeroes of $z^4+z^2+1$ are the 6th roots of unity except $\pm1$.
+
+
+
+
+\item $\displaystyle \int_{-\infty}^\infty\frac{x^2}{1+x^4}\,dx$
+\item $\displaystyle \int_0^\infty \frac{1}{(x^2+1)^2}\,dx$
+\end{enumerate}
+
+
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,260 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+%\pagenumbering{gobble}
+
+\usepackage{comment}
+\usepackage{bbm}
+%\usepackage{multicol}
+%\usepackage{graphicx}
+%\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd, quotes}
+%\usepackage{pgfplots}
+%\usepackage{pgffor}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+%\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{commath}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\usepackage[all]{xypic}
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\MF}[1]{\mathfrak{#1}}
+\newcommand{\MS}[1]{\mathscr{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\im}{\text{im\,}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\coker}{\text{coker\,}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{224 - Homological Algebra}
+\rightline{Grifo, Elo\'isa}
+\rightline{HW 4}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+\item Let $R=k[x,y]$, where $k$ is a field, let $Q = \textrm{frac}(R)$ be the fraction field of $R$. We are going to show that the $R$-module $M = Q/R$ is divisible but not injective.
+\begin{enumerate}
+\item Show that if $ax + by = 0$ for some $a, b \in R$, we must have $b \in (x)$.
+\begin{proof}
+If $ax+by=0$, then $ax=-by$ but $ax\in (x)$ and so $by\in(x)$. Since $y\notin(x)$, we must have that $b\in (x)$.
+\end{proof}
+
+\item Show that $x \mapsto \frac{1}{y}$ and $y \mapsto 0$ induces a well-defined $R$-module homomorphism $(x,y) \xrightarrow{\, f \,} Q/R$.
+
+\begin{proof}
+Suppose $ax+by=0$. By part (a), $b\in (x)$ so there is some $r\in R$ such that $b=rx$. Then $ax+by=ax+rxy=x(a+ry)=0$ which implies that $-\frac{a}{y}=r$ since $R$ is a domain. So in $Q/R$, we have $\frac{a}{y}+R=0+R$. Thus the mapping is well-defined.
+\end{proof}
+
+\item Show that $M$ is a divisible $R$-module, but not injective.
+
+\begin{proof}
+First, $M$ is divisible because it is a quotient of the fraction field of $R$ which is divisible, and quotients of divisible modules are divisible. To show that it is not injective, we suppose otherwise and arrive at a contradiction. If $M$ is injective, then by the Baer Criterion (Theorem 11.24) there is a map $g$ that makes the following diagram commute:
+\begin{center}
+\begin{tikzcd}
+            & M=Q/R                       &                            \\
+0 \arrow[r] & {(x,y)} \arrow[r] \arrow[u] & R \arrow[lu, "g"', dashed]
+\end{tikzcd}
+\end{center}
+Since $g$ is a homomorphism, the image of 1 in $Q/R$ determines the image of any other element in $R$. Write $1\mapsto\frac{a}{b}+R$. Using the definition of the mapping from part (b), we also know that $x\mapsto\frac{1}{y}+R$ and $y\mapsto0+R$. By the commutativity of the diagram, we have $g(x)=\frac{1}{y}+R$ and $g(y)=0+R$. Observe that
+\[
+\frac{ax}{b}+R=xg(1)=g(x)=\frac{1}{y}+R\quad \implies \quad \frac{ax-b}{by}\in R\text{ and}
+\]
+\[
+\frac{ay}{b}+R=yg(1)=g(y)=0+R\quad \implies \quad \frac{ay}{b}\in R.
+\]
+Since $\frac{ay}{b}\in R$, it follows that $ay\in (b)$ so there exists some $r\in R$ such that $ay=rb$. Combining this with the fact that $\frac{ax-b}{by}\in R$ yields that $\frac{rx-1}{y}\in R$ so $rx-1\in (y)$. Thus there exists some $s\in R$ such that $rx-1=sy$. But this implies that $rx-sy=1$ so $1\in(x,y)$, a contradiction. Therefore, $M$ is not injective but it is divisible.
+
+\end{proof}
+
+\end{enumerate}
+
+
+
+\item Let $R$ be a domain. Show that if $R$ has a nonzero module $M$ that is both injective and projective, then $R$ must be a field.\footnote{Hint: show that any nonzero $R$-module homomorphism $M \longrightarrow R$ must be surjective, and then show that such a homomorphism must exist.}
+
+\begin{proof}
+Suppose $M$ is a nonzero submodule of $R$ that is both injective and projective. We proceed by following the hint given. Since $M$ is injective, it is divisible by Lemma 11.30, so for every nonzero $r\in R$ and every $a\in M$, there exists a $b\in M$ such that $rb=a$. Let $x\in M$ and write $r=f(x)$. Then there exists a $b\in M$ such that $rb=x$. Then
+\begin{align*}
+f(rb)&=f(x)\\
+rf(b)&=r
+\end{align*}
+so $f(b)=1$. Now let $y\in R$. Then
+\begin{align*}
+y&=y\cdot1\\
+y&=y\cdot f(b)\\
+y&=f(by)
+\end{align*}
+which implies that $f$ is surjective. To show existence, by Theorem 11.14, $M$ is a direct summand of some free module $F$ which we can write as $F=\bigoplus_j R$. This means there is an injection $i:M\xhookrightarrow{}F=\bigoplus_j R$, and then through the canonical projection $\pi_j:\bigoplus_i R\to R$ we have a map $\pi_j\circ i:M\to R$. Since $M \neq 0$ by hypothesis, $i$ is not the 0 map, and so there is a copy, say with index $k$, of $R$ in which $\im (\pi_k\circ i)\neq 0$.
+
+Thus, we have a nonzero surjective $R$-module homomorphism, say, $f:M\to R$. Now, let $r\in R$ and consider the multiplication by $r$ map $\cdot r$. Then we have that $r\circ f=rf:M\to R$ is an $R$-module homomorphism from $M$ to $R$ which must be surjective by our result above. In particular there must exist some $m\in M$ such that $1=rf(m)$, but this implies that $f(m)=r^{-1}$, i.e. that $r$ is a unit. Lastly, note that since $f\neq 0$, if we have $rf=0$, it must be the case that $r=0$ since $R$ is a domain. Since $r$ was chosen arbitrarily, we have shown that every nonzero $r\in R$ is a unit, and so $R$ is a field.
+\end{proof}
+
+\item (omitted)
+
+\pagebreak
+
+\item  Let $\mathcal{A}$ be an abelian category.
+\begin{enumerate}
+\item Show that $\ker(x \xrightarrow{0} y) = 1_x$,  $\coker(x \xrightarrow{0} y) = 1_y$, and $\im(x \xrightarrow{0} y) = 0 \longrightarrow y$.
+
+\begin{proof}
+By definition $\ker(x \xrightarrow{0} y)$ is an arrow $k \xrightarrow{i} x$ such that $k \xrightarrow{i} x\xrightarrow{0}y$ is 0, but this is clearly the identity $1_x$ since $1_x\circ 0=0$. Similarly, $\coker(x \xrightarrow{0} y) = 1_y$ since $0\circ 1_y=0$. Next, by definition $\im(x \xrightarrow{0} y)\coloneqq\ker(\coker (x \xrightarrow{0} y))=\ker(x\xrightarrow{1_y} y)=0\to y$.
+\end{proof}
+
+\item Show that $f$ is a mono if and only if $fg = 0$ implies $g = 0$, and $g$ is an epi if and only if $fg = 0$ implies $f = 0$.
+
+\begin{proof}
+First suppose that $f$ is a mono and that $fg=0$. Then $fg=f\cdot0$ so by definition of a mono $g=0$. Conversely, suppose that $fg=0$ implies that $g=0$. Let $g_1,g_2\in\MC{A}$ and suppose that $fg_1=fg_2$. Then $f(g_1-g_2)=0$ so by our assumption, $g_1-g_2=0$, i.e. $g_1=g_2$ so $f$ is a mono by definition.
+
+Next, suppose first that $g$ is an epi and that $fg=0$ implies $f=0$. Then $fg=0\cdot g$ so by definition of an epi, $f=0$. Conversely, suppose that $fg=0$ implies that $f=0$. Let $f_1,f_2\in\MC{A}$ and suppose that $f_1g=f_2g$. Then $(f_1-f_2)g=0$ so by our assumption, $f_1-f_2=0$, i.e. $f_1=f_2$ so $g$ is an epi by definition.
+\end{proof}
+
+\item Show that $f$ is a mono if and only if $\ker f = 0$, and $g$ is an epi if and only if $\coker g = 0$.
+
+\begin{proof}
+First suppose that $f$ is a mono. It is clear that $f\circ\ker f=f\circ 0$ so then $\ker f=0$ since $f$ is a mono. Conversely, suppose $\ker f=0$. Then $f$ is injective so it is a mono.
+
+Next, first suppose that $g$ is an epi. it is clear that $\coker g\circ g=0\circ g$ so then $\coker g=0$ since $g$ is an epi. Conversely, suppose $\coker f=0$. Then $f$ must be surjective so it is an epi.
+\end{proof}
+
+\item Show that $0 \longrightarrow A \xrightarrow{\, f \,} B$ is exact if and only if $f$ is a mono.
+
+\begin{proof}
+First suppose that $0 \longrightarrow A \xrightarrow{\, f \,} B$ is exact. Then $\ker f=\im 0=0$ so by part (c) $f$ is a mono. Conversely, suppose that $f$ is a mono. We have (i) $f\circ 0=0$ by part (b) above and $0=\im0=\ker f$ by part (c) above, so $0 \longrightarrow A \xrightarrow{\, f \,} B$ is exact.
+\end{proof}
+
+\item Show that $B \xrightarrow{\, g \,} C \longrightarrow 0$ is exact if and only if $g$ is an epi.
+
+\begin{proof}
+First suppose that $B \xrightarrow{\, g \,} C \longrightarrow 0$ is exact. Then $\coker g=C/\im g=0$ so by part (c) $g$ is an epi. Conversely, suppose that $g$ is an epi. We have (i) $0\circ g=0$ by part (b) above and $\coker g=0$ by part (c) above, so $B \xrightarrow{\, g \,} C \longrightarrow 0$ is exact.
+\end{proof}
+\end{enumerate}
+
+\pagebreak
+
+\item Consider an abelian category. If $g$ is an epi and $f$ is a mono, then $\ker (fg) = \ker g$, $\coker(fg) = \coker f$, and $\im (fg) = \im f = f$.
+
+\begin{proof}
+Let $\MC{A}$ be an abelian category, let $f,g,h\in\MC{A}$, and suppose $f$ is a mono and $g$ is an epi. Then $fgh=0$ iff $fgh=f\cdot0$ so $gh=0$ since $f$ is a mono. But this means that $\ker(fg)=\ker g$ by definition. Similarly, $fgh=0$ iff $fgh=0\cdot g$ so $fg=0$ since $g$ is an epi. But this means that the $\coker(fg)=\coker f$ by definition.
+
+Lastly, $\im(fg)\coloneqq\ker(\coker(fg))=\ker(\coker f)$ by the result above. But this is $\im f$ by definition. And so $\im =\ker(\coker f)=\ker 0=f$. 
+\end{proof}
+
+
+\item (omitted)
+
+\pagebreak
+
+\item Consider the ring $R = \mathbb{Q}[x,y,z,a,b,c]/(xb-ac,yc-bz,xc-az)$, the ideal $I = (x,a)$ in $R$, $I = (x,a)$, and the $2$-generated $R$-module $M = Rf + Rg$, where the generators $f, g$ satisfy the relations 
+$$yf-xg = 0 \quad bf - cg = 0 \quad cf - zg = 0.$$
+Let $S = \mathbb{Q}[x,y,z]$ and $P$ be the ideal in $R$ defining the curve $\lbrace (t^{13},t^{42},t^{73}) \mid t \in \mathbb{Q} \rbrace$.
+
+(See file \verb!Richardson_MATH224_HW4.m2!)
+\begin{enumerate}
+\item Find the first $6$ steps in the minimal free resolutions for $R/I$ and $M$ over $R$.
+
+Using \verb!res(R^1/I)! in Macauly2 gives
+\[
+\xymatrix{R^1 & \ar[l] R^2 & \ar[l] R^3 & \ar[l] R^4 & \ar[l] R^5 & \ar[l] R^6 & \ar[l] R^7 & \ar[l] R^8 \\
+0 & 1 & 2 & 3 & 4 & 5 & 6 & 7},
+\]
+
+and \verb!res(M)! gives
+\[
+\xymatrix{R^2 & \ar[l] R^3 & \ar[l] R^4 & \ar[l] R^9 & \ar[l] R^{17} & \ar[l] R^{27} & \ar[l] R^{39} & \ar[l] R^{53} \\
+0 & 1 & 2 & 3 & 4 & 5 & 6 & 7},
+\]
+
+\item Apply $\Hom_R(-,M)$ to the portion of a minimal free resolution you found for $R/I$. Is this an exact complex? If not, in what homological degrees do we have non-trivial homology? 
+
+The complex is exact in degrees 1 through 6.
+
+\item Find a minimal free resolution for $P$ over $S$. Make sure your resolution *is* minimal!
+
+See file \verb!Richardson_MATH224_HW4.m2! for the resolution. Using \verb!.dd! we can see that the entries in the matrix are all elements of the maximal ideal $(x,y,z)$ so our resolution is indeed free.
+\end{enumerate}
+\end{enumerate}
+\end{document}

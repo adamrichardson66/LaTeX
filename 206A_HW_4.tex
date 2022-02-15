@@ -1,0 +1,283 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\p}{\mathbb{P}}
+\DeclareMathOperator{\sgn}{sgn}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{206A - Probability}
+\rightline{Cho, Heyrim}
+\rightline{HW 2}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+
+\item Binomial distribution converges in distribution to Poisson in the limit as $n\to\infty$ while $\lambda=np$ is fixed. Use Levy's continuity theorem to prove this.%83
+
+\begin{proof}
+Let $n\in \MB{N}$ and let $p\in(0,1)$ be fixed. Let $X_n=\sum_{j=0}^n{n\choose j}p^j(1-p)^{n-j}$ so that $X_n\sim \text{Bin}(n,p)$. Then
+\begin{align*}
+\varphi_{X_n}(t)&=E\left[e^{itX_n}\right]\\[2mm]
+&=\int_\MB{R} e^{itj}\cdot\sum_{j=0}^n{n\choose j}p^j(1-p)^{n-j}\\[2mm]
+&=\sum_{j=0}^n{n\choose j}(pe^{it})^j(1-p)^{n-j}\\[2mm]
+%
+%&=(pe^{it}+1-p)^n\\[2mm]
+%&=(1-p(1-e^{it}))^n\\[2mm]
+%&=\left(1-\frac{np(1-e^{it})}{n}\right)^n\\[2mm]
+%&=\left(1-\frac{\lambda(1-e^{it})}{n}\right)^n\\[2mm]
+%&=e^{-\lambda(1-e^{it})}\\[2mm]
+%&=e^{\lambda(e^{it}-1)}.
+\end{align*}
+Since $e^{it}$ is continuous, in particular at $t=0$, the finite sum above is continuous as well, so $\varphi_{X_n}(t)$ is continuous at $t=0$. By Levy's continuity theorem, there exists an $X$ such that $X_n\xrightarrow{d} X$ and $X$ has $\varphi_X(t)$ as characteristic function. Observe that
+\begin{align*}
+\sum_{j=0}^n{n\choose j}(pe^{it})^j(1-p)^{n-j}&=(pe^{it}+1-p)^n\\[2mm]
+&=(1-p(1-e^{it}))^n\\[2mm]
+&=\left(1-\frac{np(1-e^{it})}{n}\right)^n\\[2mm]
+&=\left(1-\frac{\lambda(1-e^{it})}{n}\right)^n\\[2mm]
+&=e^{-\lambda(1-e^{it})}\\[2mm]
+&=e^{\lambda(e^{it}-1)}.
+\end{align*}
+
+But this is equal to $\varphi_X(t)$ for any $X\sim\text{Pois}(\lambda)$. Thus, by Levy's continuity theorem, $\text{Bin}(n,p)\xrightarrow{d} \text{Pois}(\lambda)$.
+\end{proof}
+
+
+
+
+\vfill
+\pagebreak
+ 
+
+
+\item Use characteristic functions to show that for i.i.d. random variables $X_i$ such that $\mu=E(X_i)<\infty$, $\sum_{i=1}^n X_i/n$ converges in probability to $\mu$, i.e. the WLLN.
+
+
+\begin{proof}
+First, recall that convergence in distribution implies convergence in probability, so it suffices to show convergence in distribution. Next, we can assume without loss of generality that $E[X_i]=\mu=0$ (by instead considering the random variables $X_i-\mu$ if necessary). Let $S_n=\sum_{i=1}^n X_i$. Then
+\begin{align*}
+\varphi_{S_n/n}(t)=E[S_n/n]&=\int_\MB{R}e^{itS_n/n}\,dt\\[2mm]
+&=\int_\MB{R}e^{it(X_1+\cdots  X_n)/n}\,dt\\[2mm]
+&=\left[\int_\MB{R}e^{i\frac{t}{n}X}\,dt\right]^n\\[2mm]
+&=\varphi_X(t/n)^n.
+\end{align*}
+Let $f(t)=\log\varphi_X(t)$ so that $\varphi_X(t)=e^{f(t)}$. Then $\varphi_{S_n}(t)=\varphi_X(t/n)^n=e^{nf(t)}$. Now,
+\[
+\lim_{n\to\infty}\varphi_X(t/n)^n=\lim_{n\to\infty} e^{nf(t)},\text{ and}
+\]
+\[
+\lim_{n\to\infty}nf(t/n)=\lim_{n\to\infty}\frac{f(t/n)}{1/n}=\lim_{\ve\to0}\frac{f(t\ve)}{\ve}.
+\]
+$f$ is continuous so $f(0)=\log\varphi_X(0)=\log1=0$ so we can apply l'H\^{o}pital's Rule to the limit above. But first, note that
+\[
+f'(t)=\frac{\varphi'_X(t)}{\varphi_X(t)}
+\]
+so
+\[
+f'(0)=\frac{\varphi'_X(0)}{\varphi_X(0)}=\frac{\varphi'_X(0)}{1}=E\left[\dd{}{t}e^{itX}\right]_{t=0}=iE[X]=0.
+\]
+Thus,
+\[
+\lim_{\ve\to0}\frac{f(t\ve)}{\ve}=0, \aspace \lim_{n\to\infty}\varphi_{S_n}(t)=\lim_{n\to\infty} e^{nf(t)}=1.
+\]
+By Levy's continuity theorem, there exists a r.v. $X$ such that $S_n/n\xrightarrow{d} X=0$, and so $S_n/n$ converges in probability to 0.
+\end{proof}
+
+
+
+
+
+\pagebreak
+
+
+\item (Delta method) Suppose that $X_i$ are i.i.d. random variables with mean $\mu$ and variance $\sigma^2$. Suppose that $f(x)$ is a function that has a nonzero derivative at $\mu$. Then show that
+\[
+\frac{\sqrt{n}\left(f\left(\sum_{i=1}^n\frac{X_i}{n}\right)-f(\mu)\right)}{\sigma|f'(\mu)|}\xrightarrow{d}N(0,1),
+\]
+using a linear approximation of $f(x)$ around $\mu$.
+
+
+\begin{proof}
+Write $A_n=\sum_{i=1}^nX_i/n$, and suppose $f$ is differentiable with nonzero derivative at $\mu$. By the Central Limit Theorem, we know that
+\[
+\frac{A_n-\mu}{\sigma/\sqrt{n}}\xrightarrow{d}N(0,1).
+\]
+We can approximate $f(A_n)$ near $\mu$ linearly since it is differentiable there, and get the following:
+\begin{align*}
+f(A_n)&= |f'(\mu)|(A_n-\mu)+f(\mu)+O(x)\\[2mm]
+f(A_n)-f(\mu)&= |f'(\mu)|(A_n-\mu)+O(x)\\[2mm]
+\sqrt{n}(f(A_n)-f(\mu))&= |f'(\mu)|\sigma\sqrt{n}+\sqrt{n}O(x).
+\end{align*}
+
+Now, $O(x)\to0$ as $A_n\to\mu$, so the right hand side goes to $N(0,|f'(\mu)|\sigma^2)$ in distribution, so we can conclude that 
+\[
+\frac{\sqrt{n}\left(f(A_n)-f(\mu)\right)}{\sigma|f'(\mu)|}\xrightarrow{d}N(0,1).\qedhere
+\]
+\end{proof}
+
+
+
+\vfill
+\pagebreak
+
+
+
+
+\item (Translation invariance) Suppose that $\{B(t),\,t\geq0\}$ is a Brownian motion. For fixed $s>0$, show that $\{B(t+s)-B(s),\,t\geq0\}$ is a standard Brownian motion independent to $\{B(t),\,0\leq t\leq s\}$.
+
+\begin{proof}
+We proceed by showing the four properties that define Brownian motion. Let $\{B(t),\,t\geq0\}$ be a Brownian motion. First, $B(0+s)-B(s)=B(s)-B(s)=0$ as required. Second, $B(t+s)-B(s)$ is a difference of continuous functions and so is continuous. Third, for all $t,r\geq0$, we have
+\begin{align*}
+[B(t+s,\omega)-B(s,\omega)]-[B(r+s,\omega)-B(s,\omega)]&=B(t+s,\omega)-\cancel{B(s,\omega)}-B(r+s,\omega)+\cancel{B(s,\omega)}\\[2mm]
+&=B(t+s,\omega)-B(r+s,\omega)\\[2mm]
+&=B(t_s,\omega)-B(r_s,\omega)\\[2mm]
+&\sim N(0,t_s-r_s)\\[2mm]
+&=N(0,(t+s)-(r+s)),
+\end{align*}
+as required, where $t_s=t+s$ and $r_s=r+s$. Fourth, for $0=t_0<t_1<t_2<\cdots<t_n<\cdots$, we have
+\[
+B(t_{i+1}+s,\omega)-B(t_i+s,\omega)=B(t_{i+1,s},\omega)-B(t_{i,s},\omega),
+\]
+which are independent by hypothesis. Thus, $\{B(t+s)-B(s),\,t\geq0\}$ is a standard Brownian motion, and so $B$ is translation invariant.
+\end{proof}
+
+
+
+
+
+
+\vfill
+\pagebreak
+
+
+
+
+
+\item Consider an exponential random variable $X$ with parameter $\lambda$. Show that
+\[
+\p(X>x+y\mid X>x)=\p(X>y),
+\]
+for any $x,y\geq0$.
+
+\begin{proof}
+Let $X\sim\text{Exp}(\lambda)$ and let $x,y\geq0$. Note that since $x,y\geq0$, if $X>x+y$, then $X>x$. Moreover, since $X\sim\text{Exp}(\lambda)$, we know that
+\[
+\p(X\leq x)=\begin{cases} 1-e^{-\lambda x} & \text{if }x\geq0 \\ 0 & \text{if }x<0\end{cases}
+\]
+By definition(s) we have
+\begin{align*}
+\p(X>x+y\mid X>x)&=\frac{\p(\{X>x+y\}\cap\{X>x\})}{\p(X>x)}\\[2mm]
+&=\frac{\p(X>x+y)}{\p(X>x)}\\[2mm]
+&=\frac{1-\p(X\leq x+y)}{1-\p(X\leq x)}\\[2mm]
+&=\frac{1-[1-e^{-\lambda (x+y)}]}{1-[1-e^{-\lambda x}]}\\[2mm]
+&=\frac{e^{-\lambda (x+y)}}{e^{-\lambda x}}\\[2mm]
+&=e^{-\lambda y}\\[2mm]
+&=1-(1-e^{-\lambda y})\\[2mm]
+&=1-\p(X\leq y)\\[2mm]
+&=\p(X>y).\qedhere
+\end{align*}
+
+\end{proof}
+
+
+
+\end{enumerate}
+\end{document}

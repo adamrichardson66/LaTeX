@@ -1,0 +1,223 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210A - Complex Analysis}
+\rightline{Wong, Bun}
+\rightline{Midterm}
+\rightline{\today}
+
+\lspace
+
+
+
+\textbf{210A Midterm}
+
+\lspace
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+\item Let $G\subset \MB{C}$ be a connected open set, and let $f=u+iv$ with $f:G\to\MB{C}$ be analytic. Suppose that $u^2+v^2=k$, a constant for all $z\in G$. Prove that $f$ is constant on $G$.
+
+\begin{proof}
+Let $f$ be analytic and suppose $u^2+v^2=k$. Then for all $z\in G$,
+\[
+|f(z)|^2=u(z)^2+v(z)^2=k,
+\]
+so $f$ maps the region $G$ onto a circle of radius $\sqrt{k}$.  If $k=0$, then $|f(z)|=0$ for all $z\in G$, and so $f\equiv 0$ for all $z\in G$ and so is constant. So we may assume that $k\neq 0$. Differentiating the given equation yields
+\[
+uu_x+vv_x=0 \aspace uu_y+vv_y=0.
+\]
+Since $f$ is analytic, $u$ and $v$ satisfy the Cauchy-Riemann equations. Using these, we can transform the above equations into
+\[
+uv_y+vv_x=0 \aspace -uv_x+vv_y=0
+\]
+respectively. After significant playing around with the equations, if we multiply the left equation above by $u$ and the right equation above by $v$ we get
+\[
+u^2v_y+uvv_x=0 \aspace -uvv_x+v^2v_y=0.
+\]
+Adding these together yields
+\[
+0=u^2v_y+uvv_x-uvv_x+v^2v_y=(u^2+v^2)v_y=kv_y.
+\]
+Hence, $v_y$=0. Now, since $f$ is analytic, we have that $f_x=u_x+iv_x=u_y+iv_y=f_y$. Using the fact that $v_y=0$ and the Cauchy-Riemann equations again, we have $u_x=-v_y=0$, so the above becomes
+\[
+f_x=0+iv_x=u_x+i0\quad \iff \quad f_x=-u_x+iv_x=0.
+\]
+Since $f_x=0$, we have that $f'=0$ and it must be the case that $f$ is constant on $G$.
+\end{proof}
+
+\vfill
+\pagebreak
+
+\item Evaluate the integral $\displaystyle \int_\gamma \frac{\sin z}{z^3}\,dz$, $\gamma(t)=e^{it}$, $0\leq t\leq 2\pi$. 
+
+Here we employ Corollary 2.13, where $f(z)=\sin z$, $n=2$, and $a=0$. Then $f''(z)=-\sin z$ so $f''(0)=0$, and by the corollary we have
+\begin{align*}
+-\sin(0)&=\frac{2}{2\pi i}\int_\gamma \frac{\sin z}{z^3}\,dz\\[2mm]
+0&=\int_\gamma \frac{\sin z}{z^3}\,dz.
+\end{align*}
+
+\vfill
+\pagebreak
+
+\item State and prove the Maximum Modulus Theorem.
+
+The Maximum Modulus Theorem states: Let $G\subset \MB{C}$ be a region, and let $f:G\to \MB{C}$ be analytic. Suppose that there exists an $a\in G$ such that $|f(z)|\leq |f(a)|$ for all $z\in G$. Then $f$ must be constant on $G$.
+
+\begin{proof}
+Let $\gamma(t)=a+re^{it}$ where $r$ is such that $\bar B(a;r)\subset G$. Since $f$ is analytic on $G$, we have by Proposition 2.6 that
+\[
+f(a)=\frac{1}{2\pi i}\int_\gamma \frac{f(z)}{z-a}\,dz=\frac{1}{2\pi}\int_0^{2\pi}f(a+re^{it})\,dt.
+\]
+Thus, 
+\begin{align*}
+|f(a)|&\leq \frac{1}{2\pi}\int_0^{2\pi}|f(a+re^{it})|\,dt\\[2mm]
+&\leq \frac{1}{2\pi}\int_0^{2\pi}|f(a)|\,dt\\[2mm]
+&=\frac{1}{2\pi}\cdot|f(a)|\int_0^{2\pi}\,dt\\[2mm]
+&=|f(a)|,
+\end{align*}
+i.e.
+\[
+|f(a)|\leq \frac{1}{2\pi}\int_0^{2\pi}|f(a+re^{it})|\,dt\leq |f(a)|.
+\]
+Consequently, $\displaystyle |f(a)|= \frac{1}{2\pi}\int_0^{2\pi}|f(a+re^{it})|\,dt$, so
+\begin{align*}
+0&=|f(a)|-\frac{1}{2\pi}\int_0^{2\pi}|f(a+re^{it})|\,dt\\[2mm]
+0&=\frac{1}{2\pi}\int_0^{2\pi}|f(a)|-|f(a+re^{it})|\,dt.
+\end{align*}
+Since the integrand is positive, by a result from real analysis, $|f(a)|=|f(a+re^{it})|$. But since $r$ was arbitrary, this means that $f$ maps the disk $\bar B(a;r)$ onto the circle given by $|z|=|f(a)|$. But as we saw in Problem 1, this implies $f$ is constant on $G$.
+\end{proof}
+
+\vfill
+\pagebreak
+
+\item Let $f$ be an entire function such that there exist constants $M>0$ and $R>0$ such that $|f(z)|\leq M|z|^5$ for all $|z|>R$. Show that $f$ is a polynomial of degree less than or equal to 5.
+
+\begin{proof}
+If $f$ is entire, then it has a power series expansion
+\[
+f(z)=\sum_{k=0}^\infty a_kz^k=a_0+a_1z^1+\cdots+a_nz^n+\cdots
+\]
+By Theorem 2.8, we know that
+\[
+a_k=\frac{f^{(k)}(0)}{k!}
+\]
+and we must show that these are all 0 for $k\geq 6$. Let $|z|=r>R$ and let $\gamma(t)=re^{it}$ for $0\leq t\leq 2\pi$. Then by Corollary 2.13, 
+\[
+a_k=\frac{f^{(k)}(0)}{k!}=\frac{1}{2\pi i}\int_\gamma\frac{f(z)}{z^{k+1}}\,dz.
+\]
+Taking the absolute value, we have
+\begin{align*}
+|a_k|&=\left|\frac{f^{(k)}(0)}{k!}\right|\\[2mm]
+&=\left|\frac{1}{2\pi i}\int_\gamma\frac{f(z)}{z^{k+1}}\,dz\right|\\[2mm]
+&\leq\frac{1}{2\pi}\int_\gamma\frac{|f(z)|}{|z|^{k+1}}\,dz\\[2mm]
+&\leq\frac{1}{2\pi}\int_\gamma\frac{M|z|^5}{|z|^{k+1}}\,dz\\[2mm]
+&=\frac{M}{2\pi}\int_\gamma |z|^{5-k-1}\,dz\\[2mm]
+&=\frac{Mr^{5-k-1}}{2\pi}\int_\gamma \,dz\\[2mm]
+&=\frac{Mr^{5-k-1}}{2\pi}\cdot2\pi r\\[2mm]
+&=Mr^{5-k}\\[2mm]
+&=\frac{M}{r^{k-5}}\to0
+\end{align*}
+as $r\to\infty$. Thus,
+\[
+f(z)=\sum_{k=0}^5a_kz^k,
+\]
+i.e. $f$ is a polynomial of degree $\leq 5$.
+\end{proof}
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,258 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{comment}
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{commath}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\MF}[1]{\mathfrak{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{225 - Commutative Algebra}
+\rightline{Grifo, Elo\'isa}
+\rightline{HW 3}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+
+\item Show that
+\[
+V(I) = \bigcup_{P \in \textrm{Min}(I)} V(P)
+\]
+and conclude that
+\[
+\sqrt{I} \,\, = \bigcap_{P \in \textrm{Min}(I)} P.
+\]
+\begin{proof}
+By definition, we have
+\begin{align*}
+\bigcup_{P \in \text{Min}(I)} V(P)&=\{Q\in\text{Spec}(R)\mid Q\in V(P)\text{ for some }P\in\text{Min}(I)\}\\[2mm]
+&=\{Q\in\text{Spec}(R)\mid Q\supseteq P\text{ for some }P\in\text{Min}(I)\},
+\end{align*}
+and we claim that this set is equal to 
+\[
+\{Q\in\text{Spec}(R)\mid Q\supseteq I\}=V(I).
+\]
+
+
+
+To show this, fix a prime $Q$ that contains $I$, and define $S_Q\coloneqq\{P\in\text{Spec}(R)\mid Q\supseteq P\supseteq I\}$. This set is nonempty since $Q\in\text{Spec}(R)$ and clearly $Q\supseteq Q\supseteq I$. This set is also partially ordered by inclusion, and we claim that every chain of primes $\{P_i\}\subseteq S_Q$ has a minimal element with respect to this partial ordering; simply take their intersection. To prove this, let $P=\bigcap_iP_i$, and let $rs\in P$. Suppose that $r,s\notin P$. Then there exist some indices $j,k$ such that $r\notin P_j$ and $s\notin P_k$. Since this is a chain of ideals, we can assume WOLOG that $P_k\subseteq P_j$ and so $r,s\notin P_k$. However, since $rs\in P$, we must have that $rs\in P_k$ as well, but since neither $r$ nor $s$ are in $P_k$, the primality of $P_k$ is contradicted. Therefore, $P$ must be prime, and it follows that each chain in $S_Q$ has a minimal element. Consequently, by Zorn's lemma, $S_Q$ must have a minimal element, say $\MF{p}$. 
+
+Note also that $\MF{p}$ is ideed a minimal prime of $I$, i.e $\MF{p}\in\text{Min}(I)$: if there was a different prime $\MF{q}$ such that $I\subseteq\MF{q}\subseteq \MF{p}$, then $\MF{q}$ would have been the minimal element guaranteed by Zorn's lemma. Thus $\MF{q}=\MF{p}$ and so $\MF{p}$ is a minimal prime of $I$. Consequently, $Q\supseteq I$ if and only if $Q\supseteq P$ for some $P\in\text{Min}(I)$, as was to be shown.
+
+By the spectrum analogue of the strong Nullstellensatz, we know that $\displaystyle \sqrt{I}=\bigcap_{\MF{p}\in V(I)}\MF{p}$. We also know that
+\[
+\bigcap_{\MF{p}\in V(I)}\MF{p}\subseteq \bigcap_{\MF{q}\in \text{Min}(I)}\MF{q},
+\]
+since  $\text{Min}(I)\subseteq V(I)$. To show the reverse containment, recall the conclusion from the previous part of this problem: the set of all prime ideals that contain $I$ is the union of all the minimal prime ideals that contain $I$. Therefore the intersection of all the minimal prime ideals containing $I$ must be contained in the intersection of all the prime ideals of $I$. So finally, 
+\[
+\sqrt{I}=\bigcap_{\MF{p}\in V(I)}\MF{p}= \bigcap_{\MF{q}\in \text{Min}(I)}\MF{q},
+\]
+\end{proof}
+
+
+
+\item Let $I$ and $J$ be ideals in a ring $R$.
+\begin{enumerate}
+\item Show that $\sqrt{\sqrt{I}} = \sqrt{I}$.
+\begin{proof}
+If $f\in \sqrt{I}$, then there exists an $n$ such that $f^n\in I$ and so $(f^n)^1\in \sqrt{I}$ and we have the reverse containment.
+
+If $f\in \sqrt{\sqrt{I}}$, then there exists an $m$ such that $f^m\in \sqrt{I}$. Thus, there exists an $n$ such that $(f^m)^n\in I$ and since $mn\in \MB{N}_0$, $f^{mn}\in I$ so it is shown that $f\in \sqrt{I}$. This combined with the result above proves equality of the two sets.
+\end{proof}
+
+\item Show that if $I \subseteq J$, then $\sqrt{I} \subseteq \sqrt{J}$.
+\begin{proof}
+Suppose $I\subseteq J$ and let $f\in \sqrt{I}$. Then there is an $n\in\MB{N}_0$ such that $f^n\in I\subseteq J$, which implies that $f\in \sqrt{J}$ by definition.
+\end{proof}
+
+\item Show that $\sqrt{I \cap J} = \sqrt{I} \cap \sqrt{J}$.
+\begin{proof}
+$f\in \sqrt{I} \cap \sqrt{J}$ if and only if there exists an $n\in\MB{N}_0$ such that $f^n\in I$ and $f^n\in J$ if and only if $f^n\in I\cap J$ if and only if $f\in \sqrt{I \cap J}$.
+\end{proof}
+
+\item Show that $\sqrt{I^n} = \sqrt{I}$ for all $n \geq1$.
+\begin{proof}
+$f\in \sqrt{I^n}$ if and only if there exists an $m\in \MB{N}_0$ such that $f^m\in I^n$, if and only if $f^m=\sum_k(f_1f_2\cdots f_n)_k$ where $f_i\in I$ for all $1\leq i\leq n$, if and only if $f^m\in I$ by the definition of an ideal, if and only if $f\in \sqrt{I}$ by the definition of a radical of an ideal.
+\end{proof}
+
+\item Show that if $P$ is a prime ideal, then $\sqrt{P^n} = P$ for all $n \geq1$.
+\begin{proof}
+The proof is nearly identical to the one above: $f\in \sqrt{P^n}$ if and only if there exists an $m\in \MB{N}_0$ such that $f^m\in P^n$, if and only if $f^m=\sum_k(f_1f_2\cdots f_n)_k$ where $f_i\in P$ for all $1\leq i\leq n$, if and only if $f^m\in P$ by the definition of an ideal, if and only if $f\in P$ by the definition of a prime ideal.
+\end{proof}
+\end{enumerate}
+
+
+\item \begin{enumerate}
+\item Show that $P$ is a prime ideal if and only if $P$ satisfies the following property: given ideals $I$ and $J$ in $R$, if $IJ \subseteq P$, then $I \subseteq P$ or $J \subseteq P$.
+\begin{proof}
+For the forward direction, suppose $P$ is prime. Let $IJ\subseteq P$ and suppose that $J\not\subseteq P$. Then there exists a $j\in J\setminus P$. Then for any $i\in I$, we have $ij\in IJ\subseteq P$. Since $P$ is prime, and $j\notin P$, we must have $i\in P$, whence $I\subseteq P$.
+
+For the reverse direction, suppose that $P$ satisfies the property stated above. Let $ij\in P$ and write $I=(i)$ and $J=(j)$. Then $ij\in IJ\subseteq P$, and thus $I\subseteq P$ or $J\subseteq P$ which implies that $i\in P$ or $j\in P$, i.e. $P$ is prime.
+\end{proof}
+
+%\begin{proof}
+%Suppose first that $P$ is a prime ideal and let $I,J\subseteq R$. Suppose $IJ\subseteq P$, and let $f\in IJ$. Then we can write $f=\sum_{i=1}^ng_ih_i$ where $g_i\in I$ and $h_i\in J$. We proceed by induction on $n$. For the base case, write $f=g_1h_1$ where $g_1\in I$ and $h_1\in J$. Then either $g_1\in P$ or $h_1\in P$ since $P$ is prime, and since $g_1$ and $h_1$ were chosen arbitrarily from $I$ and $J$ respectively, we have $I\subseteq P$ or $J\subseteq P$. For the inductive step, suppose the statement holds for some $n\geq 1$, i.e. suppose that $f=\sum_{i=1}^ng_ih_i\in IJ\subseteq P$ implies that $I\subseteq P$ or $J\subseteq P$. Write $F=f+g_nh_n\in IJ$ where $g_{n+1}\in I$ and $h_{n+1}\in J$. 
+%\end{proof}
+
+\item Show that if $P$ is a prime ideal and $P = I \cap J$ for some ideals $I$ and $J$, then $P = I$ or $P = J$.
+\begin{proof}
+Suppose $P$ is a prime ideal and that $P=I\cap J$ for some ideals $I,J\subseteq R$. We know from Problem 1 on HW2 that $IJ\subseteq I\cap J=P$, so by part (a) above we have that $I\subseteq P$ or $J\subseteq P$. But since $P=I \cap J$, it is obvious that $P\subseteq I$ and $P\subseteq J$, whence it follows that $P=I$ or $P=J$.
+\end{proof}
+
+\end{enumerate}
+
+%\item (omitted)
+
+\item Let $R$ be a ring of characteristic $p>0$. The \textit{Frobenius map} on $R$ is the map 
+\[
+F:R\to R\hspace{10mm}\text{where}\hspace{10mm}r\mapsto r^p
+\]
+%	$$\xymatrix@R=2mm{R \ar[r]^-{F} & R \\ r \ar@{|->}[r] &r^p}$$
+\begin{enumerate}
+\item Show that the Frobenius map is a ring homomorphism.
+\begin{proof}
+First,
+\[
+F(rs)=(rs)^p=r^ps^p=F(r)F(s),
+\]
+and since $\text{char}(R)=p$,
+\[
+(r+s)^p=r^p+s^p=F(r)+F(s).\qedhere
+\]
+\end{proof}
+
+\item Show that the Frobenius map is module-finite if and only if it is algebra-finite.
+\begin{proof}
+First, if we assume the Frobenius map is module finite then it must be algebra-finite as well. Suppose that $F$ is algebra-finite. Then there exists a finite set of elements in $R$, say $\{r_i\}_{i=1}^n$ such that any element of $s\in R$ can be written as
+\[
+s=\sum_{i=1}^nk_iF(r_i)^i=\sum_{i=1}^nk_i(r_i^p)^i=\sum_{i=1}^nk_i(r_i^i)^p=\sum_{i=1}^nk_iF(r_i^i)
+\]
+where $k_i$ is in the underlying field for each $i$. The last sum above is a linear combination of elements in $R$, and hence $F$ is module finite.
+\end{proof}
+
+\pagebreak
+
+\item Show that the map on spectra induced by the Frobenius map is the identity map.
+
+\begin{proof}
+The induced map on $\text{Spec}(R)$ is given by $\MF{p}\mapsto F^{-1}(\MF{p})$ for any prime ideal $\MF{p}\in\text{Spec}(R)$ so we need to show that $F^{-1}(\MF{p})=\MF{p}$. First let $r\in\MF{p}$. Then since $\MF{p}$ is an ideal, $r^p=F(r)\in\MF{p}$ as well, whence $r\in F^{-1}(\MF{p})$. So we have $\MF{p}\subseteq F^{-1}(\MF{p})$. Next let $r\in F^{-1}(\MF{p})$. Then $F(r)=r^p\in\MF{p}$ and since $\MF{p}$ is prime, $r\in \MF{p}$ and we have $\MF{p}\supseteq F^{-1}(\MF{p})$. Thus $F^{-1}(\MF{p})=\MF{p}$ and so this map must be the identity map.
+\end{proof}
+\end{enumerate}
+
+\item Given any subset $X \subseteq \mathbb{A}^d_{\mathbb{C}}$, show that $\mathcal{Z}(\mathcal{I}(X))$ is the closure of $X$ in the Zariski topology.
+\begin{proof}
+Recalling some topology, remember that the closure of a set $X\subseteq \MB{A}_\MB{C}^d$ is the smallest closed set that contains $X$. $\MC{Z}(\MC{I}(X))$ is a closed set in the Zariski topology and $X\subseteq \MC{Z}(\MC{I}(X))$ by definition so it suffices to show it is the smallest one. Let $V\supseteq X$ be any Zariski-closed set containing $X$. Then $\MC{I}(V)\subseteq \MC{I}(X)$ whence $V=\MC{Z}(\MC{I}(V))\supseteq \MC{Z}(\MC{I}(X))$. In other words, $\MC{Z}(\MC{I}(X))$ contains $X$ and is contained in any Zariski-closed set that contains $X$, so it must be the smallest such set containing $X$, i.e. it is the closure of $X$ in the Zariski topology.
+\end{proof}
+
+\item (omitted)
+%\item Consider the inclusion map $k[xy,xz,yz] \subseteq k[x,y,z]$. Is the induced map on Spec surjective? If not, give an explicit prime not in the image.
+%
+%The induced map on Spec is not surjective. Example 3.39 in the notes notes that 
+
+\item (omitted)
+
+\item (omitted)
+
+
+
+
+
+\end{enumerate}
+\end{document}

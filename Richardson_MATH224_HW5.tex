@@ -1,0 +1,298 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+%\pagenumbering{gobble}
+
+\usepackage{comment}
+\usepackage{bbm}
+%\usepackage{multicol}
+%\usepackage{graphicx}
+%\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd, quotes}
+%\usepackage{pgfplots}
+%\usepackage{pgffor}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+%\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{commath}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\usepackage[all]{xypic}
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\MF}[1]{\mathfrak{#1}}
+\newcommand{\MS}[1]{\mathscr{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\im}{\text{im\,}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\coker}{\text{coker\,}}
+\newcommand{\Tor}{\text{Tor}}
+\newcommand{\Ext}{\text{Ext}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{224 - Homological Algebra}
+\rightline{Grifo, Elo\'isa}
+\rightline{HW 4}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+\item Let $R$ be a domain and $Q$ be its fraction field. Let $T(-)$ denote the torsion functor we introduced in Problem Set 3. 
+\begin{enumerate}
+\item Show that $T(M) = \Tor_1^R(M,Q/R)$.%\footnote{Hint: you want to look at some long exact sequence for Tor.}
+
+\begin{proof}
+Consider the short exact sequence
+\[
+\xymatrix{0 \ar[r] & R \ar[r] & Q \ar[r] & Q/R \ar[r] & 0}
+\]
+Tensoring with $M$ gives
+\[
+\xymatrix{M\otimes R\cong M \ar[r] & M\otimes Q \ar[r] & M\otimes Q/R \ar[r] & 0}
+\]
+Since $R$ is a domain and $Q$ is its fraction field, in particular $Q$ is a localization and so it is flat by Theorem 11.51. This means that $\Tor_1^R(M,Q)=0$. Thus, the long exact sequence induced by $\Tor$ reduces to 
+\[
+\xymatrix{0 \ar[r] & \Tor_1^R(M,Q/R) \ar[r] & M \ar[r] & M\otimes Q}
+\]
+But by exactness of this sequence, we have that $\Tor_1^R(M,Q/R)=\ker(M\to M\otimes Q)=T(M)$ by problem 5(c) in HW3.
+\end{proof}
+
+\item Show that for every short exact sequence
+\[
+\xymatrix{0 \ar[r] & A \ar[r] & B \ar[r] & C \ar[r] & 0}
+\]
+of $R$-modules gives rise to an exact sequence%\footnote{Hint: apply the Snake Lemma to some nice diagram.}
+\[
+\xymatrix@C=7mm{0 \ar[r] & T(A) \ar[r] & T(B) \ar[r] & T(C) \ar[r] & (Q/R) \otimes_R A \ar[r] & (Q/R) \otimes_R B \ar[r] & (Q/R) \otimes_R C \ar[r] & 0.}
+\]
+
+\begin{proof}
+Consider the following diagram.
+\[
+\xymatrix{0 \ar[r] & T(A) \ar[r] \ar[d] & T(B) \ar[r] \ar[d] & T(C) \ar[d] & \\
+0 \ar[r] & A \ar[r]\ar[d] & B \ar[r]\ar[d] & C \ar[r]\ar[d] & 0\\
+0 \ar[r] & Q\otimes A \ar[r]\ar[d] & Q\otimes B \ar[r]\ar[d] & Q\otimes C \ar[r]\ar[d] & 0\\
+ & (Q/R)\otimes A \ar[r] & (Q/R)\otimes B \ar[r] & (Q/R)\otimes C \ar[r] & 0\\}
+\]
+By part (a), we know that $T(M)=\ker(M\to M\otimes Q)$, so the top line is a sequence of kernels. Additionally, as we see in the second sequence in part (a), $M\otimes (Q/R)$ is the cokernel of the map $M\to M\otimes Q$, so the vertical sequences in the diagram are actually exact, yielding the diagram
+\[
+\xymatrix{
+ & 0 \ar[d] & 0 \ar[d] & 0 \ar[d]\\
+0 \ar[r] & T(A) \ar[r] \ar[d] & T(B) \ar[r] \ar[d] & T(C) \ar[d] & \\
+0 \ar[r] & A \ar[r]\ar[d] & B \ar[r]\ar[d] & C \ar[r]\ar[d] & 0\\
+0 \ar[r] & Q\otimes A \ar[r]\ar[d] & Q\otimes B \ar[r]\ar[d] & Q\otimes C \ar[r]\ar[d] & 0\\
+ & (Q/R)\otimes A \ar[r]\ar[d] & (Q/R)\otimes B \ar[r]\ar[d] & (Q/R)\otimes C \ar[r]\ar[d] & 0\\
+ & 0 & 0 & 0\\}
+\]
+Thus by the snake lemma, there is a connecting homomorphism $T(C)\to(Q/R)\otimes A$, yielding the exact sequence
+\[
+\xymatrix{0 \ar[r] & T(A) \ar[r] & T(B) \ar[r] & T(C) \ar[r] & (Q/R)\otimes A \ar[r] & (Q/R)\otimes B \ar[r] & (Q/R)\otimes C \ar[r] & 0}
+\]
+\end{proof}
+
+\item Show that the right derived functors of $T$ are $R^1T = (Q/R) \otimes_R -$ and $R^iT = 0$ for all $i \leqslant 2$.
+
+\begin{proof}
+Here we are going to appeal to Theorem 14.20 on p. 233 of the course notes. We know from Problem 4(c) in HW 3 that $T(-)$ is a left exact functor. Then by part (a), we can write $D_0=T$, $D_1=(Q/R)\otimes -$, and $D_i=0$ for $i\geq 2$ where $D_i$ are the right derived functors of $T$. By part (b), we have a long exact sequence associated to every short exact sequence. What we need to show is that $D_i(E)=0$ for every injective module $E$ and $i\geq1$, i.e. $(Q/R)\otimes_R E=0$. Let $E$ be an injective module. Since $R$ is a domain, by Lemma 11.30 we have that $E$ is divisible. Now, let $a\in E$ and $\frac{p}{q}\in Q/R$. Since $E$ is divisible, there exists a $b\in E$ such that $a=qb$. Consequently,
+\[
+a\otimes \frac{p}{q}=(qb)\otimes \frac{p}{q}=b\otimes q\cdot\frac{p}{q}=b\otimes\frac{p}{1}=0
+\]
+since $\frac{p}{1}=0$ in $Q/R$. Thus $(Q/R)\otimes_R E=0$, and by Theorem 14.20, $D_i$ is naturally isomorphic to $R^iT$. Moreover, $R^iT=0$ for $i\leq 2$.
+\end{proof}
+\end{enumerate}
+
+\pagebreak
+
+\item Let $I$ be an ideal in $R$. Show that
+\[
+\Ext^{n}_R(I,M) \cong \Ext^{n+1}_R(R/I,M)
+\]
+for all $n \geqslant 1$ and all $R$-modules $M$.
+
+\begin{proof}
+Let $M$ be an $R$-module and consider the short exact sequence
+\[
+\xymatrix{0 \ar[r] & I \ar[r] & R \ar[r] & R/I \ar[r] &0}
+\]
+Applying the Hom functor gives the long exact sequence
+\[
+\xymatrix{\cdots \ar[r] & \Ext_R^n(R,M) \ar[r] & \Ext_R^n(I,M) \ar[r] & \Ext_R^{n+1}(R/I,M) \ar[r] & \Ext_R^{n+1}(R,M) \ar[r] & \cdots}
+\]
+But $R$ is a free $R$-module and so is projective. By the remarks at the beginning of section 14.4 on p. 242 of the course notes, $\Ext_R^{n}(R,M)=0$ for all $n$. Thus, our long exact sequence reduces to
+\[
+\xymatrix{0 \ar[r] & \Ext_R^n(I,M) \ar[r] & \Ext_R^{n+1}(R/I,M) \ar[r] & 0}
+\]
+which implies that $\Ext_R^n(I,M)\cong \Ext_R^{n+1}(R/I,M)$.
+\end{proof}
+
+\item Let $(R,\MF{m})$ be a Noetherian local ring. Let $r \in R$ and $M$ and $N$ be finitely generated $R$-modules.
+\begin{enumerate}
+\item Show that the map $\Ext^i_R(M,N) \to \Ext^i_R(M,N)$ induced by $\xymatrix{M \ar[r]^-r & M}$ is the map given by multiplication by $r$.
+
+\begin{proof}
+Let $P$ be a projective resolution of $M$. Consider the diagram
+\[
+\xymatrix{\cdots \ar[r] & P_n \ar[r]\ar[d]^{\cdot r} & \cdots \ar[r] & P_0 \ar[r]\ar[d]^{\cdot r} & M \ar[r] \ar[d]^{\cdot r} &0\\
+\cdots \ar[r] & P_n \ar[r] & \cdots \ar[r] & P_0 \ar[r] & M \ar[r] &0}
+\]
+$P_i=R^{\beta_i}$ for all $i$, so the map $\xymatrix{P_i \ar[r]^{\cdot r} & P_i}$ corresponds to the same map $\xymatrix{M \ar[r]^{\cdot r} & M}$ where multiplication by $r$ occurs in every coordinate. But since the maps $\xymatrix{P_{i+1} \ar[r]^{\partial_{i+1}} & P_i}$ are $R$-linear, in particular we have $\partial_{i+1}(ra)=r\partial_{i+1}(a)$, which implies that the squares in the diagram above commute. Since computing $\Ext_R^n(\cdot r, N)$ for some module $N$ involves taking the homologies $H_n(\xymatrix{P_{i+1} \ar[r] & P_i})$, the map induced is that of multiplication by $r$.
+\end{proof}
+
+\item Show that if $r$ is regular on $M$ and $\Ext^i_R(M/rM,N) = 0$ for $i \gg 0$, then $\Ext^i_R(M,N) = 0$ for $i \gg 0$.
+
+\begin{proof}
+Suppose $r$ is regular on $M$ and $\Ext^i_R(M/rM,N) = 0$ for $i \gg 0$. Consider the short exact sequence
+\[
+\xymatrix{0 \ar[r] & M \ar[r]^{\cdot r} & M \ar[r] & R/rM \ar[r] & 0}
+\]
+Taking Hom's and looking at the resulting long exact sequence, we have
+\[
+\xymatrix{\cdots \ar[r] & \Ext_R^i(M/rM,N) \ar[r] & \Ext_R^i(M,N) \ar[r]^{\cdot r} & \Ext_R^i(M,N) \ar[r] & \Ext_R^{i+1}(M/rM,N) \ar[r] &\cdots}
+\]
+For $i$ large enough, we get
+\[
+\xymatrix{0 \ar[r] & \Ext_R^i(M,N) \ar[r]^{\cdot r} & \Ext_R^i(M,N) \ar[r] & 0}
+\]
+so $\cdot r$ is an iso. In particular it is surjective, so we have $r\Ext_R^i(M,N)=\Ext_R^i(M,N)$. Since $r$ is regular by hypothesis, $M/rM\neq 0$ and so $r$ is in some maximal ideal $\MF{m}$. Additionally, since $M$ and $N$ are finitely generated, so is $\Ext_R^i(M,N)$, and so by NAK (Proposition 4.30 on p. 53) we have $\Ext_R^i(M,N)=0$.
+\end{proof}
+
+\end{enumerate}
+
+\item (omitted)
+
+\item Here are two fun but unrelated problems about regular rings.
+\begin{enumerate}
+\item Show that every principal ideal domain is a regular ring.
+
+\begin{proof}
+Let $R$ be a PID. Then any prime ideal $P\neq0$ is generated by a single element, and it is maximal. By Krull's height theorem, since $P$ is maximal and generated by one element, $\dim R_p\leq 1$. Since $R$ is a domain, 0 is prime, and so $\dim R_p\geq 1$. Thus $R_P$ is a local ring of dimension less than or equal 1 whose maximal ideal is generated by 1 element, and so is a regular local ring. This means that $R$ is regular by definition.
+\end{proof}
+
+\item Solve the Localization Problem that baffled mathematicians for decades: if $R$ is a regular local ring, then $R_P$ is a regular local ring for every prime $P$.
+
+\begin{proof}
+Let $P$ be a prime ideal in $R$. Since $R$ is regular, $\text{pdim}_R(R/P)<\infty$ by Theorem 15.36 so there exists finite free resolution of $R/P$ over $R$:
+\[
+\xymatrix{0 \ar[r] & R^{\beta_c} \ar[r] & \cdots \ar[r] & R^{\beta_1} \ar[r] & R \ar[r] & R/P \ar[r] & 0}
+\]
+But by Theorem 4.25 on p. 51, localizing is exact, and since localizing distributes over direct sums, we have a corresponding exact sequence:
+\[
+\xymatrix{0 \ar[r] & R_P^{\beta_c} \ar[r] & \cdots \ar[r] & R_P^{\beta_1} \ar[r] & R_P \ar[r] & (R/P)_P \ar[r] & 0}
+\]
+Therefore, $(R/P)_P$ has a finite free resolution over $R_P$, i.e. $\text{pdim}_{R/P}((R/P)_P)=\text{pdim}(R_P/P_P)<\infty$. So by Theorem 15.36, every finitely generated $R_P$-module has finite projective dimension, and so $R_P$ is regular.
+%Let $R$ be a regular local ring. Then by Corollary 15.37, $R$ is a domain and by Corollary 15.38, $\text{pdim}(k)=\dim R<\infty$. Then by Theorem 15.36, the maximal ideal of $R$ must be generated by a finite number of elements. But since $R$ is a domain, every prime ideal is maximal, so every prime ideal is generated by a finite number of elements. Thus, $R_P$ is a a regular local ring for any prime $P$.
+\end{proof}
+
+\end{enumerate}
+
+\item (omitted)
+
+\item Consider the ring $R = \mathbb{Q}[x,y,z,a,b,c]/(xb-ac,yc-bz,xc-az)$ and the $2$-generated $R$-module $M = Rf + Rg$, where the generators $f, g$ satisfy the relations 
+\[
+yf-xg = 0 \quad bf - cg = 0 \quad cf - zg = 0.
+\]
+Let $P$ be the ideal in $S = \mathbb{Q}[x,y,z]$ defining the curve $\lbrace (t^{13},t^{42},t^{73}) \mid t \in \mathbb{Q} \rbrace$.
+
+To solve this problem, you are not allowed to use any additional Macaulay2 packages besides the \texttt{Complexes} package and the ones that are automatically loaded with Macaulay2.
+
+(see file \verb!Richardson_MATH224_HW5.m2!)
+\begin{enumerate}
+\item Find $\text{pdim}_S(S/P)$ and $\text{depth}(S/P)$. 
+
+Macauly2 gives $\text{pdim}_S(S/P)=2$. Since $S=Q[x,y,z]$, $S$ is regular and so is Cohen-Macauly. Thus $\text{depth}(S)=\dim(S)=3$. By the Auslander-Buchsbaum Formula (Theorem 15.49), $3=\dim(S)=\text{depth}(S)=\text{depth}(S/P)+\text{pdim}_S(S/P)=\text{depth}(S/P)+2$, so $\text{depth}(S/P)=1$.
+\item Is $P$ generated by a regular sequence?
+
+Yes, see example 15.19.
+\item Find $\text{pdim}_R(M)$ and $\text{depth}(M)$.
+
+$\dim(R)=3$ by Macauly2, and Macauly2 also gives a projective resolution of $M$ that does not (accurately) terminate so $\text{pdim}_R(M)=\infty$. To compute $\text{depth}(M)$, we use the reasoning of Theorem 15.46 and Macauly2 gives that $\text{depth}(M)=2$.
+
+\item Is $R$ a regular ring? Is it Cohen-Macaulay?
+
+$R$ is not regular by part (c) above and Theorem 15.36, and it is Cohen-Macauly since $\text{depth}(R)=\dim(R)$ by computations in Macauly2.
+\end{enumerate}
+
+\item (omitted)
+
+\end{enumerate}
+\end{document}

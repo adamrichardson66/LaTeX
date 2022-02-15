@@ -1,0 +1,286 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{commath}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\MF}[1]{\mathfrak{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{225 - Commutative Algebra}
+\rightline{Grifo, Elo\'isa}
+\rightline{HW 2}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+
+\item Given two ideals $I$ and $J$, the \textit{product} of $I$ and $J$ is the ideal
+\[
+IJ \coloneqq \left( fg \mid f \in I \text{ and } g \in J \right).
+\]
+\begin{enumerate}
+\itemsep5mm
+\item Show that $IJ \subseteq I \cap J$.
+
+\begin{proof}
+Let $h\in IJ$. Then $h=\sum_kf_kg_k$ where $f_k\in I$ and $g_k\in J$. But this means that $h\in I$ and $h\in J$ by definition of an ideal, hence $h\in I\cap J$.
+\end{proof}
+
+\item If $I$ and $J$ satisfy $I+J = R$, then $IJ = I \cap J$.
+
+\begin{proof}
+We already have $IJ \subseteq I \cap J$ by part (a), so is suffices to prove the reverse inclusion. Suppose $I+J=R$ where $R$ is a commutative ring with identity. Notice that $I\cap J$ is contained in the product of ideals $(I\cap J)R$. Thus,
+\[
+I\cap J\subseteq (I\cap J)R=(I\cap J)(I+J)=I(I\cap J)+J(I\cap J)=IJ+JI=IJ.\qedhere
+\]\
+\end{proof}
+
+\item In general, $IJ \neq I \cap J$. Find an example of a ring $R$ and ideals $I$ and $J$ with $IJ \neq I \cap J$.
+
+Let $I=2\MB{Z}$ and $J=4\MB{Z}$ with $R=\MB{Z}$. Now, $I\cap J=2\MB{Z}\cap4\MB{Z}=2\MB{Z}$, but $IJ=(2\MB{Z})(4\MB{Z})=8\MB{Z}\subsetneq2\MB{Z}$.
+\end{enumerate}
+
+
+
+\item (omitted)
+
+%A prime ideal $P$ in a ring $R$ is a \textit{minimal prime} if for every prime ideal $Q$ in $R$, 
+%\[
+%Q \subseteq P \implies Q = P.
+%\]
+%Show that every prime ideal in a ring $R$ contains some minimal prime.
+%
+%\begin{proof}
+%(omitted)
+%\end{proof}
+
+
+%\noindent
+%\fbox{\begin{minipage}{\textwidth}
+%
+%Let $R$ be a ring, and $M$ an $R$-module. The \textit{Nagata idealization} of $(R,M)$ is the ring $R \rtimes M$ such that
+%\begin{itemize}
+%\item as a set, $R \rtimes M = R\times M$;
+%\item the addition is $(r,m) + (s,n)=(r+s,m+n)$;
+%\item the multplication is $(r,m)  (s,n)=(rs,sm+rn)$.
+%\end{itemize}
+%
+%Then $R \rtimes M$ with the operations specified about is a ring.
+%\end{minipage}} 
+
+\item (omitted)
+%Consider an extension of rings $A \subseteq B \subseteq C$. In this problem, we will construct an example of such an extension such that $A \subseteq C$ is module-finite, but $A \subseteq B$ is not.%\footnote{We remarked before that such examples exist, but we didn't construct one.}
+
+%\begin{enumerate}
+%\itemsep5mm
+%\item Can you find such an extension with $A$ Noetherian?
+%\item Let $R$ be a ring that is not Noetherian, and $I$ an ideal that is not finitely generated. Show that %\footnote{Note that $R$ is a subring of $R\rtimes M$ (via the inclusion $r\mapsto (r,0)$), and as an $R$-module, $R\rtimes M\cong R\oplus M$.} 
+%${R \subseteq R \rtimes I \subseteq R \rtimes R}$, that $R \subseteq R \rtimes R$ is module-finite, but  $R \subseteq R \rtimes I$ is not.
+%\end{enumerate}
+
+
+\item \begin{enumerate}
+\itemsep5mm
+\item In Macaulay2, set up $A = \MB{Q}[s^2,st,t^2]$ as a $\MB{N}^2$-graded ring with the grading induced by setting $s^2, st, t^2$ as homogeneous elements of degrees
+\[
+\deg(s^2) = (2,0) \quad \deg(st) = (1,1) \quad \deg(t^2) = (0,2).
+\]
+
+(see file \verb!Richardson_MATH225_HW2.m2!)
+\item The ring $R=k[t^3,t^{13},t^{42}]$ is a graded subring of $k[t]$ with the standard grading, meaning that the graded structure on $k[t]$ induces a grading on $R$. Set up $R$ (with this grading) in Macaulay2.
+
+(see file \verb!Richardson_MATH225_HW2.m2!)
+\end{enumerate}
+
+\item The curve $C$ parametrized by 
+\[
+\left\{ (t^3,t^4,t^5): t \in \MB{Q} \right\}
+\]
+in $\MB{A}^3_{\MB{Q}}$ is a variety. Use Macaulay2 to find $\MC{I}(C) \subseteq \MB{Q}[x,y,z]$. Is $C$ irreducible?
+
+(see file \verb!Richardson_MATH225_HW2.m2!)
+
+Macauly2 reveals that $\MC{I}(C)=(y^2-xz,x^2y-z^2,x^3-yz)$. Running the command \verb!isPrime(I)! returns \verb!true! so this ideal is prime which means it corresponds to an irreducible variety, i.e. $C$ is irreducible.
+
+\item (omitted) 	
+%Let $X$ be the solution set of the system of equations
+%\[
+%\left\lbrace \begin{array}{l} y^{4}-2\,x\,y^{2}z+x^{2}z^{2} = 0 \\ x^{4}y^{3}-x^{5}y\,z-y^2 z^3 + x z^4 = 0 \\ x^5 y^2 - x^6 z - y^3 z^2 + x y z^{3} = 0 \\ x^9+x^3 y^3 z - 3 x^4 y z^2 + z^5 = 0 \end{array} \right.
+%\]
+%over $\mathbb{Z}/73$. Find $\mathcal{I}(X)$.
+
+\item Show that the functions $\MC{Z}$ and $\MC{I}$ have the following properties:
+\begin{enumerate}
+\item If $I=(T)$ is the ideal generated by the elements of $T$, then $\MC{Z}(T) = \MC{Z}(I)$.
+\begin{proof}
+Since $T\subseteq I$, we already have that $\MC{Z}(I)\subseteq\MC{Z}(T)$. To show the reverse inequality, let $x\in \MC{Z}(T)$. Then $f(x)=0$ for all $f\in T$. It follows that any linear combination of functions $f\in T$ also vanishes at $x$, so $x\in \MC{Z}(I)$ and thus $\MC{Z}(T)\subseteq\MC{Z}(I)$. Therefore $\MC{Z}(T) = \MC{Z}(I)$.
+\end{proof}
+
+\item For any field $k$, we have $\MC{Z}(0) = \MB{A}^n_k$ and $\MC{Z}(1) = \varnothing$.
+
+\begin{proof}
+The zero set of the 0 polynomial, $\MC{Z}(0)$, is the set of all points in $\MB{A}_k^n$ that vanish under the 0 polynomial. This is clearly the entire space $\MB{A}_k^n$ since the 0 polynomial sends any point to 0.
+
+The zero set of the constant polynomial 1, i.e. $\MC{Z}(1)$, is the set of all points in $\MB{A}_k^n$ that vanish under the polynomial 1, which is none of them since it sends all points to 1, so $\MC{Z}(1) = \varnothing$. In general, $\MC{Z}(c)=\varnothing$ for any \textit{nonzero} constant $c$.
+\end{proof}
+
+\item $\MC{I}(\varnothing)  = (1)= k[x_1, \dots, x_n]$ (the improper ideal).
+
+\begin{proof}
+\begin{align*}
+\MC{I}(\varnothing)&=\{g(x_1,\ldots,x_n)\in k[x_1,\ldots,x_n]\mid g(a_1,\ldots,a_n)=0\,\text{ for all }\, (a_1,\ldots,a_n)\in\varnothing\}\\[2mm]
+&=k[x_1,\ldots,x_n]\\[2mm]
+&=(1).\qedhere
+\end{align*}
+\end{proof}
+
+\item $\MC{I}(\MB{A}^n_k) = (0)$ if and only if $k$ is infinite.
+
+\begin{proof}
+We'll prove this by contrapositive. By definition,
+\[
+\MC{I}(\MB{A}^n_k)=\{g(x_1,\ldots,x_n)\in k[x_1,\ldots,x_n]\mid g(a_1,\ldots,a_n)=0\,\text{ for all }\, (a_1,\ldots,a_n)\in\MB{A}^n_k\}.
+\]
+$k$ is finite if and only if there are a finite number of points in $\MB{A}_k^n$. Then the ideal $\MC{I}(\MB{A}^n_k)$ is generated by polynomials in $k[x_1,\ldots,x_n]$ that vanish at a finite number of points, a set which contains the 0 polynomial, but also many more. Therefore $\MC{I}(\MB{A}^n_k)\neq(0)$.
+\end{proof}
+
+\item If $I \subseteq J\subseteq k[x_1,\ldots, x_n]$ then $\MC{Z}(I) \supseteq \MC{Z}(J)$.
+
+\begin{proof}
+Suppose $I \subseteq J\subseteq k[x_1,\ldots, x_n]$. Let $x\in \MC{Z}(J)$. Then every polynomial in $J$ vanishes at $x$, and since $I\subseteq J$, every polynomial in $I$ vanishes at $x$. Thus, $x\in \MC{Z}(I)$, and so $\MC{Z}(I) \supseteq \MC{Z}(J)$.
+\end{proof}
+
+\item If $S \subseteq T$ are subsets of $\MB{A}_k^n$ then $\MC{I}(S) \supseteq \MC{I}(T)$.
+
+\begin{proof}
+Suppose $S \subseteq T\subseteq\MB{A}_k^n$. Let $f\in \MC{I}(T)$. Then $f(x)=0$ for all $x\in T$. Since $S\subseteq T$, $f(x)=0$ for all $x\in S$. Thus, $f\in \MC{I}(S)$, and so $\MC{I}(S) \supseteq \MC{I}(T)$.
+\end{proof}
+\end{enumerate}
+
+\item  In this problem, we will show that the union and intersection of varieties is a variety.
+\begin{enumerate}
+\item Given two ideals $I$ and $J$ in $k[x_1, \ldots, x_d]$, $\MC{Z}(I) \cap \MC{Z}(J) = \MC{Z}(I + J)$.
+
+\begin{proof}
+First, $\MC{Z}(I) \cap \MC{Z}(J) \subseteq \MC{Z}(I + J)$ since any point which is a vanishing point of every polynomial in $I$ and every polynomial in $J$ must also be a vanishing point of any sum of polynomials in $I+J$. To show the reverse inclusion, let $x\in \MC{Z}(I + J)$. Then $(f+g)(x)=0$ for all $f+g\in I+J$. Note that $0\in I$ and $0\in J$. Thus, $f(x)=(f+0)(x)=0$ for all $f\in I$ and $g(x)=(0+g)(x)=0$ for all $g\in J$. In other words, $x\in\MC{Z}(I) \cap \MC{Z}(J)$, so $\MC{Z}(I) \cap \MC{Z}(J) \supseteq \MC{Z}(I + J)$ whence $\MC{Z}(I) \cap \MC{Z}(J) = \MC{Z}(I + J)$.
+\end{proof}
+
+\pagebreak
+
+\item Given two ideals $I$ and $J$ in $k[x_1, \ldots, x_d]$, $\MC{Z}(I) \cup \MC{Z}(J) = \MC{Z}(IJ) = \MC{Z}(I \cap J)$.
+
+\begin{proof}
+\begin{align*}
+\MC{Z}(IJ)&=\{x\in \MB{A}_k^d\mid h(x)=0\text{ for all }h\in IJ\}\\[2mm]
+&=\left\{x\in \MB{A}_k^d\hspace{2mm}\Bigg| \left(\sum_{i=1}^nf_ig_i\right)(x)=0\text{ for all }f_i\in I,\,g_i\in J\right\}\\[2mm]
+&=\left\{x\in \MB{A}_k^d\hspace{2mm}\Bigg|\, \sum_{i=1}^nf_i(x)g_i(x)=0\text{ for all }f_i\in I,\,g_i\in J\right\}\\[2mm]
+&=\left\{x\in \MB{A}_k^d \mid f_i(x)=0\text{ for all }f_i\in I,\text{ or }g_i(x)=0\text{ for all }\,g_i\in J\right\}\\[2mm]
+&=\left\{x\in \MB{A}_k^d \mid f(x)=0\text{ for all }f\in I\right\}\cup\left\{x\in \MB{A}_k^d \mid g(x)=0\text{ for all }\,g\in J\right\}\\[2mm]
+&=\MC{Z}(I)\cup\MC{Z}(J).
+\end{align*}
+
+Next we show that $\MC{Z}(I\cap J)=\MC{Z}(I)\cup \MC{Z}(J)$. First, let $x\in \MC{Z}(I)\cup\MC{Z}(J)$. Then $x\in \MC{Z}(I)$ or $x\in \MC{Z}(J)$ or both. Let $f\in I\cap J$. Then $f(x)=0$ so $x\in \MC{Z}(I\cap J)$ and we have $\MC{Z}(I\cap J)\supseteq\MC{Z}(I)\cup \MC{Z}(J)$. 
+
+Instead let $x\in \MC{Z}(I\cap J)$ and suppose $x\notin\MC{Z}(J)$. Then there exists a $g\in J$ such that $g(x)\neq0$. For any $f\in I$, we have $fg\in I\cap J$ so $(fg)(x)=f(x)g(x)=0$, but since $g(x)\neq0$ and $k[x_1,\ldots,x_d]$ is a domain, we must have $f(x)=0$, i.e. $x\in \MC{Z}(I)$. Therefore $\MC{Z}(I\cap J)\subseteq\MC{Z}(I)\cup \MC{Z}(J)$, and it is shown that $\MC{Z}(I\cap J)=\MC{Z}(I)\cup \MC{Z}(J)$. This combined with the proof at the beginning of this problem yields $\MC{Z}(I) \cup \MC{Z}(J) = \MC{Z}(IJ) = \MC{Z}(I \cap J)$.
+\end{proof}
+$\mathbb{7}$
+\end{enumerate}
+\end{enumerate}
+
+\end{document}

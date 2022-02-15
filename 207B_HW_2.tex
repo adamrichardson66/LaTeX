@@ -1,0 +1,510 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+\usepackage{comment}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\usepackage{bbm}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+\def\Xint#1{\mathchoice
+{\XXint\displaystyle\textstyle{#1}}%
+{\XXint\textstyle\scriptstyle{#1}}%
+{\XXint\scriptstyle\scriptscriptstyle{#1}}%
+{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{207B - PDE}
+\rightline{Moradifam, Amir}
+\rightline{HW 2}
+\rightline{\today}
+
+
+Exercises are from Chapter 2 of Evans' textbook \textit{Partial Differential Equations}, 1st ed. 
+
+\vspace{5mm}
+\begin{enumerate}
+
+\setcounter{enumi}{10}
+
+
+
+
+
+\item Assume $n=1$ and $\displaystyle u(x,t)=v\left(\frac{x^2}{t}\right)$.
+
+\begin{enumerate}
+
+\item Show $u_t=u_{xx}$ if and only if 
+
+\[
+(*) \hspace{5mm}4zv''(z)+(2+z)v'(z)=0 \text{ for } z>0
+\]
+
+\begin{proof}
+Directly, we have
+
+\[
+u_t=-v'\left(\frac{x^2}{t}\right)\cdot\frac{x^2}{t^2}\aspace u_x=2v'\left(\frac{x^2}{t}\right)\cdot\frac{x}{t},\text{ so}
+\]
+\[
+u_{xx}=2\left[2v''\left(\frac{x^2}{t}\right)\cdot\frac{x}{t}\cdot\frac{x}{t}+v'\left(\frac{x^2}{t}\right)\cdot\frac{1}{t}\right]=4\cdot\frac{x^2}{t^2}v''\left(\frac{x^2}{t}\right)+\frac{2}{t}v'\left(\frac{x^2}{t}\right)
+\]
+
+Let $z=\frac{x^2}{t}$. Then, for $t\neq0$, $u_t=u_{xx}$ if and only if
+
+\begin{align*}
+0&=u_t-u_{xx}\\[2mm]
+&=-v'\left(\frac{x^2}{t}\right)\cdot\frac{x^2}{t^2}-4\cdot\frac{x^2}{t^2}v''\left(\frac{x^2}{t}\right)-\frac{2}{t}v'\left(\frac{x^2}{t}\right)\\[2mm]
+&=\frac{4}{t}zv''(z)+\frac{z}{t}v'(z)+\frac{2}{t}v'(z)\\[2mm]
+&=4zv''(z)+(2+z)v'(z).
+\end{align*}
+\end{proof}
+\pagebreak
+
+\item Show that the general solution of $(*)$ is
+
+\[
+v(z)=c\int_0^ze^{-s/4}s^{-1/2}\,ds+d.
+\]
+
+\begin{proof}
+Let $f(z)=v'(z)$. Then $(*)$ becomes 
+
+\[(**) \hspace{5mm}4zf'(z)+(2+z)f(z)=0\]
+
+which is a homogeneous first order ODE and can be solved via an integrating factor. For $z\neq0$, we have
+\[
+f'(z)=\frac{2+z}{4z}f(z)=0
+\]
+
+so our integrating factor is 
+
+\[
+I(z)=e^{\int\frac{2+z}{4z}\,dz}=e^{(1/2)\ln |z|+(1/4)z}=z^{1/2}e^{z/4},
+\]
+
+and $(**)$ yields
+
+\begin{align*}
+4zf'(z)+(2+z)f(z)&=0\\[2mm]
+\dd{}{z}\left(z^{1/2}e^{z/4}f(z)\right)&=\dd{}{z}(0)\\[2mm]
+z^{1/2}e^{z/4}f(z)&=c\\[2mm]
+f(z)&=cz^{-1/2}e^{-z/4}\\[2mm]
+v'(z)&=cz^{-1/2}e^{-z/4}\\[2mm]
+\int_0^zv'(s)\,ds&=c\int_0^zs^{-1/2}e^{-s/4}\,ds\\[2mm]
+v(z)&=c\int_0^zs^{-1/2}e^{-s/4}\,ds+d\\[2mm]
+\end{align*}
+\end{proof}
+
+
+\item Differentiate $v\left(\frac{x^2}{t}\right)$ with respect to $x$ and select the constant $c$ properly, so as to obtain the fundamental solution $\Phi$ for $n=1$. 
+
+\begin{proof}
+Since $\displaystyle v(z)=c\int_0^zs^{-1/2}e^{-s/4}\,ds+d$, we have $\displaystyle v\left(\frac{x^2}{t}\right)=c\int_0^{\frac{x^2}{t}}s^{-1/2}e^{-s/4}\,ds+d$. Differentiating yields
+
+\begin{align*}
+\dd{}{x}\left[c\int_0^{\frac{x^2}{t}}s^{-1/2}e^{-s/4}\,ds+d\right]&=c\left[\left(\frac{x^2}{t}\right)^{-1/2}e^{\frac{1}{4}\left(\frac{x^2}{t}\right)}\cdot\frac{2x}{t}\right]\\[2mm]
+&=c\left[\frac{x^{-1}\cdot2x}{t^{-1/2}\cdot t}e^{\frac{x^2}{4t}}\right]\\[2mm]
+&=c\cdot\frac{2}{t^{1/2}}e^{\frac{x^2}{4t}}.
+\end{align*}
+
+Choose $\displaystyle c=\frac{1}{4\pi^{1/2}}$, and we have the fundamental solution
+
+\[
+\Phi(x,t)=\frac{1}{4\pi^{1/2}}\cdot\frac{2}{t^{1/2}}e^{\frac{x^2}{4t}}=\frac{1}{(4\pi t)^{1/2}}e^{\frac{x^2}{4t}}
+\]
+\end{proof}
+\end{enumerate}
+
+
+
+\item Write down an explicit formula for a solution of
+
+\[
+(*)\hspace{5mm}\begin{cases} u_t-\Delta u+cu=f & \text{in }\MB{R}^n\times(0,\infty)\\ u=g & \text{on }\MB{R}^n\times\{t=0\},\end{cases}
+\]
+where $c\in\MB{R}$.
+
+\begin{proof}
+Based on a hint, let $v(x,t)=e^{ct}u(x,t)$. Then
+
+\[
+v_t=ce^{ct}u(x,t)+e^{ct}u_t(x,t)\aspace v_{x_ix_i}=e^{ct}u_{x_ix_i}(x,t).
+\]
+
+Consequently, if $u$ solves $(*)$, then
+
+\begin{align*}
+v_t-\Delta v&=ce^{ct}u+e^{ct}u_t-\sum_{i=1}^ne^{ct}u_{x_ix_i}(x,t)\\[2mm]
+&=ce^{ct}u+e^{ct}u_t-e^{ct}\sum_{i=1}^nu_{x_ix_i}(x,t)\\[2mm]
+&=e^{ct}\left(u_t-\Delta u+cu\right)\\[2mm]
+&=e^{ct}f.
+\end{align*}
+
+Thus, $v$ solves
+
+\[
+(**)\hspace{5mm}\begin{cases} v_t-\Delta v=e^{ct}f & \text{in }\MB{R}^n\times(0,\infty)\\ u=g & \text{on }\MB{R}^n\times\{t=0\},\end{cases}
+\]
+
+so we may employ the formula given in Evans' textbook on p. 51 to yield
+
+\begin{align*}
+v(x,t)&=\int_{\MB{R}^n}\Phi(x-y)g(y)\,dy+\int_0^t\int_{\MB{R}^n}\Phi(x-y,t-s)e^{cs}f(y,s)\,dy\,ds,\text{ whence}\\[2mm]
+u(x,t)&=e^{-ct}\int_{\MB{R}^n}\Phi(x-y)g(y)\,dy+e^{-ct}\int_0^t\int_{\MB{R}^n}\Phi(x-y,t-s)e^{cs}f(y,s)\,dy\,ds.
+\end{align*}
+\end{proof}
+
+\item Given $g:[0,\infty)\rightarrow\MB{R}$, with $g(0)=0$, derive the formula
+
+\[
+u(x,t)=\frac{x}{\sqrt{4\pi}}\int_0^t\frac{1}{(t-s)^{3/2}}e^{\frac{-x^2}{4(t-s)}}g(s)\,ds
+\]
+
+for a solution of the initial/boundary-value problem 
+
+\[
+\begin{cases}u_t-u_{xx}=0 & \text{in }\MB{R}_+\times(0,\infty)\\ u=0 & \text{on }\MB{R}_+\times\{t=0\}\\ u=g & \text{on }\{x=0\}\times[0,\infty).\end{cases} 
+\]
+
+[Hint: Let $v(x,t):=u(x,t)-g(t)$ and extend $v$ to $\{x<0\}$ by odd reflection.]
+
+\begin{proof}
+Utilizing the hint, define
+
+\[
+v(x,t)=\begin{cases}u(x,t)-g(t) & \text{if }x\geq 0\\ -u(-x,t)+g(t) & \text{if }x<0.\end{cases}
+\]
+
+Then
+
+\[
+v_t(x,t)=\begin{cases}u_t(x,t)-g'(t) & \text{if } x\geq0\\ -u_t(-x,t)+g'(t) & \text{if }x<0\end{cases}\aspace v_{xx}(x,t)=\begin{cases}u_{xx}(x,t) & \text{if }x\geq0 \\ -u_{xx}(-x,t) & \text{if }x<0.\end{cases}
+\]
+
+Thus,
+
+\[
+v_t(x,t)-v_{xx}(x,t)=u_t(x,t)-g'(t)-u_{xx}(x,t)=0-g'(t)=-g'(t)
+\]
+for $x\geq0$, and
+
+\[
+v_t(x,t)-v_{xx}(x,t)=-u(-x,t)+g'(t)+u_{xx}(-x,t)=0+g'(t)=g'(t)
+\]
+for $x<0$. Furthermore, $v(x,0)=u(x,0)-g(0)=0$ and $v(0,t)=u(0,t)-g(t)=g(t)-g(t)=0$, so we have
+
+\[
+\begin{cases}v_t-v_{xx}=-g' & \text{on }\{x\geq0\}\times(0,\infty)\\ 
+v_t-v_{xx}=g' &  \text{on }\{x<0\}\times(0,\infty)\\
+v=0 & \text{on }\MB{R}\times\{t=0\}. \end{cases}
+\]
+
+In other words, $v$ solves a nonhomogeneous heat equation with initial condition $v(x,0)=0$ when $x\geq0$ and $x<0$ are taken separately. Using the formula derived in Evans' book on page 49, we have
+
+\begin{align*}
+v(x,t)&=\int_0^t\frac{1}{(4\pi(t-s))^{1/2}}\left(\int_{-\infty}^0 e^{-\frac{|x-y|^2}{4(t-s)}}g'(s)\,dy-\int_0^\infty e^{-\frac{|x-y|^2}{4(t-s)}}g'(s)\,dy\right)\,ds\\[2mm]
+&=\int_0^t\int_{-\infty}^0\frac{1}{(4\pi(t-s))^{1/2}} e^{-\frac{|x-y|^2}{4(t-s)}}g'(s)\,dy\,ds-\int_0^t\int_0^\infty \frac{1}{(4\pi(t-s))^{1/2}} e^{-\frac{|x-y|^2}{4(t-s)}}g'(s)\,dy\,ds\\[2mm]
+&=-\int_0^tg'(s)\int_{-\infty}^\infty \frac{1}{(4\pi(t-s))^{1/2}}e^{-\frac{|x-y|^2}{4(t-s)}}\,dy\,ds+2\int_0^t\int_{-\infty}^0\frac{1}{(4\pi(t-s))^{1/2}}e^{-\frac{|x-y|^2}{4(t-s)}}g'(s)\,dy\,ds\\[2mm]
+&=-\int_0^tg'(s)\cdot1\,ds+2\int_0^t\int_{-\infty}^0\frac{1}{(4\pi(t-s))^{1/2}}e^{-\frac{|x-y|^2}{4(t-s)}}g'(s)\,dy\,ds\\[2mm]
+&=-g(t)+2\int_0^t\int_{-\infty}^0\frac{1}{(4\pi(t-s))^{1/2}}e^{-\frac{|x-y|^2}{4(t-s)}}g'(s)\,dy\,ds.\\[2mm]
+\end{align*}
+
+Set $\displaystyle z=\frac{|x-y|}{2\sqrt{t-s}}$. Then when $y=-\infty$, $z=\infty$ and when $y=0$, $z=\frac{x}{2\sqrt{t-s}}$. Thus, 
+
+\begin{align*}
+v(x,t)&=-g(t)+2\int_0^t\int_{-\infty}^0\frac{1}{(4\pi(t-s))^{1/2}}e^{-\frac{|x-y|^2}{4(t-s)}}g'(s)\,dy\,ds\\[2mm]
+&=-g(t)+\frac{1}{\sqrt{\pi}}\int_0^t\left(\int_{\frac{x}{2\sqrt{t-s}}}^\infty e^{-z^2}\,dz\right)\,g'(s)\,ds.
+\end{align*}
+
+Let $\displaystyle f(s)=\frac{1}{\sqrt{\pi}}\int_{\frac{x}{2\sqrt{t-s}}}^\infty e^{-z^2}\,dz$. Then
+
+\[
+f'(s)=-\frac{x}{4\sqrt{\pi}(t-s)^{3/2}}e^{-\frac{x^2}{4(t-s)}}
+\]
+
+
+
+Then via integration by parts, we have
+
+\begin{align*}
+v(x,t)&=-g(t)+2\int_0^tf(s)g'(s)\,ds\\[2mm]
+&=-g(t)+2\left(\left.f(s)g(s)\right|_0^t-\int_0^tg(s)f'(s)\,ds\right)\\[2mm]
+&=-g(t)+2\left(f(t)g(t)-f(0)g(0)+\frac{1}{\sqrt{\pi}}\int_0^t\frac{x}{4(t-s)^{3/2}}e^{-\frac{x^2}{4(t-s)}}g(s)\,ds\right)\\[2mm]
+&=-g(t)+2\left(1\cdot g(t)-0+\frac{1}{\sqrt{\pi}}\int_0^t\frac{x}{4(t-s)^{3/2}}e^{-\frac{x^2}{4(t-s)}}g(s)\,ds\right)\\[2mm]
+&=-g(t)+2g(t)+\frac{x}{\sqrt{4\pi}}\int_0^t\frac{1}{(t-s)^{3/2}}e^{-\frac{x^2}{4(t-s)}}g(s)\,ds\\[2mm]
+&=g(t)+\frac{x}{\sqrt{4\pi}}\int_0^t\frac{1}{(t-s)^{3/2}}e^{-\frac{x^2}{4(t-s)}}g(s)\,ds.\\[2mm]
+\end{align*}
+
+Thus,
+
+\begin{align*}
+u(x,t)-v(x,t)-g(t)&=g(t)+\frac{x}{\sqrt{4\pi}}\int_0^t\frac{1}{(t-s)^{3/2}}e^{-\frac{x^2}{4(t-s)}}g(s)\,ds-g(t)\\[2mm]
+&=\frac{x}{\sqrt{4\pi}}\int_0^t\frac{1}{(t-s)^{3/2}}e^{-\frac{x^2}{4(t-s)}}g(s)\,ds.
+\end{align*}
+\end{proof}
+
+
+\item We say $v\in C^2_1(U_T)$ is a \textit{subsolution} of the heat equation if $v_t-\Delta v\leq 0$ in $U_T$.
+
+\begin{enumerate}
+\itemsep5mm
+
+\item Prove for a subsolution that 
+
+\[
+v(x,t)\leq \frac{1}{4r^n}\iint_{E(x,t;r)} v(y,s)\frac{|x-y|^2}{(t-s)^2}\,dy\,ds
+\]
+
+for all $E(x,t;r)\subset U_T$.
+
+\begin{proof}
+Let $E(x,t;r)\subset U_T$ and let $v$ be a subsolution of the heat equation. Then by definition we have that $v_t-\Delta v\leq 0$ on $E(x,t;r)$. As in Evan's proof of the mean value property, shift the space and time variables to 0 and assume that $v$ is smooth WOLOG. Let $E(r)=E(0,0;r)$, and define
+
+\[
+\phi(r)=\frac{1}{r^n}\iint_{E(r)}v(y,s)\frac{|y|^2}{s^2}\,dy\,ds=\iint_{E(1)}v(ry,r^2s)\frac{|y|^2}{s^2}\,dy\,ds,
+\]
+
+as well as 
+
+\[
+\psi=-\frac{n}{2}\log(-4\pi s)+\frac{|y|^2}{4s}+n\log r.
+\]
+
+
+
+Then, as in Evans' proof,
+
+\begin{align*}
+\phi'(r)&= \sum_{i=1}^n \frac{1}{r^{n+1}}\iint_{E(r)}-4n\Delta v\psi-\frac{2n}{s}\sum_{i=1}^n v_{y_i}y_i\,dy\,ds\\[2mm]
+&\geq \sum_{i=1}^n \frac{1}{r^{n+1}}\iint_{E(r)}-4n v_s\psi-\frac{2n}{s}\sum_{i=1}^n v_{y_i}y_i\,dy\,ds\\[2mm]
+&=0.
+\end{align*}
+
+Thus, $\phi$ is an increasing function, so for $r>\ve>0$, 
+
+\begin{align*}
+\phi(r)&=\frac{1}{r^n}\iint_{E(r)}v(y,s)\frac{|y|^2}{s^2}\,dy\,ds\\[2mm]
+&\geq\lom{\ve}{0}\phi(\ve)\\[2mm]
+&=\lom{\ve}{0}\frac{1}{\ve^n}\iint_{E(\ve)}v(y,s)\frac{|y|^2}{s^2}\,dy\,ds\\[2mm]
+&=v(0,0)\lom{\ve}{0}\frac{1}{\ve^n}\iint_{E(\ve)}\frac{|y|^2}{s^2}\,dy\,ds\\[2mm]
+&=4v(0,0).
+\end{align*}
+
+Consequently,
+
+\[
+v(0,0)\leq\frac{1}{4}\phi(r)=\frac{1}{4r^n}\iint_{E(r)} v(y,s)\frac{|y|^2}{s^2}\,dy\,ds
+\]
+
+so
+
+\[
+v(x,t)\leq \frac{1}{4r^n}\iint_{E(x,t;r)} v(y,s)\frac{|x-y|^2}{(t-s)^2}\,dy\,ds.
+\]
+
+Since $E(x,t;r)$ was chosen arbitrarily, this holds for all $E(x,t;r)\subset U_T$.
+\end{proof}
+
+\item Prove that therefore $\max_{\bar{U}_T} v=\max_{\Gamma_T}v$.
+
+\begin{proof}
+We will follow Evans' proof on page 56 and instead prove (ii) which implies (i) (the problem statement). Suppose there exists $(x_0,t_0)\in U_T$ such that $v(x_0,t_0)=\max_{\bar{U}_T}v(x,t)=M$ and let $r>0$ be small enough that $E(x_0,t_0;r)\subseteq U_T$. By the result above, we have
+
+\[
+M=v(x_0,t_0)\leq \frac{1}{4r^n}\iint_{E(x_0,t_0;r)} v(y,s)\frac{|x_0-y|^2}{(t_0-s)^2}\,dy\,ds\leq M.
+\]
+
+Since $ \frac{1}{4r^n}\iint_{E(x_0,t_0;r)} \frac{|x_0-y|^2}{(t_0-s)^2}\,dy\,ds=1$, equality holds only if $v(x,t)=M$ for all $(x,t)\in E(x_0,t_0;r)$. Now, choose $(y_0,s_0)\in U_T$ such that $s_0<t_0$ and the line segment $\ell$ from $(x_0,t_0)$ to $(y_0,s_0)$ lies entirely inside $U_T$. Define
+
+\[
+r_0=\min\{s\geq s_0\mid v(x,t)=M\text{ for all }(x,t)\in\ell,\,s\leq t\leq t_0\}.
+\]
+
+This minimum is well-defined since $v$ is continuous. We claim that $r_0=s_0$. Suppose by way of contradiction that $r_0>s_0$. Then there exists some point $(z_0, r_0)\in\ell\cap U_T$ such that $v(z_0,r_0)=M$. By the result above, $v\equiv M$ on $E(z_0,r_0;r)\subseteq U_T$ for all sufficiently small $r$. But since this heat ball intersects $\ell$ and $v=M$ along $\ell$ past $r_0$, we have a contradiction since $r_0$ is supposed to be the minimum of the set above. Consequently, $r_0=s_0$ and $v\equiv M$ on all of $\ell$. Next, given any point $x\in U$ and any $0\leq t\leq t_0$, we can draw a polygonal path from $(x_0,t_0)$ to $(x,t)$ that lies entirely in side $U_T$ and thus, by the argument above, $v\equiv M$ on this path, whence it follows that $v\equiv M$ on $U_T$. Therefore $\max_{\bar{U}_T} v=\max_{\Gamma_T}v$ since $v$ is constant.
+\end{proof}
+
+\pagebreak
+
+\item Let $\phi:\MB{R}\rightarrow\MB{R}$ be smooth and convex. Assume $u$ solves the heat equation and $v:=\phi(u)$. Prove $v$ is a subsolution.
+
+\begin{proof}
+Let $\phi:\MB{R}\rightarrow\MB{R}$ be smooth and convex and suppose $u$ solves the heat equation and define $v:=\phi(u)$. We need to prove that $v_t-\Delta v\leq 0$. We have
+
+\[
+v_t=\pp{v}{t}=\pp{}{t}\phi(u(x,t))=\dd{\phi}{u}\pp{u}{t}=\phi' u_t,\text{ and}
+\]
+
+\begin{multicols}{2}
+\begin{align*}
+v_{x_ix_i}&=\pp{^2v}{x_i^2}\\[2mm]
+&=\pp{}{x_i}\left(\pp{v}{x_i}\right)\\[2mm]
+&=\pp{}{x_i}\left(\pp{}{x_i}\left(\phi(u(x,t))\right)\right)\\[2mm]
+&=\pp{}{x_i}\left(\dd{\phi}{u}\pp{u}{x_i}\right)\\[2mm]
+&=\dd{^2\phi}{u^2}\pp{u}{x_i}\pp{u}{x_i}+\dd{\phi}{u}\pp{^2u}{x_i^2}\\[2mm]
+&=\phi''u_{x_i}^2+\phi' u_{x_ix_i}.\text{ Therefore,}\\[2mm]
+\end{align*}
+
+\columnbreak
+
+\begin{align*}
+\Delta v&=\sum_{i=1}^n v_{x_ix_i}\\[2mm]
+&=\sum_{i=1}^n\left(\phi''u_{x_i}^2+\phi' u_{x_ix_i}\right)\\[2mm]
+&=\phi''\sum_{i=1}^n u_{x_i}^2+\phi'\sum_{i=1}^n u_{x_ix_i}\\[2mm]
+&=\phi''|Du|^2+\phi'\Delta u,\text{ and we have}
+\end{align*}
+\end{multicols}
+
+\begin{align*}
+v_t-\Delta v&=\phi' u_t-\phi''|Du|^2-\phi'\Delta u\\[2mm]
+&=\phi'(u_t-\Delta u)-\phi''|Du|^2\\[2mm]
+&=\phi'\cdot0-\phi''|Du|^2\\[2mm]
+&=-\phi''|Du|^2\\[2mm]
+&\leq0
+\end{align*}
+
+since $\phi$ is convex and $|Du|^2\geq0$. In other words, $v$ is a subsolution of the heat equation.
+\end{proof}
+
+\pagebreak
+
+\item Prove $v:=|Du|^2+u_t^2$ is a subsolution, whenever $u$ solves the heat equation.
+
+\begin{proof}
+Suppose $u$ solves the heat equation and define $v:=|Du|^2+u_t^2$. Since $u$ solves the heat equation, so does $u_t$ and $Du$, so by linearity and superposition, $v$ also solves the heat equation.
+\end{proof}
+
+\end{enumerate}
+
+\setcounter{enumi}{4}
+
+\item Suppose $\alpha >0$, $T>0$, and $f\in C^0(\bar{\Omega})$ with $f\geq 0$ on $\Omega$. Let $u\in C^2_1(\Omega_T)\cap C^0(\bar{\Omega}_T)$ satisfy
+
+\[
+\begin{cases} u_t-\Delta u+\alpha u=f(x) & \text{in }\Omega_T\\ u=0 & \text{on }\Gamma_T.\end{cases}
+\]
+Prove that $u\geq0$ and $u_t\geq 0$ in $\Omega\times[0,T]$.
+
+\begin{proof}
+Let $v=e^{\alpha t}u$. Then $w_t=\alpha e^{\alpha t}u+e^{\alpha t}u_t$ and $\Delta v=e^{\alpha t}\Delta u$. Thus,
+
+\[
+v_t-\Delta v=\alpha e^{\alpha t}u+e^{\alpha t}u_t-e^{\alpha t}\Delta u=e^{\alpha t}\left(\alpha u+u_t-\Delta u\right)=e^{\alpha t}f\geq0,
+\]
+
+i.e. $v$ solves the (nonhomogeneous) heat equation. By the maximum principle, $v$ achieves its maximum on the boundary $\Gamma_T$ and $v=e^{\alpha t}u=e^{\alpha t}\cdot 0=0$ there, so we have that $v\geq0$ in $\Omega_T$ whence $u\geq0$ in $\Omega_T$. Since $u=0$ on $\Gamma_T$ and $u\geq0$ on $\Omega_T\times[0,T]$, $u_t\geq 0$ on $\Omega_T$.
+\end{proof}
+
+\item Let $T>0$ and $c\in C^0(\bar{\Omega})$. Let $u\in C^2_1(\Omega_T)\cap C^0(\bar{\Omega}_T)$ satisfy
+
+\[
+\begin{cases} u_t-\Delta u+c(x,t)u=0 & \text{in }\Omega_T\\ u\leq0 & \text{on }\Gamma_T.\end{cases}
+\]
+Prove that $u\leq0$ in $\Omega\times[0,T]$.
+
+\begin{proof}
+Suppose by way of contradiction that $u\not\leq0$ in $\Omega_T$. Then $u$ must have a positive maximum point, say $(x_0,t_0)$ where $\max_{\Omega_T}u(x,t)=u(x_0,t_0)>0$. Since $u(x_0,t_0)$ is a maximum, the second derivative test implies that $\Delta u(x_0,t_0)\leq 0$. Additionally, $u_t(x_0,t_0)=0$ since $u$ takes a maximum at $(x_0,t_0)\in\Omega_T$. Note that if $(x_0,t_0)\in\partial\Omega$, then $u_t(x_0,t_0)\leq0$.
+
+Now, first assume that $c(x,t)>0$ in $\Omega_T$. Then
+\[
+u_t(x_0,t_0)-\Delta u(x_0,t_0)+c(x_0,t_0)u(x_0,t_0)=0,
+\]
+but $u_t(x_0,t_0)-\Delta u(x_0,t_0)\geq0$ since $u_t=0$ and $\Delta u\leq 0$ in $\Omega_T$, and $c(x_0,t_0)u(x_0,t_0)>0$, so the right side of the equation above is strictly greater than 0, a contradiction. 
+
+Now, suppose $c(x,t)\leq0$ on $\Omega_T$. Let $w=e^{\alpha t}u$. Then $w_t=e^{\alpha t}(\alpha u+u_t)$ and $\Delta w=e^{\alpha t}u$. Thus,
+
+$$
+w_t-\Delta w=e^{\alpha t}[\alpha u+u_t-\Delta u]=e^{\alpha t}[\alpha u-c(x,t)u]=e^{\alpha t}u[\alpha -c(x,t)]=[\alpha-c(x,t)]w,\text{ so}
+$$
+$$w_t-\Delta w-[\alpha-c(x,t)]w=0.$$
+
+Since $c\in C^0(\bar{\Omega})$, it attains a maximum there. Consequently, we may choose $|\alpha|$ that $\alpha-c(x,t)< 0$. This makes this case similar to the previous one where $c(x,t)>0$ (just call, say, $d(x,t)=\alpha-c(x,t)$), which we already showed leads to a contradiction. Therefore, our original assumption that $u\not\leq 0$ is fallacious, and it follows that $u\leq0$ in $\Omega\times[0,T]$.
+\end{proof}
+
+
+\end{enumerate}
+
+
+\end{document}

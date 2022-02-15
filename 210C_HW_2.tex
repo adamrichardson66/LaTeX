@@ -1,0 +1,196 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+\newcommand{\im}{\text{im\,}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\coker}{\text{coker\,}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210C - Riemann Surfaces}
+\rightline{Wong, Bun}
+\rightline{HW 2}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+\item Suppose $f$ is a meromorphic function on a compact Riemann surface $M$. Let $Z$ be the number of zeros of $f$ on $M$, and let $P$ be the number of poles of $f$ on $M$ both counted according to multiplicity. Prove that  $Z=P$.
+
+\begin{proof}
+Suppose $f$ is a meromorphic function on a compact Riemann surface $M$. The set of poles is a discrete set since they are isolated singularities, and since $M$ is compact, this set is also finite, so $P<\infty$. Since $f$ is meromorphic, it admits a Laurent series of degree, say, $k$. The degree of $f$ is constant locally, and since $M$ is connected, the degree is the same globally. In particular, it is the same for any zeroes and any poles and so the number of zeroes and poles is the same.
+\end{proof}
+
+
+\item Prove that the sum of residues of a meromorphic one-form on a compact Riemann surface is zero.
+
+\begin{proof}
+Let $M$ be a compact Riemann surface and $\alpha=f\,dz$ a meromorphic one-form. Then $f$ is meromorphic, and since $M$ is compact, the set of poles of $f$ is finite. Write $\{p_i,\ldots,p_n\}$ for the set of poles of $f$. Since these are isolated singularities, for each $p_i$, there exists an $r_i$ such that $B(p_i;r_i)\cap B(p_j;r_j)=\varnothing$ for $i\neq j$. Write $D_i=\overline{B(p_i;r_i)}$ and $C_i=\partial D_i$. Let 
+\[
+S=M-\bigcup_{i=1}^nD_i.
+\]
+This set is open, and $\alpha$ is holomorphic there, thus $d\alpha=0$ there. Note that $\partial S=\bigcup_{i=1}^nC_i$, so by Stokes' theorem, we have
+\[
+0=\int_S0=\int_Sd\alpha=\int_{\partial S}\alpha=\sum_{i=1}^n\int_{C_i}\alpha=\sum_{i=1}^n\int_{C_i}f\,dz=2\pi i\sum_{i=1}^n\text{res}(\alpha,p_i).
+\]
+Therefore, $\sum_{i=1}^n\text{res}(\alpha,p_i)=0$.
+\end{proof}
+
+\pagebreak
+
+\item Let $f$ be a non-trivial meromorphic one-form on a compact Riemann surface, let $Z$ be the number of zeros of $f$ on $M$, let $P$ be the number of poles of $f$ on $M$, both counted according to multiplicity. Prove that $Z-P=2g-2$, where $g$ is the genus of $M$. 
+
+\begin{proof}
+Let $\alpha=f\,dz$ be our one-form. Since $f$ is meromorphic and $M$ is compact, the set of poles of $f$ is discrete and finite. Let $p:\MB{R}\to\MB{R}$ be the standard mollifier so that it is 1 on a neighborhood of 0 and $O(\frac{1}{t})$ for large $t$. Define $\tilde \alpha=p(|\alpha|^2)\alpha$ where $|\alpha|=\frac{|f(z)|}{R}$ where $R$ is the area form determined by $R \,dx\wedge dy$. Then the set of zeroes of $\tilde \alpha$ is the set of zeroes and poles of $\alpha$ by construction: notice that as $|\alpha|\to\infty$, $p(|\alpha|^2)\to0$. More specifically,
+\[
+\tilde \alpha=\frac{R}{|f(z)|^2}f(z)\,dz=\frac{R}{f(z)\overline{f(z)}}f(z)\,dz=\frac{R}{\overline{f(z)}}\,dz=R\cdot\overline{\left(\frac{1}{f(z)}\right)}\,dz.
+\]
+The zeroes of $\tilde \alpha$ that correspond to the poles of $\alpha$ have a multiplicity that is the opposite the order of the pole. Thus $Z=P$, and by the Hopf principle,
+\[
+Z-P=\sum_{p\in\ker\alpha}m_p(\alpha)=-\chi(M)=-(2-2g)=2g-2.
+\]
+\end{proof}
+
+
+\item Compute the deRham cohomology of an oriented compact  2-manifold (cf. Donaldson  pp. 67-73).
+
+Let $M$ be a compact oriented 2-manifold. Let $\Omega^k(M)$ represent the set of $k$-forms on $M$. The $k$th de Rham cohomology group is
+\[
+H^k(M)=\frac{\ker(d:\Omega^k\to\Omega^{k+1})}{\im(d:\Omega^{k-1}\to\Omega^k)}.
+\]
+Let $f\in H^0(M)=\ker(d:\Omega^0\to\Omega^1)$. Then $df=0$, and since we are on a 2-manifold,
+\[
+df=\pp{f}{x}dx+\pp{f}{y}dy=0
+\]
+which implies that $\pp{f}{x}=0$ and $\pp{f}{y}=0$. This implies that $f$ is constant, so $H^0(M)=\ker(d:\Omega^0\to\Omega^1)$ is the same as the set of constant functions, i.e. $H^0(M)\cong \MB{C}$.
+
+$H^1(M)$ is more difficult and omitted here.
+
+For $H^2(M)$, define a map $\alpha\mapsto\int_M\alpha$ from $\Omega^2\to \MB{R}$. The kernel of this map is the set of all $\alpha\in \Omega^2$ such that $\int_M\alpha=0$. Let $\beta\in \Omega^1$. Then $d\beta=\alpha\in \Omega^2$. We have
+\[
+\int_M\alpha=\int_M\,d\beta=\int_{\partial M}\beta=0
+\]
+since $\partial M=\varnothing$. Thus, $\im(d:\Omega^1\to\Omega^2)=\ker(d:\Omega^2\to\MB{R})$. Then
+\[
+H^2(M)=\frac{\ker(\alpha\mapsto\int_M\alpha)}{\im(d:\Omega^1\to\Omega^2)}=\frac{\Omega^2}{\ker(d:\Omega^1\to\Omega^2)}
+\]
+
+\item (Donaldson p.81, problem 4) Suppose that $\Omega$ is a compact region with a smooth boundary in a Riemann surface and that $\phi$ is a real-valued function which is positive on $\Omega$ and vanishes on the boundary of $\Omega$. Show that
+\[
+\int_{\partial \Omega}i\,\partial\phi\geq 0.
+\]
+[Hint: Consider $\Omega\subseteq \MB{C}$ and see that the integral is, in traditional notation, the flux of the gradient of $\phi$ through the boundary.]
+
+\begin{proof}
+Recall that
+\[
+\partial=\pp{}{z}=\frac{1}{2}\left(\pp{}{x}-i\pp{}{y}\right)\,dz.
+\]
+Then
+\begin{align*}
+i\,\partial\phi&=i\pp{}{z}(\phi)\,dz=\frac{i}{2}\left(\pp{}{x}-i\pp{}{y}\right)(\phi)\cdot dz\\[2mm]
+&=\frac{i}{2}\left(\pp{\phi}{x}-i\pp{\phi}{y}\right)(dx+i\,dy)\\[2mm]
+&=\frac{i}{2}\left(\pp{\phi}{x}\,dx+i\pp{\phi}{x}\,dy-i\pp{\phi}{y}\,dx+\pp{\phi}{y}\,dy\right)\\[2mm]
+&=\frac{i}{2}\left(\pp{\phi}{x}\,dx+\pp{\phi}{y}\,dy\right)-\frac{1}{2}\left(\pp{\phi}{x}\,dy-\pp{\phi}{y}\,dx\right)\\[2mm]
+&=\frac{i}{2}\,d\phi-\frac{1}{2}\<\pp{\phi}{x},\pp{\phi}{y}>\cdot\<dy,-dx>.\\[2mm]
+\end{align*}
+Integrating the first term on $\partial S$ gives 0 by Stoke's theorem, and the second term is the opposite of the flux of the gradient, and so is positive. Hence, the integral above is positive as well.
+\end{proof}
+
+
+\end{enumerate}
+\end{document}

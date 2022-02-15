@@ -1,0 +1,202 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209B - Functional Analysis}
+\rightline{Baez, John}
+\rightline{HW 8}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+
+
+
+
+\item Suppose $L$ is a vector subspace of a Banach space $X$. Let $\overline{L}$ be the closure of $L$ in the norm topology on $X$. Show that $\overline{L}$ is a vector subspace of $X$.
+
+\begin{proof}
+Let $a,b\in \MB{R}$ with $a,b\neq0$ and $f,g\in \overline{L}$. Let $\ve>0$ be given. Since $L$ is a vector subspace, there exist sequences $\{f_m\},\{g_n\}\subseteq L$ such that $f_m\to f$ and $g_n\to g$. In other words, there exist $M,N\in\MB{Z}^+$ such that if $m\geq M$ and $n\geq N$, then $\|f_m-f\|<\frac{\ve}{2|a|}$ and $\|g_n-g\|<\frac{\ve}{2|b|}$. Let $K=\max\{M,N\}$. Then when $m,n\geq K$, we have
+\begin{align*}
+\|af_m+bg_n-(af+bg)\|&=\|af_m-af+bg_n-bg\|\\[2mm]
+&\leq|a|\,\|f_m-f\|+|b|\,\|g_n-g\|\\[2mm]
+&<|a|\cdot\frac{\ve}{2|a|}+\frac{\ve}{2|b|}\\
+&=\ve.
+\end{align*}
+Thus, $af+bg$ is an accumulation point of $L$, so $af+bg\in\overline{L}$ and therefore $\overline{L}$ is a vector subspace.
+\end{proof}
+
+\item Suppose that $X$ and $Y$ are Banach spaces, $S \in L(X,Y)$, and $L \subseteq X$ is a vector subspace.  Show that if $S$ vanishes on $L$, it also vanishes on $\overline{L}$.
+
+\begin{proof}
+Suppose that $S\in L(X,Y)$ vanishes on $L$, and let $x\in\overline{L}\setminus L$. Then there exists a sequence $\{x_n\}\subseteq L$ such that $x_n\to x$. Since $S\in L(X,Y)$, it is bounded, and so by Proposition 5.2 it is continuous, i.e. for all $\ve>0$, there exists an $n\in\MB{Z}^+$ such that if $n\geq N$, then $\|S(x_n)-S(x)\|<\ve$. But since $x_n\in L$ for all $n$, $S(x_n)=0$ for all $n$, so we have $\|S(x_n)-S(x)\|=\|S(x)\|<\ve$. Since this is true for all $\ve>0$, it must be the case that $\|S(x)\|=0$, and since $Y$ is a vector space, $S(x)$ must be the 0 vector, i.e. $S(x)=0$. Since $x$ was chosen arbitrarily, $S$ vanishes on $\overline{L}$ by definition.
+\end{proof}
+
+
+\item Suppose that $T \in L(V,W)$.  Prove that if $\text{im}(T)$ is dense in $W$ then $T^\dagger$ is one-to-one. [Hint: prove the contrapositive. Suppose $T^\dagger$ is not one-to-one. Show that there exists a nonzero element $f \in W^*$ that vanishes on $\text{im}(T)$. By Problem 2, $f$ also vanishes on $\overline{\text{im}(T)}$.  Show that $\text{im}(T)$ cannot be dense.]
+
+\begin{proof}
+We proceed by proving the contrapositive. Suppose that $T^\dagger$ is not one-to-one. Then there exist linear functionals $g,h\in W^*$ such that $T^\dagger g=g(Tv)=h(Tv)=T^\dagger h$ but $g\neq h$. Let $f=g-h$. Then $f\neq0$, but on $\text{im}(T)$, we have 
+\[
+f(Tv)=T^\dagger f=T^\dagger(g-h)=T^\dagger g-T^\dagger h=g(Tv)-h(Tv)=0.
+\]
+In other words, $f$ vanishes on $\text{im}(T)$, so by Problem 2 above, $f$ vanishes on $\overline{\text{im}(T)}$. We claim that $\overline{\text{im}(T)}\neq X$. Suppose by way of contradiction that $\overline{\text{im}(T)}= X$. Then $f$ vanishes on all of $X$ so $f\equiv 0$ since $W$ is a vector space, a contradiction. Thus, $\overline{\text{im}(T)}\neq X$ so $\overline{\text{im}(T)}$ is not dense by definition.
+\end{proof}
+
+\item Suppose that $T \in L(V,W)$.  Prove that if $T^\dagger$ is one-to-one then $\text{im}(T)$ is dense in $W$. [Hint: again, prove the contrapositive.  Suppose $\text{im}(T)$ is not dense. Show that $\overline{\text{im}(T)}$ is a closed vector subspace of $W$ and that there is a vector $w \in W - \overline{\text{im}(T)}$.  Using an idea from Folland's Theorem 5.8, find a nonzero element $f \in W^*$ that vanishes on $\overline{\text{im}(T)}$.  Show that $T^*(f) = 0$ and draw the obvious conclusion.]
+
+
+\begin{proof}
+We proceed by proving the contrapositive. Suppose $\text{im}(T)$ is not dense. Then $\overline{\text{im}(T)}$ is a proper subset of $X$, i.e. $\overline{\text{im}(T)}\subset X$, so there exists an element $w\in X\setminus \overline{\text{im}(T)}$. First, we prove a little lemma.
+
+\begin{lemma}
+ $\overline{\text{im}(T)}$ is a closed vector subspace of $W$.
+\end{lemma}
+
+\begin{proof}
+Let $a,b\in\MB{R}$ and $x,y\in  \overline{\text{im}(T)}$. Then there exist $v,w\in V$ such that $x=T(v)$ and $y=T(w)$. Thus, $ax+by=aT(v)+bT(w)=T(av+bw)$ since $T$ is linear. Since $V$ is a vector space, $av+bw\in V$ and so $ax+by\in\overline{\text{im}(T)}$ which proves that $\overline{\text{im}(T)}$ is a vector subspace of $W$. $\overline{\text{im}(T)}$ is closed since it is the closure of $\text{im}(T)$, so it is a closed vector subspace of $V$. 
+\end{proof}
+
+By Theorem 5.8(a) in Folland's text, there exists an $f\in W^*$ such that $f(w)\neq 0$, and $f\big|_{\overline{\text{im}(T)}}=0$. Consequently, since $T^\dagger(f)=f(Tv)$ for all $v\in V$, $T^\dagger(f)=0$ since $Tv\in\overline{\text{im}(T)}$. Since $T^\dagger(0)=0$ as well, $T^\dagger$ cannot be one-to-one.
+\end{proof}
+
+
+\item Suppose that $T \in L(V,W)$.  Prove that
+\[     \ker(T^\dagger) = \{0\}  \quad \iff \quad \overline{\text{im}(T)} = W  .\]
+
+\begin{proof}
+$\overline{\text{im}(T)}=W$ if and only if the image of $T$ is dense in $W$ by definition. $\overline{\text{im}(T)}$ is dense in $W$ if and only if $T^\dagger$ is one-to-one by Problems 3 and 4 above. $T^\dagger$ is one-to-one if and only if $T^\dagger(f)=0$ implies $f=0$ since we already have that $T^\dagger(0)=0$. Thus, $\ker(T^\dagger)=\{0\}$ by definition.
+\end{proof}
+
+\pagebreak
+
+\item Suppose that $T \in L(V,W)$ is an isometry.  Prove that $\text{im}(T)$ is closed. [Hint: show that $T : V \to \text{im}(T)$ is a bijection whose inverse is an isometry.   To show $\text{im}(T)$ is closed, assume $w_i \to w$ is a convergent sequence in $W$ with $w_i \in \text{im}(T)$ and prove $w \in \text{im}(T)$.  To do this, show $T^{-1} (w_i)$ is a Cauchy sequence, then show $T^{-1} (w_i) \to v$ for some $v \in V$, and then show $w = Tv$.]
+
+\begin{proof}
+Suppose that $T\in L(V,W)$ is an isometry. First we show that $T$ is one-to-one. Let $x,y\in V$ and suppose $Tx=Ty$. Then since $T$ is linear, $T(x-y)=Tx-Ty=0$ so $\|x-y\|=\|T(x-y)\|=\|0\|=0$, and thus $x=y$. Every map is onto it's image, so $T:V\to\text{im}(T)$ is a bijection. Now we proceed in showing that its inverse, $T^{-1}:\text{im}(T)\to V$ is an isometry. Let $w\in\text{im}(T)$. Then there exists a $v\in V$ such that $Tv=w$. Thus, $\|w\|=\|Tv\|=\|v\|=\|T^{-1}w\|$, so $T^{-1}$ is an isometry.
+
+To show $\text{im}(T)$ is closed, let $\{w_i\}\subseteq \text{im}(T)$ be a convergent sequence, i.e. $w_i\to w\in W$. Let $\ve>0$. Then there exists an $N\in\MB{Z}^+$ such that if $i\geq N$, then $\|w_i-w\|<\frac{\ve}{2}$. We claim that $\{T^{-1}(w_i)\}_{i=1}^\infty$ is a Cauchy sequence. Let $i,j\geq N$. Then we have
+
+\begin{align*}
+\|T^{-1}(w_i)-T^{-1}(w_j)\|&=\|T^{-1}(w_i-w_j)\|\\[2mm]
+&=\|w_i-w_j\|\\[2mm]
+&=\|w_i-w+w_j-w\|\\[2mm]
+&\leq\|w_i-w\|+\|w_j-w\|\\[2mm]
+&<\frac{\ve}{2}+\frac{\ve}{2}\\[2mm]
+&=\ve.
+\end{align*}
+
+Thus $\{T^{-1}(w_i)\}$ is a Cauchy sequence, and so it converges to some $v\in V$, i.e. $T^{-1}(w_i)\to v$. Then $w_i=T(T^{-1}(w_i))\to Tv$, and since it is known that $w_i\to w$, we have that $Tv=w$, and so $w\in\text{im}(T)$. Thus, $\text{im}(T)$ is closed.
+\end{proof}
+
+\item Suppose that $T \in L(V,W)$ is an isometry.  Prove that
+\[     \ker(T^\dagger) = \{0\}  \quad \iff \quad \text{im}(T) = W  .\]
+
+\begin{proof}
+Suppose that $T \in L(V,W)$ is an isometry. By Problem 5, since $T$ is linear, $\ker(T^\dagger)=\{0\}$ if and only if $\overline{\text{im}(T)}=W$, but by Problem 6 $\text{im}(T)$ is closed so $\text{im}(T)=\overline{\text{im}(T)}$. Thus,
+\[     \ker(T^\dagger) = \{0\}  \quad \iff \quad \text{im}(T) = W  .\]
+\end{proof}
+
+\item  Prove that if $V^*$ is reflexive, then $V$ is reflexive. [Hint: once more, prove the contrapositive. Suppose $V$ is not reflexive.  Show that $\text{im}(i)$ is a closed vector subspace of $V^{**}$ and that there is a vector $\ell \in V^{**} - \text{im}(i)$.  Using an idea from Folland's Theorem 5.8, find a nonzero element $g \in V^{***}$ that vanishes on $\text{im}(i)$.  To show that $V^*$ is not reflexive, you need to show the bounded linear map
+\[                 j : V^* \to V^{***}   \]
+given by
+\[                 j(f)(\ell) = \ell(f) \qquad {\rm for \; all \; }  f \in V^*, \ell \in V^{**}\]
+is not onto.   To do this, show that $g$ is not in the image of $j$.  The trick: show anything in the image of $j$ that vanishes on $\text{im}(i)$ must be zero!]
+
+\begin{proof}
+We proceed by proving the contrapositive. Suppose $V$ is not reflexive. Then $i:V\to V^{**}$ is not onto, i.e. $\text{im}(i)\neq V^{**}$. Thus, there exists a vector $\ell\in V^{**}\setminus\text{im}(i)$. Since $i$ is an isometry, by Problem 6, $\text{im}(i)$ is closed, and so by Theorem 5.8(a) in Folland's text, there is a nonzero element $g\in V^{***}$ such that $g\big|_{\text{im}(i)}=0$. Note that we need $\ell\in V^{**}\setminus\text{im}(i)$ to yield such a $g$, as in Folland's proof.
+
+To show that $V^{*}$ is not reflexive, we will show the bounded linear map $j:V^*\to V^{***}$ defined by $j(f)(\ell)=\ell(f)$ for all $f\in V^*$ and $\ell\in V^{**}$ is not onto. Let $p\in\text{im}(j)$ and suppose $p\big|_{\text{im}(i)}=0$. Then
+\[
+p(f)=j(f)(\ell)=\ell(f)=0
+\]
+for all $\ell\in\text{im}(i)$. But this can only be the case if $\text{im}(i)= \{0\}$, which is a contradiction since $i$ is an isometry. Therefore, $p$ must be equivalently 0 and so our element $g$ above cannot be in $\text{im}(j)$ since it is nonzero and $p$ was chosen arbitrarily in $\text{im}(j)$. Consequently, $j$ is not onto so $V^*$ is not reflexive and we are done.
+\end{proof}
+
+\end{enumerate}
+
+\end{document}

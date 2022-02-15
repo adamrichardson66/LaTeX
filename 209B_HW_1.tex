@@ -1,0 +1,346 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\usepackage{bbm}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209B - Functional Analysis}
+\rightline{Baez, John}
+\rightline{HW 1}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+\item Consider two measure spaces $(X,\mathcal{M},\mu)$ and $(Y,\mathcal{N},\nu)$ where $X=Y=\mathbb{N}$, $\mathcal{M}=\mathcal{N}=\mathcal{P}(\mathbb{N})$ and $\mu=\nu=$ counting measure.   Prove that there exists a function $f:X \times Y \to \R$ such that 
+
+\[
+\int_Y \left(\int_X f d \mu\right)  d\nu = 1\pspace \text{ and } \pspace \int_X \left(\int_Y f d\nu \right)  d\mu =0.
+\]
+
+Why doesn't this violate Fubini's Theorem?
+
+[Hint: an example like this is in Folland.  When I say ``prove that there exists a function\ldots'', this includes proving that all the integrals above actually exist.]
+
+\begin{proof}
+A function that satisfies conditions similar to these is given in exercise 2.5.48 on page 69 in Folland's text. We model our function on the one there. Define
+
+\begin{multicols}{2}
+\[
+f(m,n)=\begin{cases}1 & \text{ if }m=n\\ -1 & \text{ if } m=n-1\\ 0 & \text{ otherwise}\end{cases}.
+\]
+
+
+\columnbreak
+
+\begin{tikzpicture}
+
+
+	
+\begin{axis}[
+	axis lines=middle,
+	xmin=-0.25, xmax=4.5,
+	ymin=-0.25, ymax=4.5,
+	xtick={1,2,3,4},
+	ytick={1,2,3,4},
+	axis line style={->},
+	ticklabel style={font=\tiny,fill=white},
+	xlabel={$X=\mathbb{N}$}, ylabel={$Y=\mathbb{N}$},
+	xlabel style={at={(ticklabel* cs:1)},anchor=west},
+	ylabel style={at={(ticklabel* cs:1)},anchor=south},	
+]
+
+
+\foreach \x in {1,2,3,4}
+	{
+	\edef\temp
+	{\noexpand
+	\draw (axis cs: \x,\x) node {1};}
+	\temp
+	}
+	
+\foreach \x in {1,2,3}
+	{
+	\edef\temp
+	{\noexpand
+	\draw (axis cs: \x,\x+1) node {-1};}
+	\temp
+	}
+		
+\foreach \x in {2,3,4}
+	{
+	\edef\temp
+	{\noexpand
+	\draw (axis cs: \x,\x-1) node {0};}
+	\temp
+	}
+	
+\foreach \x in {3,4}
+	{
+	\edef\temp
+	{\noexpand
+	\draw (axis cs: \x,\x-2) node {0};}
+	\temp
+	}	
+	
+\foreach \x in {1,2}
+	{
+	\edef\temp
+	{\noexpand
+	\draw (axis cs: \x,\x+2) node {0};}
+	\temp
+	}
+	
+\draw (axis cs: 1,4) node {0};
+\draw (axis cs: 4,1) node {0};
+	
+\end{axis}
+
+\end{tikzpicture}
+
+\end{multicols}
+
+We proceed by showing the above integrals evaluate to 1 and 0 respectively. By Theorem 2.36 and additivity of the integral, we have
+
+
+
+
+
+
+\begin{align*}
+\int_Y\left[\int_X f(m,n)\,d\mu(m)\right]\,d\nu(n)&=\int_{\{n=1\}}\left[\int_X f(m,n)\,d\mu(m)\right]\,d\nu(n)+\int_{\{n>1\}}\left[\int_X f(m,n)\,d\mu(m)\right]\,d\nu(n)\\[2mm]
+&=\int_{\{n=1\}}\left[\int_{\{m=1\}} f(m,n)\,d\mu(m)+\int_{\{m>1\}} f(m,n)\,d\mu(m)\right]\,d\nu(n)\\[2mm]
+&+\int_{\{n>1\}}\left[\int_{\{m=n,n-1\}\cup\{m\neq n,n-1\}} f(m,n)\,d\mu(m)\right]\,d\nu(n)\\[2mm] 
+&=\int_{\{n=1\}}\left[\int_{\{m=1\}}1\,d\mu(m)+\int_{\{m>1\}} 0\,d\mu(m)\right]\,d\nu(n)+\int_{\{n>1\}}[-1+1+0]\,d\nu(n)\\[2mm]
+&=\int_{\{n=1\}}\mu(\{m=1\})\,d\nu(n)+0+0\\[2mm]
+&=\mu(\{m=1\})\int_{\{n=1\}}1\,d\nu(n)\\[2mm]
+&=\mu(\{m=1\})\nu(\{n=1\})\\[2mm]
+&=1\cdot 1\\[2mm]
+&=1.
+\end{align*}
+
+But,
+
+\begin{align*}
+\int_X\left[\int_Y f(m,n)\,d\nu(n)\right]\,d\mu(m)&=\int_X\left[\int_{\{n=m,m+1\}\cup\{n\neq m,m+1\}}f(m,n)\,d\nu(n)\right]\,d\mu(m)\\[2mm]
+&=\int_X\left[\int_{\{n=m,m+1\}}f(m,n)\,d\nu(n)+\int_{\{n\neq m,m+1\}}f(m,n)\,d\nu(n)\right]\,d\mu(m)\\[2mm]
+&=\int_X\left[\int_{\{n=m,m+1\}}1-1\,d\nu(n)+\int_{\{n\neq m,m+1\}}0\,d\nu(n)\right]\,d\mu(m)\\[2mm]
+&=\int_X0\,d\mu(m)\\[2mm]
+&=0.
+\end{align*}
+
+This does not violate Fubini's theorem because $f\notin L^1(\mu\times\nu)$ so Fubini's theorem does not apply. Indeed, this function serves as a counterexample which illustrates the necessary condition that $f\in L^1(\mu\times\nu)$ for Fubini's theorem to hold. Observe that
+
+\begin{align*}
+\int_{\mathbb{N}\times \mathbb{N}}|f|\,d(\mu\times \nu)&=\int_{\{n\geq m\}}|f|\,d(\mu\times \nu)+\int_{\{n<m\}}|f|\,d(\mu\times \nu)\\[2mm]
+&=\int_{\{n\geq m\}}1\,d(\mu\times \nu)+\int_{\{n<m\}}1\,d(\mu\times \nu)\\[2mm]
+&=\mu\times\nu(\{n\geq m\})+\mu\times\nu(\{n<m\})\\[2mm]
+&=\infty +\infty \\[2mm]
+&=\infty,
+\end{align*}
+
+so $f\notin L^1(\mu\times\nu)$.
+\end{proof}
+
+
+\item Let $f:[0,1]\times[0,1]\rightarrow \R$ be given by
+
+\[
+f(x,y)=\begin{cases}\frac{x^2-y^2}{(x^2+y^2)^2} & \text{if }(x,y)\neq(0,0)\\ 0 & \text{if }(x,y)=(0,0).\end{cases}
+\]
+
+Since $f$ is continuous except at the origin it is measurable. Prove that
+
+\[
+\int_0^1\left(\int_0^1f(x,y)\,dx\right)\,dy=-\frac{\pi}{4}\aspace \int_0^1\left(\int_0^1f(x,y)\,dy\right)\,dx=\frac{\pi}{4}.
+\]
+
+\begin{proof}
+
+After some finagling, we see that
+
+\begin{align*}
+\int_0^1\left[\int_0^1f(x,y)\,dx\right]\,dy&=\int_0^1\left[\int_0^1\pp{}{x}\left(\frac{-x}{x^2+y^2}\right)\,dx\right]\,dy\\[2mm]
+&=\int_0^1\left[\frac{-x}{x^2+y^2}\right]_{x=0}^{x=1}\,dy\\[2mm]
+&=-\int_0^1\frac{1}{1+y^2}\,dy\\[2mm]
+&=-\tan^{-1}(1)+\tan^{-1}(0)\\[2mm]
+&=-\frac{\pi}{4}.
+\end{align*}
+
+Similarly,
+
+\begin{align*}
+\int_0^1\left[\int_0^1f(x,y)\,dy\right]\,dx&=\int_0^1\left[\int_0^1\pp{}{y}\left(\frac{y}{x^2+y^2}\right)\,dy\right]\,dx\\[2mm]
+&=\int_0^1\left[\frac{y}{x^2+y^2}\right]_{y=0}^{y=1}\,dx\\[2mm]
+&=\int_0^1\frac{1}{1+x^2}\,dx\\[2mm]
+&=\tan^{-1}(1)-\tan^{-1}(0)\\[2mm]
+&=\frac{\pi}{4}.
+\end{align*}
+
+\end{proof}
+
+
+\item Let $(X=[0,1],\MC{B},\mu=m)$ and $(Y=[0,1],\MC{P}(Y),\nu=\#)$ where $\#$ indicates the counting measure. Define $f:[0,1]\times[0,1]\rightarrow\R$ by
+
+\[
+f(x,y)=\begin{cases}1 & \text{if }x=y\\0 & \text{if }x\neq y.\end{cases}
+\]
+
+Prove that
+
+\[
+\int_Y\left(\int_Xf\,d\mu\right)\,d\nu=0\aspace \int_X\left(\int_Y f\,d\nu\right)\,d\mu=1.
+\]
+
+
+\begin{proof}
+By Theorem 2.36 and additivity, we have
+
+\begin{align*}
+\int_Y\left(\int_Xf(x,y)\,d\mu(x)\right)\,d\nu(y)&=\int_Y\left(\int_{\{x=y\}}f(x,y)\,dm(x)+\int_{\{x\neq y\}}f(x,y)\,dm(x)\right)\,d\#(y)\\[2mm]
+&=\int_Y\left(\int_{\{x=y\}}1\,dm(x)+0\right)\,d\#(y)\\[2mm]
+&=\int_Ym(\{x=y\})\,d\#(y)\\[2mm]
+&=\int_Y0\,d\#(y)\\[2mm]
+&=0,\text{ yet,}
+\end{align*}
+
+\begin{align*}
+\int_X\left(\int_Yf(x,y)\,d\nu(y)\right)\,d\mu(x)&=\int_X\left(\int_{\{y=x\}}f(x,y)\,d\#(y)+\int_{\{y\neq x\}}f(x,y)\,d\#(y)\right)\,dm(x)\\[2mm]
+&=\int_X\left(\int_{\{y=x\}}1\,d\#(y)+0\right)\,dm(x)\\[2mm]
+&=\int_X\#(\{y=x\})\,dm(x)\\[2mm]
+&=\int_X1\,dm(x)\\[2mm]
+&=m(X)\\[2mm]
+&=m([0,1])\\[2mm]
+&=1.
+\end{align*}
+
+\end{proof}
+
+This does not violate Fubini's theorem because the interval $[0,1]$ isn't $\sigma$-finite for $\#$. Suppose by way of contradiction that it were. Then we would be able to write $[0,1]$ as a countable union of sets with a finite number of elements in them, which would imply that $[0,1]$ is countable, a contradiction.
+
+
+
+\pagebreak
+
+\item Prove the \textbf{Monotone Class Lemma}: If $\MC{A}$ is an algebra of subsets of $X$, then the monotone class $\MC{C}$ generated by $\MC{A}$ coincides with the $\sigma$-algebra $\MC{M}$ generated by $\MC{A}$.
+
+\begin{proof}
+Let $\MC{A}$ be an algebra of subsets of $X$ and let $\MC{C}$ and $\MC{M}$ be as stated in the lemma. We proceed by showing $\MC{C}=\MC{M}$. 
+
+Since $\MC{M}$ is closed under countable unions and intersections of any type, it is closed under increasing unions and decreasing intersections. In other words, $\MC{M}$ is a monotone class. Since $\MC{M}$ is a monotone class containing $\MC{A}$, and $\MC{C}$ is the smallest monotone class containing $\MC{A}$, $\MC{C}\subseteq\MC{M}$.
+
+To show the reverse containment, it suffices to show that $\MC{C}$ is a $\sigma$-algebra since $\MC{M}$ is the smallest $\sigma$-algebra containing $\MC{A}$, i.e. if $\MC{C}$ is a $\sigma$-algebra (generated by $\MC{A}$), then $\MC{M}\subseteq \MC{C}$. First we show that $\MC{C}$ is an algebra, i.e. that is it closed under finite unions and complements. For any $E\in\MC{C}$, define
+
+\[
+\MC{C}(E):=\{F\in\MC{C}\mid E\setminus F,F\setminus E,E\cap F\text{ are in }\MC{C}\}.
+\]
+
+First, we claim that $\MC{C}(E)$ is a monotone class. Given an increasing union $\bigcup_{j=1}^\infty F_j$ of sets in $\MC{C}(E)$,
+
+\[
+E\setminus\bigcup_{j=1}^\infty F_j=E\cap\left(\bigcup_{j=1}^\infty F_j\right)^c=E\cap\bigcap_{j=1}^\infty F_j^c=\bigcap_{j=1}^\infty E\cap F_j^c.
+\]
+
+$\{F_j^c\}$ is a decreasing sequence of sets, so $\{E\cap F_j^c\}$ is as well and so the set difference above is in $\MC{C}$. Therefore $\MC{C}(E)$ is closed under increasing unions. A similar argument yields that $\MC{C}(E)$ is also closed under decreasing intersections so $\MC{C}(E)$ is a monotone class.
+
+Now, if $E\in\MC{A}$, then for all $F\in\MC{A}$, we have $F\in\MC{C}(E)$ since $\MC{A}$ is an algebra. Consequently, $\MC{A}\subseteq\MC{C}(E)$ whence $\MC{C}\subseteq\MC{C}(E)$ (for any $E\in\MC{A}$) since $\MC{C}(E)$ is a monotone class containing $\MC{A}$ and $\MC{C}$ is the smallest monotone class containing $\MC{A}$. It follows that if $F\in\MC{C}$, then $F\in\MC{C}(E)$ for all $E\in \MC{A}$. Note that $F\in\MC{C}(E)$ iff $E\in\MC{C}(F)$ by the symmetry present in the conditions placed on the elements in the definition above. As a result, we have $E\in\MC{C}(F)$ for all $E\in\MC{A}$, so $A\subseteq\MC{C}(F)$ as well, whence $\MC{C}\subseteq\MC{C}(F)$. This implies that $\MC{C}\subseteq\MC{C}(E)\cap\MC{C}(F)$. Thus, for any $E,F\in\MC{C}$, we have $E,F\in\MC{C}(E)\cap\MC{C}(F)$, so $E\setminus F, F\setminus E$, and $E\cap F$ are in $\MC{C}$, i.e. $\MC{C}$ is an algebra.
+
+Now that it is established that $\MC{C}$ is an algebra, let $\{E_j\}_{j=1}^\infty\subseteq\MC{C}$ be an arbitrary sequence of sets. Since $\MC{C}$ is an algebra, $U_n=\bigcup_{j=1}^nE_j$ is in $\MC{C}$ for every $n$. Since $U_n\subseteq U_{n+1}$, and since $\MC{C}$ is closed under increasing unions as a monotone class, 
+
+\[
+\bigcup_{n=1}^\infty U_n=\bigcup_{n=1}^\infty\bigcup_{j=1}^nE_j=\bigcup_{j=1}^\infty E_j
+\]
+
+is in $\MC{C}$ too, i.e. $\MC{C}$ is closed under countable unions. Behold, $\MC{C}$ is a $\sigma$-algebra so $\MC{M}\subseteq\MC{C}$ since $\MC{M}$ is the smallest $\sigma$-algebra containing $\MC{A}$. Since $\MC{C}\subseteq\MC{M}$ and $\MC{M}\subseteq\MC{C}$, we have $\MC{C}=\MC{M}$, i.e. the monotone class $\MC{C}$ generated by $\MC{A}$ coincides with the $\sigma$-algebra $\MC{M}$ generated by $\MC{A}$.
+\end{proof}
+
+
+\item[\textbf{EC.}] Guido Fubini left Italy when Mussolini's Fascist party adopted the anti-Jewish sentiments that the Nazis had been espousing for years. He moved to New York City with his family and died there 4 years later in 1943.
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+\end{document}

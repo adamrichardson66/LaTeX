@@ -1,0 +1,151 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\usepackage{bbm}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209B - Functional Analysis}
+\rightline{Baez, John}
+\rightline{HW 4}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+
+
+\item Suppose that $\mu$ is a finite Borel measure on $\MB{R}$. Prove this function is increasing and right-continuous on $[a,b]$:
+\[ F(x)=\mu([a,x]).\]
+
+
+\begin{proof}
+Suppose that $\mu$ is a finite Borel measure on $\MB{R}$. First, for any $x_1,x_2\in[a,b]$ with $x_1\leq x_2$, we have $[a,x_1]\subseteq[a,x_2]$ so $F(x_1)=\mu([a,x_1])\leq\mu([a,x_2])=F(x_2)$ by monotonicity. Thus, $F$ is increasing by definition.
+
+Next, by definition, $F(x)$ is trivially right continuous at $b$ so it remains to be shown that $F$ is right continuous on $[a,b)$. Let $x\in[a,b)$ and let $\{x_i\}\subseteq[x,b)$ such that $x_i\rightarrow x$. Since $F$ is increasing, we have immediately that
+\[
+\lom{x_i}{x^+}F(x_i)\geq F(x).
+\]
+Moreover, for any $x_i$, there exists an $n$ such that $x_i< x+\frac{b-x}{n}<b$. Therefore, since $\mu$ is a finite measure, we can apply continuity from above to find
+
+\begin{align*}
+\lom{x_i}{x^+}F(x_i)&=\lom{x_i}{x^+}m([a,x_i])\\[2mm]
+&<\lom{n}{\infty}m\left(\left[a,x+\frac{b-x}{n}\right]\right)\\[2mm]
+&=m\left(\bigcap_{n=1}^\infty\left[a,x+\frac{b-x}{n}\right]\right)\\[2mm]
+&=m([a,x])\\[2mm]
+&=F(x).
+\end{align*}
+
+Thus, $\lom{x_i}{x^+}=F(x)$ so $F$ is right continuous on $[a,b]$.
+\end{proof}
+
+\pagebreak
+
+\item Suppose that $\<x_\lambda>_{\lambda\in\Lambda}$ is a net in a topological space $X$. Prove that $x\in X$ is a cluster point of $\<x_\lambda>$ if and only if $\<x_\lambda>$ has a subnet that converges to $x$.
+
+\begin{proof}
+Let $\<x_\lambda>_{\lambda\in\Lambda}$ be a net in a topological space $X$ and suppose first that $x$ is a cluster point of $\<x_\lambda>$. Then by definition, for each neighborhood $U$ of $x$, $\<x_\lambda>$ is frequently in $U$, i.e. for all $\lambda\in\Lambda$, there exists a $\beta\in\Lambda$ such that $\lambda\lesssim \beta$ and $x_\beta\in U$.
+
+Let $\MC{N}$ be the collection of all sets $U$ that contain $x$. $\MC{N}$ is a directed set via reverse inclusion (see example (iv) on p. 125), so we may define the directed set $\Lambda\times\MC{N}$ such that $(\lambda,U)\lesssim(\lambda',U')$ if and only if $\lambda\lesssim\lambda'$ and $U\supseteq U'$. Now, for every $(\gamma,V)\in\Lambda\times\MC{N}$, there exists a $\lambda_{(\gamma,V)}\in\Lambda$ such that $\lambda_{(\gamma,V)}\gtrsim\gamma$ and $x_{\lambda_{(\gamma,V)}}\in V$. Thus, if $(\gamma,V)\lesssim(\gamma',V')$, we have that $\lambda_{(\gamma',V')}\gtrsim\gamma'\gtrsim\gamma$ and $x_{\lambda_{(\gamma',V')}}\in V'\subseteq V$ so $\<x_{\lambda_{(\gamma,V)}}>$ is a subnet of $\<x_\lambda>$. Moreover, for every neighborhood $U$ of $x$, we have that $\<x_{\lambda_{(\gamma,V)}}>$ is eventually in $U$, so $\<x_{\lambda_{(\gamma,V)}}>$ converges to $x$ by definition.
+
+Conversely, let $x\in X$ and suppose that $\<x_\lambda>_{\lambda\in\Lambda}$ has a subnet $\<y_\gamma>_{\gamma\in\Gamma}$ that converges to $x$. Then for every $\lambda_0\in\Lambda$, there exists a $\gamma_0\in\Gamma$ such that $\lambda_\gamma\gtrsim\lambda_0$ whenever $\gamma\gtrsim\gamma_0$, and $y_\gamma=x_{\lambda_\gamma}$. Additionally, for every neighborhood $U$ of $x$, $\<y_\gamma>$ is eventually in $U$, i.e. there exists $\gamma_0\in\Gamma$ such that $y_\gamma\in U$ for $\gamma\gtrsim\gamma_0$. Whence, given any neighborhood $U$ of $x$, we may choose a $\gamma_1\in\Gamma$ such that $y_\gamma\in U$ for $\gamma\gtrsim \gamma_1$. Let $\lambda_0\in\Lambda$ be given. Then we can choose a $\gamma_2\in\Gamma$ such that $\lambda_\gamma\gtrsim\lambda_0$ whenever $\gamma\gtrsim\gamma_2$, and $y_\gamma=x_{\lambda_\gamma}$. Since $\Gamma$ is a directed set, there exists a $\gamma\in\Gamma$ such that $\gamma\gtrsim\gamma_1$ and $\gamma\gtrsim\gamma_2$ as well, from which it follows $x_{\lambda_\gamma}\in U$. Thus, by definition, $\<x_\lambda>$ is frequently in $U$, and since $U$ is an arbitrary set containing $x$, $x$ is a cluster point of $\<x_\lambda>$.
+\end{proof}
+
+\item Let $X$ be a topological space. Prove that the following are equivalent:
+
+\begin{enumerate}
+\item $X$ is compact,
+\item Every net in $X$ has a cluster point,
+\item Every net in $X$ has a convergent subnet.
+\end{enumerate}
+
+\begin{proof}
+Let $X$ be a topological space. (b) $\Longleftrightarrow$ (c) is proven in Problem 2 above, so we proceed first by showing that (a) implies (b).
+
+Suppose $X$ is compact and let $\<x_\alpha>_{\alpha\in A}$ be a net in $X$. Define $E_\alpha=\{x_\beta\mid\beta\gtrsim\alpha\}$. Since $A$ is a directed set, given $\alpha,\beta\in A$ there exists a $\gamma\in A$ such that $\gamma\gtrsim\alpha$ and $\gamma\gtrsim\beta$. Consequently, $x_\gamma\in E_\alpha$ and $x_\gamma\in E_\beta$, so $E_\alpha\cap E_\beta\neq\varnothing$. Inductively, $\{E_\alpha\}$ has the finite intersection property, therefore $\{\overline{E}_\alpha\}$ has the finite intersection property as well. Thus, by Proposition 4.21, we have that $\bigcap_{\alpha\in A}\overline{E}_\alpha\neq\varnothing$. Let $x\in\bigcap_{\alpha\in A}\overline{E}_\alpha$ and let $U$ be an arbitrary neighborhood of $x$. Then $U\cap E_\alpha\neq\varnothing$ for every $\alpha$, i.e. $\<x_\alpha>\cap U\neq\varnothing$ so $\<x_\alpha>$ is frequently in $U$ for any neighborhood $U$ of $x$, i.e. $x$ is a cluster point of $\<x_\alpha>$.
+
+Conversely, suppose $X$ is not compact. We proceed by showing that there exists a net in $X$ that has no cluster point. By Proposition 4.21, there exists a family of closed sets $\{F_\alpha\}$ with the finite intersection property, yet $\bigcap_{\alpha\in A}F_\alpha=\varnothing$. By definition of the finite intersection property, there must be at least one $\alpha$ such that $F_\alpha\neq\varnothing$, and moreover, there must be at least one $\alpha'$ such that $F_{\alpha'}=\varnothing$. Construct $\<x_\alpha>$ by choosing $x_\alpha\in F_\alpha$ for every $\alpha\neq\alpha'$. Now, let $x\in X$ and $\MC{N}$ be the collection of neighborhoods $U_\beta$ of $x$. Then there exists at least one neighborhood $U_\beta\in\MC{N}$ such that $\<x_\alpha>\cap U_\beta=\varnothing$, since otherwise $\bigcap_\beta \overline{U}_\beta$ would be a nonempty intersection containing $\<x_\alpha>$, a contradiction. Therefore, $x$ cannot be a cluster point of $\<x_\alpha>$, and since $x$ was chosen arbitrarily, no point of $X$ can be cluster point of $\<x_\alpha>$, as was to be shown.
+\end{proof}
+
+\end{enumerate}
+
+
+\end{document}

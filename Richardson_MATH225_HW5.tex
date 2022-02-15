@@ -1,0 +1,303 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{comment}
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{commath}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\MF}[1]{\mathfrak{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{225 - Commutative Algebra}
+\rightline{Grifo, Elo\'isa}
+\rightline{HW 5}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+\item Let $R = \mathbb{Z}[\sqrt{-5}]$. While $6 \in R$ cannot be written as a unique product of irreducibles, we are going to show that the ideal $I = (6)$ does have a unique primary decomposition. Unfortunately, Macaulay2 cannot take primary decompositions over $\mathbb{Z}$, but this one we can do the old fashioned way.	
+\begin{enumerate}
+\itemsep3mm
+\item Prove that $(2)$ is a primary ideal.
+\begin{proof}
+First, as Elo\'isa suggested, it is easier to view our ring as $R=\MB{Z}[x]/(x^2+5)$. Thus,
+\[
+R/(2)=\MB{Z}[x]/(2,x^2+5)=\MB{Z}_2[x]/(x^2+5)=\MB{Z}_2[x]/(x^2+1)=\MB{Z}_2[x]/(x+1)^2.
+\]
+
+
+Our aim is to invoke Proposition 5.43 $(2\implies 1)$ so we need to show that every zerodivisor in $\MB{Z}_2[x]/(x+1)^2$ is nilpotent in $\MB{Z}_2[x]/(x+1)^2$. 
+
+Note that $x+1$ is a zerodivisor in $\MB{Z}_2[x]$ and so the ideal $(x+1)$ is contained in the set of zerodivisors. Moreover, as used in the above calculation, $x^2+1=(x+1)^2$ so $x+1$ is nilpotent. We claim that the set of zerodivisors is equal to the ideal $(x+1)$ and we proceed to show the reverse containment. Let $f\in\MB{Z}_2[x]$ be a zerodivisor. Then there exists a $g\in \MB{Z}_2[x]$ such that $fg\in(x+1)^2$ with $g\notin(x+1)^2$. In other words $(x+1)^2\mid fg$ and $(x+1)^2\nmid g$. Now, $f\in(x+1)$ iff $(x+1)\mid f$. Suppose to the contrary that $(x+1)\nmid f$. Then since $(x+1)^2\mid fg$, it must be the case that $(x+1)^2\mid g$ so $g\in(x+1)^2$, a contradiction. Thus $(x+1)\mid f$ and so $f\in (x+1)$. Consequently, the set of zerodivisors is the ideal $(x+1)$ and since every element in $(x+1)$ is nilpotent, by Proposition 5.43 we have that $(2)$ is a primary ideal.
+\end{proof}
+
+\item Prove that $(3)$ is \emph{not} a primary ideal.
+\begin{proof}
+Here we use the contrapositive of Proposition 5.43 ($\neg 2\implies \neg 1$). First we have
+\[
+R/(3)=\MB{Z}_3[x]/(x^2-1).
+\]
+Note that $x^2-1=(x-1)(x+1)$, so both $x-1$ and $x+1$ are zerodivisors, but if they were nilpotent, then there must exist some $n$ such that $(x-1)^n=x+1$. No such $n$ exists so at least one of them cannot be nilpotent, and by Proposition 5.43 ($\neg 2\implies \neg 1$), we have that $(3)$ is not a primary ideal.
+\end{proof}
+
+\pagebreak
+
+\item Prove that $(3, 1+\sqrt{-5})$ and $(3, 1+\sqrt{-5})$ are both primary.
+
+\begin{proof}
+Recalling that $R=\MB{Z}[x]/(x^2+5)$, observe that
+\[
+\frac{R}{(3,1+\sqrt{-5})}\cong \frac{\MB{Z}[x]}{(3,x^2+5,x+1)}\cong \frac{\MB{Z}_3[x]}{(x+1,x^2-1)}\cong\frac{\MB{Z}_3[x]}{(x+1)}.
+\]
+But the ideal $(x+1)$ is maximal and $\MB{Z}_3[x]$ is a field, so $(x+1)$ must be prime and thus primary. Consequently $(3,1+\sqrt{-5})$. By a similar argument, we find that $(3,1-\sqrt{-5})$ is primary as well.
+\end{proof}
+
+\item Show that $(6) = (2) \cap (3, 1+\sqrt{-5}) \cap (3, 1 -\sqrt{-5})$.
+
+\begin{proof}
+First we show that $(3,1+\sqrt{-5})\cap(3,1-\sqrt{-5})=(3)$. To do this, we will invoke Problem 1(b) on HW 2 which says that if $I$ and $J$ are ideals and $I+J=R$, then $IJ=I\cap J$, so we first need to show that $ (3, 1+\sqrt{-5}) + (3, 1 -\sqrt{-5}) =R$. Clearly $3\in (3, 1+\sqrt{-5}) + (3, 1 -\sqrt{-5})$, and since $1+\sqrt{-5}+ 1 -\sqrt{-5}=2$, we have that $3-2=1\in (3, 1+\sqrt{-5}) + (3, 1 -\sqrt{-5})$, but this means that $(1)\subseteq (3, 1+\sqrt{-5}) + (3, 1 -\sqrt{-5})$ so $(3, 1+\sqrt{-5}) + (3, 1 -\sqrt{-5}) =R$ as required. Consequently, $(3, 1+\sqrt{-5}) \cap (3, 1 -\sqrt{-5})  =(3, 1+\sqrt{-5})(3, 1 -\sqrt{-5})$. Now,
+\[
+(3, 1+\sqrt{-5})(3, 1 -\sqrt{-5})=(9,3+3\sqrt{-5},3-3\sqrt{-5},6)\subseteq(3),
+\]
+and $9-6=3\in (9,3+3\sqrt{-5},3-3\sqrt{-5},6)$ so $(3, 1+\sqrt{-5})(3, 1 -\sqrt{-5})\supseteq (3)$. Thus $(3, 1+\sqrt{-5})\cap(3, 1 -\sqrt{-5})=(3)$.
+
+Next we show that $(2)\cap(3)=(6)$. Clearly $(6)\subseteq (2)\cap (3)$ so we need only show the reverse containment. Note that $3-2=1$, so $R=(1)\subseteq(2)+(3)$, and by Problem 1(b) on HW 2 again, $(2)\cap(3)=(2)(3)$. But $(2)(3)=(6)$ and therefore $(6) = (2) \cap (3, 1+\sqrt{-5}) \cap (3, 1 -\sqrt{-5})$.
+\end{proof}
+
+\item Why is this primary decomposition unique?
+
+These ideals are all minimal, so the decomposition is unique (cf. Example 5.56 in the course notes).
+\end{enumerate}
+
+\pagebreak
+
+\item Let $R$ be a Noetherian ring. Let $I$ be an ideal in $R$, and $x \in R$. The \textit{saturation} of $I$ with respect to $x$ is the ideal
+\[
+(I : x^\infty) := \bigcup_{n=1}^\infty (I : x^n).
+\]
+\begin{enumerate}
+\item Let $Q$ be a $P$-primary ideal. Show that
+\[
+(Q : x^\infty) = \left\lbrace \begin{array}{ll} Q & \text{if } x \notin P \\ R & \text{if } x \in P \end{array}\right..
+\]
+
+\begin{proof}
+Let $Q$ be a $P$-primary ideal. Then $Q$ is primary and $\sqrt{Q}=P$ by definition. In other words, $P=\{x\in R\mid x^n\in Q\text{ for some }n\}$. Now,
+\[
+(Q:x^\infty)=\bigcup_{n=1}^\infty (Q : x^n)=\bigcup_{n=1}^\infty \{r\in R\mid rx^n\in Q\}.
+\]
+If $x\notin P$, then $x\notin\sqrt{Q}$ so there does not exist an $n$ such that $x^n\in Q$. But then, since $Q$ is primary, for any $rx^n\in Q$, we must have that $r\in Q$, thus the last union above can be written as
+\[
+\bigcup_{n=1}^\infty \{r\in R\mid rx^n\in Q\}=\bigcup_{n=1}^\infty \{r\in R\mid r\in Q\}=Q.
+\]
+If instead $x\in P$, then $x\in \sqrt{Q}$, so there exists an $n$ such that $x^n\in Q$. But then for any $r\in R$, $rx^n\in Q$, so the last union above becomes
+\[
+\bigcup_{n=1}^\infty \{r\in R\mid rx^n\in Q\}=\bigcup_{n=1}^\infty \{r\in R\}=R.\qedhere
+\]
+\end{proof}
+
+
+
+\item Show that $(I : x^\infty) = (I : x^n)$ for some $n$.
+
+\begin{proof}
+Note that
+\[
+(I : x^\infty) := \bigcup_{n=1}^\infty (I : x^n)=(I:x^0)\cup(I:x^1)\cup(I:x^2)\cup\cdots\cup(I:x^n)\cup\cdots.
+\]
+But this is actually a chain of ideals:
+\[
+(I:x^0)\subseteq(I:x^1)\subseteq(I:x^2)\subseteq\cdots\subseteq(I:x^n)\subseteq\cdots,
+\]
+and since $R$ is Noetherian it must stabilize, say, at $n$. Then $(I : x^\infty) = (I : x^n)$.
+\end{proof}
+
+
+\pagebreak
+\item Show that $(I \cap J : x^\infty) = (I : x^\infty) \cap (J : x^\infty)$ for any ideals $I$ and $J$.
+
+\begin{proof}
+\begin{align*}
+(I\cap J:x^\infty)&=\bigcup_{n=1}^\infty (I\cap J:x^n)\\[2mm]
+&=\bigcup_{n=1}^\infty \{r\in R\mid rx^n\in I\cap J\}\\[2mm]
+&=\bigcup_{n=1}^\infty \{r\in R\mid rx^n\in I\}\cap \{r\in R\mid rx^n\in J\}\\[2mm]
+&=\bigcup_{n=1}^\infty \{r\in R\mid rx^n\in I\}\cap \bigcup_{n=1}^\infty \{r\in R\mid rx^n\in J\}\\[2mm]
+&=(I:x^\infty)\cap (J:x^\infty).\qedhere
+\end{align*}
+\end{proof}
+
+\item Let $I = Q_1 \cap \cdots \cap Q_k$ be a primary decomposition, and $x \in R$. Show that
+\[
+(I : x^\infty) = \bigcap_{x \notin \sqrt{Q_i}} Q_i.
+\]
+\begin{proof}
+First note that by part (c) above, 
+\begin{align*}
+(I : x^\infty) &= ((Q_1\cap Q_2\cap \cdots \cap Q_k:x^\infty)\\[2mm]
+&=(Q_1:x^\infty) \cap (Q_2: x^\infty) \cap \cdots \cap (Q_k:x^\infty).
+\end{align*}
+Also, each $Q_i$ is $\sqrt{Q_i}$ -primary, so by part (a) above, $(Q_i:x^\infty)=Q_i$ if $x\notin \sqrt{Q_i}$. Hence,
+\[
+(I : x^\infty)=(Q_1:x^\infty) \cap (Q_2: x^\infty) \cap \cdots \cap (Q_k:x^\infty)=\bigcap_{x \notin \sqrt{Q_i}} Q_i.\qedhere
+\]
+\end{proof}
+
+\end{enumerate}
+
+\item (omitted)
+
+\item (omitted)
+
+\item (omitted)
+
+\pagebreak
+
+\item If $(R, \mathfrak{m})$ is a Noetherian local ring, show that $M$ has finite length if and only if $M$ is finitely generated and $\mathfrak{m}^n M = 0$ for some $n$.
+
+\begin{proof}
+Let $(R, \mathfrak{m})$ be a Noetherian local ring, and first suppose that $M$ has finite length. By Lemma 6.22, $M$ is finitely generated and $\dim (R/\text{ann}(M))=0$. Note that the primes in $R/\text{ann}(M)$ are in one to one correspondence with primes in $R$ that contain $\text{ann}(M)$.
+
+Since $\dim (R/\text{ann}(M))=0$, by definition all primes in $R/\text{ann}(M)$ must have height 0. Thus every prime there is incomparable, minimal, and maximal simultaneously. Thus, since $R$ is local, there can only one prime, $\MF{m}/\text{ann}(M)$, but this implies that $\MF{m}$ is the only (minimal) prime that contains $\text{ann}(M)$. Recall from Exercise 16 in section 5.1 that the radical of an ideal is the intersection of all minimal prime ideals containing it. Since $\MF{m}$ is the only prime ideal containing $\text{ann}(M)$, we have that $\sqrt{\text{ann}}=\MF{m}$ by Lemma 5.60, i.e. there exists an $n$ such that $\MF{m}^n\in\text{ann}(M)$. Then by definition, $\MF{m}^nM=0$.
+
+Conversely, suppose $M$ is finitely generated and $\MF{m}^nM=0$. Then $\MF{m}^n\subseteq \text{ann}(M)$. Let $P$ be a prime ideal in $R$ that contains $\text{ann}(M)$. Then $P$ contains $\MF{m}^n$ and since $P$ is prime, $\MF{m}\subseteq P$. But since $\MF{m}$ is maximal it must be the case that $\MF{m}=P$, so $\MF{m}$ is the only prime containing $\text{ann}(M)$. But since $\MF{m}$ is the only such prime, it follows by the definition of dimension that $\dim (R/\text{ann}(M))=0$. And thus by Lemma 6.22, $M$ is finitely generated.
+\end{proof}
+
+\item Let $k$ be a field, and $R = k[a,b,c,d]/(ad-bc)$. Find prime ideals $P$ and $Q$ in $R$ such that $\textrm{ht}(P) + \textrm{ht}(Q) < \textrm{ht}(P + Q)$.
+
+(see file \verb!Richardson_MATH225_HW5.m2!)
+
+Using the command \verb!codim I! in Macauly2 reveals that the height of $(ad-bc)\subseteq k[a,b,c,d]$ is 1. We know that $\dim(k[a,b,c,d])=4$, so $\dim(k[a,b,c,d]/(ad-bc))=3$. Consider the ideal $(a,b,c,d)\subseteq k[a,b,c,d]$. By Krull's height theorem, $\text{ht}((a,b,c,d))\leq4$, but observe that
+\[
+0\subsetneq(a)\subsetneq(a,b)\subsetneq(a,b,c)\subsetneq(a,b,c,d),
+\]
+so we also have $\text{ht}((a,b,c,d))\geq4$, whence $\text{ht}((a,b,c,d))=4$. Therefore, in $R$, $\text{ht}((a,b,c,d)/(ad-bc))=3$. 
+
+Let $P=(a,b)/(ad-bc)$ and $Q=(c,d)/(ad-bc)$. In $k[a,b,c,d]$, $\text{ht}((a,b))=\text{ht}((c,d))=2$, so in $R$, those heights reduce to 1. However, $(a,b)+(c,d)=(a,b,c,d)$, so we have 
+\begin{align*}
+\text{ht}(P)+\text{ht}(Q)&=\text{ht}((a,b)/(ad-bc))+\text{ht}((c,d)/(ad-bc))\\[2mm]
+&=1+1=2<3\\[2mm]
+&=\text{ht}((a,b,c,d)/(ad-bc))\\[2mm]
+&=\text{ht}(P+Q).
+\end{align*}
+
+\pagebreak
+
+\item (see file \verb!Richardson_MATH225_HW5.m2!)
+
+\begin{enumerate}
+\item Find the height of $J = (ab,bc,cd,ad)$ in $k[a,b,c,d]$ over any field $k$, and the dimension of $k[a,b,c,d]/J$.
+
+By Problem 6(b) in HW4, we know that the minimal primes of $J$ are $(a,b)$ and $(c,d)$ which both have height 2. Thus $\text{ht}(J)=2$ by definition. Moreover, $k[a,b,c,d]$ has dimension 4, so $\dim(k[a,b,c,d]/J)2$ must be 2 by Remark 6.2(h).
+ 
+\item Find the dimension of the ring $S$, where $S = \mathbb{Q}[x^3y^3, x^3y^2z, x^2z^3] \subseteq \mathbb{Q}[x,y,z]$.
+
+Macauly2 yields $\dim(S)=3$.
+
+\item Let $I$ be the defining ideal of the curve parametrized by $(t^{13},t^{42},t^{73})$ over $\mathbb{Q}$. Find the height of $I$, and notice that $\textrm{height}(I) < \mu(I)$.
+
+Using the results of Problem 6(d) in HW4, we know that $\mu(I)=3$ and a minimal generating set is $\{x^8y-z^2,y^7-x^{17}z,x^{25}-y^6z\}$ so we can write $I=(x^8y-z^2,y^7-x^{17}z,x^{25}-y^6z)$. Macauly2 gives $\text{ht}(I)=2$, so here we have an instance where $\text{ht}(I)<\mu(I)$.
+
+\item Let $R=\mathbb{Q}[x,y,z]$, and $I=(x^3, x^2y, x^2z, xyz)$. Find the dimension of $R/I$ and the height of $I$.
+
+Macauly2 yields $\dim(R/I)=2$ and $\text{ht}(I)=1$.
+\item Find the dimension of the module $I/I^2$, where $I = (xz)$ in $R = \mathbb{C}[x,y,z]/(xy,yz)$.
+
+Using the code I wrote for Problem 6(a) in HW4, Macauly2 gives that $\dim(I/I^2)=1$.
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

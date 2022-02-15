@@ -1,0 +1,353 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210A - Complex Analysis}
+\rightline{Wong, Bun}
+\rightline{HW 3}
+\rightline{\today}
+
+\lspace
+
+
+
+\textbf{pp. 74-76:} 5, 6, 7, 9, 10, 13
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+\setcounter{enumi}{4}
+
+\item Give the power series expansion of $\log z$ about $z=i$ and find its radius of convergence.
+
+First, let $f(z)= \Log z$ be the principle branch of the complex logarithm. Then $(\Log z)'=\frac{1}{z}$, so
+
+\begin{align*}
+f'(z)&=\frac{1}{z} & \implies && f'(i)&=\frac{1}{i}\\[2mm]
+f''(z)&=-\frac{1}{z^2} & \implies && f''(i)&=1\\[2mm]
+f'''(z)&=\frac{2}{z^3} & \implies && f'''(i)&=-\frac{2}{i}\\[2mm]
+f^{(4)}(z)&=-\frac{6}{z^4} & \implies && f^{(4)}(i)&=-6\\[2mm]
+\vdots &  & && &\vdots\\[2mm]
+f^{(n)}(z)&=\frac{(-1)^{n+1}(n-1)!}{z^{n}} & \implies && f^{(n)}(i)&=\frac{(-1)^{n+1}(n-1)!}{i^n},\text{ so}
+\end{align*}
+Then
+\[
+a_n=\frac{f^{(n)}(i)}{n!}=\frac{(-1)^{n+1}(n-1)!}{n! \,i^n}=\frac{(-1)^{n+1}}{n\,i^n},
+\]
+so the power series about $i$ is
+\[
+\Log z=\sum_{n=0}^\infty\frac{(-1)^{n+1}}{i^n}(z-i)^n.
+\]
+
+If this power series converges, then
+
+\[
+R=\lom{n}{\infty}\left|\frac{a_n}{a_{n+1}}\right|=\lom{n}{\infty}\left|\frac{(-1)^{n+1}}{n\,i^n}\cdot\frac{(n+1)i^{n+1}}{(-1)^{n+2}}\right|=|i|\lom{n}{\infty}\left(1+\frac{1}{n}\right)=|i|=1.
+\]
+
+\pagebreak
+
+\item Give the power series expansion of $\sqrt{z}$ about $z=1$ and find its radius of convergence. 
+
+First recall that $\sqrt{z}=z^{1/2}=e^{\frac{1}{2}\log z}$, so $\sqrt{z}$ cannot be analytic on all of $\MB{C}$. Using the power rule and computing the derivatives as above, we find that
+
+\[
+f^{(n)}(z)=\frac{1}{2^n}\prod_{k=0}^{n-1}(1-2k)z^{\frac{1-2n}{2}},\text{ so}
+\]
+\[
+a_n=\frac{f^{(n)}(1)}{n!}=\frac{1}{n!\,2^n}\prod_{k=0}^{n-1}(1-2k)
+\]
+which makes our power series
+\[
+\sqrt{z}=\sum_{n=0}^\infty\frac{1}{n!\,2^n}\prod_{k=0}^{n-1}(1-2k)(z-1)^n.
+\]
+If this power series converges, then we can find $R$ my computing the limit of the following:
+\[
+\left|\frac{\prod_{k=0}^{n-1}(1-2k)}{n!\,2^n}\cdot\frac{(n+1)!2^{n+1}}{\prod_{k=0}^{n}(1-2k)}\right|=\left|\frac{2(n+1)}{1-2n}\right|\to 1.
+\]
+Thus the radius of convergence is 1.
+
+\item Use the results of this section to evaluate the following integrals.
+
+\begin{enumerate}
+\itemsep5mm
+\item $\displaystyle \int_\gamma \frac{e^{iz}}{z^2}\,dz$, $\gamma(t)=e^{it}$, $0\leq t\leq 2\pi$.
+
+Recall the corollary to the Cauchy Integral Formula for a Disk, Corollary 2.13, p. 73: If $f:G\to \MB{C}$ is analytic, and $\bar B(a;r)\subset G$, then
+\[
+f^{(n)}(a)=\frac{n!}{2\pi i}\int_\gamma \frac{f(w)}{(w-a)^{n+1}}\,dw.
+\]
+
+Here, let $a=0$, $n=1$, and $f(z)=e^{iz}$. Then $f'(z)=ie^{iz}$, so $f'(0)=i$, and this formula yields
+\begin{align*}
+f'(0)&=\frac{1!}{2\pi i}\int_\gamma \frac{e^{iz}}{z^2}\,dz\\[2mm]
+i\cdot 2\pi i &=\int_\gamma \frac{e^{iz}}{z^2}\,dz\\[2mm]
+-2\pi &= \int_\gamma \frac{e^{iz}}{z^2}\,dz.
+\end{align*}
+
+\item $\displaystyle \int_\gamma \frac{dz}{z-a}$, $\gamma(t)=a+re^{it}$, $0\leq t\leq 2\pi$.
+
+Let $a=a$, $n=0$, and $f(z)=1$. Then Corollary 2.13 yields
+\begin{align*}
+f(a)&=\frac{1}{2\pi i}\int_\gamma \frac{dz}{z-a}\\[2mm]
+2\pi i f(a) &=\int_\gamma \frac{dz}{z-a}\\[2mm]
+2\pi i \cdot 1 &=\int_\gamma \frac{dz}{z-a}\\[2mm]
+2\pi i &=\int_\gamma \frac{dz}{z-a}.
+\end{align*}
+
+\item $\displaystyle \int_\gamma \frac{\sin z}{z^3}\,dz$, $\gamma(t)=e^{it}$, $0\leq t\leq 2\pi$. 
+
+Let $f(z)=\sin z$, $n=2$, and $a=0$. Then $f''(z)=-\sin z$ so $f''(0)=0$, and by Corollary 2.13 we have
+\begin{align*}
+0&=\frac{2}{2\pi i}\int_\gamma \frac{\sin z}{z^3}\,dz\\[2mm]
+0&=\int_\gamma \frac{\sin z}{z^3}\,dz.
+\end{align*}
+
+\item $\displaystyle \int_\gamma \frac{\log z}{z^n}$, $n\geq 0$, $\gamma(t)=1+\frac{1}{2}e^{it}$, $0\leq t\leq 2\pi$.
+
+Here, $f(z)=\frac{\log z}{z^n}$ is analytic in a disk containing $\gamma$ since $\gamma$ is shifted enough and it's radius is small enough that $f(z)$ has no poles there. Take the disk $B(1;\frac{3}{4})$ for example. Since $\gamma$ is a closed curve contained in $B(1;\frac{3}{4})$, by Corollary the integral above is 0.
+\end{enumerate}
+
+\pagebreak
+
+\setcounter{enumi}{8}
+
+\item Use Corollary 2.13 to evaluate the following integrals.
+
+\begin{enumerate}
+\itemsep5mm
+\item $\displaystyle \int_\gamma\frac{e^z-e^{-z}}{z^n}\,dz$ where $n$ is a positive integer and $\gamma(t)=e^{it}$, $0\leq t\leq 2\pi$
+
+Let $f(z)=e^z-e^{-z}$, $n=m-1$, $r=1$, and $a=0$. Then $f(z)$ is analytic on $\MB{C}$, and we have
+\begin{align*}
+f(z)&=e^z-e^{-z}\\[2mm]
+f'(z)&=e^z+e^{-z}\\[2mm]
+f''(z)&=e^z-e^{-z}\\[2mm]
+&\vdots\\[2mm]
+f^{(m-1)}(z)&=e^z-(1-)^{m+1}e^{-z}.
+\end{align*}
+Thus by Corollary 2.13,
+\begin{align*}
+f^{(m-1)}(0)&=\frac{(m-1)!}{2\pi i}\int_\gamma \frac{e^z-e^{-z}}{(z-0)^m}\,dz\\[2mm]
+1-(-1)^{m+1}&=\frac{(m-1)!}{2\pi i}\int_\gamma \frac{e^z-e^{-z}}{z^m}\,dz,\text{ whence}\\[2mm]
+\\
+\int_\gamma \frac{e^z-e^{-z}}{z^m}\,dz&=\begin{cases}0 & \text{if $m$ is odd} \\ \frac{4\pi i}{(m-1)!} & \text{if $m$ is even.}\end{cases}
+\end{align*}
+
+\item $\displaystyle \int_\gamma \frac{dz}{(z-\frac{1}{2})^n}$, where $n\in \MB{Z}^+$, $\gamma(t)=e^{it}$, $0\leq t\leq 2\pi$.
+
+Let $f(z)=1$, $a=\frac{1}{2}$, and $n=m-1$. Then, since $f^{(n)}(z)=0$ for all $n>0$ we have
+
+\[
+f^{(m-1)}\left(\frac{1}{2}\right)=\frac{(m-1)!}{2\pi i}\int_\gamma \frac{dz}{(z-\frac{1}{2})^m},\text{ whence}
+\]
+
+\begin{align*}
+\frac{(m-1)!}{2\pi i}\int_\gamma \frac{dz}{(z-\frac{1}{2})^m}&=\begin{cases}0 & \text{ if $m>1$}\\ 1 & \text{ if $m=1$}\end{cases}\\[2mm]
+\int_\gamma \frac{dz}{(z-\frac{1}{2})^m}&=\begin{cases}0 & \text{ if $m>1$}\\ 2\pi i & \text{ if $m=1$.}\end{cases}
+\end{align*}
+
+\item $\displaystyle \int_\gamma \frac{dz}{z^2+1}\,dz$ where $\gamma(t)=2e^{it}$, $0\leq t\leq 2\pi$.
+
+First, using partial fraction decomposition, we can write 
+\[
+\int_\gamma\frac{1}{z^2+1}=\int_\gamma \frac{\frac{1}{2i}}{z-i}\,dz+\int_\gamma\frac{-\frac{1}{2i}}{z+i}\,dz=:I+J.
+\]
+To deal with $I$, let $f(z)=\frac{1}{2i}$, $n=0$, $a=i$, and $r=2$. Then 
+
+\begin{align*}
+f(i)&=\frac{0!}{2\pi i}\int_\gamma \frac{\frac{1}{2i}}{(z-i)^1}\,dz\\[2mm]
+\frac{1}{2i}&=\frac{1}{2\pi i}\int_\gamma \frac{\frac{1}{2i}}{z-i}\,dz\\[2mm]
+\pi&=\int_\gamma \frac{\frac{1}{2i}}{z-i}\,dz=I.
+\end{align*}
+
+Similarly, for $J$, let $f(z)=-\frac{1}{2i}$, $n=0$, $a=-i$, and $r=2$. Then 
+
+\begin{align*}
+f(-i)&=\frac{0!}{2\pi i}\int_\gamma \frac{-\frac{1}{2i}}{(z+i)^1}\,dz\\[2mm]
+-\frac{1}{2i}&=\frac{1}{2\pi i}\int_\gamma \frac{-\frac{1}{2i}}{z+i}\,dz\\[2mm]
+-\pi &=\int_\gamma \frac{-\frac{1}{2i}}{z+i}\,dz=J.
+\end{align*}
+
+Therefore,
+\[
+\int_\gamma \frac{dz}{z^2+1}\,dz=I+J=\pi -\pi =0.
+\]
+
+\item $\displaystyle \int_\gamma \frac{\sin z}{z}\,dz$ where $\gamma(t)=1+\frac{1}{2}e^{it}$, $0\leq t\leq 2\pi$.
+
+Let $f(z)=\sin z$, $a=0$, $n=0$. Then by Corollary 2.13
+
+\begin{align*}
+f^{(0)}(0)&=\frac{0!}{2\pi i}\int_\gamma \frac{\sin z}{z}\,dz\\[2mm]
+\sin 0&=\frac{1}{2\pi i}\int_\gamma \frac{\sin z}{z}\,dz\\[2mm]
+0&=\int_\gamma \frac{\sin z}{z}\,dz.
+\end{align*}
+
+\item $\displaystyle \int_\gamma \frac{z^{1/m}}{(z-1)^m}\,dz$ where $\gamma(t)=1+\frac{1}{2}e^{it}$, $0\leq t\leq 2\pi$.
+
+Let $f(z)=z^{1/m}$, $n=m-1$, $a=1$, $r=\frac{1}{2}$. Then 
+
+\begin{align*}
+f(z)&=z^{1/m}\\[2mm]
+f'(z)&=\frac{1}{m}z^{1/m-1}\\[2mm]
+f''(z)&=\frac{1}{m}\left(\frac{1}{m}-1\right)z^{1/m-2}\\[2mm]
+&\vdots\\[2mm]
+f^{(m-1)}(z)&=\frac{1}{m}\left(\frac{1}{m}-1\right)\cdots \left(\frac{1}{m}-(m-2)\right)z^{1/m-(m-1)}.
+\end{align*}
+
+By Corollary 2.13
+
+\begin{align*}
+f^{(m-1)}(1)&=\frac{(m-1)!}{2\pi i}\int_\gamma \frac{z^{1/m}}{(z-1)^m}\,dz\\[2mm]
+\frac{1}{m}\left(\frac{1}{m}-1\right)\cdots \left(\frac{1}{m}-(m-2)\right)z^{1/m-(m-1)}&=\frac{(m-1)!}{2\pi i}\int_\gamma \frac{z^{1/m}}{(z-1)^m}\,dz\\[2mm]
+\int_\gamma \frac{z^{1/m}}{(z-1)^m}\,dz&=\frac{2\pi i}{(m-1)!}\frac{1}{m}\left(\frac{1}{m}-1\right)\cdots \left(\frac{1}{m}-(m-2)\right)z^{1/m-(m-1)}\\[2mm]
+&=\frac{2\pi i}{(m-1)!m^{m-1}}\prod_{i=0}^{m-2}(1-im).
+\end{align*}
+
+
+\end{enumerate}
+
+
+\item Evaluate $\displaystyle \int_\gamma \frac{z^2+1}{z(z^2+4)}\,dz$ where $\gamma(t)=re^{it}$, $0\leq t\leq 2\pi$ for all possible values of $r$, $0<r<2$, $2<r<+\infty$.
+
+
+Using partial fraction decomposition, we get
+\[
+\int_\gamma \frac{z^2+1}{z(z^2+4)}\,dz=\frac{1}{4}\int_\gamma\frac{1}{z}\,dz+\frac{3}{8}\int_\gamma \frac{1}{z-2i}\,dz+\frac{3}{8}\int_\gamma \frac{1}{z+2i}\,dz=:\frac{1}{4}I+\frac{3}{8}J+\frac{3}{8}K.
+\]
+
+For integral $I$, notice that for $0<r<2$ and $a=0$ and $f(z)\equiv 1$, $f(z)$ is analytic on $\bar B(0,2)$, so by Proposition 2.6,
+\begin{align*}
+f(0)&=\frac{1}{2\pi i}\int_\gamma\frac{1}{z}\,dz\\[2mm]
+1\cdot 2\pi i&=\int_\gamma \frac{1}{z}\,dz.
+\end{align*}
+For integral $J$, notice that $f(z)=\frac{1}{z-2i}$ is analytic on $B(0,2)$, so by Proposition 2.15, $\int_\gamma \frac{1}{z-2i}\,dz=0$. A similar argument works for integral $K$, so we have that
+\[
+\int_\gamma \frac{z^2+1}{z(z^2+4)}\,dz=\frac{1}{4}\int_\gamma\frac{1}{z}\,dz+0+0=\frac{1}{4}\cdot2\pi i=\frac{\pi}{2}i
+\]
+when $0<r<2$. Now we turn to when $r>2$. For integral $I$, we have that $\gamma'(t)=ire^{it}$, so 
+\[
+I=\int_\gamma \frac{1}{z}\,dz=\int_0^{2\pi}\frac{ire^{it}}{re^{it}}\,dt=i\int_0^{2\pi}\,dt=2\pi i.
+\]
+For integrals $J$ and $K$, let $a=0$, $r>2$, and consider the ball $\bar B(0,r)\subset G(r>2+\ve)$. We can use Proposition 2.6 with $f(w)=1$ again, and we have
+\begin{align*}
+f(\pm2i)&=\frac{1}{2\pi i}\int_\gamma \frac{1}{z\pm2i}\,dz\\[2mm]
+2\pi i&=\int_\gamma \frac{1}{z\pm2i}\,dz.
+\end{align*}
+Thus,
+\[
+\int_\gamma \frac{z^2+1}{z(z^2+4)}\,dz=2\pi i\left(\frac{1}{4}+\frac{3}{8}+\frac{3}{8}\right)=2\pi i.
+\]
+
+\pagebreak
+
+\setcounter{enumi}{12}
+
+\item Find the series expansion of $\displaystyle \frac{e^z-1}{z}$ about 0 and determine its radius of convergence. Consider $\displaystyle f(z)=\frac{z}{e^z-1}$ and let
+\[
+f(z)=\sum_{k=0}^\infty \frac{a_k}{k!}z^k
+\]
+be its power series expansion about 0. What is the radius of convergence? Show that
+\[
+0=a_0+{n+1\choose 1}a_1+\cdots+{n+1\choose n}a_n.
+\]
+Using the fact that $f(z)+\frac{1}{2}z$ is an even function, show that $a_k=0$ for $k$ odd and $k>1$. The numbers $B_{2n}=(-1)^{n-1}a_{2n}$ are called the Bernoulli numbers for $n\geq 1$. Calculate $B_2$, $B_4,\ldots,B_10$.
+
+
+(ask)
+
+
+\end{enumerate}
+\end{document}

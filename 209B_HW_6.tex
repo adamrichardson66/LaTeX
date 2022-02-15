@@ -1,0 +1,191 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209B - Functional Analysis}
+\rightline{Baez, John}
+\rightline{HW 6}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+
+
+\item Prove that a continuous function $f:X\rightarrow Y$ between topological spaces is continuous at every point $x\in X$.
+
+\begin{proof}
+Let $(X,\MC{T}_1)$ and $(Y,\MC{T}_2)$ be topological spaces, and suppose that $f:X\rightarrow Y$ is continuous. Then by definition we know that for any open set $O\in\MC{T}_2$, $f^{-1}(O)\in\MC{T}_1$. Let $x\in X$ and let $N\subseteq Y$ be a neighborhood of $f(x)$. Then there exists an open set $O\subseteq N$ such that $f(x)\in O$. Consequently, $x\in f^{-1}(O)$ and since $O \subseteq N$, $f^{-1}(O)\subseteq f^{-1}(N)$. Since $f$ is continuous, $f^{-1}(O)\in\MC{T}_1$, i.e. $f^{-1}(O)$ is an open set. Since $x$ and $N$ were chosen arbitrarily, $f$ is continuous at every point $x\in X$.
+\end{proof}
+
+
+\item Find an example of a function $f:\MB{R}\rightarrow \MB{R}$ that is continuous at some point $x$ but the inverse image of some \textit{open} neighborhood of $f(x)$ is not an \textit{open} neighborhood of $x$.
+
+Consider the function
+\[
+f(x)=\begin{cases}1 & \text{if }x\in\MB{Q}^c\\0 & \text{if }x\in\MB{Q}\end{cases}
+\]
+and define
+\[
+g(x)=\begin{cases}1 & \text{if }x\in(-1,1)\\ f(x) & \text{if }x\in(-1,1)^c. \end{cases}
+\]
+An attempt at a graph of $g$ is shown below. Essentially $g$ is the (infamous) function $f$, but $g$ takes on the value 1 for all $x\in(-1,1)$. Now, $g:\MB{R}\rightarrow\MB{R}$, and $g$ is certainly continuous at $x=0$. Moreover, $g^{-1}\left(\left(\frac{1}{2},\frac{3}{2}\right)\right)=(-1,1)\cup[\MB{Q}^c\setminus(-1,1)]$ which is not open since $\MB{Q}^c$ is not open.
+
+\begin{center}
+\begin{tikzpicture}	
+\begin{axis}[
+	axis lines=middle,
+	width=0.8\textwidth,
+        %height=\axisdefaultheight,
+        height=0.3\textwidth,
+        x axis line style={draw opacity=0.2},
+	xmin=-5.5, xmax=5.5,
+	ymin=-0.25, ymax=2,
+	xtick={-1,1},
+	ytick={1},
+	yticklabels={1},
+	y tick label style ={yshift=2mm, xshift=1mm},
+	axis line style={->},
+	ticklabel style={font=\tiny},
+	xlabel={$x$}, ylabel={$g(x)$},
+	xlabel style={at={(ticklabel* cs:1)},anchor=west},
+	ylabel style={at={(ticklabel* cs:1)},anchor=south},	
+]
+
+\addplot[domain=-1:1] {1};
+\addplot[thick, dotted, domain=-5:-1] {1};
+\addplot[thick, dotted, domain=1:5] {1};
+\addplot[thick, dotted, domain=-5:-1] {0};
+\addplot[thick, dotted, domain=1:5] {0};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\item Prove that if $X$ is a compact Hausdorff space then $X$ is normal.
+
+\begin{proof}
+Suppose $X$ is a compact Hausdorff space. Since it is Hausdorff, every singleton is closed. Let $A,B\subseteq X$ be closed sets. First, by Proposition 4.22, $E$ and $F$ are compact. Next, for each $x\in A$, we can find disjoint open sets $U_x$ and $V_x$ such that $x\in U_x$ and $B\subseteq V_x$ by Proposition 4.23. Then $U=\bigcup_{x\in A}U_x$ is an open cover of $A$, and since $A$ is compact, we may select a finite subcover $U=\bigcup_{i=1}^n U_{x_i}$ of $A$ where $\{U_{x_i}\}_{i=1}^n\subseteq\{U_x\}_{x\in A}$. Let $V=\bigcap_{i=1}^n V_{x_i}$. Then $B\subseteq V$ since $B\subseteq V_{x_i}$ for all $x_i$. Moreover, $V$ is open since it is a finite intersection of open sets, and $V\cap U=\varnothing$ since $U_x\cap V_x=\varnothing$ for all $x$. Thus, $X$ is normal by definition.
+\end{proof}
+
+\item Suppose $X$ is a compact Hausdorff space. Let $A=\{f:X\rightarrow [0,1]\mid f\text{ is continuous}\}$, and define $[0,1]^A=\prod_{f\in A}[0,1]$. Define $i:X\rightarrow [0,1]^A$ by $i(x)_f=f(x)$. Prove that $i$ is one-to-one. [Hint: use Problem 1 and Urysohn's Lemma.]
+
+\begin{proof}
+Suppose $X$ is a compact Hausdorff space. Let $z_1,z_2\in i(X)$ and suppose that $z_1=z_2$. Then there exist $x_1,x_2\in X$ such that $i(x_1)_f=i(x_2)_f$ for all $f\in A$. But this means that $f(x_1)=f(x_2)$ for all $f\in A$. 
+
+%Since every $f$ is continuous, by Problem 1 above, each $f$ is continuous at every $x\in X$. So by definition, for every neighborhood $N$ of $f(x)$, $f^{-1}(N)$ is a neighborhood of $x$. Consider the neighborhoods $\{f(x_1)\}$ and $\{f(x_2)\}$ of $f(x_1)$ and $f(x_2)$ respectively for any  $f$. It follows that $x_1\in f^{-1}(\{f(x_1)\})$ and $x_2\in f^{-1}(\{f(x_2)\})$. But since $f(x_1)=f(x_2)$, we have that $x_1,x_2\in f^{-1}(\{f(x_1)\})$, say, for every $f$. In other words, $x_1$ and $x_2$ have the same image under any $f$.
+
+We claim now that $x_1=x_2$. Suppose otherwise, i.e. that $x_1\neq x_2$. Since $X$ is a compact Hausdorff space, it is normal by Problem 3, and so $\{x_1\}$ and $\{x_2\}$ are closed sets. Consequently, by Urysohn's lemma, there exists an $f\in A$ such that 
+\[
+f(\{x_1\})=f(x_1)=0\neq1=f(x_2)=f(\{x_2\}),
+\]
+a contradiction. Thus, $x_1=x_2$, and so $i$ is one-to-one by definition.
+\end{proof}
+
+\item Prove $i$ is continuous. [Hint: it's easy if you use nets and show $x_\lambda \rightarrow x$ in $X$ implies $i(x_\lambda)\rightarrow i(x)$ in $[0,1]^A$.]
+
+\begin{proof}
+Now, let $\<x_\lambda>_{\lambda\in \Lambda}\subseteq X$ be a net and suppose it converges to a point $x\in X$, i.e. $x_\lambda\rightarrow x$. Consider the points $i(x_\lambda)$. For each $f\in A$, we have $i(x_\lambda)_f=f(x_\lambda)$, and since every $f$ is continuous, $f(x_\lambda)\rightarrow f(x)$ by definition. Ergo, $i(x_\lambda)_f\rightarrow i(x)_f$ for all $f$ and thus $i(x_\lambda)\rightarrow i(x)$ so $i$ is continuous. 
+\end{proof}
+
+\pagebreak
+
+\item Prove that the image $i(X)\subseteq [0,1]^A$ is closed.
+
+\begin{proof}
+Since $X$ is compact and $i$ is continuous, $i(X)$ is compact as well by Proposition 4.26. By Proposition 4.10, $[0,1]^A$ is Hausdorff, thus $i(X)$ is a compact subset of a Hausdorff space and so is closed by Proposition 4.24.
+\end{proof}
+
+
+\item Prove that the image $i(X)\subseteq [0,1]^A$, with its subspace topology, is homeomorphic to $X$.
+
+\begin{proof}
+Since $X$ is compact, $[0,1]^A$ is Hausdorff, and $i:X\rightarrow i(X)$ is continuous, onto, and one-to-one by Problem 4, $i:X\rightarrow i(X)$ is a homeomorphism by Proposition 4.28. In other words, any compact Hausdorff space is homeomorphic to a subset of the cube $[0,1]^A$.
+\end{proof}
+
+\item[\textbf{EC.}] Pavel Samuilovich Urysohn was born on February 3rd, 1898 in Odessa, Ukraine. He was only 26 when he died by drowning in rough waters off the coast of Brittany, France while on holiday immediately after visiting renowned mathematicians Brouwer, Hausdorff, and Hilbert.
+
+\end{enumerate}
+
+
+\end{document}

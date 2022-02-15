@@ -1,0 +1,478 @@
+\documentclass[11pt,oneside,english,reqno]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.65in,rmargin=0.65in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{float}
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\p}{\mathbb{P}}
+\DeclareMathOperator{\sgn}{sgn}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{206B - Numerical Analysis}
+\rightline{Wang, Qixuan}
+\rightline{HW 1}
+\rightline{\today}
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+
+\item Consider the following nonlinear equation:
+\[
+f(x)=x^2+x-1=0\pspace\text{on }[0,1]
+\]
+\begin{enumerate}
+\itemsep5mm
+\item Consider the bisection algorithm starting with the interval $[0,1]$. Find the minimum number of iterations $N$ required to approximate the solution with an absolute error of less than $10^{-5}$.
+
+Recall that the absolute error between the solution $x^*$ and an approximate solution $x_k$ is given by $|x_k-x^*|$. By a theorem in Lecture 2, we have the estimate
+\[
+|x_k-x^*|\leq2^{-(k+1)}(b-a).
+\]
+Since $b-a=1$, we need to find a number $N\in\MB{N}_0$ such that $2^{-(N+1)}\leq10^{-5}$. Solving for $N$ we find
+\begin{align*}
+2^{-(N+1)}&\leq10^{-5}\\[2mm]
+-(N+1)&\leq-5\log_210\\[2mm]
+N&\geq5\log_210-1.
+\end{align*}
+Since $5\log_210-1\approx15.609$, $N=16$ is the minimum number of iterations required to approximate the solution to an error of less than $10^{-5}$.
+
+\item Consider the stopping criterion as when the interval length is smaller than $10^{-3}$. List the $a_n,b_n$, midpoint $x_n=(a_n+b_n)/2$, and$ f(x_n)$ in each step.
+
+Using the Python program \verb!bisection_method.py!, we can generate Table \ref{tbl:BM1}.
+
+\begin{table}
+\centering
+\caption{Details of the 10 iterations produced by the Bisection Method before the stopping condition $|b_n-a_n|<10^{-3}$ is met.}\label{tbl:BM1}
+\begin{tabular}{|c|l|l|l|l|l|}
+\hline
+$n$ & $a_n$ & $b_n$ & $x_n$ & $f(x_n)$ & $|b_n-a_n|$ \\
+\hline
+0 & 0.0 & 1.0 & 0.5 & -0.25 & 1.0 \\
+1 & 0.5 & 1.0 & 0.75 & 0.3125 & 0.5 \\
+2 & 0.5 & 0.75 & 0.625 & 0.015625 & 0.25 \\
+3 & 0.5 & 0.625 & 0.5625 & -0.12109375 & 0.125 \\
+4 & 0.5625 & 0.625 & 0.59375 & -0.0537109375 & 0.0625 \\
+5 & 0.59375 & 0.625 & 0.609375 & -0.019287109375 & 0.03125 \\
+6 & 0.609375 & 0.625 & 0.6171875 & -0.00189208984375 & 0.015625 \\
+7 & 0.6171875 & 0.625 & 0.62109375 & 0.0068511962890625 & 0.0078125 \\
+8 & 0.6171875 & 0.62109375 & 0.619140625 & 0.002475738525390625 & 0.00390625 \\
+9 & 0.6171875 & 0.619140625 & 0.6181640625 & 0.00029087066650390625 & 0.001953125 \\
+10 & 0.6171875 & 0.6181640625 & \bf{0.61767578125} & -0.0008008480072021484 & 0.0009765625 \\
+\hline
+\end{tabular}
+\end{table}
+\end{enumerate}
+
+\pagebreak
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\item Consider the following nonlinear equation:
+\[
+f(x)=x^2+x-1=0
+\]
+\begin{enumerate}
+\itemsep5mm
+
+\item Write down the updating equation of $f$ of the sequence $\{p_n\}_{n=1}^\infty$ by Newton's method.
+
+Newton's method gives
+\begin{equation}\label{eq:NM1}
+p_{n}=p_{n-1}+\frac{p_{n-1}^2+p_{n-1}-1}{2p_{n-1}+1}
+\end{equation}
+for all $n\geq0$.
+
+\item Let $x_0=1$ and assume that $\{p_n\}_{n=1}^\infty$ converges. (Note: this assumption only holds for this subquestion.) Show that $\{p_n\}_{n=1}^\infty$ converges to $\frac{-1+\sqrt{5}}{2}$ by direct computation. (Notice that $p_n\geq0$, so you might have to reject an answer that you calculated.)
+
+\begin{proof}
+Let $p_0=1$ and suppose $p_n\to\varphi\in\MB{R}$ as $n\to\infty$. Since $\lim_{n\to\infty}p_n=\lim_{n\to\infty}p_{n-1}$, by Equation \ref{eq:NM1} and linearity of the limit operator, we have
+
+\begin{align}
+\lim_{n\to\infty}p_{n}&=\lim_{n\to\infty}\left(p_{n-1}+\frac{p_{n-1}^2+p_{-1}n-1}{2p_{n-1}+1}\right) \nonumber \\[2mm]
+\varphi&=\varphi+\frac{\varphi^2+\varphi-1}{2\varphi+1} \nonumber \\[2mm]
+0&=\varphi^2+\varphi-1 \nonumber \\[2mm]
+\varphi&=\frac{-1\pm\sqrt{5}}{2}.\label{eq:2b}
+\end{align}
+
+Since $p_0=1$, Equation \ref{eq:NM1} yields that $p_n\geq0$ for all $n\geq1$ and thus
+\[
+\lim_{n\to\infty}p_{n}=\varphi=\frac{-1+\sqrt{5}}{2}.\qedhere
+\]
+\end{proof}
+
+\item Show that there exists a $\delta>0$ such that the sequence converges to $\frac{-1+\sqrt{5}}{2}$ if $p_0\in\left[\frac{-1+\sqrt{5}}{2}-\delta,\frac{-1+\sqrt{5}}{2}+\delta\right]$.
+
+\begin{proof}
+Since $f\in C^2(\MB{R})$, and $f'(\varphi)=\sqrt{5}\neq0$, and $f''(\varphi)=2<\infty$, by a Theorem in \href{https://discord.com/channels/927293874534248449/927293874534248452/928459358461890560}{Lecture 2}, such a delta exists.
+\end{proof}
+
+\item Show that we can choose $\delta$ such that, if $p_0\in\left[\frac{-1+\sqrt{5}}{2}-\delta,\frac{-1+\sqrt{5}}{2}+\delta\right]$, then the sequence converges to $\varphi$ at least quadratically.
+
+\begin{proof}
+By part (c), we know the updating sequence converges since it is derived from Newton's method, and by Equation \ref{eq:2b}, we see that there are two distinct choices for the fixed point, so the solution is not a double root, and it follows that the sequence converges at least quadratically.
+\end{proof}
+
+\end{enumerate}
+
+\pagebreak
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\item Consider the following nonlinear equation:
+\[
+f(x)=x^2-2=0\pspace\text{on }[0,4]
+\]
+\begin{enumerate}
+\itemsep5mm
+
+\item Write down the sequence of the Secant Method $p_n$ to solve the above equation, with the starting point at $p_0=\frac{1}{2}$ and $p_1=3$.
+
+By a Theorem in \href{https://discord.com/channels/927293874534248449/927293874534248452/930338504620269619}{Lecture 3}, the Secant Method yields
+\begin{equation}\label{eq:SM1}
+p_{n+1}=p_n-\frac{p_n-p_{n-1}}{p_n^2-2-(p_{n-1}^2-2)}(p_n^2-2)=p_n-\frac{\cancel{(p_n-p_{n-1})}(p_n^2-2)}{\cancel{(p_n-p_{n-1})}(p_n+p_{n-1})}=p_n-\frac{p_n^2-2}{p_n+p_{n-1}}
+\end{equation}
+
+
+\item Calculate $p_2$ and $p_3$.
+
+\[
+p_2=p_1-\frac{p_1^2-2}{p_1+p_0}=3-\frac{3^2-2}{3+\frac{1}{2}}=3-\frac{7}{\frac{7}{2}}=3-2=1.
+\]
+\[
+p_3=p_2-\frac{p_2^2-2}{p_2+p_1}=1-\frac{1^2-2}{1+3}=1+\frac{1}{4}=\frac{5}{4}.
+\]
+\end{enumerate}
+
+Just for fun, Table \ref{tbl:SM1} is a table of approximations generated by the file \verb!secant_method_1D.py!. Also see file \verb!secant_mthod_1D.png!.
+
+\begin{table}[H]
+\centering
+\caption{Details of the 4 iterations produced by the Secant Method before the stopping condition $|p_{n}-p_{n+1}|<10^{-3}$ is met.}\label{tbl:SM1}
+\vspace{3mm}
+\begin{tabular}{|c|l|l|}
+\hline
+$n$ & $p_n$ & $|p_{n}-p_{n+1}|$ \\
+\hline
+0 & 0.5 & -- \\[2mm]
+1 &  3.0 & 2.5 \\[2mm]
+2 & 1.0 & 2.0 \\[2mm]
+3 & 1.25 & 0.25 \\[2mm]
+4 & 1.4444444444444444 & 0.19444444444444442 \\[2mm]
+5 & 1.4123711340206186 & 0.032073310423825774 \\[2mm]
+6 & 1.4141940657578187 & 0.0018229317372000509 \\[2mm]
+7 & 1.4142135750814935 & $1.950932367478231\times10^{-5}$ \\[2mm]
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\vfill
+\pagebreak
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\item Consider the following function:
+\[
+f(x)=1-\cos(x)\pspace\text{on }\left[-\frac{\pi}{2},\frac{\pi}{2}\right]
+\]
+
+\begin{enumerate}
+\itemsep5mm
+\item Write down the sequence of Newton's method for $\{x_n\}_{n=0}^\infty$.
+
+Since $f'(x)=\sin(x)$, Newton's method yields
+\begin{equation}\label{eq:4a}
+x_{n+1}=x_n-\frac{1-\cos(x_n)}{\sin(x_n)}=\frac{x_n\sin(x_n)+\cos(x_n)-1}{\sin(x_n)}
+\end{equation}
+
+\item If $x_0\in\{x\in\MB{R}\mid 2x\sin x+\cos x-1=0\}$ and $x_0\neq0$, show that the sequence given in part (a) with such an initial value does not converge.
+
+\begin{proof}
+Suppose $x_0\in S\coloneqq\{x\in\MB{R}\mid 2x\sin x+\cos x-1=0\}$ and $x_0\neq0$. For any $x\in S$, we have
+\begin{align*}
+2x\sin x+\cos x-1&=0\\[2mm]
+x\sin x +x\sin x+\cos x-1&=0\\[2mm]
+x\sin x+\cos x-1&=-x\sin x
+\end{align*}
+so in particular
+\begin{equation} \label{eq:4a2}
+x_0\sin(x_0)+\cos(x_0)-1=-x_0\sin(x_0).
+\end{equation}
+By Equations \ref{eq:4a} and \ref{eq:4a2}, we have
+\[
+x_1=\frac{x_0\sin(x_0)+\cos(x_0)-1}{\sin(x_0)}=\frac{-x_0\sin(x_0)}{\sin(x_0)}=-x_0.
+\]
+Continuing, we see that
+\begin{align*}
+x_2&=\frac{x_1\sin(x_1)+\cos(x_1)-1}{\sin(x_1)}\\[2mm]
+&=\frac{-x_0\sin(-x_0)+\cos(-x_0)-1}{\sin(-x_0)}\\[2mm]
+&=-\frac{x_0\sin(x_0)+\cos(x_0)-1}{\sin(x_0)}\\[2mm]
+&=-\left(\frac{-x_0\sin(x_0)}{\sin(x_0)}\right)\\[2mm]
+&=-(-x_0)=x_0.
+\end{align*}
+Thus, for these initial conditions, $\{x_n\}_{n=1}^\infty=\{(-1)^{n-1}x_0\}_{n=1}^\infty$ which does not converge for any $x_0\neq0$.
+\end{proof}
+\end{enumerate}
+
+\pagebreak
+
+\item Prove the following theorems:
+
+\begin{enumerate}
+\itemsep5mm
+\item Let $\phi\in C^1([a,b])$. Assume that there exists an $x^*\in (a,b)$ such that $\phi(x^*)=x^*$, and that $|\phi'(x^*)|<1$. Then there exists $\ve>0$ such that if $x_0\in(x^*-\ve,x^*+\ve)$, then the sequence
+\[
+x_{n+1}=\phi(x_n)
+\]
+converges to $x^*$ at least linearly.
+
+\begin{proof}
+Suppose that $\phi\in C^1([a,b])$ and there exists an $x^*\in (a,b)$ such that $\phi(x^*)=x^*$. Suppose also that $|\phi'(x^*)|<1$. Then we have
+\begin{align*}
+\lim_{n\to\infty}\frac{|x_{n+1}-x^*|}{|x_n-x^*|}&=\lim_{n\to\infty}\frac{|\phi(x_n)-x^*|}{|x_n-x^*|}\\[2mm]
+&=\lim_{n\to\infty}\frac{|\phi(x_n)-\phi(x^*)|}{|x_n-x^*|}\\[2mm]
+&=\lim_{n\to\infty}\left|\frac{\phi(x_n)-\phi(x^*)}{x_n-x^*}\right|\\[2mm]
+&=\left|\lim_{n\to\infty}\frac{\phi(x_n)-\phi(x^*)}{x_n-x^*}\right|\\[2mm]
+&=|\phi'(x^*)|\\[2mm]
+&<1
+\end{align*}
+by assumption. Thus, by definition, $\{x_{n+1}\}_{n=1}^\infty$ converges linearly, and possibly superlinearly since $|\phi'(x^*)|$ could be 0, so it converges at least linearly.
+\end{proof}
+
+\item Let $\phi\in C^k([a,b])$. Assume that there exists an $x^*\in (a,b)$ such that $\phi(x^*)=x^*$, and that there exists a $k$ such that $\phi^{(i)}(x^*)=0$ for all $i<k$. Then there exists $\ve>0$ such that if $x_0\in(x^*-\ve,x^*+\ve)$, then the sequence
+\[
+x_{n+1}=\phi(x_n)
+\]
+converges to $x^*$ at least with order $k$.
+
+\begin{proof}
+Since $\phi\in C^k([a,b])$ and $x^*\in(a,b)$, $\phi$ is $k$-times differentiable at $x^*$, and so it admits a Taylor series there. In particular, by Taylor's theorem, there exists an $\ve>0$ and a function $h_k(x)$ defined on $(x^*-\ve,x^*+\ve)$ such that 
+\begin{multline}\label{eq:5b1}
+\phi(x_n)=\phi(x^*)+\frac{\phi'(x^*)}{1!}(x_n-x^*)+\frac{\phi''(x^*)}{2!}(x_n-x^*)^2+\cdots \\ \cdots+\frac{\phi^{(k)}(x^*)}{k!}(x_n-x^*)^k+h_k(x_n)(x_n-x^*)^k
+\end{multline}
+and $\lim_{n\to\infty}h_k(x_n)=0$. Since $\phi^{(i)}(x^*)=0$ for all $i<k$ by assumption, Equation \ref{eq:5b1} becomes
+\begin{equation}
+\phi(x_n)-\phi(x^*)=\frac{\phi^{(k)}(x^*)}{k!}(x_n-x^*)^k+h_k(x_n)(x_n-x^*)^k.
+\end{equation}
+We can assume without loss of generality that $\phi^{(k)}(x^*)\neq0$. Dividing both sides by $(x_n-x^*)^k$ yields
+\begin{equation}
+\frac{\phi(x_n)-\phi(x^*)}{(x_n-x^*)^k}=\frac{\phi^{(k)}(x^*)}{k!}+h_k(x_n).
+\end{equation}
+Taking absolute values and then taking the limit as $n\to\infty$ gives
+\begin{equation}
+\lim_{n\to\infty}\left|\frac{\phi(x_n)-\phi(x^*)}{(x_n-x^*)^k}\right|=\frac{\phi^{(k)}(x^*)}{k!}=C
+\end{equation}
+for some $C>0$. Thus, $\{x_n\}_{n=1}^\infty$ converges with at least order $k$ by definition, as long as our initial point $x_0\in(x^*-\ve,x^*+\ve)$.
+\end{proof}
+\end{enumerate}
+
+\item Use the Descent Method to approximate minima to within 0.005 for the following function:
+\[
+g(x_1,x_2)=\cos(x_1+x_2)+\sin x_1+\cos x_2
+\]
+
+Graphing the function shows that there are many points where a minimum is achieved, so we will focus on the local minimum found when the initial point is $(0,0)$. Using the program \verb!steepest_descent_method_2D.py! we can generate the following table.
+
+
+
+\vspace{-2mm}
+\begin{table}[H]
+\centering
+\caption{Details of the 7 iterations produced by the Descent Method before the stopping condition $|g({\bf x}_n)-g({\bf x}_{n+1})|<0.005$ is met.}\label{tbl:SDM1}
+
+\vspace{3mm}
+\begin{tabular}{|c|l|l|l|}
+\hline
+$n$ & ${\bf x}_n$ & $g({\bf x}_n)$ & $|g({\bf x}_n)-g({\bf x}_{n+1})|$ \\[2mm]
+\hline
+0 & (0.0, 0.0) & 2.0 & 1.6539657382339645 \\[2mm]
+1 & (2.8369211624532897, 0.0) & 0.34603426176603536 & 0.6190198222347537 \\[2mm]
+2 & (3.731627260834447, 0.21404285708964138) & -0.27298556046871836 & 0.7229513826242917 \\[2mm]
+3 & (3.944688594969322, -0.7629959691074895) & -0.9959369430930101 & 0.9356495542428593 \\[2mm]
+4 & (4.611585508842834, -1.5081459582143708) & -1.9315864973358694 & 0.502131810798008 \\[2mm]
+5 & (4.75107521216096, -2.472972013356772) & -2.4337183081338774 & 0.134831977098254 \\[2mm]
+6 & (5.102500087632519, -2.404673127982956) & -2.5685502852321314 & 0.02315578755177672 \\[2mm]
+7 & (5.139257120830334, -2.5865137743539086) & -2.591706072783908 & 0.0050194659562246 \\[2mm]
+8 & (5.20724505072657, -2.5728596073033225) & {\bf -2.5967255387401327} & 0.001055482018448295 \\[2mm]
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{-5mm}
+From Table \ref{tbl:SDM1} we can see that the minimum value of $g(x,y)$ is approximately $-2.5967255387401327$, occurring the point $(5.20724505072657, -2.5728596073033225)$.
+
+
+
+
+\item (skipped)
+\vfill
+\pagebreak
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\item (\textbf{Computational problem.}) Solve the following system by Newton's Method:
+\begin{equation}
+\begin{cases} x^2+y^2-25=0 \\ x^2-y-2=0\end{cases}
+\end{equation}
+
+Let your code print the $x_n$'s generated by Newton's Method until a stopping criterion is reached. Take a screenshot of the results printed by your code and submit both your code and the screenshot of the computation results.
+
+See the file \verb!newtons_method_2D.py! for the code, and the file \verb!newtons_method_2D.png! for a screenshot of the code and the output. There are 2 (approximate) solutions:
+\begin{align*}
+p_1^* &= (2.515248424175009, 4.32183908045977) \pspace \text{and}\\[2mm]
+p_2^*&=(-2.515248424175009, 4.32183908045977).
+\end{align*}
+Initial guesses $(2,4)$ and $(-2,4)$ were used.
+
+
+\end{enumerate}
+\end{document}

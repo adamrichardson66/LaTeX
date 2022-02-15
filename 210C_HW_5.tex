@@ -1,0 +1,159 @@
+\documentclass[11pt,oneside,english,reqno]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+\newcommand{\im}{\text{im\,}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\coker}{\text{coker\,}}
+\newcommand{\ev}{\text{ev}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210C - Riemann Surfaces}
+\rightline{Wong, Bun}
+\rightline{HW 5}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+\item (p. 117) Let $p_1,\ldots,p_d$ be  $d$ distinct points on a compact Riemann surface $X$. Then $\Res_{p_j}f\in T_{p_j}(X)$ for $1\leq j\leq d$ are the residues of a meromorphic function $f$ if and only if
+\[
+\sum_{j=1}^d\<\Res_{p_j}f,\theta( p_j)>=0
+\]
+for all holomorphic 1-forms $\theta$.
+
+\begin{proof}
+Firrst, suppose that $f$ is a meromorphic function on $X$ with simple poles at $p_1,\ldots, p_d$, and let $\theta$ be a holomorphic 1-form on $X$. Then there exists a holomorphic function $g$ on $X$ such that $\theta=g\,dz$ by definition. Now, $f\theta$ is a meromorphic 1-form, and
+
+
+\begin{align*}
+\<\Res_{p_j}f,\theta(p_j)>&=\iint_X\Res_{p_j}f\wedge\theta(p_j)\\
+&=\iint_Xa_{-1}^j\pp{}{z_j}\wedge g_j(p_j)\,dz_j\\
+&=a_{-1}^j\iint_X\left.\pp{g_j}{z_j}\right|_{p_j}\,dz_j\\
+&=a_{-1}^j\cdot g_j(p_j)\\
+&=\Res_{p_j}(f\,dz_j)\cdot g_j(p_j)\\
+&=\Res_{p_j}(f\cdot g_j(p_j)\,dz_j)\\
+&=\Res_{p_j}(f\theta)\\
+\end{align*}
+Stokes' theorem implies that $\sum_{j=1}^d\Res_{p_j}(f\theta)=0$ so we have that $\sum_{j=1}^d\<\Res_{p_j}f,\theta(p_j)>=0$ as well. 
+
+Conversely, if $\sum_{j=1}^d\<\Res_{p_j}f,\theta( p_j)>=0$ for all holomorphic 1-forms $\theta$, then the set $T=\{\Res_{p_j}f\}_{j=1}^d\subseteq \ker \uline{A}$, where
+\[
+\uline{A}:\bigoplus TX_{p_i}\to H^{0,1}.
+\]
+By the exactness of the sequence on p. 116, $T$ is in the image of the residue map $R:H^0(D)\to\bigoplus_jTX_{p_j}$, therefore there exists a meromorphic function with residues given by $T$.
+\end{proof}
+
+\item Use the Riemann-Roch formula to construct a meromorphic function on $\Sigma_0$ (compact Riemann surface of genus $g=0$) with a simple pole at one point.
+
+\begin{proof}
+Let $D=\{p\}$. By the Riemann-Roch formula, we have
+\[
+h^0(D)-h^1(D)=d-g+1=d+1\pspace \iff \pspace h^0(D)=h^1(D)+d+1\geq1.
+\]
+The space of holomorphic functions (functions with not poles) has dimension 1, so it must be the case that $h^(0)\geq2$. Thus there exists at least one meromorphic function on $\Sigma_0$ with a simple pole at $p$.
+\end{proof}
+
+\pagebreak
+
+\item Use the Riemann-Roch formula to construct a meromorphic function on $\Sigma_1$ with simple poles at two distinct points. 
+
+Let $D=\{p_1,p_2\}$. By the argument above, $h^0(D)\geq2$ so there are two cases: there exists a meromorphic function with a simple pole at $p_1$ or $p_2$ but not both, or there exists a meromorphic function with simple poles at $p_1$ and $p_2$. If there exists a meromorphic function with a simple pole at $p_1$ or $p_2$ but not both, then $\Sigma_1\cong S^2$, a contradiction, so we must have the second case.
+%If $d=0$, then $H^0(D)$ would be nonempty but also any $f\in H^0(D)$ would be constant, meaning the poles in $D$ would not be isolated, which is a contradiction. Therefore, $d\geq 1$, so there exists a meromorphic function on $\Sigma_1$ with simple poles at $p_1,p_2$.
+
+\end{enumerate}
+\end{document}

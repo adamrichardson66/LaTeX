@@ -1,0 +1,213 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209B - Functional Analysis}
+\rightline{Baez, John}
+\rightline{HW 5}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+
+
+\item Suppose $A$ is any set and $B\subseteq A$. Suppose for each $\alpha\in A$ we have a topological space $X\alpha$. Prove that the projection
+\[
+p_B:\prod_{\alpha\in A}X_\alpha\rightarrow\prod_{\alpha\in B}X_\alpha
+\]
+is continuous when we give both these spaces their product topology.
+
+\begin{proof}
+Let $A$ be any nonempty set and suppose $B\subseteq A$. Let $X_\alpha$ be a topological space for every $\alpha\in A$ and let the product spaces be equipped with the product topology. Let $O\subset\prod_{\alpha\in B}X_\alpha$ be an open set. Then we need to show that $p_B^{-1}(O)$ is open. Since our spaces are equipped with the product topology, we have that
+\[
+O=\bigcap_{j=1}^n\pi^{-1}_{\alpha_j}(U_{\alpha_j})=\bigcap_{j=1}^n{p_B}(U_{\alpha_j})
+\]
+where $U_{a_j}\subseteq X_{\alpha_j}$ is open. Then
+\[
+p_B^{-1}(O)=p_B^{-1}\left(\bigcap_{j=1}^n{p_B}(U_{\alpha_j})\right)=\bigcap_{j=1}^np_B^{-1}(p_B(U_{\alpha_j}))=\bigcap_{j=1}^nU_{\alpha_j}
+\]
+which is open since it is a finite intersection of open sets. Thus, $p_B$ is continuous by definition.
+\end{proof}
+
+\item Prove \textbf{Tychnoff's Theorem}: If $\{X_\alpha\}_{\alpha\in A}$ is any family of compact topological spaces, then $X=\prod_{\alpha\in A}X_\alpha$ (with the product topology) is compact.
+
+\begin{proof}
+Theorem 4.29 states that a space is compact if and only if every net in the space has a cluster point, so we proceed by showing that an arbitrary net in $X$ has a cluster point. Let $\<x_i>_{i\in I}\subseteq X$ be an arbitrary net, and consider the nets $\<\pi_B(x_i)>_{B\subseteq A}$ in the subproducts $\prod_{B\subseteq A}X_\alpha$ of $X$. Define
+
+\[
+\MC{P}=\bigcup_{B\subseteq A}\left\{p\in\prod_{\alpha\in B}X_\alpha:\,p\text{ is a cluster point of }\<\pi_B(x_i)>\right\}.
+\]
+
+First, $\MC{P}$ is nonempty: $X_\alpha$ is compact for each $\alpha$ by hypothesis, so in particular, $\<\pi_{\{\alpha\}}(x_i)>\subseteq X_\alpha$ has a cluster point by Theorem 4.29. Second, $\MC{P}$ is partially ordered by extension: $p\leq q$ if $q$ extends $p$, i.e. $p\in\prod_{\alpha\in B}X_\alpha$ and $q\in\prod_{\alpha\in C}X_\alpha$ where $B\subseteq C$ and $p(\alpha)=q(\alpha)$ for all $\alpha\in B$. In other words, $p\leq q$ roughly means that $p$ is a cluster point of a ``shorter'' subnet than that for which $q$ is a cluster point, and they agree up to a certain index.
+
+We intend to invoke Zorn's lemma which, in this case, states that if $\MC{P}$ is partially ordered and every linearly ordered subset of $\MC{P}$ has an upper bound, then $\MC{P}$ has a maximal element. To that end, let $\{p_l\mid l\in L\}\subseteq \MC{P}$ be a linearly ordered subset of $\MC{P}$ where $p_l\in\prod_{\alpha\in B_l}X_\alpha$ for $B_l\subseteq A$. Write $B^*=\bigcup_{l\in L}B_l$ and let $p^*$ be the unique element of $\prod_{\alpha\in B^*} X_\alpha$ that extends every $p_l$. %This element exists by the Hausdorff Maximal Principle and is unique by the linear ordering on $L$.
+
+If $p^*\in\MC{P}$, then we will have shown that $\MC{P}$ has an upper bound. We claim that, indeed, $p^*\in \MC{P}$. Let $N$ be a neighborhood of $p^*$. Then by the definition of the product topology, $N$ contains an open set $O\ni p^*$, such that
+\[
+N\supseteq O=\prod_{\alpha\in B^*}U_\alpha
+\]
+where $U_\alpha\subseteq X_\alpha$ is open in $X_\alpha$ and $U_\alpha=X_\alpha$ for all but finitely many $\alpha$, say, $\{\alpha_1,\alpha_2,\ldots,\alpha_n\}\subseteq B^*$. By definition of $B^*$, each $\alpha_j$ in this list is an element of some $B_{l_j}$, where $l_j\in L$. Since $L$ is linearly ordered, let $\ell=\max\{l_j\}_{j=1}^n$ and we have $\{\alpha_1,\alpha_2,\ldots,\alpha_n\}\subseteq B_\ell$, i.e. the $\alpha_j$'s are in single subset $B_\ell$ which is determined by $p_\ell$. Now, 
+\[
+\prod_{\alpha\in B_\ell}U_\alpha
+\]
+is a neighborhood of $p_\ell$. Consequently, the net $\<\pi_{B_\ell}(x_i)>$ is frequently in $\prod_{\alpha\in B_\ell}U_\alpha$ by the definition of $\MC{P}$. But then, by the definition of $B^*$, $B_\ell\subseteq B^*$, so the net $\<\pi_{B^*}(x_i)>$ is frequently in $\prod_{\alpha\in B^*}U_\alpha$, which means that $p^*$ is a cluster point of $\<\pi_{B^*}(x_i)>$. Consequently, $p^*\in \MC{P}$. Moreover, $p^*$ is an upper bound for $\{p_l\mid l\in L\}$, so it has been shown that any linearly ordered subset of $\MC{P}$ has an upper bound.
+
+Therefore, by Zorn's Lemma, $\MC{P}$ has a maximal element $\bar{p}\in\prod_{\alpha\in \overline{B}}X_\alpha$ where $\overline{B}$ is the closure of $B$. In other words, if $p\in\MC{P}$ and $p\geq \bar{p}$, then $p=\bar{p}$. We claim that $A=\overline{B}$. Suppose by way of contradiction that $A\neq\overline{B}$ and let $\gamma\in A\setminus\overline{B}$. Consider the net $\<\pi_{\overline{B}}(x_i)>_{\overline{B}\subseteq A}$. $\bar{p}$ is a cluster point of $\<\pi_{\overline{B}}(x_i)>$ by definition of $\MC{P}$, so by Proposition 4.20 (HW 4) there exists a subnet $\<\pi_{\overline{B}}(x_{i(j)})>_{j\in J\subseteq \overline{B}}$ of $\<\pi_{\overline{B}}(x_i)>$ that converges to $\bar{p}$. 
+
+Let $\<\pi_\gamma(x_{i(j)})>_{j\in J}\subseteq X_\gamma$ be a net. Since $X_\gamma$ is compact, by Theorem 4.29, the net $\<\pi_\gamma(x_{i(j)})>_{j\in J}$ has a subnet $\<\pi_\gamma(x_{i(j(k))})>_{k\in K\subseteq J}$ that converges to some point $p_\gamma$. Now, let $q$ be the unique element of
+\[
+\prod_{\alpha\in\overline{B}\cup\{\gamma\}}X_\alpha
+\]
+that extends both $\bar{p}$ and $p_\gamma$, i.e. the unique element such that $q\geq \bar{p},p_\gamma$. Then the net $\<\pi_{\overline{B}\cup\{\gamma\}}(x_{i(j(k))})>_{k\in K}$ converges to $q$. But this means that $q$ is a cluster point of the net $\<\pi_{\overline{B}\cup\{\gamma\}}(x_i)>$, i.e. $q\in\MC{P}$ and $q\geq\bar{p}$, but $q\neq\bar{p}$, a contradiction. Therefore, our assumption that $\overline{B}\neq A$ was fallacious and it must be the case that $\overline{B}=A$. Consequently, $\bar{p}$ is a cluster point of our original net $\<x_i>$, and since $\<x_i>$ was chosen arbitrarily, we have shown that any net in $X$ has a cluster point. By Proposition 4.29 again, this means that $X$ is compact, and we are done.
+\end{proof}
+
+
+\item Let $\displaystyle 1-\sum_{n=1}^\infty c_nt^n$ be the Maclaurin series for $\sqrt{1-t}$, defined by
+
+\[
+-c_n=\frac{1}{n!}\dd{^n}{t^n}\sqrt{1-t}\Bigg|_{t=0}.
+\]
+
+Prove that $\displaystyle 1-\sum_{n=1}^\infty c_nt^n$ converges absolutely at the point $t\in\MB{R}$ when $|t|<1$. Prove that on this open interval, it converges pointwise to $\sqrt{1-t}$.
+
+\begin{proof}
+First note that 
+\[
+-c_n=\frac{1}{n!}\dd{^n}{t^n}\sqrt{1-t}\Bigg|_{t=0}=-\frac{1}{n!}\frac{(2n-2)!}{4^{n-1/2}(n-1)!}\text{ for all $n$.}
+\]
+Then 
+\begin{align*}
+\left|\frac{a_{n+1}}{a_n}\right|&=\left|\frac{\frac{1}{(n+1)!}\frac{(2n)!}{4^{n+1/2}n!}}{\frac{1}{n!}\frac{(2n-2)!}{4^{n-1/2}(n-1)!}}\right|\cdot |t|\\[2mm]
+&=\left(\frac{1}{(n+1)!}\frac{(2n)!}{4^{n+1/2}n!}\cdot\frac{n!4^{n-1/2}(n-1)!}{(2n-2)!}\right)|t|\\[2mm]
+&=\frac{1}{(n+1)n(n-1)!}\cdot\frac{2n(2n-1)(2n-2)!}{4^n4^{1/2}}\cdot\frac{4^n4^{-1/2}(n-1)!}{(2n-2)!}|t|\\[2mm]
+&=\frac{2(2n-1)}{4(n+1)}|t|\\[2mm]
+&\rightarrow|t|.
+\end{align*}
+
+By the ratio test, the series above will converge absolutely whenever $|t|<1$, and thus on compact subsets of $(-1,1)$, as well as the differentiated series $-\sum_{j=1}^nnc_nt^{n-1}$. Moreover, the coefficients $c_n$ were computed directly above from the formula for a Taylor series applied to the function $f(t)=\sqrt{1-t}$, so, since it converges pointwise on $(-1,1)$, it converges pointwise to $\sqrt{1-t}$.
+\end{proof}
+
+\pagebreak
+
+\item Prove that $\displaystyle 1-\sum_{n=1}^\infty c_nt^n$ converges absolutely and uniformly when $|t|\leq1$. Prove that on this closed interval, it converges pointwise to $\sqrt{1-t}$.
+
+\begin{proof}
+Following the proof of Lemma 4.47 in Folland, we can apply the Monotone Convergence Theorem to $\sum_{n=1}^\infty c_n$ in a clever way. Notice that $t^n\rightarrow1^n=1$ as $t\rightarrow1$. Thus, by the MCT,
+
+\begin{align*}
+\sum_{n=1}^\infty c_n&=\int_{\MB{N}}c_n\,d\#(n)\\[2mm]
+&=\int_{\MB{N}}c_n\cdot1\,d\#(n)\\[2mm]
+&=\int_{\MB{N}}c_n\lom{t}{1}t^n\,d\#(n)\\[2mm]
+&=\lom{t}{1}\int_{\MB{N}}c_nt^n\,d\#(n)\\[2mm]
+&=\lom{t}{1}\sum_{n=1}^\infty c_n t^n\\[2mm]
+&=\lom{t}{1}\left[1-\sqrt{1-t}\right]\\[2mm]
+&=1.
+\end{align*}
+
+As a result, when $t=1$,
+\[
+1-\sum_{n=1}^\infty c_nt^n=1-\sum_{n=1}^\infty c_n=1-1=0,
+\]
+and when $t=-1$, 
+\[
+1-\sum_{n=1}^\infty c_nt^n=1-\sum_{n=1}^\infty (-1)^nc_nt^n,
+\]
+but
+\[
+1-\sum_{n=1}^\infty |(-1)^nc_nt^n|=1-\sum_{n=1}^\infty c_n=0,
+\]
+
+so the series converges absolutely on the closed interval $[-1,1]$, and thus uniformly on $[-1,1]$ as well.
+\end{proof}
+
+
+
+\item[\textbf{EC.}] Max Zorn was born in Krefeld, Germany in 1906. He died in 1993 in Bloomington, Indiana, USA. His adviser was Emil Artin.
+
+
+\end{enumerate}
+
+
+\end{document}

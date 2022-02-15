@@ -1,0 +1,260 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{207A - ODEs}
+\rightline{Chen, Weitao}
+\rightline{HW 1}
+\rightline{\today}
+
+
+
+\vspace{1cm}
+\begin{enumerate}
+
+\vspace{-1cm}
+\item Let $f(t)$ be a nonnegative function satisfying the inequality
+
+\[
+f(t)\leq K_1+\varepsilon(t-\alpha)+K_2\int_\alpha^tf(s)\,ds=K_1+K_2\int_\alpha^tf(s)+\varepsilon\,ds,
+\]
+
+on an interval $\alpha\leq t\leq \beta$, where $\varepsilon,K_1,K_2$ are given positive constants. Show that
+
+\[
+f(t)\leq K_1e^{K_2(t-\alpha)}+\frac{\varepsilon}{K_2}\left(e^{K_2(t-\alpha)}-1\right).
+\]
+
+\begin{proof}
+Using the hint given on page 32 of the textbook, let $\displaystyle U(t)=K_1+\varepsilon(t-\alpha)+K_2\int_\alpha^tf(s)\,ds$. 
+
+Then $U(\alpha)=K_1$ and by the fundamental theorem of calculus, $U'(t)=\varepsilon+K_2f(t)\leq K_2U(t)+\varepsilon$, and so $U'(t)-K_2U(t)\leq\varepsilon$. This is a linear, first order ODE, which can be solved using the integrating factor $I(t)=e^{-\int K_2\,dt}=e^{-K_2t}$. We have
+
+\begin{align*}
+U'(t)-K_2U(t)&\leq\varepsilon\\[2mm]
+e^{-K_2t}U'(t)-e^{-K_2t}K_2U(t)&\leq\varepsilon e^{-K_2t}\\[2mm]
+\left(e^{-K_2t}U(t)\right)'&\leq\varepsilon e^{-K_2t}\\[2mm]
+\int_\alpha^s\left(e^{-K_2t}U(t)\right)'\,dt&\leq\int_\alpha^s\varepsilon e^{-K_2t}\,dt\\[2mm]
+e^{-K_2s}U(s)-e^{-K_2\alpha}U(\alpha)&\leq-\frac{\varepsilon}{K_2}e^{-K_2s}+\frac{\varepsilon}{K_2}e^{-K_2\alpha}\\[2mm]
+e^{-K_2s}U(s)-K_1e^{-K_2\alpha}&\leq-\frac{\varepsilon}{K_2}e^{-K_2s}+\frac{\varepsilon}{K_2}e^{-K_2\alpha}\\[2mm]
+e^{-K_2s}U(s)&\leq K_1e^{-K_2\alpha}-\frac{\varepsilon}{K_2}e^{-K_2s}+\frac{\varepsilon}{K_2}e^{-K_2\alpha}\\[2mm]
+U(s)&\leq K_1e^{K_2(s-\alpha)}-\frac{\varepsilon}{K_2}+\frac{\varepsilon}{K_2}e^{K_2(s-\alpha)}\\[2mm]
+U(t)&\leq K_1e^{K_2(t-\alpha)}+\frac{\varepsilon}{K_2}\left(e^{K_2(t-\alpha)}-1\right).
+\end{align*}
+
+Since $f(t)\leq U(t)$ by construction, it follows that 
+
+
+\[
+f(t)\leq K_1e^{K_2(t-\alpha)}+\frac{\varepsilon}{K_2}\left(e^{K_2(t-\alpha)}-1\right).
+\]
+
+
+\end{proof}
+
+
+\item Discuss the existence and uniqueness of solutions $\phi$ of $y''+p(t)y'+q(t)y=f(t)$, with initial conditions $\phi(t_0)=y_0$, $\phi'(t_0)=z_0$, where $p,q$, and $f$ are given functions continuous on some interval $a<t<b$ where $a<t_0<b$.
+
+
+Write $y_1=y$ and $y_1'=y_2$. Then we can rewrite the ODE above as the following system:
+
+\begin{align*}
+y_1'&=y_2\\[2mm]
+y_2'&=f(t)-q(t)y_1-p(t)y_2
+\end{align*}
+
+This is of the form $\mathbf{y}'=\mathbf{f}(t,\mathbf{y})+\vec{f}(t)$ where $\mathbf{y}=(y_1,y_2)$. In matrix form, we have
+
+\[\mathbf{y}'=\mathbf{f}(t,\mathbf{y})+\vec{f}(t)=
+\begin{bmatrix}
+0 & 1\\
+-q(t) & -p(t)
+\end{bmatrix}
+\begin{bmatrix}
+y_1\\
+y_2\\
+\end{bmatrix}+
+\begin{bmatrix}
+0\\
+f(t)\\
+\end{bmatrix}
+\]
+
+Since $p, q$, and $f$ are continuous, so is $\mathbf{y}'$ for $a<t<b$ and $|\mathbf{y}|<\infty$, i.e. on the infinite strip $\{(t,\mathbf{y})\mid a<t<b, |\mathbf{y}|<\infty\}$. Additionally, the column vectors $\pp{\mathbf{f}}{y_i}$ are continuous since $p$ and $q$ are, so by Theorem 1 in the text, there exists a unique solution $\phi$ of the system satisfying the given initial conditions.
+
+
+\item Prove that the initial value problem
+
+\[
+y''+g(t,y)=0,\hspace{5mm}y(0)=y_0\hspace{5mm}y'(0)=z_0
+\]
+
+where $g$ is continuous in some region $D$ containing $(0,y_0)$, is equivalent to the integral equation
+
+\[
+y(t)=y_0+z_0t-\int_0^t(t-s)g(s,y(s))\,ds.
+\]
+
+\begin{proof}
+Utilizing the hint, integrating both sides of the equation above yields
+
+\begin{align*}
+\int_0^s y''+g(\tau,y)\,d\tau&=\int 0\,d\tau\\[2mm]
+y'(s)-y'(0)+\int_0^s g(\tau,y)\,d\tau&=0\\[2mm]
+y'(s)-z_0+\int_0^sg(\tau,y)\,d\tau&=0\\[2mm]
+\int_0^t y'(s)-z_0\,ds+\int_0^t\int_0^sg(\tau,y)\,d\tau\,ds&=0\\[2mm]
+y(t)-y(0)-z_0(t-0)+\int_0^t\int_0^sg(\tau,y)\,d\tau\,ds&=0\\[2mm]
+y(t)-y_0-z_0t+\int_0^t\left(\int_\tau^t\,ds\right)g(\tau,y)\,d\tau&=0\\[2mm]
+y(t)-y_0-z_0t+\int_0^t(t-\tau)g(\tau,y)\,d\tau&=0.
+\end{align*}
+
+Moving every term but $y(t)$ to the right hand side and changing $\tau$ to $s$, we have 
+
+\[
+y(t)=y_0+z_0t-\int_0^t(t-s)g(s,y(s))\,ds.
+\]
+\end{proof}
+
+
+\item Compute a Lipschitz constant $K$ and then show that each of the following functions $f$ satisfies the Lipschitz condition in the regions indicated.
+
+\begin{enumerate}
+\item $f(t,y)=t^2+y^4$, $\{(t,y)\mid |t|\leq 1, |y|\leq3\}$
+
+$\displaystyle \pp{f}{y}=4y^3$, and $\displaystyle \left|\pp{f}{y}\right|\leq108$ for all $|y|\leq3$ and $|t|\leq 1$ so choose $K=108$. Then we have 
+
+\begin{align*}
+f(t,y_2)-f(t,y_1)&=\cancel{t^2}+y_2^4-\cancel{t^2}-y_1^4\\[2mm]
+\left|f(t,y_2)-f(t,y_1)\right|&=|y_2^4-y_1^4|\\[2mm]
+\left|f(t,y_2)-f(t,y_1)\right|&=\left|y_2^2+y_1^2\right||y_2+y_1||y_2-y_1|\\[2mm]
+\left|f(t,y_2)-f(t,y_1)\right|&\leq\left|3^2+3^2\right||3+3||y_2-y_1|\\[2mm]
+\left|f(t,y_2)-f(t,y_1)\right|&\leq108|y_2-y_1|\\[2mm]
+\left|f(t,y_2)-f(t,y_1)\right|&\leq K|y_2-y_1|.\\[2mm]
+\end{align*}
+
+\vspace{-10mm}
+\item $f(t,y)=p(t)\cos y+q(t)\sin y$, $\{(t,y)\mid |t|\leq 100, |y|<\infty\}$, where $p,q$ are continuous functions on $-100\leq t\leq 100$.
+
+$\displaystyle \pp{f}{y}=-p(t)\sin y+q(t)\cos y$, and $\displaystyle\left|\pp{f}{y}\right|\leq|p(t)|+|q(t)|$. Then we have
+
+\begin{align*}
+f(t,y_2)-f(t,y_1)&=p(t)\cos y_2+q(t)\sin y_2-p(t)\cos y_1-q(t)\sin y_1\\[2mm]
+&=p(t)(\cos y_2-\cos y_1)+q(t)(\sin y_2-\sin y_1)\\[2mm]
+&=-p(t)\cdot2\sin\left(\frac{y_2+y_1}{2}\right)\sin\left(\frac{y_2-y_1}{2}\right)++q(t)(\sin y_2-\sin y_1).\\[2mm]
+\end{align*}
+
+\vspace{-10mm}
+Choose $\displaystyle K=\max_{t\in[-100,100]}\{|p(t)+|q(t)|\}$ Using the inequality $\sin\theta\leq\theta$ for sufficiently small $\theta$, we have
+
+\vspace{-5mm}
+\begin{align*}
+|f(t,y_2)-f(t,y_1)|&=\left|-p(t)\cdot2\sin\left(\frac{y_2+y_1}{2}\right)\sin\left(\frac{y_2-y_1}{2}\right)+q(t)(\sin y_2-\sin y_1)\right|\\[2mm]
+&\leq|-p(t)|\left|2\sin\left(\frac{y_2+y_1}{2}\right)\sin\left(\frac{y_2-y_1}{2}\right)\right|+|q(t)|\left|\sin y_2-\sin y_1\right|\\[2mm]
+&\leq2|p(t)|\cdot1\cdot\left|\sin\left(\frac{y_2-y_1}{2}\right)\right|+|q(t)||y_2-y_1|\\[2mm]
+&\leq2|p(t)|\frac{|y_2-y_1|}{2}+|q(t)||y_2-y_1|\\[2mm]
+&=|p(t)||y_2-y_1|+|q(t)||y_2-y_1|\\[2mm]
+&=\left(|p(t)|+|q(t)|\right)|y_2-y_1|\\[2mm]
+&\leq K|y_2-y_1|.\\[2mm]
+\end{align*}
+
+
+
+\item $f(t,y)=te^{-y^2}$, $\{(t,y)\mid |t|\leq 1,|y|<\infty\}$.
+
+$\displaystyle \pp{f}{y}=-2yte^{-y^2}$. $\displaystyle \left|\pp{f}{y}\right|\leq \left|-2yte^{-y^2}\right|\leq2|y|\cdot1\cdot e^{-y^2}=\frac{2|y|}{e^{y^2}}$. Since $e^{y^2}>2|y|$, $\displaystyle \frac{2|y|}{e^{y^2}}< 1$, so we 
+
+have
+
+\vspace{-5mm}
+\begin{align*}
+f(t,y_2)-f(t,y_1)&=te^{-y_2^2}-te^{-y_1^2}\\[2mm]
+&=t\left(e^{-y_2^2}-e^{-y_1^2}\right)\\[2mm]
+|f(t,y_2)-f(t,y_1)|&=|t|\left|e^{-y_2^2}-e^{-y_1^2}\right|\\[2mm]
+&\leq\left|e^{-y_2^2}-e^{-y_1^2}\right|.\\[2mm]
+\end{align*}
+
+\vspace{-5mm}
+Now, consider the function $g(y)=e^{-y^2}$. This function is continuous on $[y_1,y_2]$ so by the Mean Value Theorem we have $g(y_2)-g(y_1)=g'(y_0)(y_2-y_1)$ for some $y_0\in[y_1,y_2]$. Choose $K=|g'(y_0)|$, then, returning to our inequality above,
+
+\[
+|f(t,y_2)-f(t,y_1)|\leq\left|e^{-y_2^2}-e^{-y_1^2}\right|=|g'(y_0)||y_2-y_1|=K|y_2-y_1|.
+\]
+\end{enumerate}
+
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

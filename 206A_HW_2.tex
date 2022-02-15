@@ -1,0 +1,250 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\p}{\mathbb{P}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{206A - Probability}
+\rightline{Cho, Heyrim}
+\rightline{HW 2}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+
+\item Show that events $A_1,\ldots, A_n$ are independent if and only if their corresponding indicator variables $\1_{A_1},\ldots,\1_{A_n}$ are independent. ($\1_{A_i}=1$ if $A_i$ occurs, and 0 otherwise.)
+
+\begin{proof}
+Suppose the events $A_1,\ldots, A_n$ are independent. Then for all $I\subseteq\{1,\ldots,n\}$, $\p\left(\bigcap_{i\in I}A_i\right)=\prod_{i\in I}\p(A_i)$. Since indicator variables only take on the values 0 and 1, we have
+\[
+\p(\1_{A_i}=1\, \forall \,i\in I)=\p(\1_{\cap A_i}=1)=\p\left(\bigcap_{i\in I}A_i\right)=\prod_{i\in I}\p(A_i)=\prod_{i\in I}\p(\1_{A_i}=1).
+\]
+A similar result holds for $\p(\1_{A_i}=0\, \forall \,i\in I)$ by replacing 1 with 0 above. If $\1_{A_i}=1$ for some $i\in I$ and 0 for others, then we are taking the probability of the empty set which is 0, so the result holds again.\end{proof}
+
+
+
+
+\pagebreak
+
+
+
+
+
+
+
+
+\item Let $X_n$ and $X$ be random variables defined on a probability space $(\Omega,\MC{F},\mu)$. Suppose a function $g:\MB{R}\to\MB{R}$ is continuous everywhere. Then
+\[
+X_n \xrightarrow{d} X \quad\text{implies}\quad g(X_n)\xrightarrow{d} g(X).
+\]
+
+\begin{proof}
+Let $X_n$ and $X$ be random variables and suppose $g:\MB{R}\to\MB{R}$ is continuous everywhere. Suppose also that $X_n \xrightarrow{d} X$. Then by definition,
+\[
+\lim_{n\to\infty}F_{X_n}=F_X
+\]
+where $F_{X_n}(x)=\mu(\{\omega\in \Omega:X_n(\omega)\leq  x\})=\mu(\{X_n(\omega)\leq  x\})$. Observe that
+
+\begin{align*}
+\lim_{n\to\infty} F_{g(X_n)}(x)&=\lim_{n\to\infty}\mu(\{g(X_n(\omega))\leq x\})\\[2mm]
+&=\lim_{n\to\infty}\mu\left([g(X_n)]^{-1}((-\infty,x]))\right)\\[2mm]
+&=\lim_{n\to\infty}\mu\left(X_n^{-1}\circ g^{-1}((-\infty,x]))\right)\\[2mm]
+&=\lim_{n\to\infty}\mu\left(X_n^{-1}(\{g(\omega)\leq x\})\right)\\[2mm]
+&=\mu\left(X^{-1}(\{g(\omega)\leq x\})\right)\\[2mm]
+&=\mu\left(X^{-1}\circ g^{-1}((-\infty,x]))\right)\\[2mm]
+&=\mu\left([g(X)]^{-1}((-\infty,x]))\right)\\[2mm]
+&=\mu(\{g(X(\omega))\leq x\})\\[2mm]
+&=F_{g(X)}.
+\end{align*}
+
+So $g(X_n)\xrightarrow{d} g(X)$.
+\end{proof}
+
+
+
+
+
+
+
+
+\pagebreak
+
+
+
+
+
+
+
+\item (Alternate version of Chebyshev's inequality) Let $X$ be a random variable. For any real numbers $c>0$ and $0<p<\infty$ show that 
+\[
+\p(|X|\geq c)\leq \frac{E(|X|^p)}{c^p}.
+\]
+
+\begin{proof}
+By the convexity of $e^x$, if $|X|\geq c$ then $|X|^p\geq c^p$. Thus,
+\begin{align*}
+\p(|X|\geq c)&=\int_\Omega \1_{\{|X|\geq c\}}(\omega)\,d\p\\[2mm]
+&=\int_{\{|X|\geq c\}}1\,d\p\\[2mm]
+&=\frac{1}{c^p}\int_{\{|X|\geq c\}}c^p\,d\p\\[2mm]
+&\leq\frac{1}{c^p}\int_{\{|X|\geq c\}}|X|^p\,d\p\\[2mm]
+&\leq\frac{1}{c^p}\int_{\{|X|\geq c\}}|X|^p\,d\p+\frac{1}{c^p}\int_{\{|X|<c\}}|X|^p\,d\p\\[2mm]
+&=\frac{1}{c^p}\int_\Omega|X|^p\,d\p\\[2mm]
+&=\frac{1}{c^p}E(|X|^p).\qedhere
+\end{align*}
+\end{proof}
+
+
+
+
+
+
+
+\pagebreak
+
+
+
+
+
+
+
+
+\item \begin{enumerate}\itemsep5mm \item Let $X$ be a random variable. Show that
+\[
+E(|X|)\leq \sum_{n=0}^\infty \p(|X|> n)\leq 1+E(|X|).
+\]
+
+\begin{proof}
+First, $|X|\leq \ceil{|X|}=\sum_{n=0}^\infty \1_{\{|X|>n\}}$. Also, $\displaystyle \p(|X|> n)=\int_\Omega \1_{\{|X|>  n\}}\,d\p$. Thus, by the dominated convergence theorem,
+\[
+\sum_{n=0}^\infty \p(|X|>  n)=\sum_{n=0}^\infty \int_\Omega \1_{\{|X|>  n\}}\,d\p= \int_\Omega \sum_{n=0}^\infty\1_{\{|X|>  n\}}\,d\p= \int_\Omega\ceil{|X|}\,d\p\geq\int_\Omega |X|\,d\p=E(|X|).
+\]
+
+Moreover, since $1+|X|\geq \ceil{|X|}$,
+\[
+\sum_{n=0}^\infty \p(|X|>  n)= \int_\Omega\ceil{|X|}\,d\p\leq\int_\Omega1+|X|\,d\p=1+\int_\Omega |X|\,d\p=1+E(|X|),
+\]
+
+and we have
+\[
+E(|X|)\leq \sum_{n=0}^\infty \p(|X|> n)\leq 1+E(|X|).\qedhere
+\]
+\end{proof}
+
+
+\item Let $\{X_n\}$ be independent identically distributed (i.i.d.) random variables. Show that $E(|X_1|)<\infty$ if and only if $\p(|X_n|>n,\,\text{i.o})=0$.
+
+\begin{proof}
+Let $A_n=\{|X_n|>n\}$. First suppose $E(|X_1|)<\infty$. Since these random variables are i.i.d., we have
+\[
+\sum_{n=0}^\infty\p(A_n)=\sum_{n=0}^\infty\p(\{|X_n|>n\})=\sum_{n=0}^\infty\p(\{|X_1|>n\})\leq 1+E(|X_1|)<\infty
+\]
+by part (a) above. Thus by the Borel-Cantelli lemma, $\p(|X_n|>n,\,\text{i.o})=0$.
+
+Conversely, suppose $\p(|X_n|>n,\,\text{i.o})=0$. Since these are i.i.d. random variables, we have, equivalently, that $\p(|X_1|>n,\,\text{i.o})=0$. Since $\{|X_1|>n\}$ occurs only finitely many times, by part (a) above again we have
+\[
+E(|X_1|)\leq \sum_{n=0}^\infty\p(|X_n|>n)=\sum_{n=0}^{N-1}\p(|X_1|>n)<\infty.\qedhere
+\]
+\end{proof}
+
+\end{enumerate}
+
+
+\end{enumerate}
+\end{document}

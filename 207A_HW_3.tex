@@ -1,0 +1,198 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+
+\usepackage{comment}
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\ve}{\varepsilon}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{207A - ODE}
+\rightline{Chen, Weitao}
+\rightline{HW 3}
+\rightline{\today}
+
+
+
+\vspace{1cm}
+\begin{enumerate}
+
+%\begin{comment}
+
+
+
+
+\item[\textbf{4.2.4(e).}] Given the following scalar differential equation, decide whether the solution given is asymptotically stable, stable but not asymptotically stable, or unstable: $y'=-y$, $\phi(t)=e^{-t}$.
+
+
+The equilibrium solution to this ODE is $y_0\equiv 0$. Let $\ve>0$ and choose $\delta=\ve$. Then whenever $|\phi(t_0)-y_0|=|e^{-t_0}-0|=e^{-t_0}<\delta$, and $t\geq t_0$, we have
+
+\[
+|\phi(t)-y_0|=e^{-t}\leq e^{-t_0}<\delta=\ve,
+\]
+
+so the solution is stable. To test if it is asymptotically stable, we find that
+
+\[
+\lom{t}{\infty}\phi(t)=\lom{t}{\infty}e^{-t}=0,
+\]
+
+so the solution is asymptotically stable by definition.
+
+\vfill
+\pagebreak
+
+\item[\textbf{4.3.7.}] Determine if the zero solution of the following system is stable, asymptotically stable, or unstable: $u''+2ku'+\alpha^2 u=0$ ($k>0$, $\alpha^2>0$ constants).
+
+First write $u=u_1$ and $u'=u_2$. Then we have the system
+
+\begin{multicols}{2}
+\begin{align*}
+u_1'&=u_2\\[2mm]
+u_2'&=-\alpha^2u_1-2ku_2
+\end{align*}
+
+
+\[\begin{pmatrix}
+0 & 1\\
+-\alpha^2 & -2k
+\end{pmatrix}\]
+
+\end{multicols}
+The characteristic equation of this matrix is $\lambda^2 +2k\lambda+\alpha^2=0$, yielding
+
+\[
+\lambda=\frac{-2k\pm\sqrt{4k^2-4\alpha^2}}{2}=-k\pm\sqrt{k^2-\alpha^2}.
+\]
+
+If $k\geq \sqrt{\alpha}$, then both eigenvalues will be real and negative so by Theorem 4.1 the zero solution is asymptotically stable. If $0<k<\sqrt{\alpha}$, then both eigenvalues will be complex and have negative real part, making the zero solution asymptotically stable again by Theorem 4.1.
+
+
+
+\vfill
+\pagebreak
+
+
+
+\item[\textbf{4.3.15.}] Prove the following result:
+
+Let all eigenvalues of $A$ have real parts negative, and let $B(t)$ be continuous for $0\leq t<\infty$ and such that $\int_0^\infty |B(s)|\,ds<\infty$. Then the zero solution of (4.5) is asymptotically stable. [Hint: start with (4.6) and take norms; then use the Gronwall inequality.]
+
+\begin{proof}
+
+Taking the hint, write $\psi(t,t_0,y_0)=\exp((t-t_0)A)y_0+\int_{t_0}^t\exp((t-s)A)B(s)\psi(s,t_0,y_0)\,ds$. Taking the norm of both sides and applying the triangle inequality, we have
+
+\begin{align*}
+\left|\psi(t,t_0,y_0)\right|&=\left|\exp((t-t_0)A)y_0+\int_{t_0}^t\exp((t-s)A)B(s)\psi(s,t_0,y_0)\,ds\right|\\[2mm]
+&\leq \left|\exp((t-t_0)A)y_0\right|+\int_{t_0}^t\left|\exp((t-s)A)B(s)\psi(s,t_0,y_0)\right|\,ds.\\[2mm]
+\end{align*}
+
+\vspace{-10mm}
+Using the inequality (4.4) on page 152, we have 
+
+\[
+|\psi(t,t_0,y_0)|\leq Ke^{-\sigma(t-t_0)}|\psi(t_0,t_0,y_0)|+K\int_{t_0}^te^{-(t-s)\sigma}|B(s)||\psi(s,t_0,y_0)|\,ds.
+\]
+
+for the appropriate $K$ and $\sigma$ as defined there. Multiplying both sides by $e^{\sigma t}$ yields
+
+\[
+e^{\sigma t}|\psi(t,t_0,y_0)|\leq Ke^{\sigma t_0}|\psi(t_0,t_0,y_0)|+K\int_{t_0}^te^{\sigma s}|B(s)||\psi(s,t_0,y_0)|\,ds.
+\]
+
+\vspace{-5mm}
+Then by applying Gronwall's inequality on the function $e^{\sigma t}|\psi(t,t_0,y_0)|$, we have
+
+\vspace{-5mm}
+\begin{align*}
+e^{\sigma t}|\psi(t,t_0,y_0)|&\leq K|\psi(t_0,t_0,y_0)|e^{\int_{t_0}^t|B(s)|\,ds}\\[2mm]
+|\psi(t,t_0,y_0)|&\leq e^{-\sigma t}K|\psi(t_0,t_0,y_0)|\int_{t_0}^t|B(s)|\,ds.
+\end{align*}
+
+Since $\int_0^\infty |B(s)|\,ds<\infty$, the right hand side goes to 0 as $t\rightarrow \infty$. Consequently, $\psi(t,t_0,y_0)$ will approach 0 as $t\rightarrow\infty$. The rest of the argument is identical to that of the proof of Theorem 4.2 in the textbook --- and does not require the hypothesis that $\int_{t_0}^t|B(s)|\,ds<\infty$ --- which yields that the zero solution is asymptotically stable.
+
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+
+\end{document}

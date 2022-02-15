@@ -1,0 +1,313 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210A - Complex Analysis}
+\rightline{Wong, Bun}
+\rightline{HW 1}
+\rightline{\today}
+
+\lspace
+
+p.33: 6abcd, 7; pp. 43-44: 1,3,8,12,13,14,16,17,19,21
+
+
+\textbf{p. 33}
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+\setcounter{enumi}{5}
+
+
+\item Find the radius of convergence for the following power series:
+
+\begin{enumerate}
+
+\itemsep5mm
+\item $\displaystyle \sum_{n=0}^\infty a^nz^n$, $a\in \MB{C}$.
+\[
+R=\frac{1}{\limsup|a^n|^{1/n}}=\frac{1}{\limsup|a|}=\frac{1}{|a|},\quad a\neq0.
+\]
+If $a=0$, then $R=\infty$.
+
+\item $\displaystyle \sum_{n=0}^\infty a^{n^2}z^n$, $a\in \MB{C}$.
+\[
+R=\frac{1}{\limsup|a^{n^2}|^{1/n}}=\frac{1}{\limsup|a^n|}=\frac{1}{\limsup|a|^n}=\begin{cases}\infty & \text{if }|a|<1\\ 1 & \text{if }|a|=1\\ 0 & \text{if }|a|>1.\end{cases}
+\]
+
+\item $\displaystyle \sum_{n=0}^\infty k^{n}z^n$, $k\in\MB{Z}-\{0\}$.
+\[
+R=\frac{1}{\limsup|k^n|^{1/n}}=\frac{1}{\limsup|k|}=\frac{1}{|k|}.
+\]
+
+\item $\displaystyle \sum_{n=0}^\infty z^{n!}$.
+
+For this one we can use the Ratio Test:
+\[
+\lim\left|\frac{a_{n+1}}{a_n}\right|=\lim\left|\frac{z^{(n+1)!}}{z^{n!}}\right|=\lim |z|^{(n+1)!-n!}=\lim |z|^{n(n!)}.
+\]
+This limit goes to $\infty$ if $|z|>1$, so the radius of convergence is $R=1$.
+\end{enumerate}
+
+\pagebreak
+\item Show that the radius of convergence of the power series 
+\[
+\sum_{n=1}^\infty\frac{(-1)^n}{n}z^{n(n+1)}
+\]
+is 1, and discuss the convergence for $z=1, -1,$ and $i$. [Hint: The $n$th coefficient of this series is not $\frac{(-1)^n}{n}$.]
+
+\begin{proof}
+First we reexpress it in the form of a power series:
+\[
+\sum_{n=1}^\infty\frac{(-1)^n}{n}z^{n(n+1)}=\sum_{n=1}^\infty\frac{(-1)^n}{n}z^{n^2}\cdot z^n.
+\]
+Now,
+\[
+\limsup\left|\frac{(-1)^n}{n}z^{n^2}\right|^{1/n}=\limsup\left|\frac{(-1)}{n^{1/n}}z^{n}\right|=\limsup\frac{|z|^n}{n^{1/n}}=\frac{\limsup|z|^n}{\limsup n^{1/n}},
+\]
+as long as the limit in the numerator exists, i.e. is not $\infty$. The limit in the denominator is 1, and in order for the limit in the numerator to exist, $|z|\leq 1$. Thus $R=1$.
+\end{proof}
+
+If $z=1$, then the series becomes the alternating harmonic series which converges by the alternating p-test. If $z=-1$, note that $n(n+1)$ is always even since one of the factors must be even, thus $(-1)^{n(n+1)}=1$ again and the series converges by the alternating p-test. If $z=i$, note that $i^{n(n+1)}=i^{2k_n}=(-1)^{k_n}$ for some positive integer $k_n$, thus after reindexing we have
+\[
+\sum_{n=1}^\infty\frac{(-1)^n}{n} \ospace \sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}
+\]
+both of which converge by the alternating p-test.
+
+\end{enumerate}
+
+
+
+
+
+\textbf{p. 43}
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+%\setcounter{enumi}{5}
+
+
+\item Show that $f(z)=|z|^2=x^2+y^2$ has a derivative only at the origin.
+
+\begin{proof}
+Observe that 
+\begin{align*}
+f'(z)&=\lom{h}{0}\frac{|z+h|^2-|z|^2}{h}\\[2mm]
+&=\lom{h}{0}\frac{(z+h)(\bar z+\bar h)-z\bar z}{h}\\[2mm]
+&=\lom{h}{0}\frac{z\bar z+z\bar h+\bar z h+h\bar h-z\bar z}{h}\\[2mm]
+&=\lom{h}{0}z\frac{\bar h}{h}+\bar z+\bar h.
+\end{align*}
+
+If $h\to 0$ along the real axis, then $\bar h=h$ and the limit above becomes $z+\bar z$. If $h\to0$ along the imaginary axis, then, $\bar h=-h$ so the limit above becomes $-z+\bar z$. Thus, if this limit exists, then $z+\bar z=-z+\bar z$ which implies that $z=-z$, which can only happen if $z=0$. In other words, this derivative only exists at 0.
+\end{proof}
+
+\setcounter{enumi}{2}
+\item Show $\lim n^{1/n}=1$.
+
+\begin{proof}
+Let $a=n^{1/n}$. Then $\log a=\frac{1}{n}\log n$, so
+\[
+\lom{n}{\infty}\log a=\lom{n}{\infty}\frac{\log n}{n}=\lom{x}{\infty}\frac{\log x}{x}\lhe\lom{x}{\infty}\frac{1}{x}=0.
+\]
+Thus,
+\[
+\lom{n}{\infty}n^{1/n}=\lom{n}{\infty}e^{\log a}=e^{\lim \log a}=e^0=1.
+\]
+\end{proof}
+
+\setcounter{enumi}{7}
+\item Define $\tan z=\frac{\sin z}{\cos z}$. Where is this function defined and analytic?
+
+Since $\sin z$ and $\cos z$ are analytic, $\tan z$ will be analytic as long as $\cos z\neq 0$. $\cos z=0$ when $z=\frac{(2k+1)\pi}{2}$, so $\tan z$ is defined and analytic elsewhere.
+
+
+
+
+\setcounter{enumi}{11}
+\item Show that the real part of $f(z)=z^{1/2}$ is always positive.
+
+We can write
+\[
+z^{1/2}=\left(|z|e^{i\theta}\right)^{1/2}=|z|^{1/2}e^{i\frac{\theta}{2}}=|z|^{1/2}\left(\cos\frac{\theta}{2}+i\sin\frac{\theta}{2}\right)
+\]
+where $-\pi<\theta<\pi$. Since the real part is given by $|z|^{1/2}\cos\frac{\theta}{2}$, it is always positive.
+
+
+\item Let $G=\MB{C}-\{z\in\MB{R}\mid z\leq 0\}$ and let $n$ be a positive integer. Find all analytic functions $f:G\to \MB{C}$ such that $z=\left(f(x)\right)^n$ for all $z\in G$.
+
+If we write $\Log z$ as the principal branch of the complex logarithm, we find
+
+\begin{align*}
+f(z)=z^{1/n}&=e^{\log(z^{1/n})}\\[2mm]
+&=e^{\frac{1}{n}\log z}\\[2mm]
+&=e^{\frac{1}{n}\Log z+ \frac{1}{n}i2\pi k}\\[2mm]
+&=e^{\frac{1}{n}\Log z}e^{\frac{1}{n}i2\pi k}.
+\end{align*}
+
+The factor $e^{\frac{1}{n}i2\pi k}$ represents the $n$th roots of unity so our function $f$ is a constant multiple of $e^{\frac{1}{n}\Log z}$.
+
+\item Suppose $f:G\to \MB{C}$ is analytic and $G$ is connected. Show that if $f(z)$ is real for all $z\in G$ then $f$ is constant.
+
+\begin{proof}
+Suppose $f(z)=u+iv$ is real and analytic. Then $v(x,y)=0$ for all $(x,y)\in G$, and $f$ satisfies the C-R equations, i.e.
+\[
+u_x=v+y=(0)_y=0 \aspace u_y=-v_x=-(0)_x=0.
+\]
+Thus, $u'(z)=f'(z)=0$ so $f$ is constant.
+\end{proof}
+
+\setcounter{enumi}{15}
+
+\item Find an open connected set $G\subset \MB{C}$ and two continuous functions $f$ and $g$ defined on $G$ such that $f(z)^2=g(z)^2=1-z^2$ for all $z\in G$. Can you make $G$ maximal? Are $f$ and $g$ analytic?
+
+Note that we can write
+
+\[
+f(z)=(1-z^2)^{1/2}=e^{\frac{1}{2}\log(1-z^2)}
+\]
+
+where log is taken on the principal branch. This function is defined as long as $|1-z^2|>0$, i.e. $z\neq \pm1$. Taking $G=\{z:|z|<1\}$ fits the bill, and we can let $g(z)=-f(z)$. This is not maximal though, and the maximal domain would be $\MB{C}-\{\pm 1\}$. If our domain must be simply connected then the maximal set would be $\MB{C}-\{z: |\Re z|\geq1,\,\Im z=0\}$. $f$ and $g$ are analytic on any of these domains.
+
+
+\item Give the principal branch of $\sqrt{1-z}$.
+
+We can write $\sqrt{1-z}=e^{\frac{1}{2}\log(1-z)}$. This is defined as long as $|1-z|>0$, i.e. $z\neq1$, so the principal branch is the complex logarithm defined on the slit plane $\MB{C}-\{z\in\MB{R}:z\geq 0\}$.
+
+\setcounter{enumi}{18}
+\item Let $G$ be a region and define $G^*=\{z:\bar z\in G\}$. If $f:G\to\MB{C}$ is analytic, prove that $f^*:G^*\to \MB{C}$, defined by $f^*(z)=\overline{f(\bar z)}$, is also analytic.
+
+\begin{proof}
+Suppose $f$ is analytic and write $f=u+iv$. Then
+\[
+\overline{f(\bar z)}=\overline{u(\bar z)+iv(\bar z)}=u(\bar z)-iv(\bar z)=u(x,-y)-iv(x,-y),
+\]
+and since $u$, $v$ satisfy the C-R equations for all $(x,y)\in G$, we have
+
+\[
+\pp{}{x}u(\bar z)=u_x(x,-y)=v_y(x,-y)=\pp{}{y}v(\bar z), \text{and}
+\]
+\[
+\pp{}{y}u(\bar z)=-u_y(x,-y)=v_x(x,-y)=\pp{}{x}v(\bar z).
+\]
+Thus, the component functions $u(\bar z)$ and $v(\bar z)$ satisfy the C-R equations, from which it follows that $f^*$ is analytic.
+\end{proof}
+
+
+\setcounter{enumi}{20}
+\item Prove there is no branch of the logarithm defined on $G=\MB{C}-\{0\}$. [Hint: suppose such a branch exists and compare this with the principal branch.]
+
+\begin{proof}
+Suppose to the contrary that there does exist a branch of the logarithm defined on $G=\MB{C}-\{0\}$. Let $H=\MB{C}-\{z\in\MB{R}:z\geq 0\}$. Consider the principal branch of the logarithm on $H$:
+\[
+\Log z=\ln|z|+i\arg z
+\]
+Suppose that $f$ is a branch of the logarithm defined on $G$. Since $H\subset G$, $f$ is also a branch of the logarithm defiend on $H$, thus $f(z)$ differs from the principal branch by a term of $2\pi i k$ for some $k$. In other words,
+\[
+f(z)=\ln|z|+i\arg z+2\pi i k.
+\]
+Since $f$ is analytic on $G$, it is continuous there, so it is continuous at $z=-1$. But by taking limits from either side of the branch cut, $\lom{z}{-1}f(z)\neq f(-1)$.
+%\[
+%f(-1)=\ln|-1|+i\arg (-1)+2\pi i k=0+i\pi +2\pi ik =0+i(\pi+2\pi k)=0+i(2k+1)\pi.
+%\]
+
+\end{proof}
+
+\end{enumerate}
+
+
+
+
+\end{document}

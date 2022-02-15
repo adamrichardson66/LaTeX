@@ -1,0 +1,386 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209C - Real Analysis}
+\rightline{Zhang, Zhenghe}
+\rightline{HW 2}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+
+
+\item  Let $\Lambda: X\to Y$ be a linear transformation between two normed vector spaces $X$ and $Y$ and let $\|\Lambda\|$ be the operator norm of $\Lambda$. Show that 
+\begin{enumerate}
+\item $\|\Lambda(x)\|_Y\le \|\Lambda\|\cdot\|x\|_X$ for all $x\in X$. 
+
+\begin{proof}
+If $x=0$, then the inequality holds trivially since $\|\cdot\|$ is a norm. Recall that $\|\Lambda\|=\sup_{x\neq 0}\frac{\|\Lambda x\|_Y}{\|x\|_X}$. Consequently, for any nonzero $x\in X$,
+\[
+\|\Lambda\|\geq\frac{\|\Lambda (x)\|_Y}{\|x\|_X}\pspace\text{whence}\pspace\|\Lambda\|\cdot\|x\|\geq \|\Lambda(x)\|
+\]
+\end{proof}
+
+\item Suppose there is a $M>0$ such that $\|\Lambda(x)\|\le M\|x\|,\ \forall x\in X.$ Show that $\Lambda$ is bounded and $\|\Lambda\|\le M$.
+
+\begin{proof}
+Suppose there exists an $M>0$ such that $\|\Lambda(x)\|\leq M\|x\|$ for all $x\in X$. Then for nonzero $x$, $M$ is an upper bound of $\frac{\|\Lambda(x)\|}{\|x\|}$, and since $\|\Lambda\|=\sup_{x\neq0}\frac{\|\Lambda(x)\|}{\|x\|}$, $\Lambda$ is bounded and it follows that $\|\Lambda\|\leq M$.
+\end{proof}
+\end{enumerate}
+
+Note: This problem tells us that $\|\Lambda\|=\inf\{M\}$ where $M$ is as in part (b).
+
+\pagebreak
+
+\item \begin{enumerate}\itemsep7mm \item Show that $f:(a,b)\to\MB{R}$ is convex function if and only if 
+\[
+\frac{f(y)-f(x)}{y-x}\le \frac{f(z)-f(y)}{z-y},\ \forall a<x<y<z<b.
+\]
+
+\begin{proof}
+Let $a<x<y<z<b$. Then we can write $y=tx+(1-t)z$ for some $t\in(0,1)$. Thus,
+\begin{align*}
+\frac{f(y)-f(x)}{y-x}&\leq\frac{f(z)-f(y)}{z-y}\\[2mm]
+\frac{f(tx+(1-t)z)-f(x)}{tx+(1-t)z-x}&\leq\frac{f(z)-f(tx+(1-t)z)}{z-[tx+(1-t)z]}\\[2mm]
+\frac{f(tx+(1-t)z)-f(x)}{(1-t)\cancel{(z-x)}}&\leq\frac{f(z)-f(tx+(1-t)z)}{t\cancel{(z-x)}}\\[2mm]
+tf(tx+(1-t)z)-tf(x)&\leq(1-t)f(z)-(1-t)f(tx+(1-t)z)\\[2mm]
+\cancel{tf(tx+(1-t)z)}-tf(x)&\leq f(z)-tf(z)-f(tx+(1-t)z)+\cancel{tf(tx+(1-t)z)}\\[2mm]
+f(tx+(1-t)z)&\leq tf(x)+f(z)-tf(z)\\[2mm]
+f(tx+(1-t)z)&\leq tf(x)+(1-t)f(z).
+\end{align*}
+
+Since $x,y,z\in(a,b)$ are arbitrary, the inequality above holds if and only if $f$ is convex for all $a<x<y<z<b$.
+\end{proof}
+
+\item Assume $f$ is differentiable on $(a,b)$. Show that the condition above is equivalent to 
+\[
+f'(x)\le f'(y),\ \forall a<x<y<b.
+\] 
+Thus, if $f''(x)$ exists for all $x\in(a,b)$, convexity of $f$ is equivalent to
+\[
+f''(x)\ge 0,\ \forall x\in (a, b).
+\]
+
+\begin{proof}
+Let $a<x<y<z<b$ and suppose $f$ is differentiable on $(a,b)$. For the forward direction, if $f$ is convex, then from part (a) above we have
+\begin{align*}
+\frac{f(y)-f(x)}{y-x}&\leq\frac{f(z)-f(y)}{z-y},\text{ so}\\[2mm]
+f'(x)=\lom{y}{x}\frac{f(y)-f(x)}{y-x}&\leq\lom{z}{y}\frac{f(z)-f(y)}{z-y}=f'(y).
+\end{align*}
+
+Conversely, suppose $f'(x)\leq f'(y)$, i.e. $f'$ is increasing. By the Mean Value Theorem, there exist $c_1,c_2\in(a,b)$ such that
+\[
+f'(c_1)=\frac{f(y)-f(x)}{y-x}\aspace f'(c_2)=\frac{f(z)-f(y)}{z-y}.
+\]
+But $f'$ is increasing so $f'(c_1)\leq f'(c_2)$ whence
+\[
+\frac{f(y)-f(x)}{y-x}\leq \frac{f(z)-f(y)}{z-y}
+\]
+which implies that $f$ is convex by part (a) again. Thus, if $f$ is convex, then $f'$ is increasing, so $f''(x)\geq 0$ by the first derivative test.
+\end{proof}
+
+\item Show that $f(x)=x^p:[0,\infty)\to\MB{R}$, $p\ge 1$, is convex. Then show that
+\[
+(a+b)^p\le 2^{p-1}\cdot (a^p+b^p),\ \forall a,b\ge 0.
+\]
+\end{enumerate}
+
+\begin{proof}
+$f''(x)=p(p-1)x^{p-2}\geq0$ for all $x\in[0,\infty)$ so $f$ is convex by part (b) above. Thus, for $a,b\in [0,\infty)$, we have
+\[
+(ta+(1-t)b)^p\leq ta^p+(1-t)b^p\pspace\text{for all }t\in[0,1].
+\]
+In particular, this is true for $t=\frac{1}{2}$. When $t=\frac{1}{2}$, we have
+\begin{align*}
+\left(\frac{a}{2}+\frac{b}{2}\right)^p&\leq\frac{a^p}{2}+\frac{b^p}{2}\\[2mm]
+\left(\frac{a+b}{2}\right)^p&\leq\frac{a^p+b^p}{2}\\[2mm]
+\frac{(a+b)^p}{2^p}&\leq\frac{a^p+b^p}{2}\\[2mm]
+(a+b)^p&\le 2^{p-1}(a^p+b^p)
+\end{align*}
+\end{proof}
+
+\item Let $(X,\MC{M}, \mu)$ be a measure space.
+\begin{enumerate}
+\itemsep7mm
+\item Show that $L^1(X,d\mu)$ is a normed vector space with the $L^1$ norm
+\[
+\|f\|_1=\int_X|f|d\mu.
+\]
+
+\begin{proof}
+First note that $L^1(X,d\mu)$ is a vector space since linear combinations of $L^1$ functions are still $L^1$. We proceed with showing that $\|\cdot\|_1$ is a norm. Let $f,g\in L^1(X,d\mu)$ and let $\lambda\in \MB{C}$. Then since $|\cdot|$ is a norm on $\MB{C}$, by the triangle inequality and linearity of the Lebesgue integral, we have
+\[
+\|f+g\|_1=\int_X|f+g|\,d\mu\leq\int_X|f|+|g|\,d\mu=\int_X|f|\,d\mu+\int_X|g|\,d\mu=\|f\|_1+\|g\|_1\text{ and}
+\]
+\[
+\|\lambda f\|_1=\int_X|\lambda f|\,d\mu=\int_X|\lambda|\,|f|\,d\mu=|\lambda|\int_X|f|\,d\mu=|\lambda|\,\|f\|_1.
+\]
+Next, $\|f\|_1=0$ if and only if $\int_X|f|\,d\mu=0$ and from a result in 209A (cf. Folland p. 54, Theorem 2.23(b)) this is the case if and only if $f=0$ a.e. Since functions that agree a.e. are identified in $L^p$ space for any $p\in[1,\infty]$, it follows that $\|\cdot\|_1$ is indeed a norm.
+\end{proof}
+
+\item Show that $L^\infty(X,d\mu)$ is a normed vector space with the $L^\infty$ norm 
+\[
+\|f\|_\infty=\inf\big\{M\ge 0: |f(x)|\le M \text{ for $\mu$-a.e. }x\in X\big\}=\sup_{\text{a.e. }x\in X}|f(x)|=\text{ess sup}\,|f(x)|
+\]
+\begin{proof}
+Let $f,g\in L^\infty(X,d\mu)$ and let $\lambda\in \MB{C}$. Then $\|f\|_\infty<\infty$ and $\|g\|_\infty<\infty$. By properties of suprema, and since $|\cdot|$ is a norm on $\MB{C}$, we have
+\[
+\|f+g\|_\infty=\text{ess sup}|f(x)+g(x)|\leq\text{ess sup}|f(x)|+\text{ess sup}|g(x)|=\|f\|_\infty+\|g\|_\infty<\infty,
+\]
+so $f+g\in L^\infty(X,d\mu)$. Moreover we have also shown that $\|\cdot\|_\infty$ obeys the triangle inequality. Second, again by properties of suprema, we have
+\[
+\|\lambda f\|_\infty=\text{ess sup}\,|\lambda f(x)|=\text{ess sup}\,(|\lambda|\,|f(x)|)=|\lambda|\,\text{ess sup}\,|f(x)|=|\lambda|\,\|f\|_\infty<\infty,
+\]
+so $\lambda f\in L^\infty(X,d\mu)$. Thus, $L^\infty(X,d\mu)$ is a vector space. Moreover, we have shown absolute homogeneity of $\|\cdot\|_\infty$, so all that remains is to show that $\|f\|_\infty=0$ if and only if $f=0$ a.e. If $f=0$, then $\|0\|_\infty=\text{ess sup}\,|0|=0$. If $\|f\|_\infty=0$, then $\text{ess sup}\,|f(x)|=0$. Since $|f(x)|\geq0$ for all $x\in X$, and $\text{ess sup}|f(x)|=\inf\big\{M\ge 0: |f(x)|\le M \text{ for $\mu$-a.e. }x\in X\big\}$, we have $|f(x)|=0$, whence $f=0$ for a.e. $x\in X$. Therefore, $\|\cdot\|_\infty$ is a norm by definition, and we have shown that $L^\infty(X,d\mu)$ is a normed vector space.
+\end{proof}
+
+\end{enumerate}
+
+\item Let $(X,\MC{M},\mu)$ be a measure space. Suppose $\mu(X)<\infty$. Show that for any $1\leq s<t\leq \infty$, there is a $C=C(s,t)>0$ such that
+\[
+\|f\|_s<C\|f\|_t.
+\]
+Note: In this case, we say that the $L^t$ norm is stronger than the $L^s$ norm. Clearly, it implies that $L^t(X,d\mu)\subset L^s(X,d\mu)$. Notice that convergence in $L^t$ norm implies convergence in $L^s$ norm.
+
+\begin{proof}
+We need to consider two cases here.
+
+
+\textit{Case 1:} $1\leq s< t<\infty$. Let $F=f^s$. Write $p=\frac{t}{s}$ and $q=\frac{t}{t-s}$. Then
+\[
+\frac{1}{p}+\frac{1}{q}=\frac{s}{t}+\frac{t-s}{t}=\frac{s+t-s}{t}=1,
+\]
+so we may apply H\"older's inequality to the product $F\cdot\chi_X$, yielding
+\begin{align*}
+\|F\cdot\chi_X\|_1=\|f^s\cdot1\|_1=\int_X|f|^s\,d\mu&\leq\|F\|_p\|\chi_X\|_q\\[2mm]
+&=\left(\int_X|F|^p\,d\mu\right)^{1/p}\left(\int_X\chi_X^q\,d\mu\right)^{1/q}\\[2mm]
+&=\left(\int_X|f|^{sp}\,d\mu\right)^{1/p}\left(\int_X1^q\,d\mu\right)^{1/q}\\[2mm]
+&=\left(\int_X|f|^t\,d\mu\right)^{s/t}\cdot\mu(X)^{(t-s)/t},\text{ thus,}\\[5mm]
+\int_X|f|^s\,d\mu&\leq\left(\int_X|f|^t\,d\mu\right)^{s/t}\cdot\mu(X)^{(t-s)/t}\\[5mm]
+\left(\int_X|f|^s\,d\mu\right)^{1/s}&\leq \left(\int_X|f|^t\,d\mu\right)^{1/t}\cdot\mu(X)^{\frac{t-s}{st}}\\[2mm]
+\|f\|_s&\leq\mu(X)^{\frac{t-s}{st}}\|f\|_t\\[2mm]
+\|f\|_s&\leq C\|f\|_t,
+\end{align*}
+where $C=C(s,t)=\mu(X)^{\frac{t-s}{st}}$. Note that this only holds if $X$ is $\mu$-finite.
+
+\textit{Case 2:} $1\leq s<t=\infty$. In this case, consider the function $g=\frac{f}{\|f\|_\infty}$. Then $g(x)\leq 1$ for all $x\in X$, and moreover
+\[
+\|g\|_s=\left\|\frac{f}{\|f\|_\infty}\right\|_s\leq\|1\|_s=1.
+\]
+From this, we see that
+\begin{align*}
+\left\|\frac{f}{\|f\|_\infty}\right\|_s&\leq1\\[2mm]
+\left(\int_X\left|\frac{f}{\|f\|_\infty}\right|^s\,d\mu\right)^{1/s}&\leq 1\\[2mm]
+\frac{1}{\|f\|_\infty}\left(\int_X|f|^s\,d\mu\right)^{1/s}&\leq1\\[2mm]
+\left(\int_X|f|^s\,d\mu\right)^{1/s}&\leq\|f\|_\infty\\[2mm]
+\|f\|_s&\leq\|f\|_\infty.
+\end{align*}
+In this case we have that $C=C(s,t)=1$.
+
+Note that this implies $L^t(X,d\mu)\subset L^s(X,d\mu)$: Indeed, if $f\in L^t(X,d\mu)$, then $\|f\|_t<\infty$, whence
+\[
+\|f\|_s\leq C\|f\|_t<\infty
+\]
+so $f\in L^s(X,d\mu)$ as well. Additionally, if a sequence of functions $\{f_n\}$ converges in the $L^t$ norm, it converges in the $L^s$ norm as well since
+\[
+\|f_n-f\|_s\leq C\|f_n-f\|_t\to0.
+\]
+\end{proof}
+
+\item Show that the metric of $L^\infty(X,d\mu)$ induced by the $L^\infty$ norm is complete. [Hint: Combine part (b) of problem 2 and problem 3 to get that $L^\infty(X,d\mu)$ is a Banach space.]
+
+\begin{proof}
+First, in problem 3 we showed that $L^\infty(X,d\mu)$ was a normed vector space, so it suffices to show that a Cauchy sequence in $L^\infty$ converges to some function $f\in L^\infty(X,d\mu)$. To that end, let $\{f_n\}$ be a Cauchy sequence in $L^\infty(X,d\mu)$ and let $\ve>0$. Then there exists an $N\in\MB{Z}^+$ such that whenever $m,n\geq N$, we have $\|f_n-f_m\|_\infty<\ve$. Consequently, for each $x\in X$, the sequence $\{f_n(x)\}$ is a Cauchy sequence in $\MB{C}$. Moreover, since $\MB{C}$ is complete in the standard metric, the sequence $\{f_n(x)\}$ converges to it's pointwise limit $f(x)\in\MB{C}$. In particular, $|f(x)|<\infty$ for any $x\in X$. As a result, this limit function $f$ is in $L^\infty(X,d\mu)$: observe that
+\begin{align*}
+\|f\|_\infty&=\text{ess sup}\,|f(x)|\\[2mm]
+&\leq\sup|f(x)|\\[2mm]
+&=\sup\left|\lom{n}{\infty}f_n(x)\right|\\[2mm]
+&=\limsup_{n\to\infty}|f_n(x)|<\infty
+\end{align*}
+since each $f_n\in L^\infty$. We now claim that $\{f_n\}$ converges to $f$ in $L^\infty$. We have
+\[
+\|f_n-f\|_\infty=\left\|f_n-\lom{m}{\infty}f_m\right\|_\infty=\lom{m}{\infty}\|f_n-f_m\|_\infty<\lom{m}{\infty}\ve=\ve.
+\]
+Since $\ve$ was chosen arbitrarily, this is true for all positive numbers and it follows that $\|f_N-f\|\to0$. Therefore, $L^\infty(X,d\mu)$ is a Banach space.
+\end{proof}
+
+\pagebreak
+
+\item Prove Theorem 2.2 on our lecture notes. Specifically, let $X$ and $Y$ be normed vector spaces. Let $\MC{B}(X,Y)$ denote the set of all bounded linear transformations from $X$ to $Y$. Let $\MC{B}(X,Y)$ be equipped with the operator norm, i.e. the norm of $\Lambda\in\MC{B}(X,Y)$ is defined as
+\[
+\|\Lambda\|=\sup\left\{\|\Lambda(x)\|_Y:\ x\in X\,\|x\|_X\leq 1\right\}.
+\]
+Show the following:
+\begin{enumerate}
+\item $\MC{B}(X,Y)$ is a vector space.
+\begin{proof}
+Since linear combinations of linear transformations are linear, given any linear transformations $S,T\in\MC{B}(X,Y)$ and any scalar $\lambda\in \MB{C}$, $S+T$ and $\lambda S$ are linear so it suffices to show they are bounded. We have
+\[
+\|S+T\|=\sup_{\|x\|_X\leq1}\|S(x)+T(x)\|_Y\leq\sup_{\|x\|_X\leq1}\|S(x)\|_Y+\sup_{\|x\|_X\leq1}\|T(x)\|_Y=\|S\|+\|T\|<\infty,\text{ and}
+\]
+\[
+\|\lambda S\|=\sup_{\|x\|_X\leq1}\|\lambda S(x)\|_Y=|\lambda|\sup_{\|x\|_X\leq1}\|S(x)\|_Y=|\lambda|\,\|S\|<\infty.
+\]
+Therefore, $S+T$ and $\lambda S$ are bounded, i.e. in $\MC{B}(X,Y)$, and so $\MC{B}(X,Y)$ is a vector space.
+\end{proof}
+
+\item The operator norm is indeed a norm on $\MC{B}(X,Y)$.
+\begin{proof}
+The result in part (a) above proves that $\|\cdot\|$ obeys the triangle inequality and absolute homogeneity, and all that remains is to show that $\|S\|=0$ if and only if $S\equiv0$. But $\|S\|=0$ if and only if $\sup_{\|x\|_X\leq1}\|S(x)\|_Y=0$ if and only if $\|S(x)\|_Y=0$ for all $x\in X$ such that $\|x\|_X\leq 1$, i.e. every $x$ in the closed unit ball in $X$. Since every point in $X$ can be written as a linear combination of vectors on the unit sphere $\{x\in X:\,\|x\|_X=1\}$ which is contained in the closed unit ball, it must be the case that $S(x)=0$ for all $x\in X$. Therefore, $\|\cdot\|=0$ if and only if $S\equiv 0$, and we have that $\|\cdot\|$ is a norm on $\MC{B}(X,Y)$.
+\end{proof}
+
+\item If $Y$ is a Banach space, then the metric of $\MC{B}(X,Y)$ induced by the operator norm is complete.
+\begin{proof}
+Suppose $Y$ is a Banach space. We have already seen above that $\MC{B}(X,Y)$ is a normed vector space, so it suffices to show that any Cauchy sequence of transformtations in $\MC{B}(X,Y)$ converges to some transformation in $\MC{B}(X,Y)$. To that end, let $\{S_n\}$ be a Cauchy sequence in $\MC{B}(X,Y)$ and let $\ve>0$. Then there exists an $N\in\MB{Z}^+$ such that whenever $m,n\geq N$, we have $\|S_n-S_m\|<\ve$. Consequently, for each $x\in X$, the sequence $\{S_n(x)\}$ is a Cauchy sequence in $\MB{C}$. Since $Y$ is a Banach space, it is complete, so the sequence $\{S_n(x)\}$ converges to it's pointwise limit $S(x)\in Y$. In particular, $\|S(x)\|_Y<\infty$ for any $x\in X$ so $S$ is bounded. Additionally, for any $x,y\in X$ and $\lambda\in \MB{C}$, by the linearity of $S_n$, we have
+\[
+S(x+y)=\lom{n}{\infty}S_n(x+y)=\lom{n}{\infty}\left(S_n(x)+S_n(y)\right)=\lom{n}{\infty}S_n(x)+\lom{n}{\infty}S_n(y)=S(x)+S(y),\text{ and}
+\]
+\[
+S(\lambda x)=\lom{n}{\infty}S_n(\lambda x)=\lom{n}{\infty}\lambda S_n(x)=\lambda \lom{n}{\infty}S_n(x)=\lambda S(x).
+\]
+Therefore $S$ is in $\MC{B}(X,Y)$. We now claim that $\{S_n\}$ converges to $S$ in the operator norm. For sufficiently large $m,n$, we have
+\[
+\|S_n-S\|=\left\|S_n-\lom{m}{\infty}S_m\right\|=\lom{m}{\infty}\|S_n-S_m\|<\lom{m}{\infty}\ve=\ve.
+\]
+Therefore, the metric of $\MC{B}(X,Y)$ induced by the operator norm is complete, i.e. $\MC{B}(X,Y)$ is a Banach space. Since the dual space of a normed vector space is defined as the space of all bounded linear functionals, e.g. $\MC{B}(X,\MB{R})$, we have shown that the dual space of any normed vector space is Banach.
+\end{proof}
+\end{enumerate}
+
+\item Let $\mu$ be the counting measure on $\MB{Z}$. In other words, $\mu(\{n\})=1$ for any $n\in\MB{Z}$. Note in this case every set in $\MB{Z}$ is measurable, i.e. the underlying $\sigma$-algebra is the power set $2^{\MB{Z}}$ of $\MB{Z}$. In particular, all maps $a:\MB{Z}\to\MB{C}$ are measurable. Note a map $a:\MB{Z}\to\MB{C}$ may be viewed as a sequence $\{a_n\}_{n\in\MB{Z}}$ of complex numbers.
+\begin{enumerate}
+\item Let $a:\MB{Z}\to[0,\infty)$ which is always integrable. Try to write its integral in terms of the sequence $\{a_n\}$ and in a form with which you are familiar.
+
+If $\mu$ is the counting measure, then
+\[
+\int_\MB{Z}a(n)\,d\mu=\sum_{n=-\infty}^\infty\int_{\{n\}}a_n\,d\mu=\sum_{n=-\infty}^\infty a_n.
+\]
+\item Use the formula from part (a) to explain when a general $a:\MB{Z}\to\MB{C}$ is integrable.
+
+A general function $a:\MB{Z}\to\MB{C}$ will be integrable if and only if the series above converges absolutely, i.e.
+\[
+\sum_{n=-\infty}^\infty |a_n|<\infty.
+\]
+\item Use the formula from part (a) to define the spaces $L^p(\MB{Z},d\mu)$ for $1\leq p\leq \infty$. In fact, the more standard notation for $L^p$ spaces in this case is $\ell^p(\MB{Z})$.
+
+The space $L^p(\MB{Z},d\mu)=\ell^p(\MB{Z})$ where $\mu$ is the counting measure is the space of all two-sided infinite sequences $a:\MB{Z}\to\MB{C}$ such that 
+\[
+\left(\sum_{n=-\infty}^\infty |a_n|^p\right)^{1/p}<\infty.
+\]
+\end{enumerate}
+
+Note: almost all the results for integration on a general measure space, such as all the convergence theorems, hold true in this special case. Also, all the results we proved in Chapter two hold true for the spaces $\ell^p(\MB{Z})$. For instance, they are Banach spaces; the dual space of $\ell^p(\MB{Z})$ is $\ell^q(\MB{Z})$ where $1\leq p\leq \infty$. I do encourage that you try to translate all the results for general measure spaces to this special case via the formula from part (a).
+
+\item Consider the following problems which are related to problem 4 above. 
+\begin{enumerate}
+\item Show that $\ell^2(\MB{Z})\not\subset\ell^1(\MB{Z})$ which implies that in general $L^2(X,d\mu)\not\subset L^1(X,d\mu)$.
+
+\begin{proof}
+As a counterexample, consider the harmonic sequence $h(n)=\left(1,\frac{1}{2},\frac{1}{3},\frac{1}{4},\ldots\right)$ which can be equivalently indexed by the integers or the positive integers and realized as a two-sided infinite sequence. Then $h\in\ell^2(\MB{Z})$ since
+\[
+\|h\|_{\ell^2}=\left(\sum_{n=-\infty}^\infty\left|\frac{1}{n}\right|^2\right)^{1/2}=\left(\sum_{m=1}^\infty\frac{1}{m^2}\right)^{1/2}=\frac{\pi}{\sqrt{6}}<\infty.
+\]
+However, $h\not\in\ell^1(\MB{Z})$ since the harmonic series diverges. Consequently, $\ell^2(\MB{Z})\not\subset\ell^1(\MB{Z})$ and so in general $L^2(X,d\mu)\not\subset L^1(X,d\mu)$.
+\end{proof}
+
+\item In fact, show that $\ell^s(\MB{Z})\subset \ell^t(\MB{Z})$ for any $1\leq s<t\leq \infty$.
+
+\begin{proof}
+Let $a=(a_n)$ be a sequence in $\ell^{s}(\MB{Z})$. Suppose first that $t<\infty$. Then it suffices to show that if $\|a\|_s=\left(\sum_{n=-\infty}^\infty|a_n|^s\right)^{1/s}<\infty$, then $\|a\|_t=\left(\sum_{n=-\infty}^\infty|a_n|^t\right)^{1/t}<\infty$. Equivalently, if $\sum_{m=0}^\infty|a_m|^s<\infty$ then $\sum_{m=0}^\infty|a_m|^t<\infty$. Suppose $\sum_{m=0}^\infty|a_m|^s<\infty$. By the contrapositive of the test for divergence, $\lom{m}{\infty}|a_m|^s=\left|\lom{m}{\infty}a_m\right|^s=0$. But this means that there exists some $N\in\MB{N}_0$ such that whenever $m\geq N$, $|a_m|<1$. If $|a_m|<1$, then $|a_m|^t\leq |a_m|^s$ so by the Dominated Convergence Theorem, $\sum_{m=0}^\infty |a_m|^t<\infty$. It follows that $\|a\|_t=\left(\sum_{n=-\infty}^\infty |a_n|^t\right)^{1/t}<\infty$ and so $\ell^s(\MB{Z})\subset \ell^t(\MB{Z})$ if $t<\infty$.
+
+Next suppose $t=\infty$ and that $a\in\ell^s(\MB{Z})$. Then, after reindexing, we have $\sum_{m=0}^\infty|a_m|^s<\infty$. Again by the contrapositive of the test for divergence, it follows that $\lom{n}{\infty}|a_m|=0$ and since this limit exists, $\limsup_{m\to\infty}|a_m|=0$. Moreover $|a_m|<\infty$ for every $m$, so we have  sequence of finite numbers that converges to 0. Consequently, $\text{ess sup}\,|a_m|=\sup_{m\geq0}|a_m|<\infty$ so $a\in\ell^\infty(\MB{Z})$. Putting these two cases together, we have shown that $\ell^s(\MB{Z})\subset \ell^t(\MB{Z})$ for any $1\leq s<t\leq \infty$
+\end{proof}
+
+\end{enumerate}
+
+Thus in problem 4, the condition $\mu(X)<\infty$ may not be removed in obtaining $L^t(X,d\mu)\subset L^s(X,d\mu)$ for $1\leq s<t\leq \infty$.
+	
+	
+\end{enumerate}
+
+\end{document}

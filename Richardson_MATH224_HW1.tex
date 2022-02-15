@@ -1,0 +1,257 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+%\pagenumbering{gobble}
+
+\usepackage{comment}
+\usepackage{bbm}
+%\usepackage{multicol}
+%\usepackage{graphicx}
+%\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd, quotes}
+%\usepackage{pgfplots}
+%\usepackage{pgffor}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+%\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{commath}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\usepackage[all]{xypic}
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\MF}[1]{\mathfrak{#1}}
+\newcommand{\MS}[1]{\mathscr{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\im}{\text{im\,}}
+\newcommand{\Hom}{\text{Hom}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{224 - Homological Algebra}
+\rightline{Grifo, Elo\'isa}
+\rightline{HW 1}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+\item Let $R = \mathbb{Q}[x,y,z]/(x^2,xy)$. Consider the bounded complex
+\[
+C = \xymatrix@R=1mm@C=30mm{R \ar[r]^-{\begin{pmatrix} z \\ -y \\ x \end{pmatrix}} & R^3 \ar[r]^-{\begin{pmatrix} -y & -z & 0 \\ x & 0 & -z \\ 0 & x & y \end{pmatrix}
+} & R^3 \ar[r]^-{\begin{pmatrix} x & y & z\end{pmatrix}
+} & R \\ \text{{\tiny 3}} & \text{{\tiny 2}} & \text{{\tiny 1}} & \text{{\tiny 0}}}
+\]
+Set $C$ up in Macaulay2 and compute its homology. For which $n$ is $\text{H}_n(C) = 0$?
+
+(see file \verb!Richardson_MATH224_HW1.m2!)
+
+After setting up our complex and computing the homology, the command \verb!HH_i(C)! allows us to see that only $H_3(C)=0$.
+
+\pagebreak
+
+\item Let $C_n = \mathbb{Z}/8$ for all $n \geqslant 0$, and $C_n = 0$ for $n<0$. Let 
+\[
+\xymatrix@R=2mm{C_n \ar[r]^-{d_n} & C_{n-1} \\ x \ar[r] & 4x}
+\]
+when $n>0$, and otherwise let $d_n\!: C_n \longrightarrow C_{n-1}$ be the zero map.
+\begin{enumerate}
+\itemsep5mm
+\item Show that $(C_\bullet,d_\bullet)$ is a complex.
+
+\begin{proof}
+For any $n<0$ we clearly have $d_nd_{n+1}=0$, and for any $n\geq 0$ and any $x\in\MB{Z}/8$, we have
+\[
+d_nd_{n+1}(x)=4(4x)=8(2x)\equiv 0\mod 8,
+\]
+so $(C_\bullet,d_\bullet)$ is a complex by definition.
+\end{proof}
+
+\item Compute its homology.
+
+%\[
+%\begin{tikzcd}
+%\cdots \arrow[r] & \MB{Z}/8 \arrow[r, "d_2", "4x"'] & \MB{Z}/8 \arrow[r, "d_1", "4x"'] & \MB{Z}/8  \arrow[r, "d_0", "0"'] &0\\
+%& 2 & 1 & 0
+%\end{tikzcd}
+%\]
+
+
+\begin{align*}
+H_n(C)&=\frac{\ker d_{n}}{\im d_{n+1}}=\frac{0}{0}=0 & \text{for $n\leq -1$}\\[2mm]
+H_0(C)&=\frac{\ker d_0}{\im d_1}=\frac{\MB{Z}/8}{4\MB{Z}}=\MB{Z}/4\\[2mm]
+H_n(C)&=\frac{\ker d_{n}}{\im d_{n+1}}=\frac{8\MB{Z}}{4\MB{Z}}=0 & \text{for $n\geq 1$}\\[2mm]
+\end{align*}
+\end{enumerate}
+
+
+\pagebreak
+
+
+\item (The Five Lemma) Consider the following commutative diagram of $R$-modules with exact rows:
+\[
+\xymatrix{M_4 \ar[d]_-{\gamma_4} \ar[r]^{\alpha_4} & M_3 \ar[r]^{\alpha_3} \ar[d]_-{\gamma_3} & M_2 \ar[r]^{\alpha_2} \ar[d]_-{\gamma_2} & M_1 \ar[d]_-{\gamma_1} \ar[r]^{\alpha_1} & M_0 \ar[d]_-{\gamma_0} \\
+N_4 \ar[r]^{\beta_4} & N_3 \ar[r]^{\beta_3} & N_2 \ar[r]^{\beta_2} & N_1 \ar[r]^{\beta_1} & N_0}
+\]
+Show that if $\gamma_0, \gamma_1, \gamma_3$, and $\gamma_4$ are isomorphisms, then $\gamma_2$ is an isomorphism.
+
+{\linespread{1.6}
+\begin{proof}
+Since these are $R$-modules and the maps are homomorphisms, we need to show that $\gamma_2$ is both injective and surjective. We first show that $\gamma_2$ is surjective. To that end, let $n_{2}\in N_{2}$. Since $\gamma_{1}$ is surjective, there exists an $m_{1}\in M_{1}$ such that $\gamma_{1}(m_{1})=\beta_{2}(n_{2})$. By exactness we have $\beta_{1}\gamma_{1}(m_{1})=\beta_{1}\beta_{2}(n_{2})=0$. By commutativity, $\gamma_{0}\alpha_{1}(m_{1})=0$ and by injectivity of $\gamma_{0}$, $\alpha_{1}(m_{1})=0$. Hence, $m_{1}\in\ker\alpha_{1}=\im\alpha_{2}$. Thus there exists an $m_{2}\in M_{2}$ such that $\alpha_{2}(m_{2})=m_{1}$. So by commutativity, $\beta_{2}\gamma_{2}(m_{2})=\gamma_{1}\alpha_{2}(m_{2})=\gamma_{1}(m_{1})=\beta_{2}(n_{2})$. Thus, $\beta_{2}\gamma_{2}(m_{2})-\beta_{2}(n_{2})=\beta_{2}(\gamma_{2}(m_{2})-n_{2})=0$ so $\gamma_{2}(m_{2})-n_{2}\in\ker\beta_{2}=\im\beta_{3}$. Therefore there exists an $n_{3}\in N_{3}$ such that $\beta_{3}(n_{3})=\gamma_{2}(m_{2})-n_{2}$. By surjectivity of $\gamma_{3}$ there exists an $m_{3}\in M_{3}$ such that $\gamma_{3}(m_{3})=n_{3}$. Thus by commutativity, $\beta_{3}\gamma_{3}(m_{3})=\gamma_{2}\alpha_{3}(m_{3})$, so $\beta_{3}(n_{3})=\gamma_{2}(m_{2})-n_{2}=\beta_{3}\gamma_{3}(m_{3})=\gamma_{2}\alpha_{3}(m_{3})$. Ergo, $\gamma_{2}(m_{2})-\gamma_{2}\alpha_{3}(m_{3})=\gamma_{2}(m_{2}-\alpha_{2}(m_{3}))=n_{2}$ and so $\gamma_{2}$ is surjective by definition.
+
+Next we show that $\gamma_2$ is injective. Let $m_{2}\in\ker\gamma_{2}$, so $\gamma_{2}(m_{2})=0$. By commutativity, $\gamma_{1}\alpha_{2}(m_{2})=\beta_{2}\gamma_{2}(m_{2})=\beta_{2}(0)=0$. By injectivity of $\gamma_{1}$, $\alpha_{2}(m_{2})=0$ so $m_{2}\in\ker\alpha_{2}=\im\alpha_{3}$. Hence there exists an $m_{3}\in M_{3}$ such that $\alpha_{3}(m_{3})=m_{2}$. Now by substitution and commutativity, $0=\gamma_{2}(m_{2})=\gamma_{2}\alpha_{3}(m_{3})=\beta_{3}\gamma_{3}(m_{3})$. Thus, $\beta_{3}\gamma_{3}(m_{3})=0$ so $\gamma_{3}(m_{3})\in\ker\beta_{3}=\text{im}\beta_{4}$. So there exists an $n_{4}\in N_{4}$ such that $\beta_{4}(n_{4})=\gamma_{3}(m_{3})$. By surjectivity of $\gamma_{4}$ there exists an $m_{4}\in M_{4}$ such that $\gamma_{4}(m_{4})=n_{4}$. So by substitution, $\gamma_{3}(m_{3})=\beta_{4}(n_{4})=\beta_{4}\gamma_{4}(m_{4})$. By commutativity, $\gamma_{3}(m_{3})=\beta_{4}\gamma_{4}(m_{4})=\gamma_{3}\alpha_{4}(m_{4})$ so $\gamma_{3}(m_{3})-\gamma_{3}\alpha_{4}(m_{4})=\gamma_{3}(m_{3}-\alpha_{4}(m_{4}))=0$. By injectivity of $\gamma_{3}$, $m_{3}-\alpha_{4}(m_{4})=0$ so $m_{3}=\alpha_{4}(m_{4})$. Finally, by substitution and exactness, $m_{2}=\alpha_{3}(m_{3})=\alpha_{3}\alpha_{4}(m_{4})=0$. Since $m_2$ was chosen arbitrarily, $\ker\gamma_{2}=0$ and hence $\gamma_{2}$ is injective.
+\end{proof}
+}
+\pagebreak
+
+\item (omitted)
+
+\item \begin{enumerate}
+\item Show that in any category, every isomorphism is both an epi and a mono.
+
+\begin{proof}
+Let $\mathscr{C}$ be a category, let $A,B,C,D$ be objects in $\MS{C}$ and let $f\in\Hom_\mathscr{C}(A,B)$ be an isomorphism. Then there exists a $g\in \Hom_\MS{C}(B,A)$ such that $gf=1_A$ and $fg=1_B$. Let $g_1,g_2\in\Hom_\MS{C}(C,A)$ and suppose $fg_1=fg_2$. Then 
+\begin{align*}
+gfg_1&=gfg_2\\
+1_Ag_1&=1_Ag_2\\
+g_1&=g_2
+\end{align*}
+so $f$ is a mono by definition. Next, let $g_1,g_2\in\Hom_\MS{C}(B,D)$ and suppose $g_1f=g_2f$. Then
+\begin{align*}
+g_1fg&=g_2fg\\
+g_11_B&=g_21_B\\
+g_1&=g_2
+\end{align*}
+so $f$ is an epi by definition.
+\end{proof}
+
+\item Show that the usual inclusion $\mathbb{Z} \longrightarrow \mathbb{Q}$ is an epi in the category {\bf Ring}. This \textit{should} feel weird: it says being epi and being surjective are \textit{not} the same thing.
+
+\begin{proof}
+Let $f\in\Hom(\MB{Z},\MB{Q})$ be the usual inclusion, i.e. $f(x)=\frac{x}{1}$. Let $g_1,g_2\in\Hom(\MB{Q},A)$ and suppose that $g_1f=g_2f$. Then 
+\begin{align*}
+g_1(f(x))&=g_2(f(x))\\[2mm]
+g_1\left(\frac{x}{1}\right)&=g_2\left(\frac{x}{1}\right)\\[2mm]
+g_1\left(\frac{1\cdot x}{1}\right)&=g_2\left(\frac{1\cdot x}{1}\right)\\[2mm]
+\frac{1}{1}\cdot g_1(x)&=\frac{1}{1}\cdot g_2(x)\\[2mm]
+g_1(x)&=g_2(x).
+\end{align*}
+Thus, $f$ is an epi in the category \textbf{Ring} by definition.
+\end{proof}
+
+\pagebreak
+
+\item Show that the canonical projection $\mathbb{Q} \longrightarrow \mathbb{Q}/\MB{Z}$ is a mono in the category of divisible abelian groups.\footnote{An abelian group $A$ is divisible if for every $a \in A$ and every positive integer $n$ there exists $b \in A$ such that $nb = a$.} Again, this is very strange: it says being monic and being injective are \textit{not} the same thing. 
+
+\begin{proof}
+Let $\pi\in\Hom(\MB{Q},\MB{Q}/\MB{Z})$ be the canonical projection, i.e. $\pi\left(\frac{p}{q}\right)=\frac{p}{q}+\MB{Z}$. Let $g_1,g_2\in \Hom(A,\MB{Q})$ and suppose that $\pi g_1=\pi g_2$. Then
+\begin{align*}
+\pi(g_1(x))&=\pi(g_2(x))\\
+\pi(g_1(x)-g_2(x))&=0\\
+g_1(x)-g_2(x)&\in\MB{Z}.
+\end{align*}
+If $g_1(x)-g_2(x)=0$, then we are done. Suppose by way of contradiction that $g_1(x)-g_2(x)\neq0$ and let $g_1(x)-g_2(x)=n\in\MB{Z}$ and choose $y\in A$ such that $x=2ny$, i.e. $x$ is $y$ $2n$ times. Then since $g_1$ is a homomorphism we have $g_1(x)=g_1(2ny)=2ng_1(y)$ so $g_1(y)=\frac{1}{2n}g_1(x)$. We also have $g_2(y)=\frac{1}{2n}g_2(x)$. Now, $g_1(y)-g_2(y)\in \MB{Z}$ by assumption, but we have
+\[
+g_1(y)-g_2(y)=\frac{1}{2n}(g_1(x)-g_2(x))=\frac{1}{2}\notin\MB{Z},
+\]
+a contradiction. Thus $g_1=g_2$ and so $\pi$ is a mono by definition.
+\end{proof}
+\end{enumerate}
+
+\pagebreak
+
+\item Consider the category $R\textbf{-mod}$ of $R$-modules and $R$-module homomorphisms. Show that the monomorphisms in $R\textbf{-mod}$ are precisely the injective homomorphisms of $R$-modules, and that the epimorphisms in $R\textbf{-mod}$ are precisely the surjective homomorphisms of $R$-modules.
+
+\begin{proof}
+Let $A,B$, and $C$ be $R$-modules. If $f\in\Hom_{R-\textbf{mod}}(B,C)$ is injective then it is clearly a mono by definition. Suppose instead that $f\in\Hom_{R-\textbf{mod}}(B,C)$ is a mono, and let $m\in \ker f$. Consider the identity map $1\in\Hom_{R-\textbf{mod}}(A,B)$. We have $f(1(m))=f(m)=0$ and $f(1(0))=f(0)=0$ so since $f$ is a mono, $m=1(m)=1(0)=0$ and it must be that $\ker f=0$, i.e. $f$ is injective.
+
+Next, if $f\in\Hom_{R-\textbf{mod}}(A,B)$ is surjective, then it is clearly an epi by definition. Suppose instead that $f\in\Hom_{R-\textbf{mod}}(A,B)$ is an epi. Let $g_1:B\to B/f(A)$ be the canonical quotient map and let $g_2:B\to B/f(A)$ be the 0 map. Then $fg_1=fg_2$ since we're modding out by $f(A)$, so since $f$ is an epi, the canonical quotient map is the 0 map, i.e. $f(A)=B$, meaning $f$ is surjective.
+\end{proof}
+
+
+\item (omitted)
+
+\item (omitted)
+
+
+	
+\end{enumerate}
+\end{document}

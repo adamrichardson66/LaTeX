@@ -1,0 +1,266 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209C - Real Analysis}
+\rightline{Zhang, Zhenghe}
+\rightline{HW 1}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+
+
+\item Let $\MB{C}^n$ be the $n$-dimensional Euclidean space. In other words, for two vectors $\vec x=(x_1,\ldots,x_n)$ and $\vec y=(y_1,\ldots, y_n)\in\MB{C}^n$, we have their inner product defined as:
+\[
+\langle\vec x,\vec y\rangle=\sum^{n}_{j=1}x_j\bar y_j.
+\]
+Note that $\|\vec x\|=\sqrt{\langle \vec x,\vec x\rangle}$ is a norm on $\MB{C}^n$ and $(\MB{C}^n, \|\cdot\|)$ is a Banach space. Given a set of $n$ vectors $\{\vec e^{(j)}, j=1,\ldots n\}$. We say its an orthonormal basis if for all $j,k\in\{1,\ldots, n\}$, it holds that
+\[
+\langle\vec e^{(j)},\vec e^{(k)}\rangle=\begin{cases}1, & j=k \\0, & j\neq k.\end{cases}
+\]
+Show that for any $\vec x\in\MB{C}^n$, it holds that
+\[
+\vec x=\sum^n_{j=1}\langle \vec x,\vec e^{(j)}\rangle \cdot \vec e^{(j)}.
+\] 
+
+\begin{proof}
+
+WRONG 
+Let $\uline{x}\in\MB{C}^n$. Then
+
+\begin{align*}	
+\sum^n_{j=1}\langle \vec x,\vec e^{(j)}\rangle \cdot \vec e^{(j)}&=\sum_{j=1}^n\sum_{i=1}^n\left(x_i\bar{e}^{(j)}\right)\cdot\vec e^{(j)}\\[2mm]
+&=\sum_{j=1}^n\sum_{i=1}^n\left(x_ie^{(j)}\right)\cdot\vec e^{(j)}\\[2mm]
+&=\sum_{j=1}^n(x_1\cdot0+x_2\cdot0+\cdots+x_j\cdot1+\cdots+0\cdot x_n)\cdot\vec e^{(j)}\\[2mm]
+&=\sum_{j=1}^nx_j\cdot1\cdot\vec e^{(j)}\\[2mm]
+&=\sum_{j=1}^nx_j\cdot\vec e^{(j)}\\[2mm]
+&=\vec x.
+\end{align*}
+\end{proof}
+
+\item Let $\MB{T}=\MB{R}/\MB{Z}$ be the unit circle. Denote by $C(\MB{T})$ the space of continuous functions on $\MB{T}$, i.e. 
+\[
+C(\MB{T})=\{f:\MB{T}\to \MB{C} \mbox{ is continuous on }\MB{T}\}.
+\]
+Note this space is the same with the space of continuous, periodic functions defined on $\MB{R}$ with period 1. Then we may introduce a norm on $C(\MB{T})$ as 
+\[
+\|f\|_\infty=\sup_{x\in\MB{T}}|f(x)|.
+\]
+Show that $\|\cdot \|_\infty$ is a norm on $C(\MB{T})$ and that $(C(\MB{T}),\|\cdot\|_\infty)$ is a Banach space.
+
+\begin{proof}
+
+First note that $C(\MB{T})$ is indeed a vector space: the space of continuous functions on an interval is a vector space, and moreover
+\[
+(f+g)(0)=f(0)+g(0)=f(1)+g(1)=(f+g)(1)\aspace \alpha f(0)=\alpha f(1),
+\]
+so $f+g,\alpha f$ are well defined and $f+g,\alpha f \in C(\MB{T})$ for all $x\in\MB{T}$. It follows that $C(\MB{T})$ is a vector space.
+
+Now we show that $\|\cdot\|_\infty$ is a norm on $C(\MB{T})$. Let $\alpha\in \MB{C}$, and let $f,g\in C(\MB{T})$. First, clearly $\|\cdot\|_\infty\geq0$ since $|\cdot|\geq0$ and a supremum is an upper bound. Next, by properties of suprema,
+\[
+\|\alpha f\|_\infty=\sup_{x\in\MB{T}}|\alpha f(x)|=\sup_{x\in\MB{T}}\left(|\alpha|\,|f(x)|\right)=|\alpha|\sup_{x\in\MB{T}}|f(x)|=|\alpha|\|f\|_\infty.
+\]
+
+Now, if $f\equiv0$ then $\|f\|_\infty=\|0\|_\infty=\sup_{x\in\MB{T}}|0|=0$. If $\|f\|_\infty=0$, then $\sup_{x\in\MB{T}}|f(x)|=0$ which means that $|f(x)|=0$ for all $x\in\MB{T}$, so $f\equiv0$. Therefore, $\|f\|_\infty=0$ if and only if $f\equiv 0$.
+
+Lastly,
+\[
+\|f+g\|_\infty=\sup_{x\in\MB{T}}\left|f(x)+g(x)\right|\leq\sup_{x\in\MB{T}}(|f(x)|+|g(x)|)=\sup_{x\in\MB{T}}|f(x)|+\sup_{x\in\MB{T}}|g(x)|=\|f\|_\infty+\|g\|_\infty,
+\]
+so $\|\cdot\|$ is a norm on $C(\MB{T})$. 
+
+Thus, we have shown that  $(C(\MB{T}),\|\cdot\|_\infty)$ is a normed vector space. Next, we show $(C(\MB{T}),\|\cdot\|_\infty)$ is a Banach space, i.e. it is complete, i.e. every Cauchy sequence converges. Let $\ve>0$ and let $\{f_n\}\subseteq C(\MB{T})$ be a Cauchy sequence. Then there exists an $N_1\in\MB{N}_0$ such that if $m,n\geq N_1$, then
+
+\[
+\|f_n-f_m\|_\infty=\sup_{x\in\MB{T}}|f_n(x)-f_m(x)|<\frac{\ve}{3}.
+\]
+
+Since each $f_n$ is a continuous function, there exists a $\delta>0$ such that for any $x,y\in\MB{T}$, if $|x-y|<\delta$, then $|f_n(x)-f_n(y)|<\frac{\ve}{3}$. 
+
+However, for each fixed $x\in\MB{T}$, $\{f_n(x)\}\subseteq \MB{C}$ is a Cauchy sequence, and since $\MB{C}$ is complete in the $|\cdot|$ metric, this sequence converges, i.e. there exists a complex number $f(x)\in\MB{C}$ and an $N_2\in\MB{N}_0$ such that if $n\geq N_2$, then $|f_n(x)-f(x)|<\frac{\ve}{3}$. In other words, $f(x)$ is the complex-valued pointwise limit of $f_n(x)$.
+
+We claim that $f(x):\MB{T}\rightarrow\MB{C}$ is a continuous function. To see this, let $x,y\in \MB{T}$, let $N=\max\{N_1,N_2\}$ and $|x-y|<\delta$. Choose $m,n$ sufficiently large, i.e. $m,n\geq N$. Then
+\begin{align*}
+|f(x)-f(y))|&=|f(x)-f_n(x)+f_n(x)-f_m(y)+f_m(y)-f(y)|\\[2mm]
+&\leq|f(x)-f_n(x)|+|f_n(x)-f_m(y)|+|f_m(y)-f(y)|.\\[2mm]
+\end{align*}
+Since $\{f_n(x)\}$ and $\{f_m(y)\}$ are Cauchy sequences, they converge. Consequently, we have
+\begin{align*}
+|f(x)-f(y)|&\leq|f(x)-f_n(x)|+|f_n(x)-f_m(y)|+|f_m(y)-f(y)|\\[2mm]
+&\leq\frac{\ve}{3}+\sup_{x\in\MB{T}}|f_n(x)-f_m(x)|+\frac{\ve}{3}\\[2mm]
+&=\frac{\ve}{3}+\|f_n-f_m\|_\infty+\frac{\ve}{3}\\[2mm]
+&<\frac{\ve}{3}+\frac{\ve}{3}+\frac{\ve}{3}\\[2mm]
+&=\ve.
+\end{align*}
+Thus, $f$ is a continuous function so $f\in C(\MB{T})$. Putting all this together, we have
+\begin{align*}
+\|f_n-f\|_\infty&=\sup_{x\in\MB{T}}|f_n(x)-f(x)|\\[2mm]
+&=\sup_{x\in\MB{T}}(|f_n(x)-f_n(y)+f_n(y)-f_m(x)+f_m(x)-f(x)|)\\[2mm]
+&\leq\sup_{x\in\MB{T}}|f_n(x)-f_n(y)|+\sup_{x\in\MB{T}}|f_n(y)-f_m(x)|+\sup_{x\in\MB{T}}|f_m(x)-f(x)|\\[2mm]
+&< \sup_{x\in\MB{T}}\frac{\ve}{3}+\|f_n-f_m\|_\infty+\sup_{x\in\MB{T}}\frac{\ve}{3}\\[2mm]
+&<\frac{\ve}{3}+\frac{\ve}{3}+\frac{\ve}{3}\\[2mm]
+&=\ve.
+\end{align*}
+
+Therefore, $\{f_n\}$ converges in the sup norm to a function $f$ in $C(\MB{T})$. Since $\{f_n\}$ was chosen arbitrarily, this holds for any Cauchy sequence and we have shown that any Cauchy sequence converges, so $(C(\MB{T}),\|\cdot\|_\infty)$ is a Banach space.
+\end{proof}
+
+\pagebreak
+
+\item Let $(X,\rho)$ be a complete metric space with metric $\rho$. Suppose that $X$ has no isolated point. Show by the \textit{Baire Category Theorem} that any generic subset $G\subset X$ cannot be countable. In particular, $\MB{Q}$ is a dense subset of $\MB{R}$ that is not generic.
+
+\begin{proof}
+Let $(X,\rho)$ be a complete metric space with metric $\rho$, and suppose that $X$ has no isolated point. Suppose $G\subset X$ is a generic set. Then we may write $G=\bigcap_{n=1}^\infty A_n$ where $A_n\subseteq X$ is an open dense set for each $n\in\MB{N}$. Consequently, $A_n^c$ is a nowhere dense set for every $n$. Suppose by way of contradiction that $G$ is countable. Then we may write 
+
+\[
+G=\bigcup_{x_i\in G}\{x_i\}=\bigcup_{i=1}^\infty\{x_i\},
+\]
+thus,
+\[
+X=G\cup G^c=\bigcup_{x_i\in G}\{x_i\}\cup\left(\bigcap_{n=1}^\infty A_n\right)^c=\bigcup_{i=1}^\infty\{x_i\}\cup\bigcup_{n=1}^\infty A_n^c.
+\]
+
+But $\{x_i\}$ is a nowhere dense set for all $i\in \MB{N}$. Thus, we have written $X$ as a countable union of nowhere dense sets, contradicting the Baire Category Theorem.
+\end{proof}
+
+\item Let $(X,\rho)$ be complete metric space. Recall that $A\subset X$ is said to be nowhere dense if $\left(\bar{E}\right)^\circ=\varnothing$. Here $\bar E$ is the closure of $E$ and $E^\circ$ is the set of interior points of $E$ (note $E^\circ$ is open). Recall that we say a $E\subset X$ is of \textbf{first category} or is \textbf{meager} if it's a countable union of nowhere dense sets. Recall that we say $E$ is \textbf{generic} or \textbf{residual} if $E$ is a countable intersection of dense open sets. 
+\begin{enumerate}
+\item Fix a set $U\subset X$. Show that $U^\circ$ is dense iff $U^c$ is nowhere dense.
+
+\begin{proof}
+Let $U\subset X$. By definition, $U^c$ is nowhere dense if and only if
+\begin{align*}
+\overline{U^c}^{\,\circ}&=\varnothing\\[2mm]
+(\overline{U^c}^{\,\circ})^c&=(\varnothing)^c\\[2mm]
+\overline{\overline{U^c}^{\,c}}&=X,
+\end{align*}
+in other words $\overline{U^c}^{\, c}$ is dense. But, $\overline{U^c}^{\, c}=U^\circ$, so $U^c$ is nowhere dense if and only if $U^\circ$ is dense.
+\end{proof}
+
+\pagebreak
+
+\item Show that $E$ is of first category if and only if $E^c$ contains a generic set.
+
+\begin{proof}
+Let $E\subset X$. $E$ is of first category if and only if it is a countable union of nowhere dense sets, i.e.
+\begin{align*}
+E&=\bigcup_{n=1}^\infty A_n\\[2mm]
+E^c&=\left(\bigcup_{n=1}^\infty A_n\right)^c\\[2mm]
+E^c&=\bigcap_{n=1}^\infty A_n^c,
+\end{align*}
+where $A_n$ is nowhere dense for each $n\in\MB{Z}^+$. Since $A_n$ is nowhere dense, $(A_n^c)^{\circ}$ is dense by part (a), and since $(A_n^c)^{\circ}\subset A_n^c$ for all $n$, $\bigcap_{n=1}^\infty(A_n^c)^\circ\subset\bigcap_{n=1}^\infty A_n^c=E^c$. But $\bigcap_{n=1}^\infty(A_n^c)^\circ$ is a countable intersection of dense sets, i.e. a generic set. Therefore, $E^c$ contains a generic set.
+\end{proof}
+
+\item Can you find a meager set in some complete metric space that is dense as well? [You may use problem 3.]
+
+Yes, for example the rational numbers as a subset of the real numbers can be written as a countable union of singleton sets, which are nowhere dense. However, the rational numbers are also dense, so there exist dense meager sets.
+\end{enumerate} 
+
+
+\item Let $X$ be a Banach space and $Y$ be a normed vector space. Let $\{\Lambda_\alpha\}_{\alpha\in A}$ be a family of bounded linear transformations from $X$ to $Y$. We've introduced the Banach-Steinhaus Theorem in two different ways. Specifically:
+
+\begin{enumerate}[(i)]
+\item Either $\sup_{\alpha\in A}\|\Lambda_\alpha\|<\infty$; or $\{x\in X: \sup_{\alpha\in A}|\Lambda_\alpha(x)|=\infty\}$ is a generic set.
+
+\item If $\sup_{\alpha\in A}|\Lambda_\alpha(x)|<\infty$ for a nonmeager set of $x\in X$, then $\sup_{\alpha\in A}\|\Lambda_\alpha\|<\infty$.
+\end{enumerate}
+
+Show that these two different statements are equivalent. [Hint: you may use problem 4.]
+
+\begin{proof}
+Suppose first that (i) is true. If $\sup_{\alpha\in A}\|\Lambda_\alpha\|<\infty$, then for all $x\in X$, $\sup_{\alpha\in A}|\Lambda_\alpha(x)|<\infty$, so it is certainly true for a nonmeager set of $X$ so (ii) is true as well.
+
+Suppose now that (ii) is true. If $\sup_{\alpha\in A}|\Lambda_\alpha(x)|<\infty$ for a nonmeager set of $x\in X$, then we get the first part of the disjunctive statement in (i), so (i) is true. If $\sup_{\alpha\in A}|\Lambda_\alpha(x)|=\infty$ for a nonmeager set of $x\in X$, then since $X$ is a Banach space, by the Baire Category Theorem $\{x\in X: \sup_{\alpha\in A}|\Lambda_\alpha(x)|=\infty\}$ is a generic set, so we have (i) true again.
+\end{proof}
+
+
+
+
+\end{enumerate}
+\end{document}

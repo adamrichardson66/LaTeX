@@ -1,0 +1,224 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{209B - Functional Analysis}
+\rightline{Baez, John}
+\rightline{HW 9}
+\rightline{\today}
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+\itemsep7mm
+
+
+
+
+\item Let $X$ be a topological space and let $S\subseteq X$. Prove that $S$ is dense iff $\overline{S}=X$.
+
+\begin{proof}
+First, suppose that $S$ is dense and let $x\in X$. Then by definition of density, every open neighborhood of $x$ intersects $S$, i.e. every open neighborhood contains a point of $S$. Consequently, $x$ is a limit point of $S$, so $x\in \overline{S}$, and it follows that $X\subseteq \overline{S}$. Since $\overline{S}\subseteq X$, we have that $\overline{S}=X$.
+
+Conversely, suppose that $\overline{S}=X$ and let $U\subseteq X$ be an open set. Clearly $U\cap\overline{S}\neq \varnothing$ so $U$ intersects $S$ or its boundary $\partial S$ (or both). If $U$ intersects $S$, then we are done, so suppose $U$ intersects $\partial S$. Then there exists an $x\in \partial S$ such that $x\in U$ as well. By definition of a boundary point, $U$ intersects $S$ and $X-S$. Thus, any open set in $X$ intersects $S$, so $S$ is dense by definition.
+\end{proof}
+
+\item Show that $S\subseteq X$ is nowhere dense iff $X-\overline{S}$ is dense.
+
+\begin{proof}
+First, suppose that $S\subseteq X$ is nowhere dense. Then the closure $\overline{S}$ has an empty interior by definition. Since $\overline{S}=\text{int}(S)\cup\partial S$, we have that $\overline{S}=\partial S$ so $X-\overline{S}=X-\partial S$. Thus, by the Lemma\footnote{\begin{lemma}
+Let $X$ be a topological space and let $S\subseteq X$. Then $\overline{X-S}=X-\text{int}(S)$.
+
+\begin{proof}
+$x\in\overline{X-S}$ if and only if any open neighborhood centered at $x$ intersects $X-S$ if and only if no open neighborhood centered at $x$ is entirely contained in $S$ if and only if $x\not\in\text{int}(S)$ if and only if $x\in X-\text{int}(S)$. Thus, $\overline{X-S}= X-\text{int}(S)$.
+\end{proof}
+\end{lemma}} below,
+\[
+\overline{X-\overline{S}}=\overline{X-\partial S}=X-\text{int}(\partial S)=X-\varnothing=X.
+\]
+So $X-\overline{S}$ is dense by definition.
+Conversely, suppose $X-\overline{S}$ is dense. Then
+\[
+X=\overline{X-\overline{S}}=X-\text{int}(\overline{S})
+\]
+so $\text{int}(\overline{S})=\varnothing$ and thus $S$ is nowhere dense by definition.
+\end{proof}
+
+
+
+\item Show that $S\subseteq X$ is closed and nowhere dense iff $X-S$ is open and dense.
+
+\begin{proof}
+By Problem 2, $S$ is closed and nowhere dense iff $X-\overline{S}=X-S$ is dense, but since $S$ is closed, $X-S$ is open and we are done.
+\end{proof}
+
+\pagebreak
+
+
+\item Show that for any $0<\alpha \leq \frac{1}{3}$, the fat Cantor set $K_\alpha$ is closed and nowhere dense. [Hint: show that $S_n$ contains no interval with length greater than $2^{-n}$.]
+
+\begin{proof}
+Let $0<\alpha\leq \frac{1}{3}$ be arbitrary but fixed. Note that $K_\alpha$ is closed since it is a countable intersection of closed intervals. For each $n\geq 1$, the length of an interval of $S_n$ is $\ell_\alpha(n)=2^{-n}-\frac{\alpha^n}{2}<2^{-n}$, and this is a decreasing function of $n$.
+
+Suppose by way of contradiction that $\text{int}(K_\alpha)\neq\varnothing$ and assume without loss of generality that $x,y\in\text{int}(K_\alpha)$ with $x<y$. Then there exists an $N$ such that $2^{-N}<y-x$ so $x$ and $y$ cannot lie in the same interval in some iteration $S_N$. Consequently, there must exist a point in $[0,1]-K_\alpha$ that lies between $x$ and $y$. Since $x$ and $y$ were chosen arbitrarily, $K_\alpha$ cannot contain an interval. Since the interior of a set is defined to be the union of all open sets contained in it, $K_\alpha$ must have an empty interior, but since it is also closed, $K_\alpha=\overline{K_\alpha}$ so it's closure has empty interior, i.e. $K_\alpha$ is nowhere dense.
+\end{proof}
+
+\item Compute the measure of $K_\alpha$ for any $0<\alpha\leq\frac{1}{3}$.
+
+At each iteration, $2^{n-1}$ lengths of length $\alpha^n$ are removed. Thus, the Lebesgue measure of $K_\alpha$ is 
+\begin{align*}
+m(K_\alpha)&=1-\sum_{n=1}^\infty 2^{n-1}\alpha^n\\[2mm]
+&=1-\sum_{n=1}^\infty \alpha(2\alpha)^{n-1}\\[2mm]
+&=1-\frac{\alpha}{1-2\alpha}.\\[2mm]
+\end{align*}
+\item Let $A\subseteq[0,1]$ be defined by
+\[
+A=\bigcup_{n=3}^\infty K_{1/n}.
+\]
+Show that $A$ has Lebesgue measure 1 yet $A$ is meager.
+
+\begin{proof}
+First, note that $K_{1/n}\subseteq K_{1/(n+1)}$. This is because each interval in the iteration in the construction of $K_{1/n}$ is contained in an interval in the corresponding iteration in the construction $K_{1/(n+1)}$. Consequently, by continuity from below,
+\[
+m(A)=m\left(\bigcup_{n=3}^\infty K_{1/n}\right)=\lom{n}{\infty}m(K_{1/n})=\lom{n}{\infty}\left(1-\frac{\frac{1}{n}}{1-\frac{2}{n}}\right)=1.
+\]
+By Problem 4, each $K_{1/n}$ is nowhere dense, so $A$ is a countable union of nowhere dense sets and thus is meager by definition.
+\end{proof}
+
+\item Show that $[0,1]-A$ is uncountable.
+
+\begin{proof}
+By the previous problem, $A$ is meager. Suppose by way of contradiction that $A^c$ is countable. Then $A^c=\bigcup_{i=1}^\infty\{x_i\}$, where $x_i\in A^c$. $\{x_i\}$ is nowhere dense in $[0,1]$ for each $i$, so, consequently, $A^c$ is a countable union of nowhere dense sets and, thus, is meager. Therefore $[0,1]=A\cup A^c$ is a meager set. This contradicts the Baire Category Theorem since $[0,1]$ is a complete metric space and therefore cannot be meager. Therefore $A^c=[0,1]-A$ is uncountable.
+\end{proof}
+
+\item Let $\{q_i\}_{i=1}^\infty $ be an enumeration of the rational numbers.  For any $\ve > 0$, define the set $B_\ve \subseteq \MB{R}$ by
+\[         B_\ve = \bigcup_{i= 1}  \left(q_i - \frac{\ve}{2^i}, q_i + \frac{\ve}{2^i}\right) .\]
+Prove that $B_\ve$ is open and dense in $\MB{R}$ but $m(B_\ve) \leq 2 \ve$.
+
+\begin{proof}
+$B_\ve$ is open since it is a union of open intervals. Since $\{q_i\}\subseteq B_\ve$ and the rationals are dense in $\MB{R}$, every open set contained in $\MB{R}$ must intersect $B_\ve$, so $B_\ve$ is dense by definition. By countable subadditivity, we have
+
+\[
+m(B_\ve)=m\left(\bigcup_{i= 1}  \left(q_i - \frac{\ve}{2^i}, q_i + \frac{\ve}{2^i}\right)\right)\leq\sum_{i=1}^\infty m\left(\left(q_i - \frac{\ve}{2^i}, q_i + \frac{\ve}{2^i}\right)\right)=\sum_{i=1}^\infty \frac{2\ve}{2^i}=2\ve.
+\]
+\end{proof}
+
+\pagebreak
+
+\item  Let 
+\[        B = \bigcap_{n = 1}^\infty B_{1/n} .\]
+Show that $B$ is not meager. [Hint: show that $B$ is comeager, and show that a set $S \subseteq \MB{R}$ cannot be both meager and comeager.]
+
+\begin{proof}
+$B$ is a countable intersection of open dense sets in $\MB{R}$ so $\MB{R}-B$ is a countable union of closed nowhere dense sets by DeMorgan's laws and Problem 3 above, i.e. $\MB{R}-B$ is meager. This means that $B$ is comeager, so by the Lemma\footnote{\begin{lemma}
+A subset $S\subseteq \MB{R}$ cannot be simultaneously meager and comeager.
+\end{lemma}
+
+\begin{proof}
+Let $S\subseteq \MB{R}$ and suppose $S$ is meager and comeager. Then $S$ is a countable union of nowhere dense sets, but so is $\MB{R}-S$. Thus $S\cup(\MB{R}-S)=\MB{R}$ is a countable union of nowhere dense sets and so is meager by definition. But this contradicts the second conclusion in the Baire Category Theorem since $\MB{R}$ is complete. Thus $S$ cannot be simultaneously meager and comeager.
+\end{proof}} below, it is not meager.
+\end{proof}
+
+\item Show that $B$ is a null set.
+
+\begin{proof}
+$m(B_1)\leq2<\infty$, so by continuity from above and Problem 8 above,
+\[
+m(B)=m\left(\bigcap_{n = 1}^\infty B_{1/n}\right)=\lom{n}{\infty}m(B_{1/n})=\lom{n}{\infty}\frac{2}{n}=0.
+\]
+Therefore $B$ is a null set by definition.
+\end{proof}
+
+
+\item[\textbf{EC.}] \href{http://mathshistory.st-andrews.ac.uk/Biographies/Baire.html}{Ren\'{e}-Louis Baire} was born on January 21st, 1874 in Paris, France and died on July 5th 1932 in Chamb\'{e}ry, France. According to the Princeton University Press, he suffered from agoraphobia, and was in ``delicate health'' for much of his life. By 1918, the mathematical community began to recognize his contributions and he began to receive more substantial compensation. He was elected to the Acad\'{e}mie des Sciences in 1922 and retired in 1925 to the shores of the Lake of Leman. His pension was sufficient originally, but inflation later resulted in him having financial troubles again.
+\end{enumerate}
+
+\vfill
+
+
+
+
+
+\end{document}

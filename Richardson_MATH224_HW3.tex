@@ -1,0 +1,283 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+%\pagenumbering{gobble}
+
+\usepackage{comment}
+\usepackage{bbm}
+%\usepackage{multicol}
+%\usepackage{graphicx}
+%\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{cd, quotes}
+%\usepackage{pgfplots}
+%\usepackage{pgffor}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+%\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{commath}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+\usepackage[all]{xypic}
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\MF}[1]{\mathfrak{#1}}
+\newcommand{\MS}[1]{\mathscr{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\im}{\text{im\,}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\coker}{\text{coker\,}}
+
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{224 - Homological Algebra}
+\rightline{Grifo, Elo\'isa}
+\rightline{HW 3}
+\rightline{\today}
+
+\lspace
+
+
+
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+\item Let $R$ be a ring, $I$ and $J$ ideals in $R$, and $M$ be an $R$-module.
+\begin{enumerate}
+\item Show that $R/I \otimes_R R/J \cong R/(I+J)$.
+
+\begin{proof}
+First, define a map $f:R/I\times R/J\to R/(I+J)$ by $f(\bar x, \bar y)=xy+(I+J)$. This map is well defined since, if $x'\in\bar x$ and $y'\in \bar y$ as well, we have $xy-x'y'\in I+J$ by definition of an ideal, and so $f(\bar x,\bar y)=f(\bar{x'}, \bar{y'})$. It is also bilinear:
+\begin{align*}
+f(\overline{x_1+x_2},\bar y)&=(x_1+x_2)y+(I+J)\\[2mm]
+&=x_1y+(I+J)+x_2y+(I+J)\\[2mm]
+&=f(\bar{x_1},\bar y)+f(\bar{x_2},\bar y),
+\end{align*}
+similarly for $f(x,\overline{y_1+y_2})$. Also, for $r\in R$,
+\[
+f(\overline{rx},\bar y)=(rx)y+(I+J)=x(ry)+(I+J)=r(xy)+(I+J),
+\]
+the last two expressions being equal to $f(\bar x,\overline{ry})$ and $rf(\bar x,\bar y)$ respectively.
+
+By definition of a tensor product, there exists an $R$-module homomorphism $\tilde f:R/I \otimes_R R/J\to R/(I+J)$ where $\bar x\otimes \bar y\mapsto xy+(I+J)$. This map is surjective: given any $\bar z\in R/(I+J)$ we have $\bar z\otimes \bar 1\mapsto z\cdot1+(I+J)=\bar z$.
+
+To show $\tilde f$ is injective, observe the following. Let $z\in R/I\otimes R/J$. Then
+\begin{align*}
+z&=\sum_{i=1}^n\bar{x_i}\otimes \bar{y_i}=\sum_{i=1}^n(x_i+I)(y_i+J)=\sum_{i=1}^n\left(x_i\otimes y_i+I\otimes J\right)=\sum_{i=1}^n \bar{x_i}\otimes \bar 1\\[2mm]
+&=\bar{x_1}\otimes \bar 1+\bar{x_2}\otimes \bar 1+\cdots +\bar{x_n}\otimes \bar 1=(\bar{x_1}+\bar{x_2}+\cdots+\bar{x_n})\otimes\bar 1=\bar x\otimes \bar 1.
+\end{align*}
+In other words, every element in $R/I\otimes R/J$ has the form $\bar x\otimes \bar 1$. Let $\bar z \otimes \bar 1\in \ker \tilde f$. Then $z\in I+J$ so $z=x+y$ for some $x\in I$ and some $y\in J$. Then
+\[
+\bar z\otimes \bar 1=(\bar x+\bar y)\otimes \bar 1=\bar x\otimes \bar 1+\bar y\otimes\bar 1=x+(I+J)+y+(I+J)=x+y+(I+J)=\bar 0.
+\]
+Thus, $\ker \tilde f=\bar 0$ and so $\tilde f$ is injective. Therefore, $\tilde f$ is an isomorphism as was to be shown.
+\end{proof}
+
+\pagebreak
+
+\item Show that $R/I \otimes_R M \cong M/IM$.
+
+\begin{proof}
+Consider the short exact sequence:
+
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & I \arrow[r] & R \arrow[r] & R/I \arrow[r] & 0
+\end{tikzcd}
+\end{center}
+Recall that the tensor functor is right exact. So if we apply $-\otimes_R M$ to our sequence, we get:
+
+\begin{center}
+\begin{tikzcd}
+0\otimes_R M \arrow[r] & I\otimes_R M \arrow[r] & R\otimes_R M \arrow[r] & (R/I)\otimes_R M \arrow[r] & 0\otimes_R M
+\end{tikzcd}
+\end{center}
+
+By Lemma 10.22, $R\otimes_R M\cong M$ via $a\otimes m\mapsto am$ so the map $I\otimes_R M\mapsto M$ is given by the same mapping, but this means that the image of the map is $IM$. Thus, by exactness, $(R/I)\otimes_R M\cong M/IM$.
+\end{proof}
+
+\item There is an $R$-module map $I \otimes_R M \longrightarrow IM$ induced by the $R$-bilinear map $(a,m) \mapsto am$. This map is always clearly surjective; must it be injective?
+
+No. Suppose $am_1=am_2$. Then we would have injectivity if and only if $a\otimes m_1=a\otimes m_2$, i.e. $a\otimes (m_1-m_2)$. But this would only hold if $a=0$ or $m_1=m_2$ which will not always be the case. A similar argument can be made if we instead suppose $a_1m=a_2m$.
+\end{enumerate}
+
+\item Show that over a filed $k$ the Hom functor and the tensor functor are always exact.
+
+\begin{proof}
+Since $k$ is a field, $M$ is a free module. Any free module is projective, and so by Theorem 11.4 the Hom functor is exact.
+
+Let $M$ be a $k$-module. By remark 11.38, $M$ is flat if and only if for every injective $k$-module map $i:A\to B$, the map $(1\otimes_ki):M\otimes_kA\to M\otimes_kB$ is injective. And by definition $M$ is flat if and only if $M\otimes_k-$ is an exact functor. But the map $1\otimes_ki$ is injective in this case since $k$ is a field so $M$ has a basis. 
+\end{proof}
+
+\pagebreak
+
+\item \begin{enumerate}
+\item Consider $R$-module homomorphisms $A \xrightarrow{f} B $ and $B \xrightarrow{g} C$. If
+$$\xymatrix{\Hom_R(M,A) \ar[r]^{f_*} & \Hom_R(M,B) \ar[r]^-{g_*} & \Hom_R(M,C)}$$
+is exact for all $M$, then $\xymatrix{A \ar[r]^-f & B \ar[r]^-g & C}$ is an exact sequence.\footnote{In particular, we are not assuming $\xymatrix{A \ar[r]^-f & B \ar[r]^-g & C}$ is a complex!}
+
+\begin{proof}
+If the first sequence of Homs is exact, then by Theorem 11.4 $M$ is projective. It follows then (by Remark 11.2) that $f_*(g)=f$. Thus, $\im f = \im f_*(g)=\ker g_*(g)=\ker g$ by exactness of the Hom sequence above.
+\end{proof}
+
+\item Suppose that $(F,G)$ is an adjoint pair of covariant functors $R\textbf{-mod} \longrightarrow R\textbf{-mod}$. Show that $G$ is left exact.\footnote{Later we will explain how it follows easily that $F$ is right exact.}
+
+\begin{proof}
+Let $\xymatrix{0 \ar[r] & A \ar[r] & B \ar[r] & C \ar[r] &0}$ be an exact sequence of $R$-modules and let $M$ be another $R$-module. The Hom functor is left exact and covariant so we have
+\begin{center}
+$\xymatrix{0 \ar[r] & \text{Hom}(F(M),A) \ar[r] & \text{Hom}(F(M),B) \ar[r] & \text{Hom}(F(M),C)}$
+\end{center}
+is also exact. Since $F$ and $G$ are adjoints, we get
+\begin{center}
+$\xymatrix{0 \ar[r] & \text{Hom}(M,G(A)) \ar[r] & \text{Hom}(M,G(B)) \ar[r] & \text{Hom}(M,G(C)).}$
+\end{center}
+By the Yoneda lemma, there is a bijection $\text{Nat}(\text{Hom}(M,-),G)\to G(M)$ which yields that 
+\begin{center}
+$\xymatrix{0 \ar[r] & G(A) \ar[r] & G(B) \ar[r] & G(C)}$
+\end{center}
+is exact, i.e. $G$ is left exact.
+\end{proof}
+\end{enumerate}
+
+\pagebreak
+\noindent
+\fbox{\begin{minipage}{\textwidth}
+Let $R$ be a domain and $M$ be an $R$-module. The {\bf torsion}\index{torsion} of $M$ is the submodule
+	$$T(M) \coloneqq \lbrace m \in M \mid rm = 0 \textrm{ for some nonzero } r \in R \rbrace.$$
+	The elements of $T(M)$ are called {\bf torsion elements}, and we say that $M$ {\bf is torsion} if $T(M) = M$. Finally, $M$ is {\bf torsion free} if $T(M) = 0$.
+\end{minipage}} 
+\item Let $R$ be a domain and $M$ be an $R$-module.
+\begin{enumerate}
+\item The $R$-module $M/T(M)$ is torsion free.
+
+\begin{proof}
+The set of torsion elements of $M/T(M)$ are the elements $m+T(M)$ such that there exists an $r\in R$ making $rm+T(M)=0$. But this means that $rm\in T(M)$ so $rm=0$ for some nonzero $r$. Since $R$ is a domain, we must have that $m=0$, and thus the set of torsion elements of $M/T(M)$ is 0 and so $M/T(M)$ is torsion free.
+\end{proof}
+
+\item If $f\!: M \longrightarrow N$ is an $R$-module homomorphism, $f(T(M)) \subseteq T(N)$.
+
+\begin{proof}
+Let $n\in f(T(M))$. Then there exists an $m\in T(M)$ such that $f(m)=n$. Since $m\in T(M)$, there exists a nonzero $r\in R$ such that $rm=0$. Since $f$ is a homomorphism, $0=f(0)=f(rm)=rf(m)=rn$. Thus $n\in T(N)$ by definition and so $f(T(M)) \subseteq T(N)$.
+\end{proof}
+
+\item Torsion is a left exact covariant functor $R\textbf{-mod} \longrightarrow R\textbf{-mod}$.
+
+\begin{proof}
+Let
+\[
+\xymatrix{0 \ar[r] & A \ar[r]^f & B \ar[r]^g & C}
+\]
+be an exact sequence of $R$-modules. We need to show the sequence
+\[
+\xymatrix{0 \ar[r] & T(A) \ar[r]^{T(f)} & T(B) \ar[r]^{T(g)} & T(C)}
+\]
+is exact, where $T(f)=f\mid_{T(A)}$ and $T(g)=g\mid_{T(B)}$. In particular we need to show $T(f)$ is injective, $T(g)T(f)=0$, and $\im T(f)=\ker T(g)$.
+
+Let $m\in\ker T(f)$. Then $T(f)(m)=f(m)=0$ and since $f$ is injective by hypothesis, $m=0$ and $T(f)$ is injective. Let $m\in T(A)$. Then $T(g)T(f)(m)=g(f(m))=0$ since $\im f=\ker g$ by exactness. 
+
+If $n\in \ker T(g)$, then $g(n)=0$ so $n\in \ker g=\im f$ by exactness. Thus, $n\in \im T(f)$. This combined with the result that $T(g)T(f)=0$ yields that  $\im T(f)=\ker T(g)$. Therefore, torsion is left exact.
+\end{proof}
+\end{enumerate}
+
+\item (omitted)
+
+\item Consider the domain $R = \mathbb{Q}[x,y,z,a,b,c]/(xb-ac,yc-bz,xc-az)$, the ideal $I = (x,a)$ in $R$, the $R$-module $N = \mathbb{Q}$, $I = (x,a)$, and consider the $2$-generated $R$-module $M = Rf + Rg$, where the generators $f, g$ satisfy the relations 
+\[
+yf-xg = 0 \quad bf - cg = 0 \quad cf - zg = 0.
+\]
+
+(see file \verb!Richardson_MATH224_HW3.m2!)
+\begin{enumerate}
+\item Are there nontrivial $R$-module homomorphisms $M \longrightarrow N$? How about $N \longrightarrow M$?
+
+Yes, there are nontrivial $R$-module homomorphisms $M\to N$. No, there no nontrivial homomorphisms $N\to M$
+
+\item Does $- \otimes_R M$ preserve the injectivity of the inclusion $I \subseteq R$?
+
+Yes, $-\otimes_R M$ does preserve injectivity of the inclusion $I\subseteq R$.
+\item Apply $\Hom_R(-,R)$ to the short exact sequence 
+\[
+\xymatrix{0 \ar[r] & I \ar[r] & R \ar[r] & R/I \ar[r] & 0}.
+\]
+Is $R$ an injective $R$-module?
+
+No. Recall that a module is injective iff $\text{Hom}_R(-,I)$ is exact. Consider the ideal $I=(x,a,b)$, and we see that the homology of $\text{Hom}$ is not always 0, so $\text{Hom}$ is not exact and so $R$ is not injective.
+\end{enumerate}
+		
+\item (omitted)
+
+\end{enumerate}
+\end{document}

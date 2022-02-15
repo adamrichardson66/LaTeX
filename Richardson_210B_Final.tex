@@ -1,0 +1,307 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{bbm}
+\usepackage{commath}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgffor}
+\usetikzlibrary{cd}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=true]
+ {hyperref}
+\hypersetup{urlcolor=blue}
+
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lspace}{\vspace{5mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\ve}{\varepsilon}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\Im}{\text{Im }}
+\newcommand{\Log}{\text{Log }}
+\newcommand{\ess}{\text{ess sup}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\MC}[1]{\mathcal{#1}}
+\newcommand{\MB}[1]{\mathbb{#1}}
+\newcommand{\mbf}[1]{\,\mathbf{#1}}
+\renewcommand{\vec}[1]{\underline{#1}}
+\newcommand{\Res}{\text{Res}}
+
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+
+
+\begin{document}
+
+\rightline{Adam D. Richardson}
+\rightline{210B - Complex Analysis}
+\rightline{Xu, Feng}
+\rightline{Final Assignment}
+\rightline{\today}
+
+\lspace
+
+Problems taken from Conway's Text, 2nd ed.: 6.1.2, 6.2.1, 6.2.2, 7.1.6, 7.2.4, 7.2.10, 7.4.5, 10.1.4, 10.2.1
+
+\lspace
+
+\begin{enumerate}[leftmargin=*]
+\itemsep5mm
+
+\item[\textbf{6.1.2}] Let $G$ be a bounded region and suppose $f$ is continuous on $\bar G$ and analytic on $G$. Show that if there is a constant $c\geq 0$ such that $|f(z)|=c$ for all $z\in\partial G$ then either $f$ is a constant function or $f$ has a zero in $G$.
+
+\begin{proof}
+Let $G$ be a bounded region and suppose $f$ is continuous on $\bar G$ and analytic on $G$. Suppose also that there is a constant $c\geq 0$ such that $|f(z)|=c$ for all $z\in\partial G$. By the Second Version of the Maximum Modulus Theorem [Con, p.128],
+\[
+\max\{|f(z)|:z\in \bar G\}=\max\{|f(z)|:z\in \partial G\}=c
+\]
+since $|f(z)|=c$ for all $z\in\partial G$. In other words, $f$ achieves its maximum on the boundary of $G$, so for all $z\in G$, $|f(z)|\leq c$. If there exists an $a\in G$ such that $|f(a)|=c$, then by the First Version of the Maximum Modulus Theorem, $f$ is constant.
+
+If instead $|f(z)|<c$ for all $z\in G$, then since $f$ is continuous in $G$, it must attain a minimum in $G$, say at $b\in G$. In other words, $|f(b)|\leq |f(z)|$ for all $z\in G$. Suppose $f(z)\neq 0$ for all $z\in G$. Then $g(z)=\frac{1}{f(z)}$ is analytic in $G$ and since $|f(b)|\leq |f(z)|$, we have that $|g(b)|=\left|\frac{1}{f(b)}\right|\geq \left|\frac{1}{f(z)}\right|=|g(z)|$ for all $z\in G$. Thus by the First Version of the Maximum Modulus Theorem again, $g$ must be constant so $f$ must be constant as well. Therefore we have that $f$ is constant, or $f$ has a zero somewhere in $G$.
+\end{proof}
+
+\pagebreak
+
+\item[\textbf{6.2.1}] Suppose $|f(z)|\leq 1$ for $|z|<1$ and $f$ is a non-constant analytic function. By considering the function $g:D\to D$ defined by
+\[
+g(z)=\frac{f(z)-a}{1-\bar af(z)}
+\]
+where $a=f(0)$, prove that
+\[
+\frac{|f(0)|-|z|}{1+|f(0)||z|}\leq |f(z)|\leq \frac{|f(0)|+|z|}{1-|f(0)||z|}
+\]
+for $|z|<1$.
+
+\begin{proof}
+Our aim is to apply Schwarz's lemma [Con, p. 130] to $g$, so we must show that $|g(z)|\leq 1$ and $g(0)=0$. First, since $a=f(0)$ and $|f(z)|\leq 1$, we have that $|f(z)-a|\leq 1$, so
+\[
+|g(z)|=\frac{|f(z)-a|}{|1-\bar af(z)|}\leq \frac{1}{|1-\bar a f(z)|}\leq 1.
+\]
+Next,
+\[
+g(0)=\frac{f(0)-a}{1-\bar af(0)}=\frac{a-a}{1-\bar aa}=0,
+\]
+so by Schwarz's lemma, $|g(z)|\leq |z|$ for $z\in D$. Consequently, by the reverse triangle inequality
+\begin{align*}
+\frac{|f(z)-a|}{|1-\bar af(z)|}&\leq|z|\\[2mm]
+|f(z)-a|&\leq |1-\bar af(z)||z|\\[2mm]
+||f(z)|-|a||&\leq(|1|+|\bar af(z)|)|z|\\[2mm]
+-|z|-|z||a||f(z)|&\leq|f(z)|-|a|\leq|z|+|z||a||f(z)|\\[2mm]
+\frac{|a|-|z|}{1+|a||z|}&\leq|f(z)|\leq\frac{|a|+|z|}{1-|a||z|}\\[2mm]
+\frac{|f(0)|-|z|}{1+|f(0)||z|}&\leq|f(z)|\leq\frac{|f(0)|+|z|}{1-|f(0)||z|}.
+\end{align*}\qedhere
+\end{proof}
+
+
+\item[\textbf{6.2.2}] Does there exist an analytic function $f:D\to D$ with $f(\frac{1}{2})=\frac{3}{4}$ and $f'(\frac{1}{2})=\frac{2}{3}$?
+
+No. We have that $|f(z)|\leq 1$, $\left|\frac{1}{2}\right|<1$, and $f(\frac{1}{2})=\frac{2}{3}$, so by the discussion on pages 131-132 in Conway's text and by inequality (2.3) there, we must have
+\[
+0.\bar6=\frac{2}{3}=\left|f'\left(\frac{1}{2}\right)\right|\leq\frac{1-\left|\frac{3}{4}\right|^2}{1-\left|\frac{1}{2}\right|^2}=\frac{7}{12}=0.58\bar3,
+\]
+which is a contradiction.
+
+\item[\textbf{7.1.6}] (Dini's Theorem) Consider $C(G,\MB{R})$ and suppose that $\{f_n\}$ is a sequence in $C(G,\MB{R})$ which is monotonically increasing (i.e. $f_n(z)\leq f_{n+1}(z)$ for all $z\in G$) and $\lim f_n(z)=f(z)$ for all $z\in G$ where $f\in C(G,\MB{R})$. Show that $f_n\to f$. 
+
+\begin{proof}Let $\{f_n\}$ be a sequence in $C(G,\MB{R})$, suppose it is monotonically increasing in $G$ and that \\ $\lim_{n\to \infty}f_n(z)=f(z)$ for all $z\in G$ where $f\in C(G,\MB{R})$ as well. By Proposition 1.2 [Con, p. 142] there exists a sequence $\{K_k\}\subseteq G$ of compact sets such that $G=\bigcup_{k=1}^\infty K_k$. Fix $k$, consider $\{f_n\}$ and $f$ restricted to $K_k$,  and let $\ve>0$ be given. For each $n$, define $g_n=f-f_n$. Since $f$ and $f_n$ are continuous for every $n$, $g_n$ is also continuous, and since $\{f_n\}$ is monotonically increasing, $\{g_n\}$ is monotonically decreasing to 0 by construction. Thus, for each $z\in K_k$ there exists an $N_z\in \MB{N}$ such that if $n\geq N_z$ then $|g_n(z)-0|=|g_n(z)|<\ve$. Since $g_n$ is continuous, for any $z\in K_k$, there exists an open ball $B(z;r)$ with $r<\infty$ such that if $n\geq N_z$, then for any $w\in B(z;r)$ we have $|g_n(w)|<\ve$. Taking the union over $z\in K_k$ of these open balls yields an open cover of $K_k$, and since $K_k$ is compact, there is a finite set $\{z_1,\ldots,z_m\}\subseteq K_k$ such that $K_k\subseteq \bigcup_{i=1}^m B(z_i;r)$. Now, choose $N=\max\{N_{z_1},N_{z_2},\ldots, N_{z_m}\}$. Then for all $z\in K_k$, if $n\geq N$, $|g_n(z)|=|f_n(z)-f(z)|<\ve$, i.e. $f_n\to f$ on $K_k$. Since this is true for any $k$, by Proposition 1.10(b) and Corollary 1.11 [Con, p. 145] we have that $f_n\to f$ on $G$.
+\end{proof}
+
+\item[\textbf{7.2.4}] Prove Vitali's Theorem: If $G$ is a region and $\{f_n\}\subset H(G)$ is locally bounded and $f\in H(G)$ that has the property that $A=\{z\in G:\lim f_n(z)=f(z)\}$ has a limit point in $G$ then $f_n \to f$.
+
+\begin{proof}
+Let $G$ be a region and suppose $\{f_n\}\subset H(G)$ is locally bounded and let $f\in H(G)$. Suppose $f$ has the property that the set $A=\{z\in G:\lim f_n(z)=f(z)\}$ has a limit point in $G$. First, since $\{f_n\}\subset H(G)$ is locally bounded, by Montel's theorem $\{f_n\}$ is normal, i.e. there exists a subsequence $\{f_{n_k}\}$ such that $f_{n_k}\to f$ uniformly on $G$. But since uniform convergence implies pointwise convergence, we have 
+\[
+\{z\in G:\lim f_{n_k}(z)=f(z)\}=G\supseteq \{z\in G:\lim f_n(z)=f(z)\}=A.
+\]
+Suppose by way of contradiction that $\{f_n\}$ does not converge uniformly on $G$. Then there exists an $\ve>0$, a subsequence $\{f_{n_j}\}\subseteq\{f_n\}$, and points $z_j\in G$ such that $|f_{n_j}(z_j)-f(z_j)|\geq \ve$. But $\{f_{n_j}\}$ is locally bounded so again by Montel's theorem there exists a subsequence $\{f_{{n_j}_\ell}\}\subseteq\{f_{n_j}\}$ that converges uniformly to some analytic function $g$. Since $|f_{n_j}(z_j)-f(z_j)|\geq \ve$, it must be that $|f_{{n_j}_\ell}(z_j)-f(z_j)|\geq \ve$ as well, so $g\not\equiv f$. But $f$ and $g$ must agree on $A$ by the Identity Theorem (Corollary 3.8 [Con, p. 79]), so we have a contradiction and $\{f_n\}$ must converge to $f$ uniformly.
+
+%Therefore, 
+%\[
+%A=\{z\in G:\lim f_{n_k}(z)=g(z)\}\cap \{z\in G:\lim f_n(z)=f(z)\}= \{z\in G:f(z)=g(z)\}
+%\]
+%
+%so $\{z\in G:f(z)=g(z)\}$ has a limit point in $G$, and by Corollary 3.8 [Con, p. 79], we must have that $f(z)\equiv g(z)$ from which it follows that $f_n\to f$ uniformly on $G$.
+\end{proof}
+
+
+\pagebreak
+
+\item[\textbf{7.2.10}] Let $\{f_n\}\subset H(G)$ be a sequence of one-to-one functions which converge to $f$. Show that either $f$ is one-to-one or $f$ is a constant function.
+
+\begin{proof}
+Let $\{f_n\}\subset H(G)$ be a sequence of one-to-one functions which converge to $f$. Let $a$ be a fixed point in $G$ and define $g_n(z)=f_n(z)-f_n(a)$. Since $f_n$ is one-to-one for each $n$, $g_n(z)\neq g_n(a)$ for all $z\neq a$. Moreover, letting $g(z)=\lim g_n(z)$, we have $g(z)= f(z)-f(a)$. Note that $\{g_n\}\subset H(G\setminus \{a\})$ and it converges to $g\in H(G\setminus \{a\})$, and $g_n$ never vanishes on $G\setminus \{a\}$ since $f_n$ is one-to-one. Thus by Corollary 2.6 [Con, p. 152], we either have $g\equiv 0$ or $g$ never vanishes. If $g\equiv 0$, then $f(z)=f(a)$ for all $z\in G$, i.e. $f$ is a constant function and we are done. If instead $g$ never vanishes, then for all $z\in G$, if $z\neq a$, then $f(z)\neq f(a)$, i.e. $f$ is one-to-one.
+\end{proof}
+
+\pagebreak
+
+\item[\textbf{7.4.5}] Let $f$ be analytic on $G=\{z:\Re z>0\}$, one-to-one, with $\Re f(z)>0$ for all $z\in G$ and $f(a)=a$ for some real number $a$. Show that $|f'(a)|\leq 1$.
+
+\begin{proof}
+Let $f$ be analytic on $G=\{z:\Re z>0\}$, one-to-one, with $\Re f(z)>0$ for all $z\in G$ and $f(a)=a$ for some real number $a(\in G)$. Note that $f$ is onto because it maps the right half plane to the right half plane. The conclusion seems to suggest Schwarz's lemma [Con, p. 130] could be used, but that lemma only applies to functions on $D$. However, since $G\neq\MB{C}$, the Riemann mapping theorem [Con, p. 160] guarantees the existence of a unique analytic function $g:G\to D$ such that (i) $g(a)=0$ and $g'(a)>0$, (ii) $g$ is one-to-one, and (iii) $g(G)=D$. Since $g$ is one-to-one, $g^{-1}:D\to G$ exists, and is one-to-one and onto as well. Hence $f\circ g^{-1}:D\to G$. Consider the function $h=g\circ f\circ g^{-1}:D\to D$. This function is one-to-one since all of the factors of the composition are one-to-one, it is analytic since they are all analytic, and $h(D)=D$. Since $g(a)=0$ and $g$ is one-to-one, we have $g^{-1}(0)=a$. Thus,
+\[
+h(0)=g(f(g^{-1}(0)))=g(f(a))=g(a)=0.
+\]
+Additionally, since $h:D\to D$, $|h(z)|<1$ for all $z\in D$. Thus by Schwarz's lemma, we have that $|h'(0)|\leq 1$. Using the Inverse Function Theorem [Con, Prop 2.20, p. 39], we have
+\begin{align*}
+h'(z)&=\left[g(f(g^{-1}(z)))\right]'\\[2mm]
+&=g'\left(f\left(g^{-1}(z)\right)\right)\cdot f'\left(g^{-1}(z)\right)\cdot \left(g^{-1}(z)\right)'\\[2mm]
+&=g'\left(f\left(g^{-1}(z)\right)\right)\cdot f'\left(g^{-1}(z)\right)\cdot\frac{1}{g'(g^{-1}(z))}
+\end{align*}
+as long as $g'(g^{-1}(z))\neq0$. Now, since $f(a)=a$ and the Riemann mapping theorem affords that $g'(a)>0$ (in particular $g'(a)\neq 0$),
+\begin{align*}
+h'(0)&=g'\left(f\left(g^{-1}(0)\right)\right)\cdot f'\left(g^{-1}(0)\right)\cdot\frac{1}{g'(g^{-1}(0))}\\[2mm]
+&=g'(f(a))\cdot f'(a)\cdot\frac{1}{g'(a)}\\[2mm]
+&=g'(a)\cdot f'(a)\cdot\frac{1}{g'(a)}\\[2mm]
+&=f'(a).
+\end{align*}
+Hence $|h'(0)|=|f'(a)|\leq1$ by our result above.
+\end{proof}
+
+
+\pagebreak
+
+\item[\textbf{10.1.4}] Prove that a nonconstant harmonic function on a region is an open map. [Hint: use the fact that the connected subsets of $\MB{R}$ are intervals.]
+
+\begin{proof}
+Let $G$ be a region and let $u:G\to \MB{R}$ be a nonconstant harmonic function. Let $O\subseteq G$ be an open set. Then it can be written as a union of open discs, say $O=\bigcup_{\alpha\in A}D_\alpha$ where $A$ is an index set. Since each $D_\alpha$ is connected, by a topological argument, $u(D_\alpha)$ is connected as well, but since $u$ is nonconstant, and the connected components of $\MB{R}$ are intervals, we must have that $u(D_\alpha)$ is an interval for every $\alpha$. Now, each $D_\alpha$ is a region and since $u$ is harmonic it is continuous. Thus, since $u$ is nonconstant on $D_\alpha$ for each $\alpha$, by the \textit{contrapositives} of the Maximum and Minimum Principles [Con, p. 253, 255], $u$ does not attain a maximum nor a minimum on each $D_\alpha$, and since these maxima and minima correspond to the endpoints of an interval in $\MB{R}$, it must be the case that $u(D_\alpha)$ is an interval that does not contain the endpoints, i.e. an open interval. Thus,
+\[
+u(O)=u\left(\bigcup_{\alpha\in A}D_\alpha\right)=\bigcup_{\alpha\in A}u(D_\alpha)
+\]
+is a union of open sets and so is open. Since $O\subseteq G$ was chosen arbitrarily, we have shown that $u$ is an open map.
+\end{proof}
+
+\pagebreak
+
+\item[\textbf{10.2.1}] Let $D=\{z:|z|<1\}$ and suppose that $f:\bar D\to\MB{C}$ is a continuous function such that both $\Re f$ and $\Im f$ are harmonic. Show that
+\[
+f(re^{i\theta})=\frac{1}{2\pi}\int_{-\pi}^\pi f(e^{it})P_r(\theta-t)\,\dif{t}
+\]
+for all $re^{i\theta}\in D$. Using Definition 2.1 show that $f$ is analytic on $D$ iff
+\[
+\int_{-\pi}^\pi f(e^{it})e^{int}\,\dif{t}=0
+\]
+for all $n\geq 1$.
+
+\begin{proof}
+Suppose that $f:\bar D\to\MB{C}$ is a continuous function such that both $\Re f$ and $\Im f$ are harmonic. Write $u=\Re f$ and $v=\Im f$ so that $f=u+iv$. By Corollary 2.9 [Con, p. 259], for all $re^{i\theta}\in D$, we have
+\[
+u(re^{i\theta})=\frac{1}{2\pi}\int_{-\pi}^\pi u(e^{it})P_r(\theta-t)\,\dif{t}\aspace v(re^{i\theta})=\frac{1}{2\pi}\int_{-\pi}^\pi v(e^{it})P_r(\theta-t)\,\dif{t}.
+\]
+Thus
+\begin{align*}
+f(re^{i\theta})&=u(re^{i\theta})+iv(re^{i\theta})\\[2mm]
+&=\frac{1}{2\pi}\int_{-\pi}^\pi u(e^{it})P_r(\theta-t)\,\dif{t}+i\cdot\frac{1}{2\pi}\int_{-\pi}^\pi v(e^{it})P_r(\theta-t)\,\dif{t}\\[2mm]
+&=\frac{1}{2\pi}\int_{-\pi}^\pi \left[u(e^{it})+iv(e^{it})\right]P_r(\theta-t)\,\dif{t}\\[2mm]
+&=\frac{1}{2\pi}\int_{-\pi}^\pi f(e^{it})P_r(\theta-t)\,\dif{t}.
+\end{align*}
+
+For the second part, notice that
+\[
+\int_{-\pi}^\pi f(e^{it})e^{int}\,\dif{t}=\int_{|z|=1} f(z)z^n\,\dif{z}.
+\]
+First suppose that $f$ is analytic on $D$. Then for $n\geq1$, $f(z)z^n$ is analytic on $D$ as well. So by Cauchy's Theorem [Con, p.85], for any $z=re^{it}$ with $0\leq r<1$, we have
+\[
+\int_{|z|=r}f(z)z^n\,dz=\int_{-\pi}^\pi f(re^{it})r^ne^{int}\,\dif{t}=0.
+\]
+$f$ is continuous on $\bar D$ by assumption, and since this integral converges for all $0\leq r<1$, we have
+\begin{align*}
+\lim_{r\to1^-}\int_{-\pi}^\pi f(re^{it})r^ne^{int}\,\dif{t}&=\lim_{r\to1^-}0\\[2mm]
+\int_{-\pi}^\pi f\left(\lim_{r\to1^-}re^{it}\right)\cdot\lim_{r\to1^-}r^ne^{int}\,\dif{t}&=0\\[2mm]
+\int_{-\pi}^\pi f(e^{it})e^{int}\,\dif{t}&=0.
+\end{align*}
+Conversely, suppose 
+\[
+\int_{-\pi}^\pi f(e^{it})e^{int}\,\dif{t}=0
+\]
+for all $n\geq 1$. By the previous result above and the definition of the Poisson kernel, for all $z=re^{i\theta}$ with $0\leq r<1$ we know 
+\begin{align*}
+f(re^{i\theta})&=\frac{1}{2\pi}\int_{-\pi}^\pi f(e^{it})P_r(\theta-t)\,\dif{t}\\[2mm]
+&=\frac{1}{2\pi}\int_{-\pi}^\pi f(e^{it})\left(\sum_{n\in\MB{Z}}r^{|n|}e^{in\theta}e^{-int}\right)\,\dif{t}\\[2mm]
+&=\frac{1}{2\pi}\sum_{n\in\MB{Z}}\left(r^{|n|}e^{in\theta}\int_{-\pi}^\pi f(e^{it})e^{-int}\,\dif{t}\right)\\[2mm]
+&=\frac{1}{2\pi}\sum_{n=-\infty}^{-1}\left(r^{-n}e^{in\theta}\int_{-\pi}^\pi f(e^{it})e^{-int}\,\dif{t}\right)+\frac{1}{2\pi}\sum_{n=0}^\infty\left(r^{n}e^{in\theta}\int_{-\pi}^\pi f(e^{it})e^{-int}\,\dif{t}\right)\\[2mm]
+&=\frac{1}{2\pi}\sum_{n=1}^{\infty}\left(r^{n}e^{-in\theta}\int_{-\pi}^\pi f(e^{it})e^{int}\,\dif{t}\right)+\frac{1}{2\pi}\sum_{n=0}^\infty\left(r^{n}e^{in\theta}\int_{-\pi}^\pi f(e^{it})e^{-int}\,\dif{t}\right)\\[2mm]
+&=\frac{1}{2\pi}\sum_{n=1}^{\infty}\left(r^{n}e^{-in\theta}\cdot0\right)+\frac{1}{2\pi}\sum_{n=0}^\infty\left(z^n\int_{-\pi}^\pi f(e^{it})e^{-int}\,\dif{t}\right)\\[2mm]
+&=\frac{1}{2\pi}\sum_{n=0}^\infty\left(z^n\int_{-\pi}^\pi f(e^{it})e^{-int}\,\dif{t}\right).
+\end{align*}
+
+Recall that
+\[
+\int_\gamma z^n\,\dif{z}=0
+\]
+for any closed rectifiable curve in $D$ and $n\geq 1$ since $z^n$ has a primitive. So in particular 
+\[
+\int_T z^n\,\dif{z}=0
+\]
+for any triangle $T$ contained in $D$. Hence,
+\begin{align*}
+\int_Tf(z)\,\dif{z}&=\frac{1}{2\pi}\int_T\sum_{n=0}^\infty\left(z^n\int_{-\pi}^\pi f(e^{it})e^{-int}\,\dif{t}\right)\,\dif{z}\\[2mm]
+&=\frac{1}{2\pi}\sum_{n=0}^\infty\left(\int_Tz^n\,\dif{z}\int_{-\pi}^\pi f(e^{it})e^{-int}\,\dif{t}\right)\\[2mm]
+&=\frac{1}{2\pi}\sum_{n=0}^\infty\left(0\cdot\int_{-\pi}^\pi f(e^{it})e^{-int}\,\dif{t}\right)\\[2mm]
+&=0.
+\end{align*}
+Therefore by Morera's theorem [Con, p. 86] $f$ is analytic on $D$.
+\end{proof}
+
+\end{enumerate}
+
+\end{document}

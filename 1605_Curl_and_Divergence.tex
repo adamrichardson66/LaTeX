@@ -1,0 +1,330 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+%Textbook: Essential Calculus - Early Transcendentals, 2nd edition - Stewart. ISBN: 978-1-133-11228-0
+
+
+\begin{document}
+\vspace*{-1cm}
+\title{16.5 - Curl and Divergence}
+\maketitle
+
+
+
+
+\section*{Curl}
+
+Recall,
+
+\begin{definition}
+Let $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$ be a vector field in $\R^3$ and suppose the partial derivatives of $P,Q,$ and $R$ all exist. Then the \textbf{curl} of $\mathbf{F}$ is the vector field on $\R^3$ defined by
+
+\[
+\text{curl }\mathbf{F}=\left(\pp{R}{y}-\pp{Q}{z}\right)\mathbf{i}+\left(\pp{P}{z}-\pp{R}{x}\right)\mathbf{j}+\left(\pp{Q}{x}-\pp{P}{y}\right)\mathbf{k}.
+\]
+\end{definition}
+
+
+In the last section, we got an intuition for what curl is, and how Green's Theorem relates to curl. In this section, we take a different view of curl and how it relates to the cross product.
+
+Now we're going to introduce a bit of notation and also abuse it. We introduce the \textbf{vector differential operator} $\nabla$ pronounced ``del'' as
+
+\[
+\nabla =\mathbf{i}\pp{}{x}+\mathbf{j}\pp{}{y}+\mathbf{k}\pp{}{z}=\Bigl<\pp{}{x},\pp{}{y},\pp{}{z}\Bigr>
+\]
+
+The rule it describes is the act of taking the partial derivatives of a function and producing a vector where the partial derivatives are the component functions. del itself is a vector consisting of partial derivative operators as the components. If the input of del is a scalar function, then del acts as ``taking the gradient'' of that. More specifically, 
+
+\[
+\nabla f=\Bigl<\pp{}{x},\pp{}{y},\pp{}{z}\Bigr>f=\Bigl<\pp{}{x}(f),\pp{}{y}(f),\pp{}{z}(f)\Bigr>=\Bigl<\pp{f}{x},\pp{f}{y},\pp{f}{z}\Bigr>=\text{gradient of $f$}
+\]
+
+\[
+\nabla f=\mathbf{i}\pp{f}{x}+\mathbf{j}\pp{f}{y}+\mathbf{k}\pp{f}{z}=\pp{f}{x}\mathbf{i}+\pp{f}{y}\mathbf{j}+\pp{f}{z}\mathbf{k}
+\]
+
+What's nice about viewing $\nabla$ as a vector, is it opens itself up to other operations as well. If we think of $\nabla$ as a vector itself with components $\pp{}{x}$, $\pp{}{y}$, and $\pp{}{z}$, we can consider the cross product of $\nabla$ with the vector field $\mathbf{F}$ as
+
+\[
+\nabla\times\mathbf{F}=\begin{vmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k}\\\pp{}{x} & \pp{}{y} & \pp{}{z}\\ P & Q & R\end{vmatrix}=\left(\pp{R}{y}-\pp{Q}{z}\right)\mathbf{i}+\left(\pp{P}{z}-\pp{R}{x}\right)\mathbf{j}+\left(\pp{Q}{x}-\pp{P}{y}\right)\mathbf{k}=\text{curl }\mathbf{F}
+\]
+
+Thus, we can express the curl of $\mathbf{F}$ in terms of del.
+
+
+\begin{example}
+If $\mathbf{F}(x,y,z)=xz\mathbf{i}+xyz\mathbf{j}-y^2\mathbf{k}$, find curl $\mathbf{F}$.
+
+\begin{align*}
+\text{curl }\mathbf{F}&=\nabla \times \mathbf{F}\\[2mm]
+&=\begin{vmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k}\\\pp{}{x} & \pp{}{y} & \pp{}{z}\\ xz & xyz & -y^2\end{vmatrix}\\[2mm]
+&=\left[\pp{}{y}(-y^2)-\pp{}{z}(xyz)\right]\mathbf{i}-\left[\pp{}{x}(-y^2)-\pp{}{z}(xz)\right]\mathbf{j}+\left[\pp{}{x}(xyz)-\pp{}{y}(xz)\right]\mathbf{k}\\[2mm]
+&=(-2y-xy)\mathbf{i}-(0-x)\mathbf{j}+(yz-0)\mathbf{k}\\[2mm]
+&=-y(2+x)\mathbf{i}+x\mathbf{j}+yz\mathbf{k}.
+\end{align*}
+\end{example}
+
+Note that the gradient of a function $f$ of three variables is a vector field in $\R^3$, so we can compute its curl.
+
+\begin{note}
+If curl $\mathbf{F}=\mathbf{0}$ at a point $P$, then $\mathbf{F}$ is called \textbf{irrotational} at $P$.
+\end{note}
+
+\begin{theorem}
+If $\mathbf{F}$ is a conservative vector field over $\R^3$ that has continuous second-order partial derivatives, then
+
+\[
+\text{curl}(\mathbf{F})=\mathbf{0}.
+\]
+\end{theorem}
+
+
+
+\begin{proof}
+
+Since $\mathbf{F}$ is conservative, by definition there exists a function $f$ such that $\mathbf{F}=\nabla f$. Thus,
+\begin{align*}
+\text{curl }\mathbf{F}&=\text{curl}(\nabla f)\\[2mm]
+&=\nabla \times (\nabla f)\\[2mm]
+&=\begin{vmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k}\\\pp{}{x} & \pp{}{y} & \pp{}{z}\\ \pp{f}{x} & \pp{f}{y} & \pp{f}{z}\end{vmatrix}\\[2mm]
+&=\left(\pp{^2f}{y\,\partial z}-\pp{^2f}{z\,\partial y}\right)\mathbf{i}+\left(\pp{^2f}{z\,\partial x}-\pp{^2f}{x\,\partial z}\right)\mathbf{j}+\left(\pp{^2f}{x\,\partial y}-\pp{^2f}{y\,\partial x}\right)\mathbf{k}\\[2mm]
+&=0\mathbf{i}+0\mathbf{j}+0\mathbf{k}\\[2mm]
+&=\mathbf{0}
+\end{align*}
+
+by Clairaut's theorem.
+
+Notice the similarity to the result $\mathbf{a}\times \mathbf{a}=\mathbf{0}$.
+\end{proof}
+
+
+
+
+
+
+The converse of the previous theorem is not true in general, but it is true if $\mathbf{F}$ is defined on a simply connected region. We will see the proof of this theorem in a later section.
+
+\begin{theorem}
+If $\mathbf{F}$ is a vector field defined on a simply connected region (e.g. $\R^3$) whose component functions have continuous partial derivatives and curl $\mathbf{F}=\mathbf{0}$, then $\mathbf{F}$ is a conservative vector field.
+\end{theorem}
+
+\textbf{Note.} This is handy because it gives us a simple way of determining if a vector field is conservative or not.
+
+\begin{example}
+Is the vector field $\mathbf{F}(x,y,z)=xz\mathbf{i}+xyz\mathbf{j}-y^2\mathbf{k}$ conservative?
+
+We have
+
+\[
+\text{curl }\mathbf{F}=-y(2+x)\mathbf{i}+x\mathbf{j}+yz\mathbf{k}.
+\]
+
+Since curl $\mathbf{F}\neq\mathbf{0}$, $\mathbf{F}$ is not conservative.
+
+\end{example}
+
+
+\pagebreak
+
+\section*{Divergence}
+
+Next, we're going to leverage $\nabla $ again to get some new data about a vector field, this time via the dot product.
+
+\begin{definition}
+Let $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$ be a vector field on $\R^3$ and suppose the partial derivatives all exist. The \textbf{divergence of $\mathbf{F}$} is the \uline{scalar} field of three variables defined by 
+
+\[
+\text{div }\mathbf{F}=\pp{P}{x}+\pp{Q}{y}+\pp{R}{z}.
+\]
+
+We can write this in terms of $\nabla$ since 
+
+\[
+\text{div }\mathbf{F}=\pp{P}{x}+\pp{Q}{y}+\pp{R}{z}=\Bigl<\pp{}{x},\pp{}{y},\pp{}{z}\Bigr>\cdot\<P,Q,R>=\nabla\cdot\mathbf{F}.
+\]
+
+Intuitively, div $\mathbf{F}(x,y,z)$ measures the tendency for a particle to diverge from the point $(x,y,z)$.
+\end{definition}
+
+\begin{note}
+Note that curl is a vector and divergence is a scalar. This jibes with the definitions of the cross product and the dot product. Recall that the dot product gives you a measure of how aligned two vectors are. If the incremental change in the vector field represented by the partial derivatives is made in the same direction as the vector itself, the dot product will be positive and there will be a tendency to move outward from the point. If the dot product is negative then there will be a tendency to have inward flow, the opposite of divergence.
+\end{note}
+
+\begin{example}
+Find div $\mathbf{F}$ if $\mathbf{F}(x,y,z)=xz\mathbf{i}+xyz\mathbf{j}-y^2\mathbf{k}$.
+
+By definition we have
+
+\[
+\text{div }\mathbf{F}=\nabla \cdot \mathbf{F}=\pp{}{x}(xz)+\pp{}{y}(xyz)+\pp{}{z}(-y^2)=z+xz.
+\]
+\end{example}
+
+\begin{theorem}
+If $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$ is a vector field on $\R^3$ and $P,Q,R$ have continuous second-order partial derivatives, then
+
+\[
+\text{div curl }\mathbf{F}=\mathbf{0}.
+\]
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+\text{div curl }\mathbf{F}&=\nabla \cdot(\nabla\times\mathbf{F})\\[2mm]
+&=\pp{}{x}\left(\pp{R}{y}-\pp{Q}{z}\right)+\pp{}{y}\left(\pp{P}{z}-\pp{R}{x}\right)+\pp{}{z}\left(\pp{Q}{x}-\pp{P}{y}\right)\\[2mm]
+&=\pp{^2R}{x\,\partial y}-\pp{^2Q}{x\,\partial z}+\pp{^2P}{y\,\partial z}-\pp{^2R}{y\,\partial x}+\pp{^2Q}{z\,\partial x}-\pp{^2P}{z\,\partial y}\\[2mm]
+&=0
+\end{align*}
+
+by Clairaut's Theorem. More intuitively, $\nabla\times\mathbf{F}$ is orthogonal to both $\nabla$ and $\mathbf{F}$, so $\nabla\cdot(\nabla\times\mathbf{F})=0$.
+\end{proof}
+
+\begin{note}
+If div $\mathbf{F}=0$, then $\mathbf{F}$ is said to be \textbf{incompressible}.
+\end{note}
+
+Another important operator occurs when we compute the divergence of a gradient vector field:
+
+\[
+\text{div}(\nabla f)=\nabla \cdot(\nabla f)=\pp{^2f}{x^2}+\pp{^2f}{y^2}+\pp{f}{z^2}.
+\]
+
+This expression occurs so often we use the operator
+
+\[
+\nabla^2=\nabla \cdot \nabla
+\]
+
+This is called the \textbf{Laplace operator} because \textbf{Laplace's Equation} is
+
+\[
+\nabla ^2f=\pp{^2f}{x^2}+\pp{^2f}{y^2}+\pp{f}{z^2}=0.
+\]
+
+This equation is used a lot in diffeqs and complex analysis. We can also apply it to a vector field to get
+
+\[
+\nabla ^2\mathbf{F}=\nabla ^2P\mathbf{i}+\nabla^2Q\mathbf{i}+\nabla^2R\mathbf{k}.
+\]
+
+\section*{Vector Forms of Green's Theorem}
+
+Now that we have a full understanding of curl and divergence, we can reexpress Green's Theorem in a couple ways that provide more insight that will be helpful later.
+
+Consider the vector field $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+0\mathbf{k}$ as a vector field in $\R^3$. Then by definition,
+
+\[
+\text{curl }\mathbf{F}=\begin{vmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k}\\\pp{}{x} & \pp{}{y} & \pp{}{z}\\ P(x,y) & Q(x,y) & 0\end{vmatrix}=\left(\pp{Q}{x}-\pp{P}{y}\right)\mathbf{k}.
+\]
+
+Then the $\mathbf{k}$th component of the curl is
+
+\[
+\text{curl }\mathbf{F}\cdot\mathbf{k}=\left(\pp{Q}{x}-\pp{P}{y}\right)\mathbf{k}\cdot\mathbf{k}=\left(\pp{Q}{x}-\pp{P}{y}\right)|\mathbf{k}|^2=\pp{Q}{x}-\pp{P}{y}
+\]
+
+This, we can write \textbf{Green's Theorem} as 
+
+\[\boxed{
+\oint_C\mathbf{F}\cdot\,d\mathbf{r}=\iint_D(\text{curl }\mathbf{F})\cdot\mathbf{k}\,dA}
+\]
+
+This form says that the line integral of the tangential component of $\mathbf{F}$ along $C$ is the same as the double integral of the vertical component of curl $\mathbf{F}$ over the region $D$ enclosed by $C$.
+
+Now we're going to get a related variation of Green's Theorem in terms of divergence using the normal component of $\mathbf{F}$ instead of the tangential component. Suppose $C$ is given by the vector equation $\mathbf{r}(t)=x(t)\mathbf{i}+y(t)\mathbf{j}$ where $a\leq t\leq b$. Then
+
+\[
+\mathbf{T}(t)=\frac{x'(t)}{|\mathbf{r}'(t)|}\mathbf{i}+\frac{y'(t)}{|\mathbf{r}'(t)|}\mathbf{j}.
+\]
+
+The outward unit normal vector is
+
+\[
+\mathbf{n}(t)=\frac{y'(t)}{|\mathbf{r}'(t)|}\mathbf{i}-\frac{x'(t)}{|\mathbf{r}'(t)|}\mathbf{j}.
+\]
+
+Now, we have
+
+\begin{align*}
+\oint_C\mathbf{F}\cdot\mathbf{n}\,ds&=\int_a^b(\mathbf{F}\cdot\mathbf{n})|\mathbf{r}'(t)|\,dt\\[2mm]
+&=\int_a^b\left[\frac{P(x(t),y(t))y'(t)}{|\mathbf{r}'(t)|}-\frac{Q(x(t),y(t))x'(t)}{|\mathbf{r}'(t)|}\right]|\mathbf{r}'(t)|\,dt\\[2mm]
+&=\int_a^bP(x(t),y(t))y'(t)\,dt-Q(x(t),y(t))x'(t)\,dt\\[2mm]
+&=\int_CP\,dy-Q\,dx\\[2mm]
+&=\int_C-Q\,dx+P\,dy\\[2mm]
+&=\iint_D\pp{P}{x}-\left(-\pp{Q}{y}\right)\,dA\\[2mm]
+&=\iint_D\pp{P}{x}+\pp{Q}{y}\,dA\\[2mm]
+&=\iint_D\text{div }\mathbf{F}(x,y)\,dA.
+\end{align*}
+
+by Green's Theorem. Notice that the integrand on the right is just the divergence of $\mathbf{F}$. Thus, we can write
+
+\[\boxed{
+\oint_C\mathbf{F}\cdot\mathbf{n}\,ds=\iint_D\text{div }\mathbf{F}(x,y)\,dA}
+\]
+
+This says that the line integral of the normal component of $\mathbf{F}$ along $C$ is equal to the double integral of the divergence of $\mathbf{F}$ over the region $D$ enclosed by $C$.
+
+
+
+\end{document}

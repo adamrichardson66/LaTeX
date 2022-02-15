@@ -1,0 +1,228 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{0.5cm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+%Textbook: Essential Calculus - Early Transcendentals, 2nd edition - Stewart. ISBN: 978-1-133-11228-0
+
+
+\begin{document}
+\vspace*{-1cm}
+\title{16.1 - Vector Fields}
+\maketitle
+
+This chapter is where we put any and everything to use that we have learned in all previous math courses. It showcases the beautiful connections between mathematics and physics, and prepares you to study much more complex ideas that permeate our reality in an objective and rigorous way. Most of the rest of the chapter builds upon the fundamental concepts learned in this section, so listen up.
+
+Recall slope fields from Calc II.
+
+\begin{definition}
+Let $D$ be a set in $\R^2$. A \textbf{vector field on} $\R^2$ is a function $\mathbf{F}$ that assigns to each point $(x,y)$ in $D$ a two-dimensional vector $\mathbf{F}(x,y)$.
+
+Note: this is identical to the definition of a \textbf{slope field} that you saw back in Calc II, only we didn't call it a vector field. Since $\mathbf{F}(x,y)$ is a two-dimensional vector, we can write it in terms of its component functions $P$ and $Q$:
+
+\[
+\mathbf{F}(x,y)=P(x,y)\mathbf{i}+Q(x,y)\mathbf{j}\ospace \mathbf{F}=P\mathbf{i}+Q\mathbf{j}.
+\]
+
+where $P$ and $Q$ are \textbf{scalar fields}.
+\end{definition}
+
+
+\begin{center}
+\includegraphics[scale=0.4]{2dvector_field.png}
+\end{center}
+
+\begin{definition}
+Let $E$ be a subset of $\R^3$. A \textbf{vector field on $\R^3$} is a function $\mathbf{F}$ that assigns to each point $(x,y,z)$ in $E$ a three-dimensional vector $\mathbf{F}(x,y,z)$.\
+
+\begin{center}
+\includegraphics[scale=0.4]{3dvector_field.png}
+\end{center}
+
+\end{definition}
+
+\pagebreak
+
+\begin{example}
+Let $\mathbf{F}(x,y)=-y\mathbf{i}+x\mathbf{j}$. Sketch $\mathbf{F}$.
+
+Here we select points and draw arrows representative of the vector produced at that point.
+
+\begin{center}
+\includegraphics[scale=0.4]{vectorfield_ex1.png}
+\end{center}
+
+It appears that each vector is tangent to some circle centered at the origin. To check this, we can take the dot product of the position vector $\mathbf{v}=x\mathbf{i}+y\mathbf{j}$ and our function $\mathbf{F}$ evaluated at that position vector, $\mathbf{F}(\mathbf{v})$:
+
+\[
+\mathbf{v}\cdot\mathbf{F}(\mathbf{v})=(x\mathbf{i}+y\mathbf{j})\cdot(-y\mathbf{i}+x\mathbf{j})=-xy+yx=0.
+\]
+
+So $\mathbf{F}(x,y)$ is orthogonal to the position vector $\<x,y>$. Notice that $|\mathbf{v}|=\sqrt{x^2+y^2}$ and $\mathbf{F}(x,y)=\sqrt{(-y)^2+x^2}=|\mathbf{v}|$, so the magnitude of $\mathbf{F}$ is the same as the radius of the circle to which it is tangent.
+\end{example}
+
+\begin{example}
+Sketch the vector field on $\R^3$ given by $\mathbf{F}(x,y,z)=z\mathbf{k}$.
+
+\begin{center}
+\includegraphics[scale=0.4]{vectorfield_ex2.png}
+\end{center}
+
+The vector field doesn't depend on $x$ or $y$. It will scale the vector $\mathbf{k}$ by whatever value $z$ is, so the vector field is vertical rays that extend in length as distance is increased from the $xy$-plane and in direction of the sign of $z$.
+\end{example}
+
+
+\section*{Applications}
+
+Naturally, there is an innumerable amount of applications to which the concept of vector fields can be applied. 
+
+\begin{example}
+Imagine a fluid flowing steadily along a pipe and let $\mathbf{V}(x,y,z)$ be the velocity vector at a point $(x,y,z)$. Then $\mathbf{V}$ assigns a (three-dimensional) vector to each point in a certain domain $D\subset\R^3$. Thus $\mathbf{V}$ is a vector field.
+\end{example}
+
+\begin{example}
+Newton's Law of Gravitation states that the magnitude of the gravitational force between two objects with masses $m_1$ and $m_2$ is given by
+
+\[
+|\mathbf{F}|=\frac{m_1m_2g}{r^2}
+\]
+
+where $r$ is the distance between the objects and $g$ is the gravitational constant. Suppose the object of mass $m_2$ is located at the origin in $\R^3$, and let the position vector of the object with mass $m_1$ be $\mathbf{x}=\<x,y,z>$. Then $r=|\mathbf{x}|$ so $r^2=|\mathbf{x}|^2$.
+
+Now, the gravitational force exerted on this object acts toward the origin, and a unit vector in that direction is $-\frac{\mathbf{x}}{|\mathbf{x}|}$. Thus, the gravitational force acting on the object at $\mathbf{x}$ is
+
+\[
+\mathbf{F}(\mathbf{x})=-\frac{m_1m_2g}{|\mathbf{x}|^3}\mathbf{x}
+\]
+
+\begin{center}
+\includegraphics[scale=0.4]{vectorfield_ex3.png}
+\end{center}
+\end{example}
+
+
+\begin{example}
+Suppose an electric charge $Q$ is located at the origin. According to Coulomb's Law, the electric force $\mathbf{F}(\mathbf{x})$ exerted by this charge on a charge $q$ located at a point $(x,y,z)$ with position vector $\mathbf{x}=\<x,y,z>$ is
+
+\[
+\mathbf{F}(\mathbf{x})=\frac{\varepsilon qQ}{|\mathbf{x}|^3}\mathbf{x}
+\]
+
+where $\varepsilon$ is a constant. Notice the similarity between the last two formulas. Both are examples of \textbf{force fields}.
+
+Sometimes physicists often consider the force per unit charge:
+
+\[
+\mathbf{E}(\mathbf{x})=\frac{1}{q}\mathbf{F}(\mathbf{x})=\frac{\varepsilon Q}{|\mathbf{x}|^3}\mathbf{x}.
+\]
+
+$\mathbf{E}$ is called the \textbf{electric field} of $Q$.
+\end{example}
+
+
+
+
+\section*{Gradient Fields}
+
+If $f$ is a scalar function of two variables, then the gradient is
+
+\[
+\nabla f(x,y)=f_x(x,y)\mathbf{i}+f_y(x,y)\mathbf{j}=\<f_x,f_y>
+\]
+
+Thus, the gradient is actually a vector field! Sometimes it is called the \textbf{gradient vector field}. If $f$ is a scalar function of three variables, then the gradient vector field is 
+
+\[
+\nabla f(x,y,z)=f_x(x,y,z)\mathbf{i}+f_y(x,y,z)\mathbf{j}+f_z(x,y,z)\mathbf{k}=\<f_x,f_y,f_z>
+\]
+
+\begin{example}
+Find the gradient vector field of $f(x,y)=x^2y-y^3$. Plot the gradient vector field together with a contour map of $f$.
+
+The gradient vector field is 
+
+\begin{multicols}{2}
+\[
+\nabla f(x,y)=2xy\mathbf{i}+(x^2-3y^2)\mathbf{j}.
+\]
+
+\begin{center}
+\includegraphics[scale=0.3]{vectorfield_ex4.png}
+\end{center}
+
+\end{multicols}
+
+Notice here that the gradient field consists of all vectors that are orthogonal to the level curves, i.e. all vectors tangent to the orthogonal trajectories!
+\end{example}
+
+\begin{note}
+A vector field $\mathbf{F}$ is called a \textbf{conservative vector field} if it is the gradient of some scalar function, i.e. there exists a function $f$ such that $\mathbf{F}=\nabla f$. In this situation $f$ is called a \textbf{potential function} for $\mathbf{F}$. Not all vector fields are conservative, but many that arise in applications are. We will see why this terminology is used in a later section.
+
+\fbox{\parbox{\textwidth}{\textbf{Key Idea.} You can think of it geometrically: if $\mathbf{F}$ is a conservative vector field, then we can find a surface in $\R^3$ described by $f$ such that the (level curve of the) gradient at any point on the surface is equal to the value of $\mathbf{F}$ at that point, i.e. $\nabla f=\mathbf{F}$.}}
+\end{note}
+
+
+
+
+
+
+
+\end{document}

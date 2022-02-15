@@ -1,0 +1,422 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+%Textbook: Essential Calculus - Early Transcendentals, 2nd edition - Stewart. ISBN: 978-1-133-11228-0
+
+
+\begin{document}
+\vspace*{-1cm}
+\title{16.4 - Green's Theorem}
+\maketitle
+
+Green's Theorem gives us a very important result about the relationship between the line integral of a simple closed curve $C$ and the double integral over the plane region $D$ with $C$ as boundary.
+
+\begin{definition}
+We say a simple closed curve is \textbf{positively oriented} if it is traversed counterclockwise (as is tradition).
+\end{definition}
+
+\begin{center}
+\includegraphics[scale=0.6]{orientation.png}
+\end{center}
+
+\vspace{7mm}
+\begin{theorem}[Green's Theorem]
+Let $C$ be a positively oriented, piecewise-smooth, simple closed curve in the plane and let $D$ be the region with $C$ as boundary. If $P$ and $Q$ have continuous partial derivatives on an open region that contains $D$, then
+
+\[
+\int_CP\,dx + Q\,dy=\iint_D\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA.
+\]
+
+Since $C$ is the boundary of $D$, the conventional notation is to write $C=\partial D$, so Green's Theorem can be stated as
+
+\[
+\int_{\partial D}P\,dx + Q\,dy=\iint_D\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA.
+\]
+
+\end{theorem}
+\pagebreak
+
+
+\section*{Curl - Introduction}
+
+In order to get a thorough and intuitive understanding of Green's Theorem, we first need to introduce the concept of \textbf{curl}. We will explore it in greater detail in the next section, but for now let's see a definition and get some intuition.
+
+\begin{definition}
+Let $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$ be a vector field in $\R^3$ and suppose the partial derivatives of $P,Q,$ and $R$ all exist. Then the \textbf{curl} of $\mathbf{F}$ is the vector field on $\R^3$ defined by
+
+\[
+\text{curl }\mathbf{F}=\left(\pp{R}{y}-\pp{Q}{z}\right)\mathbf{i}+\left(\pp{P}{z}-\pp{R}{x}\right)\mathbf{j}+\left(\pp{Q}{x}-\pp{P}{y}\right)\mathbf{k}.
+\]
+\end{definition}
+ 
+But what does any of this mean? The curl of a vector space at a point $(x,y,z)$ can be visualized as a ball spinning in place under the forces of the field. The axis of rotation is the direction of the curl, and the magnitude is the speed at which the ball is rotating. It is essentially the ``microscopic'' circulation at a point. 
+
+Each component function gives you the amount of curl in a certain basis direction. Let's focus on the last one. It is the curl in the $z$-direction. Notice that it is in terms of functions of $x$ and $y$ because those are the dimensions which will cause a curl in the $z$-direction. Let's see why the component function is the way it is.
+
+\begin{center}
+\includegraphics[scale=0.5]{curl.png}
+\end{center}
+
+Let's take a birds eye view of our ball. The projection of our vector field into the $xy$-axis gives us the influence of the field on this ball's projection, the disk. If we wanted this disk to turn counter clockwise, one way to do it would be to have the $y$-component of the force, i.e. the force determined by $Q$, push upward on the disk, but it would have to do so more on the right than on the left. We would need the force given by $Q$ to increase as we move from left to right, in other words, we need $\pp{Q}{x}$ to be positive.
+
+We could also achieve this rotation if the $x$-component of the force, i.e. $P$, pushed the disk to the right, but the influence on the bottom would need to be greater than the influence on the top. In other words, we need $\pp{P}{y}$ to be negative. 
+
+Generalizing this idea, since both of these techniques exhaust the ways a field could spin the disk, the sum of these forces gives us the total curl in the $z$-direction, i.e.
+
+\[
+z\text{-curl }\mathbf{F}=\pp{Q}{x}-\pp{P}{y}\pspace \text{i.e.}\pspace \mathbf{k}\cdot\text{curl }\mathbf{F}=\pp{Q}{x}-\pp{P}{y}.
+\]
+
+
+This is a function gives us the amount of curl in the $z$-direction at any point in the vector field. Now, let's look at Green's Theorem again:
+
+\begin{theorem}[Green's Theorem]
+Let $C$ be a positively oriented, piecewise-smooth, simple closed curve in the plane and let $D$ be the region with $C$ as boundary. If $P$ and $Q$ have continuous partial derivatives on an open region that contains $D$, then
+
+\[
+\int_CP\,dx + Q\,dy=\iint_D\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA.
+\]
+
+Since $C$ is the boundary of $D$, the conventional notation is to write $C=\partial D$, so Green's Theorem can be stated as
+
+\[
+\int_{\partial D}P\,dx + Q\,dy=\iint_D\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA.
+\]
+
+\end{theorem}
+
+
+
+\begin{note}
+Green's Theorem gives a beautiful connection between the ``macroscopic circulation'' of a vector field over a closed curve and the ``microscopic'' circulation a vector field exhibits at every point in the region enclosed by that curve. Suppose $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}$. Then Green's Theorem says that the circulation of $\mathbf{F}$ along the curve $C$ is the same as the sum of all the curl inside the region it contains. 
+\end{note}
+
+\textbf{Notation.} The notation 
+
+\[
+\oint_CP\,dx+Q\,dy\ospace \varointctrclockwise_C P\,dx +Q\,dy
+\]
+
+is used to indicate the line integral is being calculated using the positive orientation.
+
+\begin{note}
+Note the similarity between Green's Theorem and FTC2 for double integrals: (1) on the left there is an integral involving derivatives, (2) the right side involves the values of the original functions only on the \textit{boundary} of their domain. Note that the boundary of an interval $[a,b]$ is $\{a,b\}$. This is absolutely amazing!
+\end{note}
+
+We will give a proof of the case where $D$ is both type I and type II. Such regions are called \textbf{simple regions}.
+
+\begin{proof}
+We will proceed by showing 
+
+\[
+\int_CP\,dx=-\iint_D\pp{P}{y}\,dA\aspace \int_CQ\,dy=\iint_D\pp{Q}{x}\,dA.
+\]
+
+We'll start by showing $\displaystyle \int_CP\,dx=-\iint_D\pp{P}{y}\,dA$ by computing both sides individually. 
+
+First, express $D$ as a type I region: $D=\{(x,y)\mid a\leq x\leq b,g_1(x)\leq y\leq g_2(x)\}$ where $g_1$ and $g_2$ are continuous functions. Then we can compute the double integral
+
+\begin{align*}
+\iint_D\pp{P}{y}\,dA&=\int_a^b\int_{g_1(x)}^{g_2(x)}\pp{P}{y}(x,y)\,dy\,dx\\[2mm]
+&=\int_a^b[P(x,g_2(x))-P(x,g_1(x))]\,dx\\[2mm]
+&=\int_a^bP(x,g_2(x))\,dx-\int_a^bP(x,g_1(x))\,dx.\hspace{10mm}(*)\\[2mm]
+\end{align*}
+
+\begin{multicols}{2}
+Hold on to that for a minute. Let's compute the line integral on the left by splitting the curve $C$ into 4 curves $C=C_1\cup C_2\cup C_3 \cup C_4$ shown to the right.
+
+
+\begin{center}
+\includegraphics[scale=0.4]{green_proof1.png}
+\end{center}
+\end{multicols}
+On $C_1$ we choose $x$ to be the parameter so we can describe $C_1$ as $x=x$, $y=g_1(x)$, $a\leq x\leq b$. Thus,
+
+\[
+\int_{C_1}P(x,y)\,dx=\int_a^bP(x,g_1(x))\,dx.
+\]
+
+Now, $C_3$ goes from right to left, so $-C_3$ goes from left to right, so we can use $x$ as the parameter again, and write 
+
+\[
+\int_{C_3}P(x,y)\,dx=-\int_{-C_3}P(x,y)\,dx=-\int_a^bP(x,g_2(x))\,dx
+\]
+
+On $C_2$ and $C_4$ (either of which might reduce to a single point), $dx=0$ so the integrals are 0 as well. Therefore,
+
+\begin{align*}
+\int_CP(x,y)\,dx&=\int_{C_1}P(x,y)\,dx+\int_{C_2}P(x,y)\,dx+\int_{C_3}P(x,y)\,dx+\int_{C_4}P(x,y)\,dx\\[2mm]
+&=\int_a^bP(x,g_1(x))\,dx+0 -\int_a^bP(x,g_2(x))\,dx+0\\[2mm]
+&=\int_a^bP(x,g_1(x))\,dx -\int_a^bP(x,g_2(x))\,dx.\hspace{10mm}(*)\\[2mm]
+\end{align*}
+
+The two starred equations are identical, and so it is shown that $\displaystyle \int_CP\,dx=-\iint_D\pp{P}{y}\,dA$.
+
+The other equation can be proved in much the same way, and is left as an exercise. Adding the results together yields Green's Theorem.
+\end{proof}
+
+\pagebreak
+
+\begin{example}
+Evaluate $\int_Cx^4\,dx+xy\,dy$ where $C$ is the triangular curve consisting of the line segments connecting $(0,0)$, $(1,0)$, and $(0,1)$.
+
+Here we could use more elementary methods, but that would require three separate integrals. Instead, let's use the connective power of Green's Theorem. We have
+
+\begin{align*}
+\int_Cx^4\,dx+xy\,dy&=\iint_D\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA\\[2mm]
+&=\iint_Dy-0\,dA\\[2mm]
+&=\int_0^1\int_0^{1-x}y\,dy\,dx\\[2mm]
+&=\int_0^1\left[\frac{1}{2}y^2\right]_{y=0}^{y=1-x}\,dx\\[2mm]
+&=\frac{1}{2}\int_0^1(1-x)^2\,dx\\[2mm]
+&=-\frac{1}{6}\left[(1-x)^3\right]_0^1\\[2mm]
+&=\frac{1}{6}.
+\end{align*}
+\end{example}
+
+\begin{example}
+Evaluate $\oint_C(3y-e^{\sin x})\,dx+(7+\sqrt{y^4+1})\,dy$ where $C$ is the circle $x^2+y^2=9$.
+
+The region $D$ bounded by $C$ is the disk $x^2+y^2\leq 9$. We have
+
+\begin{align*}
+\oint_C(3y-e^{\sin x})\,dx+(7+\sqrt{y^4+1})\,dy&=\iint_D\left[\pp{}{x}(7x+\sqrt{y^4+1})-\pp{}{y}(3y-e^{\sin x})\right]\,dA\\[2mm]
+&=\iint_D7-3\,dA\\[2mm]
+&=4\iint_D\,dA\\[2mm]
+&=4\cdot\pi(3)^2\\[2mm]
+&=36\pi.
+\end{align*}
+
+We could have instead switched to polar coordinates and gotten the same result.
+\end{example}
+
+
+Keep in mind that Green's Theorem is another tool in our toolbox that can make evaluating integrals more easily. We can also get some interesting results if we look at it in a somewhat reversed context. For example, if we know $P(x,y)=Q(x,y)=0$ on $\partial D$, then Green's Theorem gives
+
+\[
+\iint_D\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA=\int_{\partial D}P\,dx+Q\,dy=0
+\]
+
+no matter what values $P$ and $Q$ take on inside the region $D$.
+
+Also, consider that $\iint_D\,dA$ is the area of the region $D$. To agree with Green's Theorem, we would have
+
+\[
+\pp{Q}{x}-\pp{P}{y}=1.
+\]
+
+There are a few possibilities for solutions to this equation, and some are straightforward:
+
+\begin{align*}
+P(x,y)=0\aspace Q(x,y)=x\\
+P(x,y)=-y\aspace Q(x,y)=0\\
+P(x,y)=-\frac{1}{2}y\aspace Q(x,y)=\frac{1}{2}x
+\end{align*}
+
+Thus, Green's Theorem gives us the following formulas for the area of a region.
+
+\[
+A=\oint_{\partial D}x\,dy=-\oint_{\partial D}y\,dx=\frac{1}{2}\oint_{\partial D}x\,dy-y\,dx
+\]
+
+\begin{example}
+Find the area enclosed by the ellipse $\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$.
+
+Earlier you figured out that the ellipse has parametric equations $x=a\cos t$ and $y=b\sin t$ where $0\leq t\leq 2\pi$. Using the third formula above,
+
+\begin{align*}
+A&=\frac{1}{2}\int_Cx\,dy-y\,dx\\[2mm]
+&=\frac{1}{2}\int_0^{2\pi}(a\cos t)(b\cos t)\,dt-(b\sin t)(-a\sin t)\,dt\\[2mm]
+&=\frac{ab}{2}\int_0^{2\pi}\,dt\\[2mm]
+&=\pi ab.
+\end{align*}
+\end{example}
+
+\begin{note}
+Planimeters are cool! References:
+
+\begin{itemize}
+\itemsep3mm
+\item R. W. Gatterman, ``The planimeter as an example of Green's Theorem'' Amer. Math. Monthly, Vol. 88 (1981), pp. 701-4.
+\item Tanya Leise, ``As the planimeter wheel turns'' College Math. Journal, Vol. 38 (2007), pp. 24-31.
+\end{itemize}
+\end{note}
+
+\section*{Extending the Scope of Green's Theorem}
+
+We only proved Green's Theorem for the case where $D$ is a simple region, and now we extend it to the case where $D$ is a finite union of simple regions. 
+
+We can decompose $D$ as $D=D_1 \cup D_2$ as shown.
+
+\begin{multicols}{2}
+\begin{center}
+\includegraphics[scale=0.5]{green_union1.png}
+\end{center}
+
+\begin{align*}
+\int_{C_1\cup C_3}P\,dx+Q\,dy&=\iint_{D_1}\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA\\[2mm]
+\int_{C_2\cup (-C_3)}P\,dx+Q\,dy&=\iint_{D_2}\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA\\
+\end{align*}
+
+\end{multicols}
+
+When adding these together, the line integrals over $C_3$ cancel each other out.
+
+\pagebreak
+
+Green's Theorem can also be applied to regions with holes, i.e. regions that are not simply connected. The boundary $C$ of the region shown below consists of two curves $C_1$ and $C_2$. We can parameterize these curves so that the region $D$ is always on the left as $C_i$ is traversed. The line integrals over the lines that are traversed twice in opposite directions cancel each other out, so we are left with
+
+
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[scale=0.7]{green_union3.png}
+\end{center}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[scale=0.7]{green_union4.png}
+\end{center}
+\end{minipage}
+
+
+\[
+\iint_D\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA=\int_{C_1}P\,dx+Q\,dy+\int_{C_2}P\,dx+Q\,dy=\int_CP\,dx+Q\,dy.
+\]
+
+\begin{example}
+If $\mathbf{F}(x,y)=-\frac{y}{x^2+y^2}\mathbf{i}+\frac{x}{x^2+y^2}\mathbf{j}$, show that $\int_C\mathbf{F}\cdot\,d\mathbf{r}=2\pi$ for every positively oriented simple closed path that encloses the origin.
+
+
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{green_stream.png}
+\end{center}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{green_hole.png}
+\end{center}
+\end{minipage}
+
+
+
+Since $C$ can be any arbitrary closed path, computing the integral directly doesn't seem feasible. Instead suppose $C'$ is a counterclockwise oriented circle centered at the origin and with radius $a$ small enough so that $C'$ is entirely inside $C$. Let $D$ be the region bounded by $C$ and $C'$. Its positively oriented boundary is $C\cup (-C')$, so Green's Theorem gives
+
+\begin{align*}
+\int_CP\,dx+Q\,dy+\int_{-C'}P\,dx+Q\,dy\\[2mm]
+&=\iint_D\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA\\[2mm]
+&=\iint_D\left[\frac{y^2-x^2}{(x^2+y^2)^2}-\frac{y^2-x^2}{(x^2+y^2)^2}\right]\,dA\\[2mm]
+&=0.
+\end{align*}
+
+Therefore, 
+
+\[
+\int_CP\,dx+Q\,dy=\int_{C'}P\,dx+Q\,dy.
+\]
+
+This means that 
+
+
+\[
+\int_C\mathbf{F}\cdot\,d\mathbf{r}=\int_{C'}\mathbf{F}\cdot\,d\mathbf{r}.
+\]
+
+We can easily compute this integral using the standard parameterization of the circle.
+
+\begin{align*}
+\int_C\mathbf{F}\cdot\,d\mathbf{r}&=\int_{C'}\mathbf{F}\cdot\,d\mathbf{r}\\[2mm]
+&=\int_0^{2\pi}\mathbf{F}(\mathbf{r}(t))\cdot\mathbf{r}'(t)\,dt\\[2mm]
+&=\int_0^{2\pi}\left(\frac{-\sin t}{\cos^2t+\sin^2t}\mathbf{i}+\frac{\cos t}{\cos^2t+\sin^2t}\mathbf{j}\right)\cdot(-\sin t\mathbf{i}+\cos t\mathbf{j})\,dt\\[2mm]
+&=\int_0^{2\pi}1\,dt\\[2mm]
+&=2\pi.
+\end{align*}
+\end{example}
+
+\pagebreak
+
+\textbf{Proof of Theorem from Previous Section.}
+
+\begin{theorem}
+Let $\mathbf{F}=P\mathbf{i}+Q\mathbf{i}$ be a vector field on an open simply-connected region $D$. Suppose that $P$ and $Q$ have continuous first-order partial derivatives and 
+
+\[
+\pp{P}{y}=\pp{Q}{x}\pspace\pspace\text{i.e.}\pspace\pp{P}{y}-\pp{Q}{x}=0\text{ throughout $D$.}
+\]
+
+Then $\mathbf{F}$ is conservative.
+
+\end{theorem}
+
+
+\begin{proof}
+If $C$ is any simple closed path in $D$ and $R$ is the region that $C$ encloses, then Green's Theorem gives
+
+\[
+\oint\mathbf{F}\cdot\,d\mathbf{r}=\oint P\,dx+Q\,dy=\iint_R\left(\pp{Q}{x}-\pp{P}{y}\right)\,dA=\iint_R0\,dA=0.
+\]
+
+A curve that is not simple crosses itself at one or more points, so it can be broken up into a number of simple closed curves. The line integral of $\mathbf{F}$ around these simple curves is 0, so adding these integrals up we see that the total line integral is 0. Therefore $\int_C\mathbf{F}\cdot\,d\mathbf{r}$ is independent of path and so $\mathbf{F}$ is a conservative vector field.
+\end{proof}
+
+\end{document}

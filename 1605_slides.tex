@@ -1,0 +1,562 @@
+\documentclass[11pt,english,
+handout
+]{beamer}
+
+%Preamble  
+\input{/Users/Adam/Desktop/LBCC/MATH80/MATH80_Lesson_Plans/MATH80_Slides_Preamble.tex}
+
+%Textbook: Essential Calculus - Early Transcendentals, 2nd edition - Stewart. ISBN: 978-1-133-11228-0
+
+
+
+\begin{document}
+
+%Slide titles are all contained in this file..
+\ExecuteMetaData[/Users/Adam/Desktop/LBCC/MATH80/MATH80_Lesson_Plans/MATH80_Slide_Titles.tex]{1605}
+
+%Global Title Slide Format is contained in the following file.
+\input{/Users/Adam/Desktop/LBCC/MATH80/MATH80_Lesson_Plans/MATH80_Title_Slide_Format.tex}
+\makebeamertitle
+
+
+
+
+
+
+
+
+
+\begin{frame}{Curl}
+\small
+%Recall,
+%
+%\begin{definition}
+%Let $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$ be a vector field in $\MB{R}^3$ and suppose the partial derivatives of $P,Q,$ and $R$ all exist. Then the \textbf{curl} of $\mathbf{F}$ is the vector field on $\MB{R}^3$ defined by
+%
+%\[
+%\text{curl }\mathbf{F}=\left(\pp{R}{y}-\pp{Q}{z}\right)\mathbf{i}+\left(\pp{P}{z}-\pp{R}{x}\right)\mathbf{j}+\left(\pp{Q}{x}-\pp{P}{y}\right)\mathbf{k}.
+%\]
+%\end{definition}
+%
+%
+In the last section, we got an intuition for what curl is, and how Green's Theorem relates to curl. In this section, we see how it can be expressed using the cross product. We're going to reintroduce a bit of notation and also abuse it. \pause We define the \textbf{vector differential operator} $\nabla$ pronounced ``del'' as
+
+\[
+\nabla =\mathbf{i}\pp{}{x}+\mathbf{j}\pp{}{y}+\mathbf{k}\pp{}{z}=\Bigl<\pp{}{x},\pp{}{y},\pp{}{z}\Bigr>.
+\]
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Curl}
+\small
+The rule it describes is the act of taking the partial derivatives of a function and producing a vector where the partial derivatives are the component functions. \pause del itself is a vector consisting of partial derivative operators as the components. \pause If the input of del is a scalar function, then del says to ``take the gradient'' of that. \pause More specifically, 
+
+\begin{align*}
+\nabla f&=\Bigl<\pp{}{x},\pp{}{y},\pp{}{z}\Bigr>f=\Bigl<\pp{}{x}(f),\pp{}{y}(f),\pp{}{z}(f)\Bigr>\\[2mm]
+&=\Bigl<\pp{f}{x},\pp{f}{y},\pp{f}{z}\Bigr>=\text{gradient of $f$, or}\\[5mm]
+\nabla f&=\pp{f}{x}\mathbf{i}+\pp{f}{y}\mathbf{j}+\pp{f}{z}\mathbf{k}
+\end{align*}
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Curl}
+\small
+What's nice about viewing $\nabla$ as a vector, is that it opens itself up to other operations as well. \pause If we think of $\nabla$ as a vector itself with components $\pp{}{x}$, $\pp{}{y}$, and $\pp{}{z}$, we can consider the cross product of $\nabla$ with the vector field $\mathbf{F}$ as
+
+{\footnotesize
+\[
+\nabla\times\mathbf{F}=\begin{vmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k}\\\pp{}{x} & \pp{}{y} & \pp{}{z}\\ P & Q & R\end{vmatrix}=\left(\pp{R}{y}-\pp{Q}{z}\right)\mathbf{i}+\left(\pp{P}{z}-\pp{R}{x}\right)\mathbf{j}+\left(\pp{Q}{x}-\pp{P}{y}\right)\mathbf{k}=\text{curl }\mathbf{F}
+\]
+}
+
+Thus, we can express the curl of $\mathbf{F}$ in terms of del.\pause 
+
+\lspace 
+\textbf{Note:} The gradient of a function $f$ of three variables is a vector field in $\MB{R}^3$, so we can compute its curl.
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Curl}
+\small
+
+\begin{example}
+If $\mathbf{F}(x,y,z)=xz\mathbf{i}+xyz\mathbf{j}-y^2\mathbf{k}$, find curl $\mathbf{F}$.\pause
+
+\lspace
+{\footnotesize
+\begin{align*}
+\text{curl }\mathbf{F}&=\nabla \times \mathbf{F}\\[2mm]
+&=\begin{vmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k}\\[2mm]\pp{}{x} & \pp{}{y} & \pp{}{z}\\[2mm] xz & xyz & -y^2\end{vmatrix}\\[2mm]
+&=\left[\pp{}{y}(-y^2)-\pp{}{z}(xyz)\right]\mathbf{i}-\left[\pp{}{x}(-y^2)-\pp{}{z}(xz)\right]\mathbf{j}+\left[\pp{}{x}(xyz)-\pp{}{y}(xz)\right]\mathbf{k}\\[2mm]
+&=(-2y-xy)\mathbf{i}-(0-x)\mathbf{j}+(yz-0)\mathbf{k}\\[2mm]
+&=-y(2+x)\mathbf{i}+x\mathbf{j}+yz\mathbf{k}.
+\end{align*}}
+\end{example}
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Curl}
+\small
+\textbf{Note:} If curl $\mathbf{F}=\mathbf{0}$ at a point $P$, then $\mathbf{F}$ is called \textbf{irrotational} at $P$.\pause
+
+\lspace
+\begin{theorem}
+If $\mathbf{F}$ is a conservative vector field over $\MB{R}^3$ that has continuous second-order partial derivatives, then
+\[
+\text{curl}(\mathbf{F})=\mathbf{0}.
+\]
+\end{theorem}\pause
+
+\lspace
+\begin{proofs}
+
+Since $\mathbf{F}$ is conservative, by definition there exists a function $f$ such that $\mathbf{F}=\nabla f$. Thus...
+\end{proofs}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Curl}
+\small
+\begin{proof}
+\begin{align*}
+\text{curl }\mathbf{F}&=\text{curl}(\nabla f)=\nabla \times (\nabla f)=\begin{vmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k}\\\pp{}{x} & \pp{}{y} & \pp{}{z}\\ \pp{f}{x} & \pp{f}{y} & \pp{f}{z}\end{vmatrix}\\[2mm]
+&=\left(\pp{^2f}{y\,\partial z}-\pp{^2f}{z\,\partial y}\right)\mathbf{i}+\left(\pp{^2f}{z\,\partial x}-\pp{^2f}{x\,\partial z}\right)\mathbf{j}+\left(\pp{^2f}{x\,\partial y}-\pp{^2f}{y\,\partial x}\right)\mathbf{k}\\[3mm]
+&=0\mathbf{i}+0\mathbf{j}+0\mathbf{k}=\mathbf{0}.
+\end{align*}
+
+by Clairaut's theorem.
+\end{proof}\pause
+
+\lspace
+Notice the similarity to the result $\mathbf{a}\times \mathbf{a}=\mathbf{0}$.
+\end{frame}
+
+
+
+
+
+\begin{frame}[t]{Curl}
+\small
+The converse of the previous theorem, $\text{curl}(\mbf{F})=\mbf{0} \implies \mbf{F}$ conservative, is not true in general, but it is true if the component functions of $\mbf{F}$ are $C^1$ and $\mathbf{F}$ is defined on a simply connected region:\pause 
+
+\lspace
+\begin{theorem}
+If $\mathbf{F}$ is a vector field defined on a simply connected region (e.g. $\MB{R}^3$) where $\text{curl}(\mathbf{F})=\mathbf{0}$ and whose component functions have continuous partial derivatives, then $\mathbf{F}$ is a conservative vector field.
+\end{theorem}\pause
+
+\lspace
+We got a glimpse of this fact in the previous section when we were developing intuition, and we will see the proof of this theorem in a later section in this chapter. \pause \textbf{Note:} This theorem is handy because it gives us a simple way of determining if a vector field is conservative or not when the situation is nice enough.
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Curl}
+\begin{example}
+Is the vector field $\mathbf{F}(x,y,z)=xz\mathbf{i}+xyz\mathbf{j}-y^2\mathbf{k}$ conservative?\pause
+
+\lspace
+We have
+\[
+\text{curl }\mathbf{F}=-y(2+x)\mathbf{i}+x\mathbf{j}+yz\mathbf{k}.
+\]\pause 
+
+Since curl $\mathbf{F}\neq\mathbf{0}$, $\mathbf{F}$ is not conservative.
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Divergence}
+\small
+Next we explore another very important property of vector fields called \textbf{divergence}, and see how our abuse of notation helps us again.\pause
+
+\lspace
+\begin{definition}
+Let $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$ be a vector field on $\MB{R}^3$ and suppose the partial derivatives all exist. The \textbf{divergence of $\mathbf{F}$} is the \uline{scalar} field of three variables defined by 
+
+\[
+\boxed{\text{div }\mathbf{F}=\pp{P}{x}+\pp{Q}{y}+\pp{R}{z}.}
+\]
+\end{definition}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Divergence}
+\small
+We can write this in terms of $\nabla$:
+
+\[
+\text{div }\mathbf{F}=\pp{P}{x}+\pp{Q}{y}+\pp{R}{z}=\Bigl<\pp{}{x},\pp{}{y},\pp{}{z}\Bigr>\cdotr\<P,Q,R>=\nabla\cdotr\mathbf{F}
+\]
+
+\[
+\boxed{\text{div }\mathbf{F}=\nabla\cdotr\mathbf{F}}
+\]\pause
+
+
+Intuitively, div $\mathbf{F}(x,y,z)$ measures the tendency for a particle to diverge from the point $(x,y,z)$:\pause
+
+\begin{itemize}
+\itemsep2mm
+\item $\pp{P}{x}+\pp{Q}{y}+\pp{R}{z}$ is the sum of the rates of change in the respective basis directions at any point.\pause
+\item If this sum is positive, then particles have a tendency to move away from that point.\pause
+\item If the divergence is negative, then particles have a tendency to move toward that point.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Divergence}
+\small
+
+\textbf{Note:} \fbox{curl is a vector} and \fbox{divergence is a scalar}. This jibes with the definitions of the cross product and the dot product.\pause 
+
+\lspace
+\begin{center}
+\fbox{\textbf{Required Supplementary Video:} \href{https://www.youtube.com/watch?v=rB83DpBJQsE}{3B1B Curl and Divergence Intuition}}\pause
+\end{center}
+
+
+
+\lspace
+\begin{example}
+Find div $\mathbf{F}$ if $\mathbf{F}(x,y,z)=xz\mathbf{i}+xyz\mathbf{j}-y^2\mathbf{k}$.\pause 
+
+\lspace
+By definition we have
+
+\[
+\text{div }\mathbf{F}=\nabla \cdotr \mathbf{F}=\pp{}{x}(xz)+\pp{}{y}(xyz)+\pp{}{z}(-y^2)=z+xz.
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}{Divergence}
+\small
+\begin{theorem}
+If $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$ is a vector field on $\MB{R}^3$ and $P,Q,R$ are $C^2$ functions, i.e. they have continuous second-order partial derivatives, then
+
+\[
+\text{div curl }\mathbf{F}=0.
+\]
+\end{theorem}\pause 
+
+\lspace
+This says the tendency of a particle to diverge from the curl vector is 0.
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Divergence}
+\small
+\begin{proof}
+\vspace{-5mm}
+\begin{align*}
+\text{div curl }\mathbf{F}&=\nabla \cdotr(\nabla\times\mathbf{F})\\[2mm]
+&=\pp{}{x}\left(\pp{R}{y}-\pp{Q}{z}\right)+\pp{}{y}\left(\pp{P}{z}-\pp{R}{x}\right)+\pp{}{z}\left(\pp{Q}{x}-\pp{P}{y}\right)\\[2mm]
+&=\pp{^2R}{x\,\partial y}-\pp{^2Q}{x\,\partial z}+\pp{^2P}{y\,\partial z}-\pp{^2R}{y\,\partial x}+\pp{^2Q}{z\,\partial x}-\pp{^2P}{z\,\partial y}\\[2mm]
+&=0
+\end{align*}
+
+by Clairaut's Theorem. \pause More geometrically, $\nabla\times\mathbf{F}$ is orthogonal to both $\nabla$ and $\mathbf{F}$, so $\nabla\cdotr(\nabla\times\mathbf{F})=0$.
+\end{proof}\pause
+
+\lspace
+\begin{definition}
+If div $\mathbf{F}=0$, then $\mathbf{F}$ is said to be \textbf{incompressible}.
+\end{definition}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Divergence}
+\footnotesize
+Another very important operator occurs when we compute the divergence of a gradient vector field:
+\[
+\text{div}(\nabla f)=\nabla \cdotr(\nabla f)=\pp{^2f}{x^2}+\pp{^2f}{y^2}+\pp{f}{z^2}.
+\]\pause 
+This expression occurs so often that we denote it as
+\[
+\Delta=\nabla^2=\nabla \cdotr \nabla
+\]\pause
+This is called the \textbf{Laplace operator} because \textbf{Laplace's Equation} is
+
+\[
+\Delta f=\pp{^2f}{x^2}+\pp{^2f}{y^2}+\pp{f}{z^2}=0
+\]\pause
+
+\textbf{Note:} \textit{The solutions to the Laplace equation are called \textbf{harmonic functions}}. These are functions for which the tendency of a particle to move away from the gradient at any point is 0.
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Vector Forms of Green's Theorem}
+\small 
+Now that we're comfortable with the concepts of curl and divergence, we can reexpress Green's Theorem in a couple different ways that provide more insight into the relationship it describes. \pause 
+
+\lspace
+Recall from section 16.4 we found 
+
+\[
+z\text{-curl }\mathbf{F}=\left(\pp{Q}{x}-\pp{P}{y}\right)\mbf{k} \quad \iff \quad (\text{curl }\mathbf{F})\cdotr \mbf{k}=\pp{Q}{x}-\pp{P}{y}.
+\]\pause
+
+Thus, we can write \textbf{Green's Theorem} as 
+
+\[
+\boxed{
+\oint_C\mathbf{F}\cdotr\,d\mathbf{r}=\iint_D(\text{curl }\mathbf{F})\cdotr\mathbf{k}\,dA}
+\]
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Vector Forms of Green's Theorem}
+\small 
+Now we compute another equivalent form. Suppose $C$ is given by the vector equation $\mathbf{r}(t)=x(t)\mathbf{i}+y(t)\mathbf{j}$ where $a\leq t\leq b$. \pause Then
+
+\[
+\mathbf{T}(t)=\frac{x'(t)}{|\mathbf{r}'(t)|}\mathbf{i}+\frac{y'(t)}{|\mathbf{r}'(t)|}\mathbf{j}.
+\]\pause
+
+The outward unit normal vector is
+\[
+\mathbf{n}(t)=\frac{y'(t)}{|\mathbf{r}'(t)|}\mathbf{i}-\frac{x'(t)}{|\mathbf{r}'(t)|}\mathbf{j},
+\]
+and it's computation is left as an exercise.
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[t]{Vector Forms of Green's Theorem}
+\small 
+
+Observe:
+\begin{align*}
+\oint_C\mathbf{F}\cdotr\mathbf{n}\,ds&=\int_a^b(\mathbf{F}\cdotr\mathbf{n})|\mathbf{r}'(t)|\,dt\\[2mm]
+&=\int_a^b\left[\frac{P(x(t),y(t))y'(t)}{|\mathbf{r}'(t)|}-\frac{Q(x(t),y(t))x'(t)}{|\mathbf{r}'(t)|}\right]|\mathbf{r}'(t)|\,dt\\[2mm]
+&=\int_a^bP(x(t),y(t))y'(t)\,dt-Q(x(t),y(t))x'(t)\,dt=\int_CP\,dy-Q\,dx\\[2mm]
+&=\int_C-Q\,dx+P\,dy=\iint_D\pp{P}{x}-\left(-\pp{Q}{y}\right)\,dA\\[2mm]
+&=\iint_D\pp{P}{x}+\pp{Q}{y}\,dA=\iint_D\text{div }\mathbf{F}(x,y)\,dA.
+\end{align*}
+
+by Green's Theorem.
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Vector Forms of Green's Theorem}
+\small 
+Thus, we can write
+
+\[
+\boxed{\oint_C\mathbf{F}\cdotr\mathbf{n}\,ds=\iint_D\text{div }\mathbf{F}(x,y)\,dA.}
+\]\pause
+
+
+This says that the line integral of the normal component of $\mathbf{F}$ along $C$ is equal to the double integral of the divergence of $\mathbf{F}$ over the region $D$ enclosed by $C$. \pause More intuitively, the outward flow of $\mbf{F}$ over the curve $C$ is equal to the sum of the divergence within the region $C$ encloses.
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Vector Forms of Green's Theorem}
+\small 
+\[
+\boxed{\oint_C\mathbf{F}\cdotr\mathbf{n}\,ds=\iint_D\text{div }\mathbf{F}(x,y)\,dA}
+\]
+
+\lspace
+\[
+\boxed{
+\oint_C\mathbf{F}\cdotr\,d\mathbf{r}=\iint_D(\text{curl }\mathbf{F})\cdotr\mathbf{k}\,dA}
+\]
+
+The other vector form we found says that the line integral of the tangential component of $\mathbf{F}$ along $C$ is the same as the double integral of the vertical component of curl $\mathbf{F}$ over the region $D$ enclosed by $C$. In other words, the circulation of the force field around $C$ is the sum of the circulation within the region $C$ contains, as we deduced earlier.
+
+
+\end{frame}
+
+
+
+
+\end{document}

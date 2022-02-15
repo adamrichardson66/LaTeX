@@ -1,0 +1,327 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+%Textbook: Essential Calculus - Early Transcendentals, 2nd edition - Stewart. ISBN: 978-1-133-11228-0
+
+
+\begin{document}
+\vspace*{-1cm}
+\title{16.8 - Stokes' Theorem}
+\maketitle
+
+
+
+Stokes' Theorem is a higher dimensional version of Green's Theorem. Recall that Green's Theorem describes a profound relationship between a double integral over a planar region and the line integral of the boundary of that planar region. Stokes theorem describes the profound connection between a surface integral over a surface $S$ and its boundary curve, which is a space curve.
+
+\begin{center}
+\includegraphics[scale=0.5]{man_orient.png}
+\end{center}
+
+Let $S$ be an oriented surface with unit normal vector $\mathbf{n}$ as pictured. The orientation induces a \textbf{positive orientation of the boundary curve $C$} shown in the figure. If you walk in the positive direction around $C$ with your head pointing in the direction of $\mathbf{n}$, then the region will always be on your left.
+
+
+
+\begin{theorem}[Stokes' Theorem]
+Let $S$ be an oriented piecewise-smooth surface that is bounded by a simple, closed, piecewise-smooth boundary curve $C$ with positive orientation. Let $\mathbf{F}$ be a vector field whose components have continuous partial derivatives on an open region in $\R^3$ that contains $S$. Then
+
+\[
+\int_C\mathbf{F}\cdot\,d\mathbf{r}=\iint_S\text{curl }\mathbf{F}\cdot\,d\mathbf{S}.
+\]
+\end{theorem}
+
+\begin{note}
+Since
+
+\[
+\int_C\mathbf{F}\cdot\,d\mathbf{r}=\int_C\mathbf{F}\cdot\mathbf{T}\,ds\aspace \iint_S\text{curl }\mathbf{F}\cdot\,d\mathbf{S}=\iint_S\text{curl }\mathbf{F}\cdot\mathbf{n}\,dS,
+\]
+
+Stokes' Theorem says that the line integral around the boundary curve of $S$ of the tangential component of $\mathbf{F}$ is equal to the surface integral over $S$ of the normal component of the curl of $\mathbf{F}$.
+
+In analogy with Green's theorem, Stokes' theorem says the circulation of $\mathbf{F}$ along the space curve $C$ is the same as the sum of the curl over the surface $S$ bounded by $C$.
+
+Notice also the similarity to the FTC as with Green's Theorem: Stokes' Theorem relates an integral involving derivatives (the curl) to an integral involving only the boundary of $S$.
+
+\textbf{Observe.} In the case where the surface $S$ is flat and lies in the $xy$-plane with upward orientation, the unit normal is $\mathbf{k}$, the surface integral becomes a double integral, and Stokes' Theorem becomes
+
+\[
+\int_C\mathbf{F}\cdot\,d\mathbf{r}=\iint_S\text{curl }\mathbf{F}\cdot\,d\mathbf{S}=\iint_S(\text{curl }\mathbf{F})\cdot\mathbf{k}\,dA=\iint_S\left(\pp{q}{x}-\pp{P}{y}\right)\,dA
+\]
+
+which is Green's Theorem.
+\end{note}
+
+\textbf{Notation.} It is common to use the symbol $\partial S$ to indicate the boundary of $S$, so Stokes' Theorem says 
+
+\[
+\int_{\partial S}\mathbf{F}\cdot\,d\mathbf{r}=\iint_S\text{curl }\mathbf{F}\cdot\,d\mathbf{S}.
+\]
+
+
+
+
+The proof of Stokes' Theorem is too advanced for this class, but you will see it in an undergraduate math analysis course. We can however prove it when $S$ us a graph and $\mathbf{F}$, $S$, and $C$ are well-behaved.
+
+\begin{proof}
+
+Suppose $S$ is a surface given by $z=g(x,y)$ where $(x,y)\in D$, $g$ has continuous second-order partial derivatives and $D$ is a simple plane region whose boundary curve $C_1$ corresponds to $C$. If the orientation of $S$ is upward, then the positive orientation of $C$ corresponds to the positive orientation of $C_1$. 
+
+\begin{center}
+\includegraphics[scale=0.5]{stokes1.png}
+\end{center}
+
+Let $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$ where the partial derivatives are continuous. Since $S$ is a graph, we can apply a formula for the surface integral from the last section with $\mathbf{F}$ replaced by curl $\mathbf{F}$:
+
+\[
+\iint_S\text{curl }\mathbf{F}\cdot\,d\mathbf{S}=\iint_D\left[-\left(\pp{R}{y}-\pp{Q}{z}\right)\pp{z}{x}-\left(\pp{P}{z}-\pp{R}{x}\right)\pp{z}{y}+\left(\pp{Q}{x}-\pp{P}{y}\right)\right]\,dA
+\]
+ 
+where the partial derivatives of $P,Q,$ and $R$ are evaluated at $(x,y,g(x,y))$. Let $x=x(t)$, $y=y(t)$, $a\leq t\leq b$ be a parameterization of $C_1$. Then the corresponding parameterization of $C$ is
+
+\[
+x=x(t)\pspace y=y(t)\pspace z=g(x(t),y(t))\pspace a\leq t\leq b.
+\]
+
+Now, by the Chain Rule, we have 
+
+\begin{align*}
+\int_C\mathbf{F}\cdot\,d\mathbf{R}&=\int_a^b\mathbf{F}\cdot\mathbf{r}'(t)\,dt\\[2mm]
+&=\int_a^b\left(P\dd{x}{t}+Q\dd{y}{t}+R\dd{z}{t}\right)\,dt\\[2mm]
+&=\int_a^b\left[P\dd{x}{t}+Q\dd{y}{t}+R\left(\pp{z}{x}\dd{x}{t}+\pp{z}{y}\dd{y}{t}\right)\right]\,dt\\[2mm]
+&=\int_a^b\left[\left(P+R\pp{z}{x}\right)\dd{x}{t}+\left(Q+R\pp{z}{t}\right)\dd{y}{t}\right]\,dt\\[2mm]
+&=\int_{C_1}\left(P+R\pp{z}{x}\right)\,dx+\left(Q+R\pp{z}{y}\right)\,dy\\[2mm]
+&=\iint_D\left[\pp{}{x}\left(Q+R\pp{z}{y}\right)-\pp{}{y}\left(P+R\pp{z}{x}\right)\right]\,dA.
+\end{align*}
+
+The last step was done using Green's Theorem. Now, using the Chain Rule again, remembering that $P$, $Q$, and $R$ are functions of $x,y,z$ and that $z$ is a function of $x,y$, we get
+
+\begin{align*}
+\int_C\mathbf{F}\cdot\,d\mathbf{r}&=\iint_D\left[\left(\pp{Q}{x}+\pp{Q}{z}\pp{z}{x}+\pp{R}{x}\pp{z}{y}+\cancel{\pp{R}{z}\pp{z}{x}\pp{z}{y}}+\cancel{R\pp{^2z}{x\,\partial y}}\right)\right.\\[2mm]
+&-\left.\left(\pp{P}{y}+\pp{P}{z}\pp{z}{y}+\pp{R}{y}\pp{z}{x}+\cancel{\pp{R}{z}\pp{z}{y}\pp{z}{x}}+\cancel{R\pp{^2z}{y\,\partial x}}\right)\right]\,dA\\[2mm]
+&=\iint_D\left[\pp{Q}{x}+\pp{Q}{z}\pp{z}{x}+\pp{R}{x}\pp{z}{y}-\pp{P}{y}-\pp{P}{z}\pp{z}{y}-\pp{R}{y}\pp{z}{x}\right]\,dA\\[2mm]
+&=\iint_D\left[-\pp{R}{y}\pp{z}{x}+\pp{Q}{z}\pp{z}{x}-\pp{P}{z}\pp{z}{y}+\pp{R}{x}\pp{z}{y}+\pp{Q}{x}-\pp{P}{y}\right]\,dA\\[2mm]
+&=\iint_D\left[-\left(\pp{R}{y}-\pp{Q}{z}\right)\pp{z}{x}-\left(\pp{P}{z}-\pp{R}{x}\right)\pp{z}{y}+\left(\pp{Q}{x}-\pp{P}{y}\right)\right]\,dA\\[2mm]
+&=\iint_S\text{curl }\mathbf{F}\cdot\,d\mathbf{S}.
+\end{align*}
+\end{proof}
+
+\pagebreak
+
+
+\begin{example}
+In this example we will use a line integral to evaluate an equivalent surface integral.
+
+Use Stokes' Theorem to compute the integral $\iint_S\text{curl }\mathbf{F}\cdot\,d\mathbf{S}$ where $\mathbf{F}(x,y,z)=xz\mathbf{i}+yz\mathbf{j}+xy\mathbf{k}$ and $S$ is the part of the sphere $x^2+y^2+z^2=4$ that lies inside the cylinder $x^2+y^2=1$ and above the $xy$-plane.
+
+\begin{center}
+\includegraphics[scale=0.4]{hemisphere.png}
+\end{center}
+
+First we need to find the boundary curve. To find it, we need to know when the two surfaces intersect. The equations of our two surfaces yield $4-z^2=1$, so $z=\sqrt{3}$ since $z\geq 0$. Then the boundary $C$ of our region is the circle given by $x^2+y^2=1$, $z=\sqrt{3}$. A vector equation of this circle is
+
+\[
+\mathbf{r}(t)=\cos t\mathbf{i}+\sin t\mathbf{j}+\sqrt{3}\mathbf{k}\pspace 0\leq t\leq 2\pi,
+\]
+\[
+\text{so }\mathbf{r}'(t)=-\sin t\mathbf{i}+\cos t\mathbf{j}.
+\]
+
+Thus, $\mathbf{F}(\mathbf{r}(t))=\sqrt{3}\cos t\mathbf{i}+\sqrt{3}\sin t\mathbf{j}+\cos t\sin t\mathbf{k}$. By Stokes' theorem, we have
+
+\begin{align*}
+\iint_S\text{curl }\mathbf{F}\cdot\,d\mathbf{S}&=\int_C\mathbf{F}\cdot\,d\mathbf{r}\\[2mm]
+&=\int_0^{2\pi}\mathbf{F}(\mathbf{r}(t))\cdot\mathbf{r}'(t)\,dt\\[2mm]
+&=\int_0^{2\pi}(-\sqrt{3}\cos t\sin t+\sqrt{3}\sin t\cos t)\,dt\\[2mm]
+&=\sqrt{3}\int_0^{2\pi}0\,dt\\[2mm]
+&=0.
+\end{align*}
+\end{example}
+
+
+\begin{note}
+Notice that in this example we were able to compute the surface integral of that surface by using \textit{only} values on the boundary curve. This means that for any other oriented surface with the same boundary curve, the value of the surface integral is the same! In other words...
+\end{note}
+
+\begin{corollary}
+The conclusion of Stokes' Theorem is independent of (appropriate) surface. More specifically, if $S_1$ and $S_2$ are oriented surfaces with the same oriented boundary curve $C$ and both satisfy the hypotheses of Stokes' Theorem, then
+
+\[
+\iint_{S_1}\text{curl }\mathbf{F}\cdot\,d\mathbf{S}=\int_C\mathbf{F}\cdot\,d\mathbf{r}=\iint_{S_2}\text{curl }\mathbf{F}\cdot\,d\mathbf{S}.
+\]
+\end{corollary}
+
+
+
+
+
+
+
+
+\begin{example}
+In this example, we'll evaluate a line integral by evaluating an equivalent surface integral, which we'll evaluate by evaluating a double integral.
+
+Evaluate $\int_C\mathbf{F}\cdot\,d\mathbf{r}$ where $\mathbf{F}(x,y,z)=-y^2\mathbf{i}+x\mathbf{j}+z^2\mathbf{k}$ and $C$ is the curve of intersection of the plane $y+z=2$ and the cylinder $x^2+y^2=1$. (Orient $C$ to be counterclockwise from above.)
+
+The curve $C$ is an ellipse.
+
+\begin{center}
+\includegraphics[scale=0.5]{ellipse.png}
+\end{center}
+
+We could compute this particular integral directly, but it is easier to use Stokes' theorem. First we need to compute the curl:
+
+\[
+\text{curl }\mathbf{F}=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\ \pp{}{x} &\pp{}{y}&\pp{}{z} \\ -y^2 & x & z^2\end{vmatrix}=(1+2y)\mathbf{k}.
+\]
+
+Now, we have our choice of whatever surface we would like to use to integrate, but the natural and easiest choice is the ellipse embedded in the plane $y+z=2$ that is bounded by $C$. The projection of this ellipse onto the $xy$-plane is the circle $x^2+y^2=1$. Setting $z=g(x,y)=2-y$, we have
+
+\[
+\mathbf{r}(x,y)=\<x,y,2-y>\aspace \mathbf{r}_u\times\mathbf{r}_v=\<0,1,1>
+\]
+
+\begin{align*}
+\int_C\mathbf{F}\cdot\,d\mathbf{r}&=\iint_S\text{curl }\mathbf{F}\cdot\,d\mathbf{S}\\[2mm]
+&=\iint_S(\text{curl }\mathbf{F})\cdot\mathbf{n}\,dS\\[2mm]
+&=\iint_S(\text{curl }\mathbf{F})\cdot(\mathbf{r}_x\times\mathbf{r}_y)\,dS\\[2mm]
+&=\iint_S\<0,0,1+2y>\cdot\<0,1,1>\,dS\\[2mm]
+&=\iint_D(1+2y)\,dA\\[2mm]
+&=\int_0^{2\pi}\int_0^1(1+2r\sin\theta)\,r\,dr\,d\theta\\[2mm]
+&=\int_0^{2\pi}\left[\frac{1}{2}r^2+2\frac{r^2}{3}\sin\theta\right]_0^1\,d\theta\\[2mm]
+&=\int_0^{2\pi}\left(\frac{1}{2}+\frac{2}{3}\sin\theta\right)\,d\theta\\[2mm]
+&=\frac{1}{2}(2\pi)+0\\[2mm]
+&=\pi.
+\end{align*}
+\end{example}
+
+
+%\section*{Circulation, Clarified}
+%
+%
+%
+%
+%Let $C$ be an oriented closed curve and $\mathbf{v}$ represent a velocity field in fluid flow. Note that $\mathbf{v}\cdot\mathbf{T}$ is the component of $\mathbf{v}$ in the direction of $\mathbf{T}$. Since the dot product is a measure of how aligned two vectors are, the closer the direction of $\mathbf{v}$ is to the direction of $\mathbf{T}$, the larger the value of the dot product. 
+%
+%\begin{definition}
+%The measure of the tendency of a fluid to move around a curve $C$ is called the \textbf{circulation} of $\mathbf{v}$ around $C$, and it is the number
+%
+%\[
+%\int_C\mathbf{v}\cdot\,d\mathbf{r}
+%\]
+%
+%\begin{center}
+%\includegraphics[scale=0.5]{circulation1.png}
+%\end{center}
+%\end{definition}
+%
+%Let $P_0(x_0,y_0,z_0)$ be a point in the fluid and let $S_a$ be a (really) small disk with radius $a$ and center $P_0$. Then 
+%
+%\[
+%(\text{curl }\mathbf{F})(P)\approx(\text{curl }\mathbf{F})(P_0)
+%\]
+%
+%for all points $P$ on $S_a$ because curl $\mathbf{F}$ is continuous. Thus by Stokes' Theorem, we get the following approximation to the circulation around the boundary circle $\partial S_a$:
+%
+%\begin{align*}
+%\int_{\partial S_a}\mathbf{v}\cdot\,d\mathbf{r}&=\iint_{S_a}\text{curl }\mathbf{v}\cdot\,d\mathbf{S}\\[2mm]
+%&=\iint_{S_a}\text{curl }\mathbf{v}\cdot\mathbf{n}\,dS\\[2mm]
+%&\approx\iint_{S_a}\text{curl }\mathbf{v}(P_0)\cdot\mathbf{n}(P_0)\,dS\\[2mm]
+%&=\text{curl }\mathbf{v}(P_0)\cdot\mathbf{n}(P_0)\iint_{S_a}\,dS\\[2mm]
+%&=\text{curl }\mathbf{v}(P_0)\cdot\mathbf{n}(P_0)\pi a^2.
+%\end{align*}
+%
+%This approximation makes sense if you look at the pieces: the dot product that appears gives the amount of ``microscopic'' circulation at $P_0$ and that value gets multiplied by the area of the disk to give an approximation of the circulation around that disk. Moreover, this approximation gets better as $a\rightarrow0$, thus,
+%
+%\[
+%\text{curl }\mathbf{v}(P_0)\cdot\mathbf{n}(P_0)=\lom{a}{0}\frac{1}{\pi a^2}\int_{\partial S_a}\mathbf{v}\cdot\,d\mathbf{r}.
+%\]
+%
+%
+%
+%\section*{Proving a Previous Theorem}
+%
+%Now we use Stokes' Theorem to almost immediately prove the previous theorem which stated: If curl $\mathbf{F}=\mathbf{0}$ on a simply connected region like $\R^3$, then $\mathbf{F}$ is a conservative vector field.
+%
+%\begin{proof}
+%From our previous work, we know that if $\int_C\mathbf{F}\cdot\,d\mathbf{r}=0$ for every closed path $C$, then $\mathbf{F}$ is conservative. Given $C$, suppose we can find an orientiable surface $S$ whose boundary is $C$. (This can be done, but the proof requires advanced techniques.) Then Stokes' Theorem gives
+%
+%\[
+%\int_C\mathbf{F}\cdot\,d\mathbf{r}=\iint_S\text{curl }\mathbf{F}\cdot\,d\mathbf{S}=\iint_S\mathbf{0}\cdot\,d\mathbf{S}=0.
+%\]
+%
+%A curve that is not simple can be broken into a finite union of simple curves and the same argument can be applied to all of them before summing all of the integrals.
+%\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

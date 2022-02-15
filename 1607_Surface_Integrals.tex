@@ -1,0 +1,514 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+\usepackage{esint}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+%Textbook: Essential Calculus - Early Transcendentals, 2nd edition - Stewart. ISBN: 978-1-133-11228-0
+
+
+\begin{document}
+\vspace*{-1cm}
+\title{16.7 - Surface Integrals}
+\maketitle
+
+
+We learned how to compute line integrals before, and surface integrals are similar. This time suppose $f$ is a function of three variables whose domain includes a surface $S$. We are going to develop a way of integrating $f$ over this surface instead of a general region. We first investigate how to do this for parametric surfaces.
+
+\section*{Parametric Surfaces}
+
+
+
+\begin{minipage}{0.4\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{patches.png}
+\end{center}
+\end{minipage}%
+\begin{minipage}{0.6\textwidth}
+Suppose that $S$ is determined by the vector equation $\mathbf{r}(u,v)=x(u,v)\mathbf{i}+y(u,v)\mathbf{j}+z(u,v)\mathbf{k}$ with $(u,v)\in D$. For ease, assume $D$ is a rectangle and subdivide it into subrectangles $R_{ij}$ with dimensions $\Delta u$ and $\Delta v$. Then the surface $S$ is subdivided into corresponding patches $S_{ij}$. We evaluate $f$ as a point $P_{ij}^*$ in each patch, multiply by the area $\Delta S_{ij}$ and form the Riemann sum
+
+\[
+\sum_{i=1}^m\sum_{j=1}^nf(P_{ij}^*)\Delta S_{ij}.
+\]
+
+Take the limit as the number of patches increases to get the \textbf{surface integral of $f$ over the surface $S$}:
+
+\[
+\iint_Sf(x,y,z)\,dS=\lom{m,n}{\infty}\sum_{i=1}^m\sum_{j=1}^nf(P_{ij}^*)\Delta S_{ij}.
+\]
+
+Notice the similarity to the definition of a line integral, as well as the definition of a double integral.
+\end{minipage}
+
+In order to evaluate the integral, we use approximating parallelograms in the tangent plane for each patch $\Delta S_{ij}$. We have the approximation
+
+\[
+\Delta S_{ij}\approx|\mathbf{r}_u\times\mathbf{r}_v|\Delta u\Delta v
+\]
+
+where $\mathbf{r}_u$ and $\mathbf{r}_v$ are tangent vectors at a corner of the parallelogram. If the components of $\mathbf{r}_u$ and $\mathbf{r}_v$ are continuous, and the vectors are nonzero and nonparallel in the interior of $D$, it follows that
+
+\[
+\iint_Sf(x,y,z)\,dS=\iint_Df(\mathbf{r}(u,v))|\mathbf{r}_u\times\mathbf{r}_v|\,dA.
+\]
+
+
+\begin{note}
+Note that
+
+\[
+\iint_S1\,dS=\iint_D|\mathbf{r}_u\times\mathbf{r}_v|\,dA=A(S).
+\]
+
+Additionally, observe that this formula allows us to compute a surface integral by converting it to a double integral over the parameter domain $D$. In fact, it is simply an application of the change of variables formula. We already have the technology to integrate functions over 2-dimensional planar regions, so this simplifies our work. In general, the surface integral behaves like a line integral, except our function is now 3-dimensional, so the geometric interpretation of being ``under the curve'' is difficult see.\end{note}
+
+\begin{example}
+Compute the surface integral $\iint_Sx^2\,dS$ where $S$ is the sphere of radius $a$.
+
+We will use the spherical parameterizations:
+
+\[
+x=a\sin\phi\cos\theta\pspace y=a\sin\phi\sin\theta\pspace z=a\cos\phi\pspace0\leq \theta\leq 2\pi
+\]
+
+Then
+
+\begin{align*}
+\mathbf{r}_\phi\times\mathbf{r}_\theta&=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\ a\cos\phi\cos\theta & a\cos\phi\sin\theta & -a\sin\phi\\ a\sin\phi\sin\theta & a\sin\phi\cos\theta & 0\end{vmatrix}\\[2mm]
+&=a^2\sin^2\phi\cos\theta\mathbf{i}+a^2\sin^2\phi\sin\theta\mathbf{j} +a^2\sin\phi\cos\phi\mathbf{k}.
+\end{align*}
+
+So
+
+\begin{align*}
+|\mathbf{r}_\phi\times\mathbf{r}_\theta|&=\sqrt{a^4\sin^4\phi\cos^2\theta+a^4\sin^4\phi\sin^2\theta+a^4\sin^2\phi\cos^2\phi}\\[2mm]
+&=\sqrt{a^4\sin^4\phi+a^4\sin^2\phi\cos^2\phi}\\[2mm]
+&=a^2\sqrt{\sin^2\phi}\\[2mm]
+&=a^2\sin\phi.
+\end{align*}
+
+Thus,
+
+\begin{align*}
+\iint_Sx^2\,dS&=\iint_D(a\sin\phi\cos\theta)^2|\mathbf{r}_u\times\mathbf{r}_v|\,dA\\[2mm]
+&=a^2\int_0^{2\pi}\int_0^\pi\sin^2\phi\cos^2\theta\sin\phi\,d\phi\,d\theta\\[2mm]
+&=a^2\int_0^{2\pi}\cos^2\theta\,d\theta\int_0^\pi\sin^3\theta\,d\theta\\[2mm]
+&=a^2\int_0^{2\pi}\frac{1}{2}(1+\cos2\theta)\,d\theta\int_0^\pi(\sin\phi-\sin\phi\cos^2\phi)\,d\phi\\[2mm]
+&=\frac{a^2}{2}\left[\theta+\frac{1}{2}\sin2\theta\right]_0^{2\pi}\left[-\cos\phi+\frac{1}{3}\cos^3\theta\right]_0^\pi\\[2mm]
+&=\frac{4\pi}{3}a^2.
+\end{align*}
+\end{example}
+
+
+
+\section*{Quick Applications}
+
+Surface integrals also have connections to the physics concepts we discussed earlier. For example, if a thin sheet, say of graphene, has the shape of a surface $S$ and the density of the graphene at the point $(x,y,z)$ is $\rho(x,y,z)$, then the total \textbf{mass} of the sheet is
+
+\[
+m=\iint_S\rho(x,y,z)\,dS
+\]
+
+and the \textbf{center of mass} is $(\bar{x},\bar{y},\bar{z})$ where
+
+\[
+\bar{x}=\frac{1}{m}\iint_Sx\rho(x,y,z)\,dS\pspace\bar{y}=\frac{1}{m}\iint_Sy\rho(x,y,z)\,dS\pspace\bar{z}=\frac{1}{m}\iint_Sz\rho(x,y,z)\,dS
+\]
+
+Moments of inertia can also be defined.
+
+\pagebreak
+
+\section*{Graphs of Functions of Two Variables}
+
+Any surface $S$ with equation $z=g(x,y)$ can be regarded as a parametric surface with parametric equations
+
+\[
+x=x\pspace y=y\pspace z=g(x,y)
+\]
+
+and so
+
+\[
+\mathbf{r}_x=\mathbf{i}+\pp{g}{x}\mathbf{k}\pspace \mathbf{r}_y=\mathbf{j}+\pp{g}{y}\mathbf{k}.
+\]
+
+Thus,
+
+\[
+\mathbf{r}_x\times\mathbf{r}_y=-\pp{g}{x}\mathbf{i}-\pp{g}{y}\mathbf{j}+\mathbf{k}\aspace |\mathbf{r}_x\times\mathbf{r}_y|=\sqrt{\left(\pp{z}{x}\right)^2+\left(\pp{z}{y}\right)^2+1}.
+\]
+
+Thus, the surface integral of a surface $z=g(x,y)$ is
+
+\[\boxed{
+\iint_Sf(x,y,z)\,dS=\iint_Df(x,y,g(x,y))\sqrt{\left(\pp{z}{x}\right)^2+\left(\pp{z}{y}\right)^2+1}\,dA
+}\]
+
+\begin{corollary}
+If $S$ is a piecewise-smooth surface, i.e. it is a finite union of surfaces $S_1,s_2,\ldots,S_n$ that only intersect on their boundary, then the surface integral over $S$ is the sum of the surface integrals over all $S_i$.
+\end{corollary}
+
+\pagebreak
+
+\begin{example}
+Evaluate $\iint_Sz\,dS$ where $S$ is the surface pictured below.
+
+\begin{center}
+\includegraphics[scale=0.5]{slant_cylinder.png}
+\end{center}
+
+For $S_1$, we use $\theta$ and $z$ as parameters and write 
+
+\[
+x=\cos\theta\pspace y=\sin\theta\pspace z=z
+\]
+
+where 
+
+\[
+0\leq\theta \leq 2\pi\pspace 0\leq z\leq 1+x=1+\cos\theta
+\]
+
+Thus
+
+\[
+\mathbf{r}_\theta\times\mathbf{r}_z=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\ -\sin\theta & \cos\theta & 0\\ 0 & 0 & 1\end{vmatrix}=\cos\theta\mathbf{i}+\sin\theta\mathbf{j}.
+\]
+
+and
+
+\[
+|\mathbf{r}_\theta\times\mathbf{r}_z|=\sqrt{\cos^2\theta+\sin^2\theta}=1.
+\]
+
+Now, the surface integral over $S_1$ is
+
+\begin{align*}
+\iint_{S_1}z\,ds&=\iint_Dz|\mathbf{r}_\theta\times\mathbf{r}_z|\,dA\\[2mm]
+&=\int_0^{2\pi}\int_0^{1+\cos\theta}z\,dz\,d\theta\\[2mm]
+&=\int_0^{2\pi}\frac{1}{2}(1+\cos\theta)^2\,d\theta\\[2mm]
+&=\frac{1}{2}\int_0^{2\pi}\left[1+2\cos\theta+\frac{1}{2}(1+\cos2\theta)\right]\,d\theta\\[2mm]
+&=\frac{1}{2}\left[\frac{3}{2}\theta+2\sin\theta+\frac{1}{4}\sin2\theta\right]_0^{2\pi}\\[2mm]
+&=\frac{3\pi}{2}.
+\end{align*}
+
+Since $S_2$ lies in the $xy$-plane, $\displaystyle \iint_{S_2}z\,dS=\iint_{S_2}0\,dS=0$.
+
+For $S_3$, $z=1+x$, and we can use the formula we derived above and convert to polar coordinates:
+
+\begin{align*}
+\iint_{S_3}z\,dS&=\iint_D(1+x)\sqrt{\left(\pp{z}{x}\right)^2+\left(\pp{z}{y}\right)^2+1}\,dA\\[2mm]
+&=\int_0^{2\pi}\int_0^1(1+r\cos\theta)\sqrt{1+1+0}\,r\,dr\,d\theta\\[2mm]
+&=\sqrt{2}\int_0^{2\pi}\int_0^1(r+r^2\cos\theta)\,dr\,d\theta\\[2mm]
+&=\sqrt{2}\int_0^{2\pi}\left(\frac{1}{2}+\frac{1}{3}\cos\theta\right)\,d\theta\\[2mm]
+&=\sqrt{2}\left[\frac{\theta}{2}+\frac{\sin\theta}{3}\right]_0^{2\pi}\\[2mm]
+&=\sqrt{2}\pi.
+\end{align*}
+
+Putting all of these together, we get
+
+\[
+\iint_Sz\,dS=\frac{3\pi}{2}+0+\sqrt{2}\pi=\left(\frac{3}{2}+\sqrt{2}\right)\pi
+\]
+\end{example}
+
+\section*{Oriented Surfaces}
+
+Earlier we saw an example of a nonorientable surface, the M\"{o}bius strip. We want to be able to define surface integrals over vector fields, but in order to do so, we need to have a rigorous definition of what ``direction'' really is. The problem with the M\"{o}bius strip is that, because it has only one side, the notions of left and right are not well-defined.
+
+\begin{note}
+From now on, we only consider \textbf{orientable} (two-sided) surfaces. Begin with a surface $S$ that has a tangent plane at every point $(x,y,z)$ in $S$ except maybe at the boundary points. At each point, there are two possible normal vectors, $\mathbf{n}_1$ and $\mathbf{n}_2=-\mathbf{n}_1$.
+
+If it is possible to choose a normal vector $\mathbf{n}$ at every point $(x,y,z)$ so that $\mathbf{n}$ varies continuously over $S$, then the surface is said to be \textbf{orientable} and is called an \textbf{oriented surface}. The choice of $\mathbf{n}$ provides us with an \textbf{orientation}.
+
+There are two possible orientations for any orientable surface.
+\end{note}
+
+If a surface is given by $z=g(x,y)$, then the surface has a natural orientation given by the unit normal vector
+
+\[
+\mathbf{n}=\frac{-\pp{g}{x}\mathbf{i}-\pp{g}{y}\mathbf{j}+\mathbf{k}}{\sqrt{\left(\pp{z}{x}\right)^2+\left(\pp{z}{y}\right)^2+1}}
+\]
+
+Since the $\mathbf{k}$ component is positive this gives the \textit{upward} orientation of the surface.
+
+If $S$ is a smooth orientable surface given by the vector function $\mathbf{r}(u,v)$, then it is automatically supplied with the orientation of the unit normal vector
+
+\[
+\mathbf{n}=\frac{\mathbf{r}_u\times\mathbf{r}_v}{|\mathbf{r}_u\times\mathbf{r}_v|}
+\]
+
+For example, we previously found that for a sphere of radius $a$, $\mathbf{r}(\phi,\theta)=a\sin\phi\cos\theta\mathbf{i}+a\sin\phi\sin\theta\mathbf{j}+a\cos\phi\mathbf{k}$, and $|\mathbf{r}_\phi\times\mathbf{r}_\theta|=a^2\sin\phi$, so
+
+\[
+\mathbf{n}=\frac{\mathbf{r}_\phi\times\mathbf{r}_\theta}{|\mathbf{r}_\phi\times\mathbf{r}_\theta|}=\sin\phi\cos\theta\mathbf{i}+\sin\phi\sin\theta\mathbf{j}+\cos\phi\mathbf{k}=\frac{1}{a}\mathbf{r}(\phi,\theta).
+\]
+
+Notice that $\mathbf{n}$ points in the same direction as the position vector, i.e. outward from the sphere. The opposite orientation would have occurred if we had switched the order of the parameters since $\mathbf{r}_\theta\times\mathbf{r}_\phi=-\mathbf{r}_\phi\times\mathbf{r}_\theta$
+
+For a \textbf{closed surface}, i.e. a surface that is the boundary of a solid region $E$, the positive orientation points outward and the negative orientation points inward.
+\begin{center}
+\includegraphics[scale=0.5]{orientation.png}
+\end{center}
+
+
+\section*{Surface Integrals of Vector Fields}
+
+
+Suppose that $S$ is an orientable surface with unit normal vector $\mathbf{n}$ and imagine a fluid with density $\rho(x,y,z)$ and velocity field $\mathbf{v}(x,y,z)$ flowing through $S$. You can imagine $S$ as a surface that doesn't impede the flow of the fluid, like a fishing net across a stream. The rate of flow (mass per unit time) per unit area is $\rho\mathbf{v}$. If we divide $S$ into small patches $S_{ij}$ then $S_{ij}$ is nearly planar and we can approximate the mass of fluid per unit time crossing $S_{ij}$ in the direction of $\mathbf{n}$ by the quantity
+
+\[
+(\rho\mathbf{v}\cdot\mathbf{n})\cdot A(S_{ij}).
+\]
+
+Summing all of these together and taking the limit, we get
+
+\[
+\iint_S\rho\mathbf{v}\cdot\mathbf{n}\,dS=\iint_S\rho(x,y,z)\mathbf{v}(x,y,z)\cdot\mathbf{n}(x,y,z)\,dS
+\]
+
+
+Since $\rho\mathbf{v}$ is a vector field, we can write $\mathbf{F}=\rho\mathbf{v}$ and the integral on the left becomes
+
+\[
+\iint_S\mathbf{F\cdot n}\,dS
+\]
+
+\begin{definition}
+If $\mathbf{F}$ is a continuous vector field defined on an oriented surface $S$ with unit normal vector $\mathbf{n}$, then the \textbf{surface integral of $\mathbf{F}$ over $S$}, i.e. the \textbf{flux},  is 
+
+\[
+\iint_S\mathbf{F}\cdot\,d\mathbf{S}=\iint_S\mathbf{F}\cdot\mathbf{n}\,dS
+\]
+
+i.e. the surface integral of a vector field over a surface $S$ is equal to the surface integral of its normal component vector over $S$.
+\end{definition}
+
+\begin{note}
+Flux is a total amount and not a rate. It is the amount of stuff passing through or acting on a surface at any single moment in time. The flux is greatest when our surface is perpendicular to the flow of the vector field, i.e. the normal vector to the surface is parallel to the flow of the vector field. Notice that this behavior is captured by the dot product in the integral. The flux is the least when the surface is parallel to the flow of the vector field, i.e. the normal vector is orthogonal to flow.
+\end{note}
+
+
+Like before, our definitions have been chosen so wisely and carefully, that we can now reduce the problem of finding a surface integral to that of a double integral over a region on which the surface is defined. By definitions, we have
+
+
+\begin{align*}
+\iint_S \mathbf{F}\cdot\,d\mathbf{S}&=\iint_S\mathbf{F}\cdot\frac{\mathbf{r}_u\times\mathbf{r}_v}{|\mathbf{r}_u\times\mathbf{r}_v|}\,dS\\[2mm]
+&=\iint_D\left[\mathbf{F}(\mathbf{r}(u,v))\cdot\frac{\mathbf{r}_u\times\mathbf{r}_v}{|\mathbf{r}_u\times\mathbf{r}_v|}\right]|\mathbf{r}_u\times\mathbf{r}_v|\,dA\\[2mm]
+\iint_S \mathbf{F}\cdot\,d\mathbf{S}&=\int_D\mathbf{F}(\mathbf{r}(u,v))\cdot(\mathbf{r}_u\times\mathbf{r}_v)\,dA.
+\end{align*}
+
+\begin{example}
+Find the flux of the vector field $\mathbf{F}(x,y,z)=z\mathbf{i}+y\mathbf{j}+x\mathbf{k}$ across the unit spehere.
+
+\begin{center}
+\includegraphics[scale=0.5]{sphere_flux.png}
+\end{center}
+
+We use the spherical coordinate parameters again and get
+
+\[
+\mathbf{r}(\phi,\theta)=\sin\phi\cos\theta\mathbf{i}+\sin\phi\sin\theta\mathbf{j}+\cos\phi\mathbf{k} \pspace 0\leq\phi\leq\pi \pspace 0\leq\theta\leq2\pi.
+\]
+
+Then
+
+\[
+\mathbf{F}(\mathbf{r}(\phi,\theta))=\cos\phi\mathbf{i}+\sin\phi\sin\theta\mathbf{j}+\sin\phi\cos\theta\mathbf{k}.
+\]
+
+So
+
+\[
+\mathbf{F}(\mathbf{r}(\phi,\theta))\cdot(\mathbf{r}_\phi\times\mathbf{r}_\theta)=\cos\phi\sin^2\phi\cos\theta+\sin^3\phi\sin^2\theta+\sin^2\phi\cos\phi\cos\theta.
+\]
+
+By our formula,
+
+\begin{align*}
+\int_S\mathbf{F}\cdot\,d\mathbf{S}&=\iint_D\mathbf{F}\cdot(\mathbf{r}_\phi\times\mathbf{r}_\theta)\,dA\\[2mm]
+&=\int_0^{2\pi}\int_0^\pi(2\sin^2\phi\cos\phi\cos\theta+\sin^3\phi\sin^2\theta)\,d\phi\,d\theta\\[2mm]
+&=2\int_0^\pi\sin^2\phi\cos\phi\,d\phi\int_0^{2\pi}\cos\theta\,d\theta+\int_0^\pi\sin^3\phi\,d\phi\int_0^{2\pi}\sin^2\theta\,d\theta\\[2mm]
+&=0+\int_0^\pi\sin^3\phi\,d\phi\int_0^{2\pi}\sin^2\theta\,d\theta\\[2mm]
+&=\hspace{8mm}\vdots\\[2mm]
+&=\frac{4\pi}{3}
+\end{align*}
+
+by the calculations from a previous example.
+
+So, for example, if the vector field $\mathbf{F}$ was a velocity field describing the flow of a fluid with density 1, then $\frac{4\pi}{3}$ is the rate of the flow through the unit sphere in mass per time.
+
+\end{example}
+
+
+
+If the surface $S$ is given by the graph $z=g(x,y)$, then we can treat $x$ and $y$ as parameters, yielding 
+
+\[
+\mathbf{F}\cdot(\mathbf{r}_x\times\mathbf{r}_y)=(P\mathbf{i}+Q\mathbf{j}+R\mathbf{k})\cdot\left(-\pp{g}{x}\mathbf{i}-\pp{g}{y}\mathbf{j}+\mathbf{k}\right)
+\]
+
+\vspace{7mm}
+\begin{example}
+Evaluate $\iint_S\mathbf{F}\cdot\,d\mathbf{S}$ where $\mathbf{F}(x,y,z)=y\mathbf{i}+x\mathbf{j}+z\mathbf{k}$ and $S$ is the boundary of the solid region $E$ enclosed by the paraboloid $z=1-x^2-y^2$ and the plane $z=0$.
+
+
+\begin{center}
+\includegraphics[scale=0.5]{paraboloid.png}
+\end{center}
+
+$S$ consists of the parabolic cap $S_1$ pictured and its circular base $S_2$. We will orient it in the outward direction. We can use our previous formula where $D$ is the unit disk. Now,
+
+\[
+P(x,y,z)=y\pspace Q(x,y,z)=x\pspace R(x,y,z)=z=1-x^2-y^2
+\]
+
+and $\pp{z}{x}=-2x$, $\pp{z}{y}=-2y$. Thus.
+
+\begin{align*}
+\iint_{S_1}\mathbf{F}\,d\mathbf{S}&=\iint_D\left(-P\pp{z}{x}-Q\pp{z}{y}+R\right)\,dA\\[2mm]
+&=\iint_D-y(-2x)-x(-2y)+1-x^2-y^2\,dA\\[2mm]
+&=\iint_D1+4xy-x^2-y^2\,dA\\[2mm]
+&=\int_0^{2\pi}\int_0^1(1+4r^2\cos\theta\sin\theta-r^2)\,r\,dr\,d\theta\\[2mm]
+&=\int_0^{2\pi}\int_0^1(r-r^3+4r^3\cos\theta\sin\theta)\,dr\,d\theta\\[2mm]
+&=\int_0^{2\pi}\left[\frac{1}{2}r^2-\frac{1}{4}r^4+r^4\cos\theta\sin\theta\right]_{r=0}^{r=1}\,d\theta\\[2mm]
+&=\int_0^{2\pi}\left(\frac{1}{4}+\cos\theta\sin\theta\right)\,d\theta\\[2mm]
+&=\left[\frac{1}{4}\theta-\frac{1}{4}\cos2\theta\right]_0^{2\pi}\\[2mm]
+&=\frac{1}{4}(2\pi)\\[2mm]
+&=\frac{\pi}{2}.
+\end{align*}
+
+The disk $S_2$ is oriented downward, so its unit vector is $\mathbf{n}=-\mathbf{k}$. Thus.
+
+\[
+\iint_{S_2}\mathbf{F}\,d\mathbf{S}=\iint_{S_2}\mathbf{F}\cdot(-\mathbf{k})\,dS=\iint_D(-z)\,dA=\iint_D0\,dA=0
+\]
+
+since $z=0$ on $S_2$.
+
+Thus the total flux is $\frac{\pi}{2}$.
+
+
+\end{example}
+
+
+\section*{Electrostatics and Heat Flow}
+
+If $\mathbf{E}$ is an electric field, the surface integral
+
+\[
+\iint_S\mathbf{E}\cdot\,d\mathbf{S}
+\]
+
+is called the \textbf{electric flux} of $\mathbf{E}$ through the surface $S$. \textbf{Gauss's Law} says that the total net charge enclosed by a closed surface $S$ is 
+
+\[
+Q=\varepsilon_0\iint_S\mathbf{E}\cdot\,d\mathbf{S}
+\]
+
+where $\varepsilon_0$ is a constant call the permittivity of free space that depends on the units used. (In the SI system, $\varepsilon\approx8.8542\times10^{-12}\,\text{C}^2/\text{N$\cdot$m$^2$}$.)
+
+
+Suppose the temperature at a point $(x,y,z)$ in a body is $u(x,y,z)$. Then the \textbf{heat flow} is defined as the vector field
+
+\[
+\mathbf{F}=-K\nabla u
+\]
+
+where $K$ is an experimentally determined constant called the \textbf{conductivity} of the substance. The rate of heat flow across the surface $S$ in the body is
+
+\[
+\iint_S\mathbf{F}\cdot\,d\mathbf{S}=-K\iint_S\nabla u\cdot\,d\mathbf{S}.
+\]
+
+\begin{example}
+
+The temperature $u$ in a ``metal ball'' is proportional to the square of the distance from the center of the ball. Find the rate of heat flow across a sphere $S$ of radius $a$ with center at the center of the ball.
+
+Take the center of the ball to be the origin. We have $u(x,y,z)=Cd^2=C(x^2+y^2+z^2)$. Then the heat flow is
+
+\[
+\mathbf{F}(x,y,z)=-K\nabla u=-KC(2x\mathbf{i}+2y\mathbf{j}+2z\mathbf{k})
+\]
+
+where $K$ is the conductivity of the ``metal''. At this point, we could use the normal spherical parameterization, but notice that we can already determine the outward unit normal to the sphere of radius $a$: $\mathbf{n}=\frac{1}{a}(x\mathbf{i}+y\mathbf{j}+z\mathbf{k}$. So 
+
+\[
+\mathbf{F}\cdot\mathbf{n}=-\frac{2KC}{a}(x^2+y^2+z^2)=-\frac{2KC}{a}a^2=-2aKC
+\]
+
+on $S$. Therefore, the rate of heat flow across $S$ is
+
+\begin{align*}
+\iint_S\mathbf{F}\cdot\,d\mathbf{S}&=\iint_S\mathbf{F}\cdot\mathbf{n}\,dS\\[2mm]
+&=-2aKC\iint_S\,dS\\[2mm]
+&=-2aKC\cdot A(S)\\[2mm]
+&=-2aKC(4\pi a^2)\\[2mm]
+&=-8KC\pi a^3.
+\end{align*}
+\end{example}
+
+
+
+
+
+\end{document}

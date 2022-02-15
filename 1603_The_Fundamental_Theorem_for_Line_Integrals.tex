@@ -1,0 +1,491 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+\usepackage{soul}
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+%Textbook: Essential Calculus - Early Transcendentals, 2nd edition - Stewart. ISBN: 978-1-133-11228-0
+
+
+\begin{document}
+\vspace*{-1cm}
+\title{16.3 - The Fundamental Theorem for Line Integrals}
+\maketitle
+
+We're going to go deep into a \textit{lot} of theory in this section, so brace yourselves for several theorems and new definitions.
+
+Recall the Fundamental Theorem of Calculus, Part 2:
+
+\begin{theorem}
+Let $F'$ be continuous on $[a,b]$. Then $\displaystyle \int_a^bF'(x)\,dx=F(b)-F(a)$.
+
+In other words, the integral of a rate of change is the net change.
+\end{theorem}
+
+We can adapt this important theorem to line integrals. If we interpret $\nabla f$ of a function $f$ as a ``derivative'' of the function, then we get
+
+\begin{theorem}[The Fundamental Theorem for Line Integrals]
+Let $C$ be a smooth curve given by the vector function $\mathbf{r}(t)$, $a\leq t\leq b$. Let $f$ be a differentiable function of two or three variables whose gradient vector $\nabla f$ is continuous on $C$. Then
+
+\[
+\int_C\nabla f\cdot d\mathbf{r}=f(\mathbf{r}(b))-f(\mathbf{r}(a)).
+\]
+
+In other words, we can evaluate the integral of a conservative vector field (the gradient vector field of the potential function $f$) just by knowing the value of $f$ at the endpoints of $C$. 
+\end{theorem}
+
+Let's prove the case where $f$ is a function of three variables.
+
+\begin{proof}
+Let $C$ be a smooth curve and $f$ a differentiable function where $\nabla f$ is continuous on $C$. Then
+
+\begin{align*}
+\int_C\nabla f\cdot d\mathbf{r}&=\int_a^b\nabla f(\mathbf{r}(t))\cdot\mathbf{r}'(t)\,dt\\[2mm]
+&=\int_a^b\left(\pp{f}{x}\dd{x}{t}+\pp{f}{y}\dd{y}{t}+\pp{f}{z}\dd{z}{t}\right)\,dt\\[2mm]
+&=\int_a^b\dd{}{t}f(\mathbf{r}(t))\,dt\\[2mm]
+&=f(\mathbf{r}(b))-f(\mathbf{r}(a)).
+\end{align*}
+
+Notice the last step requires FTC1.
+\end{proof}
+
+%\begin{example}
+%Find the work done by the gravitational field
+%
+%\[
+%\mathbf{F}(\mathbf{x})=-\frac{m_1m_2g}{|\mathbf{x}|^3}\mathbf{x}.
+%\]
+%\end{example}
+
+
+
+\section*{Independence of Path}
+
+\begin{definition}
+A piecewise-smooth curve in $\R^n$ is a \textbf{path}.
+\end{definition}
+
+
+Suppose $C_1$ and $C_2$ are two paths that have the same initial point $A$ and terminal point $B$. We saw before when studying line integrals that $\int_{C_1}\mathbf{F}\cdot \,d\mathbf{r}\neq\int_{C_2}\mathbf{F}\cdot\,d\mathbf{r}$, but one implication of FTL is that
+
+\[
+\int_{C_1}\nabla f\cdot\,d\mathbf{r}=\int_{C_2}\nabla f\cdot\,d\mathbf{r}
+\]
+
+ whenever $\nabla f$ is continuous because we only need to evaluate the curve at the endpoints.
+
+
+\begin{definition}
+If $\mathbf{F}$ is a continuous vector field with domain $D$, we say the integral $\displaystyle \int_C\mathbf{F}\cdot\,d\mathbf{r}$ is \textbf{path-independent} (or \textbf{independent of path}) if $\int_{C_1}\mathbf{F}\cdot \,d\mathbf{r}=\int_{C_2}\mathbf{F}\cdot\,d\mathbf{r}$ for any two paths $C_1$ and $C_2$ in $D$ that have the same initial points and the same terminal points.
+\end{definition}
+
+
+ \begin{note}
+ The line integral of a \uline{conservative} vector field depends only on the initial and terminal point of a curve, i.e. line integrals of conservative vector fields are path-independent.
+ \end{note}
+ 
+ \begin{definition}
+ A curve is called \textbf{closed} if its terminal point coincides with its initial point, i.e. $\mathbf{r}(b)=\mathbf{r}(a)$.
+ \end{definition}
+ 
+ \begin{theorem}
+ $\displaystyle \int_C\mathbf{F}\cdot\,d\mathbf{r}$ is path-independent in $D$ if and only if $\int_C\mathbf{F}\cdot\,d\mathbf{r}=0$ for every closed path $C$ in $D$.
+ \end{theorem}
+ 
+\begin{proof}
+First, suppose  $\int_C\mathbf{F}\cdot\,d\mathbf{r}$ is path-independent in $D$ and $C$ is any closed path in $D$. Choose any two points $A$ and $B$ on $C$. Then we can write $C=C_1\cup C_2$ where $C_1$ is the path from $A$ to $B$ and $C_2$ is the path from $B$ to $A$. Then
+
+\[
+\int_C\mathbf{F}\cdot\,d\mathbf{r}=\int_{C_1}\mathbf{F}\cdot\,d\mathbf{r}+\int_{C_2}\mathbf{F}\cdot\,d\mathbf{r}=\int_{C_1}\mathbf{F}\cdot\,d\mathbf{r}-\int_{-C_2}\mathbf{F}\cdot\,d\mathbf{r}=0.
+\]
+
+by FTL and since $C_1$ and $-C_2$ have the same initial points and the same terminal points.
+
+Conversely, suppose that $\displaystyle \int_C\mathbf{F}\cdot\,d\mathbf{r}=0$ for all closed paths $C$ in $D$. Let $A$ and $B$ be any two points in $D$ and let $C_1$ and $C_2$ be two paths connecting $A$ and $B$. Define $C=C_1\cup -C_2$. Then
+
+\[
+0=\int_C\mathbf{F}\cdot\,d\mathbf{r}=\int_{C_1}\mathbf{F}\cdot\,d\mathbf{r}+\int_{-C_2}\mathbf{F}\cdot\,d\mathbf{r}=\int_{C_1}\mathbf{F}\cdot\,d\mathbf{r}-\int_{C_2}\mathbf{F}\cdot\,d\mathbf{r}.
+\]
+
+Thus, $\displaystyle \int_{C_1}\mathbf{F}\cdot\,d\mathbf{r}=\int_{C_2}\mathbf{F}\cdot\,d\mathbf{r}$ and since $C_1$ and $C_2$ were chosen arbitrarily, this equality holds for any curves $C_1$ and $C_2$. In other words, $\int_C\mathbf{F}\cdot\,d\mathbf{r}$ is path-independent.
+\end{proof}
+
+
+\begin{note}
+We know that the line integral of any conservative vector field $\mathbf{F}$ is independent of path as seen earlier, so it follows from the previous theorem that $\int_C\mathbf{F}\cdot\,d\mathbf{r}=0$ for any closed curve $C$ over a conservative vector field $F$.
+
+Physically, this means that the net work done by a conservative force field as it moves an object around a closed path is 0, which makes sense because the displacement is 0.
+\end{note}
+
+
+
+\begin{definition}
+A set $D$ is called \textbf{open} if for any point $P$ in $D$, there exists a disk with center $P$ that lies entirely inside $D$.
+\end{definition}
+
+\begin{definition}
+A set $D$ is called \textbf{connected} if any two points in $D$ can be joined by a path that lies in $D$.
+\end{definition}
+
+The next theorem is a characterization theorem that we'll be proving.
+
+\begin{theorem}
+Suppose $\mathbf{F}$ is a vector field that is continuous on an open connected region $D$. If $\int_C\mathbf{F}\cdot\,d\mathbf{r}$ is path-independent in $D$, then $\mathbf{F}$ is a conservative vector field on $D$, i.e. there exists a function $f$ such that $\nabla f=\mathbf{F}$.
+\end{theorem}
+
+\begin{proof}
+Let $A(a,b)$ be a fixed point in $D$. Define our potential function as
+
+\[
+f(x,y)=\int_{(a,b)}^{(x,y)}\mathbf{F}\cdot\,d\mathbf{r}
+\]
+
+for any point $(x,y)$ in $D$. Since $\int_C\mathbf{F}\cdot\,d\mathbf{r}$ is path-independent, it does not matter which path $C$ from $(a,b)$ to $(x,y)$ is used to evaluate $f(x,y)$ so it is a well-defined function. Since $D$ is open, there exists a disk contained in $D$ with center $(x,y)$. Choose any point $(x_1,y)$ in the disk with $x_1<x$ and let $C$ consist of any path $C_1$ from $(a,b)$ to $(x_1,y)$ followed by the horizontal line segment $C_2$ from $(x_1,y)$ to $(x,y)$.
+
+\begin{center}
+\includegraphics[scale=0.5]{line_int_proof1.png}
+\end{center}
+
+Then
+
+\[
+f(x,y)=\int_{C_1}\mathbf{F}\cdot\,d\mathbf{r}+\int_{C_2}\mathbf{F}\cdot\,d\mathbf{r}=\int_{(a,b)}^{(x_1,y)}\mathbf{F}\cdot\,d\mathbf{r}+\int_{C_2}\mathbf{F}\cdot\,d\mathbf{r}.
+\]
+
+Notice that the integral on the left is independent of $x$, thus,
+
+\[
+\pp{}{x}f(x,y)=0+\pp{}{x}\int_{C_2}\mathbf{F}\cdot\,d\mathbf{r}.
+\]
+
+Write $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}$. Then
+
+\[
+\int_{C_2}\mathbf{F}\cdot\,d\mathbf{r}=\int_{C_2}P\,dx+Q\,dy.
+\]
+
+Now, on $C_2$, $y$ is constant do $dy=0$. Using $t$ as our parameter with $x_1\leq t\leq x$, we have
+
+\[
+\pp{}{x}f(x,y)=\pp{}{x}\int_{C_2}P\,dx+Q\,dy=\pp{}{x}\int_{x_1}^xP(t,y)\,dt=P(x,y)
+\]
+
+by FTC1. We use a similar argument with a vertical line segment.
+
+\begin{center}
+\includegraphics[scale=0.5]{line_int_proof2.png}
+\end{center}
+
+\[
+\pp{}{y}f(x,y)=\pp{}{y}\int_{C_2}P\,dx+Q\,dy=\pp{}{y}\int_{y_1}^yQ(x,t)\,dt=Q(x,y).
+\]
+
+Behold,
+
+\[
+\mathbf{F}=P\mathbf{i}+Q\mathbf{j}=\pp{f}{x}\mathbf{i}+\pp{f}{y}\mathbf{j}=\nabla f.
+\]
+\end{proof}
+
+To recap: we just showed that if a line integral of a vector field is path independent, then that vector field must be conservative, i.e. it is the gradient of some scalar function. However, we still haven't developed a way to determine if a vector field is conservative, given the vector field itself. 
+
+\begin{theorem}
+If $\mathbf{F}(x,y)=P(x,y)\mathbf{i}+Q(x,y)\mathbf{j}$ is a conservative vector field, where $P$ and $Q$ have continuous first-order derivatives on a domain $D$, then throughout $D$ we have
+
+\[
+\pp{P}{y}=\pp{Q}{x}\pspace\text{i.e.}\pspace\pp{P}{y}-\pp{Q}{x}=0.
+\]
+\end{theorem}
+
+\begin{proof}
+Let $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}$ be a conservative vector field. Then there exists a function $f$ such that $\nabla f =\mathbf{F}$, i.e.
+
+\[
+P=\pp{f}{x}\aspace Q=\pp{f}{y}.
+\]
+
+By Clairaut's Theorem,
+
+\[
+\pp{P}{y}=\pp{}{y}\left(\pp{f}{x}\right)=\pp{^2f}{y\,\partial x}=\pp{^2f}{x\,\partial y}=\pp{}{x}\left(\pp{f}{y}\right)=\pp{Q}{x}.
+\]
+\end{proof}
+
+This is an important and sensible result once we get a bit more context for these theorems. It says that the rate of change of the $\mathbf{i}$th component in the $y$ direction is the same as the rate of change of the $\mathbf{j}$th component in the $x$-direction. The converse of this theorem is also true, but under stricter conditions. We need a couple more definitions. 
+
+\begin{definition}
+A \textbf{simple curve} is a curve that does not intersect itself anywhere between its endpoints
+\end{definition}
+
+
+\begin{definition}
+A \textbf{simply-connected region} in the plane is a connected region such that every simple closed curve in $D$ encloses only points that are in $D$. In other words, $D$ has no holes and it does not consist of two pieces.
+\end{definition}
+
+\begin{theorem}
+Let $\mathbf{F}=P\mathbf{i}+Q\mathbf{i}$ be a vector field on an open simply-connected region $D$. Suppose that $P$ and $Q$ have continuous first-order partial derivatives and 
+
+\[
+\pp{P}{y}=\pp{Q}{x}\pspace\pspace\text{i.e.}\pspace\pp{P}{y}-\pp{Q}{x}=0\text{ throughout $D$.}
+\]
+
+Then $\mathbf{F}$ is conservative.
+
+\end{theorem}
+
+This theorem says if your vector field is defined on a simply-connected region, and those rates of change are the same, then the vector field is conservative. Notice that the only new condition for us to get this characterization of conservative vector fields was that $D$ be simply-connected. The shape and behavior of the region turns out to be extremely important and is studied in depth in graduate level complex analysis courses. We will prove this theorem in the next section when we have a more powerful tool at hand.
+
+\begin{example}
+Is the vector field $\mathbf{F}(x,y)=(x-y)\mathbf{i}+(x-2)\mathbf{j}$ a conservative vector field?
+
+\begin{multicols}{2}
+Here we have
+
+\[
+\pp{P}{y}=-1\aspace \pp{Q}{x}=1
+\]
+
+So $\mathbf{F}$ is not conservative.
+
+\begin{center}
+\includegraphics[scale=0.5]{nconex.png}
+\end{center}
+
+\end{multicols}
+
+\end{example}
+
+
+\begin{example}
+Is $\mathbf{F}=(3+2xy)\mathbf{i}+(x^2-3y^2)\mathbf{j}$ conservative?
+
+\begin{multicols}{2}
+Here,
+
+\[
+\pp{P}{y}=2x=\pp{Q}{x},
+\]
+
+and the domain of $\mathbf{F}$ is all of $\R^2$ which is simply connected so by our previous theorem, $\mathbf{F}$ is indeed conservative.
+
+\begin{center}
+\includegraphics[scale=0.5]{conex.png}
+\end{center}
+
+\end{multicols}
+\end{example}
+
+
+
+\begin{note}
+The first example was not conservative because if we draw a closed path around the source in the field, the work produced by the field will be positive in pushing an object counterclockwise and negative in pushing it clockwise because it will (continuously) transfer energy to the object. This means $\int_C\mathbf{F}\cdot\,d\mathbf{r}\neq0$.
+
+In the second example, we can draw closed curves where force positively aligns with the tangent of the object's path and negatively aligns with it, as well as point where it's tangential. In order for the object to move that way, it would have to transfer energy back to the field to maintain its trajectory, so the field conserves its energy.
+\end{note}
+
+
+Now we can determine if a vector field is conservative, but how can we find the potential function $f$ such that $\nabla f=\mathbf{F}$?
+
+%\begin{example}$ $
+
+
+%\begin{enumerate}
+%\item If $\mathbf{F}(x,y)=(3+2xy)\mathbf{i}+(x^2-3y^2)\mathbf{j}$, find the potential function $\nabla f$.
+%
+%We saw a moment ago that this is indeed a conservative vector field. We are looking for functions $f_x$ and $f_y$ such that
+%
+%\[
+%f_x(x,y)=2+2xy\,(*)\aspace f_y(x,y)=x^2-3y^2.\,(**)
+%\]
+%
+%If we integrate $f_x$ above with respect to $x$, we get
+%
+%\[
+%\pp{}{x}f_x(x,y)=f(x,y)=3x+x^2y+g(y).
+%\]
+%
+%Here, $g(y)$ is a function of $y$ because any function of $y$ is constant with respect to $x$. Next, we differentiate both sides of this equation with respect to $y$:
+%
+%\[
+%\pp{}{y}f(x,y)=\pp{}{y}[3x+x^2y+g(y)]=x^2+g'(y).
+%\]
+%
+%Comparing that with $(**)$, it must be the case that $g'(y)=-3y^2$ which means $g(y)=-y^3+K$ where $K$ is some constant. Now that we know $g(y)$, we have
+%
+%\[
+%f(x,y)=3x+x^2y-y^3+K.
+%\]
+
+
+%\item Evaluate the line integral $\int_C\mathbf{F}\cdot\,d\mathbf{r}$ where $C$ is the curve given by $\mathbf{r}(t)=e^t\sin t\mathbf{i}+e^t\cos t\mathbf{j}$ where $0\leq t\leq \pi$.\
+%
+%Here we can use FTL, we just need to find the initial and terminal points of $\mathbf{r}(t)$. We have $\mathbf{r}(0)=(0,1)$ and $\mathbf{r}(\pi)=(0,-e^\pi)$. $K$ will get washed out in the calculation using FTL, so we can simply choose $K=0$ and dispense with it. Then
+%
+%\[
+%\int_C\mathbf{F}\cdot\,d\mathbf{r}=\int_C\nabla f\cdot\,d\mathbf{r}=f(0,-e^\pi)-f(0,1)=e^{3\pi}+1.
+%\]
+%
+%
+%
+%\end{enumerate}
+%\end{example}
+
+\begin{example}
+If $\mathbf{F}(x,y,z)=y^2\mathbf{i}+(2xy+e^{3z})\mathbf{j}+3ye^{3z}\mathbf{k}$, find the potential function $f$ such that $\nabla f=\mathbf{F}$.
+
+In order for such a function to exist, it must be the case that
+
+\begin{align}
+f_x(x,y,z)&=y^2\\
+f_y(x,y,z)&=2xy+e^{3z}\\
+f_z(x,y,z)&=3ye^{3z}
+\end{align}
+
+Integrating (1) with respect to $x$ yields $f(x,y,z)=xy^2+g(y,z)$. Differentiating this with respect to $y$ gives
+
+\[
+f_y(x,y,z)=2xy+g_y(y,z).
+\]
+
+Comparing this with (2) reveals that $g_y(y,z)=e^{3z}$, so $g(y,z)=ye^{3z}+h(z)$. Now we can write
+
+\[
+f(x,y,z)=xy^2+g(y,z)=xy^2+ye^{3z}+h(z).
+\]
+
+Lastly, differentiating with respect to $z$ reveals $f(x,y,z)=3ye^{3z}+h'(z)$. Comparing with (3) reveals that $h'(z)=0$ so $h(z)=K$  constant. Thus,
+
+\[
+f(x,y,z)=xy^2+ye^{3z}+K.
+\]
+
+Let's verify that this is correct by computing the partial derivatives. We have
+
+\begin{align*}
+f_x(x,y,z)&=y^2\pspace\checkmark\\
+f_y(x,y,z)&=2xy+e^{3z}\pspace\checkmark\\
+f_z(x,y,z)&=3ye^{3z}\pspace\checkmark
+\end{align*}
+\end{example}
+
+\vfill
+\pagebreak
+
+\section*{Conservation of Energy}
+
+You can can probably guess from from the names floating around that all of this has a strong relationship with physics and conservation of energy. Let's now make the connection to physics explicit.
+
+Suppose $\mathbf{F}$ is a continuous force field that moves an object along a path $C$ given by $\mathbf{r}(t)$ where $a\leq t\leq b$, $\mathbf{r}(a)=A$ is the initial point, and $\mathbf{r}(b)=B$ is the terminal point. According to Newton's Second Law of Motion, the force $\mathbf{F}(\mathbf{r}(t))$ at a point on $C$ is related to the acceleration $\mathbf{a}(t)=\mathbf{r}''(t)$ by the equation
+
+\[
+\mathbf{F}(\mathbf{r}(t))=m\mathbf{r}''(t).
+\]
+
+Now, we can reexpress the work done by the force on the object as follows.
+
+\begin{align*}
+W&=\int_C\mathbf{F}\cdot\,d\mathbf{r}\\[2mm]
+&=\int_a^b\mathbf{F}(\mathbf{r}(t))\cdot\mathbf{r}'(t)\,dt\\[2mm]
+&=\int_a^bm\mathbf{r}''(t)\cdot\mathbf{r}'(t)\,dt\\[2mm]
+&=\frac{m}{2}\int_a^b\dd{}{t}[\mathbf{r}'(t)\cdot\mathbf{r}'(t)]\,dt\\[2mm]
+&=\frac{m}{2}\int_a^b\dd{}{t}|\mathbf{r}'(t)|^2\,dt\\[2mm]
+&=\frac{m}{2}\left[\mathbf{r}'(t)|^2\right]_a^b\\[2mm]
+&=\frac{m}{2}\left(|\mathbf{r}'(b)|^2-|\mathbf{r}'(a)|\right)\\[2mm]
+&=\frac{m}{2}\left(|\mathbf{v}(b)|^2-|\mathbf{v}(a)|\right)\\[2mm]
+&=\frac{1}{2}m|\mathbf{v}(b)|^2-\frac{1}{2}m|\mathbf{v}(a)|^2.
+\end{align*}
+
+The quantity $\frac{1}{2}m|\mathbf{v}(t)|^2$ (half the mass times the square of the speed) is called the \textbf{kinetic energy} of the object. We can therefore rewrite the work equation as
+
+\[
+W=K(B)-K(A)
+\]
+
+which says that the work done by the force field along $C$ is the change in the kinetic energy at the endpoints of $C$.
+
+Now, further assume that $\mathbf{F}$ is a conservative force field, i.e. $\mathbf{F}=\nabla f$. The \textbf{potential energy} of an object at the point $(x,y,z)$ is defined as $P(x,y,z)=-f(x,y,z)$, so we can write $\mathbf{F}=-\nabla P$. (This is done to agree with the intuition that work done against a force field increases potential energy.) Then by FTL,
+
+\[
+W=\int_C\mathbf{F}\cdot\,d\mathbf{r}=-\int_C\nabla P\,d\mathbf{r}=-[P(\mathbf{r}(b))-P(\mathbf{r}(a))]=P(A)-P(B).
+\]
+
+Putting this equation together with the one above, we have
+
+\begin{align*}
+K(B)-K(A)&=P(A)-P(B)\\
+P(A)+K(A)&=P(B)+K(B),
+\end{align*}
+
+if an object moves from point $A$ to point $B$ under the influence of a conservative force field, the total energy remains constant. This is called the \textbf{Law of Conservation of Energy}, and it is the reason for the terminology ``conservative'' and ``potential''.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

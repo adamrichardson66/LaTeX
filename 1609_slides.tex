@@ -1,0 +1,614 @@
+\documentclass[11pt,english,
+handout
+]{beamer}
+
+%Preamble  
+\input{/Users/Adam/Desktop/LBCC/MATH80/MATH80_Lesson_Plans/MATH80_Slides_Preamble.tex}
+
+%Textbook: Essential Calculus - Early Transcendentals, 2nd edition - Stewart. ISBN: 978-1-133-11228-0
+
+
+
+\begin{document}
+
+%Slide titles are all contained in this file..
+\ExecuteMetaData[/Users/Adam/Desktop/LBCC/MATH80/MATH80_Lesson_Plans/MATH80_Slide_Titles.tex]{1609}
+
+%Global Title Slide Format is contained in the following file.
+\input{/Users/Adam/Desktop/LBCC/MATH80/MATH80_Lesson_Plans/MATH80_Title_Slide_Format.tex}
+\makebeamertitle
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Divergence Theorem}
+\small
+Recall the second vector form of Green's Theorem for planar regions:
+
+\[
+\int_{\partial D}\mathbf{F}\cdotr\mathbf{n}\,ds=\iint_D\text{div }\mathbf{F}\,dA
+\]
+
+where $\partial D=C$ is the positively oriented boundary curve of the plane region $D$. \pause
+
+\lspace
+Our goal is to extend this theorem to vector fields on $\MB{R}^3$. \pause We make a guess that perhaps the higher dimensional version of Green's Theorem is
+
+\[
+\iint_{\partial E}\mathbf{F}\cdotr\mathbf{n}\,dS=\iiint_E\text{div }\mathbf{F}\,dV
+\]
+
+where $\partial E=S$ is the boundary \textit{surface} of the \textit{solid region} $E$. \pause This turns out to be true...
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{The Divergence Theorem}
+\small
+\textbf{Recall:} Solid regions of Type I, II, and III.\pause
+
+\lspace
+%\begin{definition}
+%A solid region $E$ is said to be of \textbf{type 1} if it lies between the graphs of two continuous functions of $x$ and $y$, i.e.
+%
+%\[
+%E=\{(x,y,z)\mid(x,y)\in D,u_1(x,y)\leq z \leq u_2(x,y)\}
+%\]
+%
+%where $D$ is the projection of $E$ onto the $xy$-plane.
+%\end{definition}
+%
+%\begin{definition}
+%A solid region $E$ is said to be of \textbf{type 2} if it lies between the graphs of two continuous functions of $y$ and $z$, i.e.
+%
+%\[
+%E=\{(x,y,z)\mid(y,z)\in D,u_1(y,z)\leq x \leq u_2(y,z)\}
+%\]
+%
+%where $D$ is the projection of $E$ onto the $yz$-plane.
+%\end{definition}
+%
+%\begin{definition}
+%A solid region $E$ is said to be of \textbf{type 3} if it lies between the graphs of two continuous functions of $x$ and $z$, i.e.
+%
+%\[
+%E=\{(x,y,z)\mid(x,z)\in D,u_1(x,z)\leq x \leq u_2(x,z)\}
+%\]
+%
+%where $D$ is the projection of $E$ onto the $yz$-plane.
+%\end{definition}
+
+\begin{definition}
+A region $E$ in $\MB{R}^3$ is called a \textbf{simple solid region} if it is simultaneously of Type I, II, and III. For example, regions bounded by ellipsoids or rectangular boxes are simple solid regions. The boundary of such regions are closed surfaces.
+\end{definition}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\fbox{\parbox{\textwidth}{
+\begin{theorem}[The Divergence Theorem]
+Let $E$ be a simple solid region and let $S$ be the boundary surface of $E$, given with positive (outward) orientation. Let $\mathbf{F}$ be a vector field whose component functions have continuous partial derivatives on an open region that contains $E$. Then
+
+\[
+\iint_S\mathbf{F}\cdotr\mathbf{n}\,dS=\iiint_E\textnormal{div }\mathbf{F}(x,y,z)\,dV
+\]
+\end{theorem}}}
+
+Recall that the divergence of a vector field at a point is a measure of the tendency of a particle to flow away from that point under the influence of that vector field. \pause The Divergence Theorem says that calculating the flux across a closed boundary surface is the same as finding the net divergence within the region the surface contains.\pause
+
+
+In application, the Divergence Theorem is like Stokes' Theorem in that it can possibly simplify our work by allowing us to integrate over a surface instead of a region, or vice versa.
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{proofs}
+Let $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$. \pause Then
+
+\[
+\text{div }\mathbf{F}=\pp{P}{x}+\pp{Q}{y}+\pp{R}{z},\text{ so}
+\]
+
+\[
+\iiint_E\text{div }\mathbf{F}\,dV=\iiint_E\pp{P}{x}\,dV+\iiint_E\pp{Q}{y}\,dV+\iiint_E\pp{R}{z}\,dV.
+\]\pause
+
+If $\mathbf{n}$ is the unit outward normal of $S$, then the surface integral on the left side of the Divergence Theorem is
+
+\begin{align*}
+\iint_S\mathbf{F}\cdotr\,d\mathbf{S}&=\iint_S\mathbf{F}\cdotr\mathbf{n}\,dS=\iint_S(P\mathbf{i}+Q\mathbf{j}+R\mathbf{k})\cdotr\mathbf{n}\,dS\\[2mm]
+&=\iint_SP\mathbf{i}\cdotr\mathbf{n}\,dS+\iint_SQ\mathbf{j}\cdotr\mathbf{n}\,dS+\iint_SR\mathbf{k}\cdotr\mathbf{n}\,dS.
+\end{align*}
+\end{proofs}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{proofs}
+Therefore, it suffices to prove the following three equations:
+
+\begin{align*}
+\iint_SP\mathbf{i}\cdotr\mathbf{n}\,dS&=\iiint_E\pp{P}{x}\,dV\\[2mm]
+\iint_SQ\mathbf{j}\cdotr\mathbf{n}\,dS&=\iiint_E\pp{Q}{y}\,dV\\[2mm]
+\iint_SR\mathbf{k}\cdotr\mathbf{n}\,dS&=\iiint_E\pp{R}{z}\,dV\\[2mm]
+\end{align*}\pause 
+
+We'll prove the last equation and leave the rest as exercises. 
+\end{proofs}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{proofs}
+
+To prove the last equation, we use the fact that $E$ is a type 1 region:
+
+\lspace
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[scale=0.28]{divergence_proof.png}
+\end{minipage}%
+\begin{minipage}{0.6\textwidth}
+\footnotesize
+\[
+E=\{(x,y,z)\mid (x,y)\in D,u_1(x,y)\leq z\leq u_2(x,y)\}
+\]
+
+where $D$ is the projection of $E$ onto the $xy$-plane. \pause Then we have
+
+\[
+\iiint_E\pp{R}{z}\,dV=\iint\left[\int_{u_1(x,y)}^{u_2(x,y)}\pp{R}{z}(x,y,z)\,dz\right]\,dA
+\]
+
+so by FTC2,
+\end{minipage}
+
+\lspace
+{\footnotesize
+\begin{equation}\tag{1}
+\iiint_E\pp{R}{z}\,dV=\iint_D\left[R(x,y,u_2(x,y))-R(x,y,u_1(x,y))\right]\,dA.
+\end{equation}}
+\end{proofs}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{proofs}
+
+To prove the last equation, we use the fact that $E$ is a type 1 region:
+
+\lspace
+\begin{minipage}{0.4\textwidth}
+\centering
+\includegraphics[scale=0.28]{divergence_proof.png}
+\end{minipage}%
+\begin{minipage}{0.55\textwidth}
+
+The boundary surface $S$ consists of three pieces: the bottom surface $S_1$, the top surface $S_2$, and a possibly vertical surface $S_3$ which lies above the boundary curve $\partial D$ of $D$. \pause Note: it might happen that $S_3$ doesn't appear, as with a sphere. \pause On $S_3$, we have
+\[
+\iint_{S_3}R\mathbf{k}\cdotr\mathbf{n}\,dS=\iint_{S_3}0\,dS=0.
+\]
+\end{minipage}\pause
+
+\lspace
+This means that regardless of whether there is a vertical surface in our boundary surface, we can write
+
+\[
+\iint_SR\mathbf{k}\cdotr\mathbf{n}\,dS=\iint_{S_1}R\mathbf{k}\cdotr\mathbf{n}\,dS+\iint_{S_2}R\mathbf{k}\cdotr\mathbf{n}\,dS.
+\]
+
+\end{proofs}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{proofs}
+Now, $S_2$ is a surface given by the equation $z=u_2(x,y)$ where $(x,y)\in D$ and the outward normal vector $\mathbf{n}$ points upward, so by a previous formula mentioned in Section 16.7 (with $\mbf{F}$ replaced by $R\mbf{k}$),
+
+\[
+\iint_{S_2}R\mathbf{k}\cdotr\mathbf{n}\,dS=\iint_DR(x,y,u_2(x,y))\,dA.
+\]\pause 
+
+We can use the same formula on $S_1$, but in this case, the outward normal vector points down, so we multiply by -1:
+
+\[
+\iint_{S_1}R\mathbf{k}\cdotr\mathbf{n}\,dS=-\iint_DR(x,y,u_1(x,y))\,dA
+\]
+\end{proofs}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{proof}
+Notice that these expressions appear in equation (1). Thus, we have
+
+\[
+\iiint_E\pp{R}{z}\,dV=\iint_D\left[R(x,y,u_2(x,y))-R(x,y,u_1(x,y))\right]\,dA=\iint_SR\mathbf{k}\cdotr\mathbf{n}\,dS
+\]
+
+which is what we were trying to prove. \pause The other two equations are solved similarly, and combining them all yields
+
+\[
+\iint_S\mathbf{F}\cdotr\mathbf{n}\,dS=\iiint_E\text{div }\mathbf{F}(x,y,z)\,dV.
+\]
+\end{proof}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{example}
+Find the flux of the vector field $\mathbf{F}(x,y,z)=z\mathbf{i}+y\mathbf{j}+x\mathbf{k}$ over the unit sphere.\pause 
+
+\lspace
+First we compute the divergence of $\mathbf{F}$:
+\[
+\text{div }\mathbf{F}=\pp{}{x}(z)+\pp{}{y}(y)+\pp{}{z}(x)=0+1+0=1.
+\]\pause
+
+The unit sphere $S$ is the boundary of the unit ball $B$ given by $x^2+y^2+z^2\leq 1$ so the Divergence Theorem gives the flux as
+
+\lspace
+\[
+\iint_S\mathbf{F}\cdotr\,d\mathbf{S}=\iiint_B\text{div }\mathbf{F}\,dV=\iiint_B1\,dV=V(B)=\frac{4}{3}\pi(1)^2=\frac{4}{3}\pi.
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{example}
+Evaluate $\iint_S\mathbf{F}\cdotr\,d\mathbf{S}$ where
+\[
+\mathbf{F}(x,y,z)=xy\mathbf{i}+(y^2+e^{xz^2})\mathbf{j}+\sin(xy)\mathbf{k}
+\]
+and $S$ is the surface of the region $E$ bounded by the parabolic cylinder $z=1-x^2$ and the planes $z=0$, $y=0$, and $y+z=2$.
+
+\begin{center}
+\includegraphics[scale=0.33]{ex2.png}
+\end{center}
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{example}
+It would be extremely difficult to evaluate the given surface integral directly because we would have to evaluate 4 of them. \pause Additionally, the divergence of $\mathbf{F}$ is much less messy than $\mathbf{F}$ itself:
+
+\[
+\text{div }\mathbf{F}=\pp{}{x}(xy)+\pp{}{y}(y^2+e^{xz^2})+\pp{}{z}(\sin(xy))=y+2y=3y.
+\]\pause 
+
+Now we need to decide which type of region to view our region as, Type I, II, or III. \pause In this case it is easiest to view the region as a type 3 region:
+
+\[
+E=\{(x,y,z)\mid-1\leq x\leq 1,0\leq z(x)\leq 1-x^2,0\leq y(x,z)\leq 2-z\}
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{example}
+Then we have
+\begin{align*}
+\iint_S\mathbf{F}\cdotr\,d\mathbf{S}&=\iiint_E\text{div }\mathbf{F}\,dV=\iiint_E3y\,dV=3\int_{-1}^1\int_0^{1-x^2}\int_0^{2-z}y\,dy\,dz\,dx\\[2mm]
+&=3\int_{-1}^1\int_0^{1-x^2}\frac{(2-z)^2}{2}\,dz\,dx=\frac{3}{2}\int_{-1}^1\left[-\frac{(2-z)^3}{3}\right]_0^{1-x^2}\,dx\\[2mm]
+&=\frac{1}{2}\int_{-1}^1(x^2+1)^3-8\,dx=-\int_0^1(x^6+3x^4+3x^2-7)\,dx\\[2mm]
+&=\frac{184}{35}.
+\end{align*}
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}{The Divergence Theorem}
+\small
+We proved the Divergence Theorem only for simple solid regions, but it can also be proved for regions that are finite unions of simple solid regions. \visible<2->{For example, consider the region $E$ that lies between the closed surfaces $S_1$ and $S_2$ where $S_1$ lies inside $S_2$.} \visible<3->{Let $\mathbf{n}_1$ and $\mathbf{n}_2$ outward normals of $S_1$ and $S_2$.} \visible<4->{Then the boundary surface of $E$ is $S=S_1\cup S_2$ and its normal $\mathbf{n}$ is given by $\mathbf{n}=-\mathbf{n}_1$ on $S_1$ and $\mathbf{n}=\mathbf{n}_2$ on $S_2$.} \visible<5->{Applying the Divergence Theorem, we get}
+
+\begin{minipage}{0.3\textwidth}
+\centering
+\visible<2->{\includegraphics[scale=0.28]{innout.png}}
+\end{minipage}\hspace{5mm}%
+\begin{minipage}{0.65\textwidth}
+\footnotesize
+\visible<5->{
+\begin{align*}
+\iiint_E\text{div }\mathbf{F}\,dV&=\iint_S\mathbf{F}\cdotr\,d\mathbf{S}\\[2mm]
+&=\iint_S\mathbf{F}\cdotr\mathbf{n}\,dS\\[2mm]
+&=\iint_{S_1}\mathbf{F}\cdotr(-\mathbf{n}_1)\,dS+\iint_{S_2}\mathbf{F}\cdotr\mathbf{n}_2\,dS\\[2mm]
+&=-\iint_{S_1}\mathbf{F}\cdotr\,d\mathbf{S}+\iint_{S_2}\mathbf{F}\cdotr\,d\mathbf{S}.
+\end{align*}}
+\end{minipage}
+\end{frame}
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{example}
+Back in Section 16.1, we saw the example of the electric field
+\[
+\mathbf{E}(\mathbf{x})=\frac{\varepsilon Q}{|\mathbf{x}|^3}\mathbf{x},
+\]
+where the electric charge $Q$ is located at the origin and $\mathbf{x}=\<x,y,z>$ is a position vector. Use the Divergence Theorem to show that the electric flux of $\mathbf{E}$ through \textit{any} closed surface $S_2$ that encloses the origin is
+\[
+\iint_{S_2}\mathbf{E}\cdotr\,d\mathbf{S}=4\pi\varepsilon Q.
+\]
+\pause
+
+This is an interesting result because it says that the flux is independent of the surface enclosing the electric charge. It also makes the question a bit tricky at first because we aren't given any specific surface over which to integrate. It's similar to the example we did in 16.4 when we learned about Green's theorem.
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{example}
+Let $S_1$ be a tiny sphere of radius $a$ where $a$ is chosen such that $S_1\subseteq S_2$. \pause Using the result about finite unions that we derived a minute ago, we have
+\[
+\iiint_E\text{div }\mathbf{F}\,dV=-\iint_{S_1}\mathbf{F}\cdotr\,d\mathbf{S}+\iint_{S_2}\mathbf{F}\cdotr\,d\mathbf{S}.
+\]\pause 
+Thus,
+{\footnotesize
+\begin{align*}
+\iiint_E\text{div }\mathbf{E}\,dV&=-\iint_{S_1}\mathbf{E}\cdotr\,d\mathbf{S}+\iint_{S_2}\mathbf{E}\cdotr\,d\mathbf{S}\\[2mm]
+\iint_{S_2}\mathbf{E}\cdotr\,d\mathbf{S}&=\iiint_E\text{div }\mathbf{E}\,dV+\iint_{S_1}\mathbf{E}\cdotr\,d\mathbf{S}\\[2mm]
+&=0+\iint_{S_1}\mathbf{E}\cdotr\,d\mathbf{S}\\[2mm]
+&=\iint_{S_1}\mathbf{E}\cdotr\,d\mathbf{S}=\iint_{S_1}\mathbf{E}\cdotr\mathbf{n}\,dS.
+\end{align*}}
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+\begin{example}
+We will verify that the middle integral is 0 in our last activity! \pause The beauty here is that we can compute the surface integral over the sphere $S_1$ which is a nice surface. \pause The normal vector at $\mathbf{x}$ is $\frac{\mathbf{x}}{|\mathbf{x}|}$. Therefore
+
+\[
+\mathbf{E}\cdotr\mathbf{n}=\frac{\varepsilon Q}{|\mathbf{x}|^3}\mathbf{x}\cdotr\frac{\mathbf{x}}{|\mathbf{x}|}=\frac{\varepsilon Q}{|\mathbf{x}|^4}\mathbf{x}\cdotr\mathbf{x}=\frac{\varepsilon Q}{|\mathbf{x}|^2}=\frac{\varepsilon Q}{a^2}
+\]
+
+\vspace{3mm}
+since the vector equation of $S_1$ is $|\mathbf{x}|=a$. \pause Thus,
+
+\[
+\iint_{S_2}\mathbf{E}\cdotr\,d\mathbf{S}=\iint_{S_1}\mathbf{E}\cdotr\mathbf{n}\,dS=\frac{\varepsilon Q}{a^2}\iint_{S_1}\,dS=\frac{\varepsilon Q}{a^2}A(S_1)=\frac{\varepsilon Q}{a^2}4\pi a^2=4\pi\varepsilon Q.
+\]\pause 
+
+\lspace
+Behold, the flux through \textit{any} closed surface that contains the origin is $4\pi\varepsilon Q$. (This is a special case of Gauss's Law).
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{The Divergence Theorem}
+\small
+We conclude this section, and this course, with some fundamental definitions of objects you will study later in a course on differential equations
+
+\lspace
+\begin{definition}
+Let $\mbf{F}$ be a vector field and let $P$ be a point in $\MB{R}^n$. If $\text{div }\mathbf{F}(P)>0$, the net flow of the vector field is outward near $P$, and $P$ is called a \textbf{source}. If $\text{div }\mathbf{F}(P)<0$, the net flow is inward near $P$, and $P$ is called a \textbf{sink}.
+\end{definition}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}
+\begin{center}
+{\Huge \bf Congratulations!}
+
+\vspace{2cm}
+
+\fbox{\textit{``The essence of mathematics lies entirely in its freedom.''} - Georg Cantor}
+\end{center}
+\end{frame}
+
+
+
+
+
+%\section*{Divergence, Clarified}
+%
+%Let $\mathbf{v}(x,y,z)$ be the velocity field of a fluid with constant density $\rho$. Then $\mathbf{F}=\rho \mathbf{v}$ is the rate of flow per unit area. If $P_0(x_0,y_0,z_0)$ is a point in the fluid and $B_a$ is a ball with center $P_0$ and a very small radius $a$, then $\text{div }\mathbf{F}(P)\approx\text{div }\mathbf{F}(P_0)$ for all points $P$ in $B_a$ since div $\mathbf{F}$ is continuous. We approximate the flux over the boundary sphere $\partial B_a$:
+%
+%\[
+%\iint_{\partial B_a}\mathbf{F}\cdotr\,d\mathbf{S}=\iiint_{B_a}\text{div }\mathbf{F}\,dV\approx\iiint_{B_a}\text{div }\mathbf{F}(P_0)\,dV=\text{div }\mathbf{F}(P_0)\iiint_{B_a}\,dV=\text{div }\mathbf{F}(P_0)V(B_a).
+%\]
+%
+%This approximation gets better as $a\rightarrow0$, and we get that
+%
+%\[
+%\text{div }\mathbf{F}(P_0)=\lom{a}{0}\frac{1}{V(B_a)}\iint_{S_a}\mathbf{F}\cdotr\,d\mathbf{S}.
+%\]
+%
+%
+%
+%This result says that the divergence of $\mathbf{F}$ at $P_0$ is the net rate of outward flux per unit volume at $P_0$, which makes sense. If $\text{div }\mathbf{F}(P)>0$, the net flow is outward near $P$ and $P$ is called a \textbf{source}. If $\text{div }\mathbf{F}(P)<0$, the net flow is inward near $P$ and $P$ is called a \textbf{sink}.
+%
+%\begin{center}
+%\includegraphics[scale=0.5]{sink_source.png}
+%\end{center}
+%
+%The vector field $\mathbf{F}=x^2\mathbf{i}+y^2\mathbf{j}$ is pictured above. $\text{div }\mathbf{F}=2x+2y$ which is positive whenever $y>-x$. So the points above the line $y=-x$ are sources and the points below are sinks. More intuitively, the vectors that end near $P_1$ are shorter than the vectors that start at $P_1$, so $P_1$ is a source. For $P_2$, the longer vectors are heading into $P_2$ and the shorter vectors are leaving $P_2$, so it is a sink.
+
+
+
+
+
+
+\end{document}

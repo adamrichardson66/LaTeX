@@ -1,0 +1,510 @@
+\documentclass[11pt,oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{verbose,tmargin=0.65in,bmargin=0.65in,lmargin=0.75in,rmargin=0.75in,headheight=0.75cm,headsep=1cm,footskip=1cm}
+\setlength{\parskip}{7mm}
+\usepackage{setspace}
+\onehalfspacing
+\pagenumbering{gobble}
+
+
+\usepackage{bbm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{pgfplots}
+\usepackage{ulem}
+\usepackage{adjustbox}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{babel}
+\usepackage{mdframed}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem*{example}{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{definition}{Definition}
+\newtheorem*{note}{Nota Bene}
+
+\newcommand{\aspace}{\hspace{7mm}\text{and}\hspace{7mm}}
+\newcommand{\ospace}{\hspace{7mm}\text{or}\hspace{7mm}}
+\newcommand{\pspace}{\hspace{10mm}}
+\newcommand{\lhe}{\stackrel{\text{L'H}}{=}}
+\newcommand{\lom}[2]{\lim_{{#1}\rightarrow{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\DD}[2]{\frac{\Delta{#1}}{\Delta{#2}}}
+\newcommand{\ovec}[1]{\overrightarrow{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+
+\def\<#1>{\mathinner{\langle#1\rangle}}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\belowdisplayshortskip{5mm}
+}
+\makeatother
+
+
+
+%Textbook: Essential Calculus - Early Transcendentals, 2nd edition - Stewart. ISBN: 978-1-133-11228-0
+
+
+\begin{document}
+\vspace*{-1cm}
+\title{16.2 - Line Integrals}
+\maketitle
+
+
+In this section we define and develop an extremely important use of the integral: \textit{line integrals}. Line integrals are similar to single integrals except instead of integrating over an interval, we'll be integrating over a curve $C$. They were invented in the early 19th century to solve problems involving fluid flow, forces, electricity, and magnetism.
+
+\section*{Development}
+
+Let $C$ be a curve in the $xy$-plane defined by the parametric equations $x=x(t)$, $y=y(t)$ where $a\leq t\leq b$, or equivalently by the vector equation $\mathbf{r}(t)=x(t)\mathbf{i}+y(t)\mathbf{j}$. Suppose that $C$ is a smooth curve. We divide the parameter interval $[a,b]$ into $n$ subintervals $[t_{i-1},t_i]$ of equal length. Let $x_i=x(t_i)$ and $y_i=y(t_i)$.
+
+Then, the corresponding points $P_i(x_i,y_i)$ divide $C$ into $n$ subarcs with lengths $\Delta s_i$. Choose any point $P_i^*(x_i^*,y_i^*)$ in the $i$th subarc. Let $f$ be a scalar function of two variables whose domain includes the curve $C$. If we evaluate $f$ at $(x_i^*,y_i^*)$, multiply the result by $\Delta s_i$, and add all of these products up, we get an approximation of the area under the ``curtain'' formed by $C$ and its projection onto the $xy$-axis:
+
+\[
+\sum_{i=1}^nf(x_i^*,y_i^*)\,\Delta s_i.
+\]
+
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{line_integral1.png}
+\end{center}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{line_integral2.png}
+\end{center}
+\end{minipage}
+
+Taking the limit as $n\rightarrow \infty$ we get
+
+\begin{definition}
+If a \textit{scalar field} $f$ is defined on a smooth curve $C$ given by the parametric equations $x=x(t)$, $y=y(t)$, $a\leq t\leq b$, then the \textbf{line integral of $f$ along $C$ (with respect to arc length)} is 
+
+\[
+\int_Cf(x,y)\,ds=\lom{n}{\infty}\sum_{i=1}^nf(x_i^*,y_i^*)\,\Delta s_i
+\]
+
+provided this limit exists.
+\end{definition}
+
+
+\textbf{Recall.} Earlier, we found the arc length function 
+
+\[
+s(t)=\int_a^t|\mathbf{r}'(u)|\,du=\int_a^t\sqrt{\left(\dd{x}{u}\right)^2+\left(\dd{y}{u}\right)^2}\,du
+\]
+
+Recall also that if we differentiate both sides of this equation we get
+
+\begin{align*}
+\dd{s}{t}&=|\mathbf{r}'(t)|=\sqrt{\left(\dd{x}{t}\right)^2+\left(\dd{y}{t}\right)^2}\text{ so}\\[2mm]
+ds&=\sqrt{\left(\dd{x}{t}\right)^2+\left(\dd{y}{t}\right)^2}\,dt\\[2mm]
+\end{align*}
+
+Consequently, we can rewrite our formula for a line integral as
+
+
+
+\[\boxed{
+\int_Cf(x,y)\,ds=\int_a^bf(x(t)),y(t))\sqrt{\left(\dd{x}{t}\right)^2+\left(\dd{y}{t}\right)^2}\,dt=\int_a^bf(\mathbf{r}(t))|\mathbf{r}'(t)|\,dt
+}\]
+
+
+
+\begin{note}
+The line integral can be interpreted as finding the ``wieghted'' arc length, where the weight at any point on $\mathbf{r}(t)$ is given by the function $f(\mathbf{r}(t))$. In fact, using the formula above, if we take $f\equiv 1$, i.e. set the weight equal to 1, then 
+
+\[
+\int_a^bf(\mathbf{r}(t))|\mathbf{r}'(t)|\,dt=\int_a^b1\cdot|\mathbf{r}'(t)|\,dt=\int_a^b|\mathbf{r}'(t)|\,dt,
+\]
+
+which is the usual length of the unweighted arc.
+
+\uline{The value of the line integral does not depend on the parameterization of the curve}.
+\end{note}
+
+\begin{example}
+Evaluate $\int_C2+x^2y\,ds$ where $C$ is the upper half of the unit circle.
+
+First, we need to parameterize the curve. This is simple enough for such a simple curve; $x=\cos t$, $y=\sin t$, with $0\leq t \leq \pi$. Thus,
+
+\begin{align*}
+\int_C(2+x^2y)\,ds&=\int_0^\pi(2+\cos^2t\sin t)\sqrt{\left(\dd{x}{t}\right)^2+\left(\dd{y}{t}\right)^2}\,dt\\[2mm]
+&=\int_0^\pi(2+\cos^2t\sin t)\sqrt{\cos^2t+\sin^2t}\,dt\\[2mm]
+&=\int_0^\pi(2+\cos^2t\sin t)\,dt\\[2mm]
+&=\left[2t-\frac{\cos^3t}{3}\right]_0^\pi\\[2mm]
+&=2\pi+\frac{2}{3}.
+\end{align*}
+\end{example}
+
+\vspace{7mm}
+\begin{note}
+If a curve $C$ is a \textbf{piecewise smooth curve}, i.e. $C$ can be decomposed into a finite union of smooth curves $C_1,C_2,\ldots,C_n$, then the line integral of the curve $C$ is the sum of the line integrals of the curves $C_i$:
+
+\[
+\int_Cf(x,y)\,ds=\int_{C_1}f(x,y)\,ds+\int_{C_2}f(x,y)\,ds+\cdots+\int_{C_n}f(x,y)\,ds
+\]
+\end{note}
+
+
+Physical interpretations of the line integral depend on the physical interpretation of the function $f$. For example, suppose $\rho(x,y)$ represents the linear density at a point $(x,y)$ of a thin wire shaped like a curve $C$. Then the mass of the curve from $P_{i-1}$ to $P_i$ is approximately $\rho(x_i^*,y_i^*)\,\Delta s_i$. Extending this idea, we get that the \textbf{mass} $m$ of the wire is
+
+\[
+m=\lom{n}{\infty}\sum_{i=1}^n\rho(x_i^*,y_i^*)\,\Delta s_i=\int_C\rho(x,y)\,ds.
+\]
+
+\pagebreak
+
+The \textbf{center of mass} of the wire with density function $\rho$ is the point $(\bar{x},\bar{y})$ where
+
+\[
+\bar{x}=\frac{1}{m}\int_Cx\rho(x,y)\,ds\pspace\bar{y}=\frac{1}{m}\int_Cy\rho(x,y)\,ds
+\]
+
+
+\begin{example}
+A wire takes the shape of a semicircle  $x^2+y^2=1$ with $y\geq 0$, and it is thicker near it bas than near the top. Find the center of mass of the wire if the linear density at any point is proportional to its distance from the line $y=1$.
+
+Our linear density function is $\rho(x,y)=k(1-y)$ where $k$ is a constant. The we have
+
+\[
+m=\int_Ck(1-y)\,ds=\int_0^\pi k(1-\sin t)\,dt=k\left[t+\cos t\right]_0^\pi=k(\pi-2)\text{, and}
+\]
+
+\begin{align*}
+\bar{y}&=\frac{1}{m}\int_Cy\rho(x,y)\,ds\\[2mm]
+&=\frac{1}{k(\pi-2)}\int_Cyk(1-y)\,ds\\[2mm]
+&=\frac{1}{\pi-2}\int_0^\pi(\sin t-\sin^2t)\,dt\\[2mm]
+&=\frac{1}{\pi-2}\left[-\cos t-\frac{1}{2}t^2+\frac{1}{4}\sin2t\right]_0^\pi\\[2mm]
+&=\frac{4-\pi}{2(\pi-2)}.
+\end{align*}
+
+Since the wire is symmetric about the $y$-axis, $\bar{x}=0$, and we have
+
+\[
+(\bar{x},\bar{y})=\left(0,\frac{4-\pi}{2(\pi-2)}\right)\approx(0,0.38)
+\]
+\end{example}
+
+\vfill
+\pagebreak
+
+\section*{Line Integrals with respect to $x$ and $y$}
+
+Two other very important line integrals arise:
+
+\begin{definition}
+The \textbf{line integrals of $f$ along $C$ with respect to $x$ and $y$} are
+
+\begin{align*}
+\int_Cf(x,y)\,dx&=\lom{n}{\infty}\sum_{i=1}^nf(x_i^*,y_i^*)\,\Delta x_i\\[2mm]
+\int_Cf(x,y)\,dy&=\lom{n}{\infty}\sum_{i=1}^nf(x_i^*,y_i^*)\,\Delta y_i\\[2mm]
+\end{align*}
+
+Since $\dd{x}{t}=x'(t)$ and $\dd{y}{t}=y'(t)$, we can write
+
+
+\begin{align*}
+\int_Cf(x,y)\,dx&=\int_a^bf(x(t),y(t))x'(t)\,dt\\[2mm]
+\int_Cf(x,y)\,dy&=\int_a^bf(x(t),y(t))y'(t)\,dt
+\end{align*}
+
+Roughly and geometrically speaking, this is like finding the net area under the projection of the curve $C$ onto the $xz$-plane and the $yz$ plane respectively.
+
+\begin{center}
+\includegraphics[scale=0.3]{line_integral3.jpg}
+\end{center}
+\end{definition}
+
+\pagebreak
+
+\textbf{Notation.} As you might imagine, line integrals with respect to $x$ and $y$ often occur together. It is customary to abbreviate the sum of such integrals as follows.
+
+\[
+\int_CP(x,y)\,dx+\int_CQ(x,y)\,dy=\int_CP(x,y)\,dx+Q(x,y)\,dy
+\]
+
+\textbf{Question.} Does $\displaystyle \int_CP(x,y)\,dx+Q(x,y)\,dy=\int_C[P(x,y)+Q(x,y)]\,ds$?
+
+Not in general! This is equivalent to asking if it is always true that the sides of a triangle add up to the length of the hypotenuse. This is only true when the vertices of the triangle are collinear, but in that case our curve must be parallel to the $xz$- or $yz$-planes.
+
+\begin{note}
+Often times we need to do a line integral over an actual line segment. For this, it is handy to remember the following vector representation of a line.
+
+\[
+\mathbf{r}(t)=(1-t)\mathbf{r}_0+t\mathbf{r}_1\pspace0\leq t\leq 1
+\]
+\end{note}
+
+
+\begin{example}
+Evaluate $\displaystyle \int_Cy^2\,dx+x\,dy$ with $C=C_1\cup C_2$ where $C_1$ is the line segment from $(-5,-3)$ to $(0,2)$ and $C_2$ is the arc of the parabola $x=4-y^2$ from $(-5,-3)$ to $(0,2)$.
+
+\begin{center}
+\includegraphics[scale=0.3]{ex1.png}
+\end{center}
+
+Considering distances between the initial and terminal coordinates of the end points of the line segemet yield the parameterization 
+
+\[
+x=5t-5\pspace y=5t-3\pspace 0\leq t\leq 1
+\]
+
+From these we get $dx=5\,dt$ and $dy=5\,dt$, so
+
+\begin{align*}
+\int_Cy^2\,dx+x\,dy&=\int_0^1 (5t-3)^2(5t\,dt)+(5t-5)(5\,dt)\\[2mm]
+&=5\int_0^1(25t^2-25t+4)\,dt\\[2mm]
+&=5\left[\frac{25t^3}{3}-\frac{25t^2}{2}+4t\right]_0^1\\[2mm]
+&=-\frac{5}{6}.
+\end{align*}
+
+The parabola is already expressed as a function of $y$, so take $y$ to be the parameter and write $C_2$ as
+
+\[
+x=4-y^2\pspace y=y\pspace -3\leq y\leq 2.
+\]
+
+Then $dx=-2y\,dy$ so
+
+\begin{align*}
+\int_Cy^2\,dx+x\,dy&=\int_{-3}^2y^2(-2y)\,dy+(4-y^2)\,dy\\[2mm]
+&=\int_{-3}^2(-2y^3-y^2+4)\,dy\\[2mm]
+&=\left[-\frac{1}{2}y^4-\frac{1}{3}y^3+4y\right]_{-3}^2\\[2mm]
+&=40\frac{5}{6}.
+\end{align*}
+
+Therefore
+
+\[
+ \int_Cy^2\,dx+x\,dy=\int_{C_1}y^2\,dx+x\,dy+\int_{C_2}y^2\,dx+x\,dy=-\frac{5}{6}+40\frac{5}{6}=40.
+\]
+\end{example}
+
+
+\begin{note}
+Notice that we got different results for our line integral depending on which curve we traversed even though the curves had the same initial and terminal points. In general, the value of a line integral depends not only on the endpoints alone, but the path chosen as well. In the next section we will see conditions under which the line integral is independent of the path.
+\end{note}
+
+\pagebreak
+
+\begin{note}
+Observe that we made a choice of \textbf{orientation} in the previous example. We chose which point was initial and which point is terminal. This effects the value of the line integral with respect to $x$ or $y$. Let $-C$ be the curve $C$ but with opposite orientation. Then
+
+\[
+\int_{-C}f(x,y)\,dx=-\int_Cf(x,y)\,dx\aspace \int_{-C}f(x,y)\,dy=-\int_Cf(x,y)\,dy
+\] 
+
+This makes sense if you recall why $\int_a^bf(x)\,dx=-\int_b^af(x)\,dx$ from Calc I: $\Delta x_i$ and $\Delta y_i$ change sign when we reverse the orientation of $C$.
+
+However, if we integrate with respect to arc length, the value of the line integral does \textit{not} change when we reverse the orientation of $C$ because $\Delta s_i$ is always positive. I.e.
+
+\[
+\int_{-C}f(x,y)\,ds=\int_Cf(x,y)\,ds.
+\]
+\end{note}
+
+
+
+\section*{Line Integrals in Space}
+
+
+Suppose $C$ is a smooth curve given by the equations
+
+\[
+x=x(t)\pspace y=y(t)\pspace z=z(t)\pspace a\leq t\leq b
+\]
+
+or by a vector equation $\mathbf{r}(t)=x(t)\mathbf{i}+y(t)\mathbf{j}+z(t)\mathbf{k}$.
+
+\begin{definition}
+If $f$ is a scalar function of three variables and $f$ is continuous on some domain that contains $C$, then the \textbf{line integral of $f$ along $C$} with respect to arc length is 
+
+\begin{align*}
+\int_Cf(x,y,z)\,ds&=\lom{n}{\infty}\sum_{i=1}^nf(x_i^*,y_i^*,z_i^*)\,\Delta s_i\\[2mm]
+&=\int_Cf(x(t),y(t),z(t))\sqrt{\left(\dd{x}{t}\right)^2+\left(\dd{y}{t}\right)^2+\left(\dd{z}{t}\right)^2}\,dt\\[2mm]
+&=\int_Cf(\mathbf{r}(t))|\mathbf{r}'(t)|\,dt
+\end{align*}
+\end{definition}
+
+\pagebreak
+
+\begin{note}
+Line integrals with respect to $x$, $y$, and $z$ can be constructed in the analgous way. for example,
+
+\[
+\int_Cf(x,y,z)\,dz=\int_Cf(x(t),y(t),z(t))z'(t)\,dz\text{ and}
+\]
+\[
+\int_CP(x,y,z)\,dx+Q(x,y,z)\,dy+R(x,y,z)\,dz
+\]
+
+\end{note}
+
+
+\begin{example}
+Evaluate the integral $\displaystyle \int_Cy\sin z\,ds$ where $C$ is the circular helix given by $x=\cos t$, $y=\sin t$, $z=t$, where $0\leq t\leq 2\pi$.
+
+\begin{align*}
+\int_Cy\sin z\,ds&=\int_0^{2\pi}\sin^2t \sqrt{\left(\dd{x}{t}\right)^2+\left(\dd{y}{t}\right)^2+\left(\dd{z}{t}\right)^2}\,dt\\[2mm]
+&=\int_0^{2\pi}\sin^2t \sqrt{\cos^2t+\sin^2t+1}\,dt\\[2mm]
+&=\frac{\sqrt{2}}{2}\int_0^{2\pi}1-\cos2t\,dt\\[2mm]
+&=\frac{\sqrt{2}}{2}\left[t-\frac{1}{2}\sin2t\right]_0^{2\pi}\\[2mm]
+&=\sqrt{2}\pi.
+\end{align*}
+\end{example}
+
+
+\section*{Line Integrals of Vector Fields}
+
+In Calc I (or Calc II) you saw that the work done by a variable force $f(x)$ in pushing an object from $a$ to $b$ along the $x$-axis is $\displaystyle W=\int f(x)\,dx$. Earlier in this course, we saw that the work done by a constant force $\mathbf{F}$ in moving an object from point $P$ to point $Q$ in space is $W=\mathbf{F}\cdot\mathbf{D}$ where $\mathbf{D}=\ovec{PQ}$ the displacement vector.
+
+\pagebreak
+
+Now suppose $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$ is a continuous force field on $\R^3$. Our goal is to compute the work done by this force in moving an object along a space curve $C$ from $P$ to $Q$. Divide up $C$ into subarcs $P_{i-1}P_i$ of length $\Delta s_i$ by dividing the parameter interval into $n$ equal-length subintervals. Choose a point $P_i^*(x_i^*,y_i^*,z_i^*)$ in the $i$th subarc that corresponds to the parameter $t_i^*$ in the $i$th subinterval. If $\Delta s_i$ is small, then the object moves along $C$ approximately in the direction of $\mathbf{T}(t_i^*)$, the unit tangent vector at $P_i^*$. Consequently, the work done by the force field in moving the object from $P_{i-1}$ to $P_i$ is
+
+\[
+\mathbf{F}(x_i^*,y_i^*,z_i^*)\cdot[\Delta s_i\cdot\mathbf{T}(t_i^*)]= [\mathbf{F}(x_i^*,y_i^*,z_i^*)\cdot\mathbf{T}(t_i^*)]\cdot\Delta s_i.
+\]
+
+\begin{center}
+\includegraphics[scale=0.5]{vect_lineint.png}
+\end{center}
+
+
+Then the total work done is approximately 
+
+\[
+\sum_{i=1}^n [\mathbf{F}(x_i^*,y_i^*,z_i^*)\cdot\mathbf{T}(t_i^*)]\cdot\Delta s_i,
+\]
+
+and precisely
+
+\[
+W=\int_C\mathbf{F}(x,y,z)\cdot\mathbf{T}(x,y,z)\,ds=\int_C \mathbf{F}\cdot \mathbf{T}\,ds
+\]
+
+This says that work is the line integral with respect to arc length of the tangential component of the force.
+
+If $C$ is instead given by the vector equation $\mathbf{r}(t)=x(t)\mathbf{i}+y(t)\mathbf{j}+z(t)\mathbf{k}$, then $\displaystyle \mathbf{T}(t)=\frac{\mathbf{r}'(t)}{|\mathbf{r}'(t)|}$ and we can rewrite the work formula as
+
+\[
+W=\int_C\left[\mathbf{F}(\mathbf{r}(t))\cdot \frac{\mathbf{r}'(t)}{|\mathbf{r}'(t)|}\right]|\mathbf{r}'(t)|\,dt= \int_C\mathbf{F}(\mathbf{r}(t))\cdot\mathbf{r}'(t)\,dt=\int_C\mathbf{F}\cdot\,d\mathbf{r}.
+\]
+
+In summary,
+
+\begin{definition}
+Let $\mathbf{F}$ be a continuous vector field defined on a smooth curve $C$ defined by a vector equation $\mathbf{r}(t)$ with $a\leq t\leq b$. Then the \textbf{line integral of $\mathbf{F}$ along $C$} is
+
+\[\boxed{
+\int_C\mathbf{F}(\mathbf{r}(t))\cdot\mathbf{r}'(t)\,dt=\int_C\mathbf{F}\cdot\,d\mathbf{r}=\int_C\mathbf{F}\cdot\mathbf{T}\,ds
+}
+\]
+\end{definition}
+
+\begin{note}
+What this says is that the line integral over a curve in a force field adds up the curve-tangential component of the force acting on the curve at every point. This gives us a measure of how well the curve is aligned with the force field. If $C$ is a closed curve, the line integral gives us the \textbf{circulation} of the vector field around $C$, i.e. how much the vector field tends to circulate around the curve.
+\end{note}
+
+
+\begin{example}
+Find the work done by the force field $\mathbf{F}(x,y)=x^2\mathbf{i}-xy\mathbf{j}$ in moving a particle along the quarter circle $\mathbf{r}(t)=\cos t\mathbf{i}+\sin t\mathbf{j}$, $0\leq t \leq \frac{\pi}{2}$
+
+\begin{center}
+\includegraphics[scale=0.5]{ex2.png}
+
+\end{center}
+Since $x=\cos t$ and $y=\sin t$, we have 
+
+\[
+\mathbf{F}(\mathbf{r}(t))=\cos^2 t\mathbf{i}-\cos t\sin t \mathbf{j}.
+\]
+
+Since
+\[
+\mathbf{r}'(t)=-\sin t\mathbf{i}+\cos t\mathbf{j},
+\]
+
+we have
+
+\begin{align*}
+\int_C\mathbf{F}\cdot\,d\mathbf{r}&= \int_0^{\frac{\pi}{2}}\mathbf{F}(\mathbf{r}(t))\cdot\mathbf{r}'(t)\,dt\\[2mm]
+&=\int_0^{\frac{\pi}{2}}(-2\cos^2t\sin t)\,dt\\[2mm]
+&=2\left[\frac{1}{3}\cos^3\right]_0^{\frac{\pi}{2}}\\[2mm]
+&=-\frac{2}{3}.
+\end{align*}
+
+\end{example}
+
+\begin{note}
+Even though $\displaystyle \int_C\mathbf{F}\cdot\,d\mathbf{r}=\int_C\mathbf{F}\cdot\mathbf{T}\,ds$, if we reverse the orientation of $C$, the sign of the integral will also change. This is because when the direction is reversed, $\mathbf{T}$ is replaced by $-\mathbf{T}$.
+\end{note}
+
+
+\begin{example}
+Find $\displaystyle \int_C\mathbf{F}\cdot\,d\mathbf{r}$ where $\mathbf{F}(x,y,z)=xy\mathbf{i}+yz\mathbf{j}+zx\mathbf{k}$ and $C$ is the twisted cubic given by:
+
+\[
+x=t\pspace y=t^2\pspace z=t^3\pspace 0\leq t\leq 1
+\]
+
+\begin{multicols}{2}
+We have
+
+\begin{align*}
+\mathbf{r}(t)&=t\mathbf{i}+t^2\mathbf{j}+t^3\mathbf{k}\\[2mm]
+\mathbf{r}'(t)&=\mathbf{i}+2t\mathbf{j}+3t^2\mathbf{k}\\[2mm]
+\mathbf{F}(\mathbf{r}(t))&=t^3\mathbf{i}+t^5\mathbf{j}+t^4\mathbf{k}.
+\end{align*}
+
+\columnbreak
+Thus,
+
+\begin{align*}
+\int_C\mathbf{F}\cdot\,d\mathbf{r}&= \int_0^1\mathbf{F}(\mathbf{r}(t))\cdot\mathbf{r}'(t)\,dt\\[2mm]
+&=\int_0^1t^3+5t^6,dt\\[2mm]
+&=\left[\frac{1}{4}t^4+\frac{5}{7}t^7\right]_0^1\\[2mm]
+&=\frac{27}{28}.
+\end{align*}
+
+\end{multicols}
+\end{example}
+
+\begin{note}
+Now we note the connection between line integrals of vector fields and line integrals of scalar fields. Suppose $\mathbf{F}$ is a vector field given by $\mathbf{F}=P\mathbf{i}+Q\mathbf{j}+R\mathbf{k}$. Computing its line integral along $C$ reveals
+
+\begin{align*}
+\int_C\mathbf{F}\cdot\,d\mathbf{r}&= \int_a^b\mathbf{F}(\mathbf{r}(t))\cdot\mathbf{r}'(t)\,dt\\[2mm]
+&=\int_a^b (P\mathbf{i}+Q\mathbf{j}+R\mathbf{k})\cdot(x'(t)\mathbf{i}+y'(t)\mathbf{j}+z'(t)\mathbf{k})\,dt\\[2mm]
+&=\int_a^b\left[P(x(t),y(t),z(t))x'(t)+Q(x(t),y(t),z(t))y'(t)+R(x(t),y(t),z(t))z'(t)\right]\,dt\\[2mm]
+&=\int_a^bP\,dx+Q\,dy+R\,dz.
+\end{align*}
+
+\fbox{\parbox{\textwidth}{In other words, the line integral of a vector field is equivalent to the sum of the line integrals of the component scalar fields with respect to their respective variables.}}
+\end{note}
+
+
+
+
+
+
+\end{document}

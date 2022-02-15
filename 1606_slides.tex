@@ -1,0 +1,896 @@
+\documentclass[11pt,english,
+handout
+]{beamer}
+
+%Preamble  
+\input{/Users/Adam/Desktop/LBCC/MATH80/MATH80_Lesson_Plans/MATH80_Slides_Preamble.tex}
+
+%Textbook: Essential Calculus - Early Transcendentals, 2nd edition - Stewart. ISBN: 978-1-133-11228-0
+
+
+
+\begin{document}
+
+%Slide titles are all contained in this file..
+\ExecuteMetaData[/Users/Adam/Desktop/LBCC/MATH80/MATH80_Lesson_Plans/MATH80_Slide_Titles.tex]{1606}
+
+%Global Title Slide Format is contained in the following file.
+\input{/Users/Adam/Desktop/LBCC/MATH80/MATH80_Lesson_Plans/MATH80_Title_Slide_Format.tex}
+\makebeamertitle
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Parametric Surfaces}
+In this section we're going to extend our ability to describe surfaces to any general surface. More specifically, we are going to re-express everything we learned about surfaces in terms of parameters and parametric equations which are far more versatile.
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+Recall that a space curve can be described by a vector function $\mathbf{r}(t)$ of a single parameter $t$. Similarly, we can describe a surface in $\MB{R}^3$ by a vector function $\mathbf{r}(u,v)$ of two parameters $u$ and $v$.\pause 
+
+\lspace
+\begin{definition}
+Write
+\[
+\boxed{\mathbf{r}(u,v)=x(u,v)\mathbf{i}+y(u,v)\mathbf{j}+z(u,v)\mathbf{k}}
+\]
+
+\vspace{3mm}
+and suppose this function of two variables is defined on a region $D$ in the $uv$-plane. The set of all points $(x,y,z)$ in $\MB{R}^3$ such that
+\[
+x=x(u,v)\pspace y=y(u,v)\pspace z=z(u,v)
+\]
+and $(u,v)$ varies throughout $D$ is called a \textbf{parametric surface} $S$, and the equations above are called the \textbf{parametric equations} of the surface.
+\end{definition}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+
+\[
+\mathbf{r}(u,v)=x(u,v)\mathbf{i}+y(u,v)\mathbf{j}+z(u,v)\mathbf{k}
+\]
+\begin{center}
+\includegraphics[scale=0.5]{para_surf.png}
+\end{center}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+\begin{example}
+Identify and sketch the surface with vector equation 
+\[
+\mathbf{r}(u,v)=2\cos u\mathbf{i}+v\mathbf{j}+2\sin u\mathbf{k}.
+\]\pause
+\lspace
+The parametric equations are
+
+\[
+x=2\cos u\pspace y=v\pspace z=2\sin u.
+\]\pause
+
+\vspace{1mm}
+There is clearly some circular behavior going on, and if we notice that 
+\[
+x^2+z^2=4\cos^2 u+4\sin^2 u=4,
+\]
+
+we see this is a cylinder with axis the $y$-axis and radius 2.
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+\textbf{Note:} Restricting the domains of our parameters $u$ and $v$ allows us to restrict ourselves to parts of surfaces.
+
+\lspace
+\visible<2->{Given a parametric surface $S$, we are often interested in two families of curves called the \textbf{grid curves} of $S$.} \visible<3->{The grid curves are the curves on the surface generated when one of the variables is held fixed.} \visible<3->{These curves correspond to vertical and horizontal lines in the $uv$-plane.} \visible<4->{E.g. fix $u=u_0$. Then $\mathbf{r}(u_0,v)=\mathbf{r}_{u_0}(v)$ which is a vector function of a single variable, i.e. a space curve.}
+
+\visible<3->{\begin{center}
+\includegraphics[scale=0.48]{grid_curves.png}
+\end{center}}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+\begin{example}
+Graph $\mathbf{r}(u,v)=\<(2+\sin v)\cos u,(2+\sin v)\sin u,u+\cos v>$. Which grid curves have $u$ fixed? Which have $v$ fixed? \pause %The circles, and then the long paths.
+
+\lspace
+\begin{minipage}{0.5\textwidth}
+\centering
+\includegraphics[scale=0.4]{spiral_pasta2.png}\pause
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+The circles have $u$ fixed and the spirals have $v$ fixed.
+\end{minipage}
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+\begin{example}
+Find a vector function that represents the plane that passes through the point $P_0$ with position vector $\mathbf{r}_0$ and that contains two nonparallel vectors $\mathbf{a}$ and $\mathbf{b}$.
+
+\begin{center}
+\includegraphics[scale=0.4]{point_plane.png}
+\end{center}\pause
+
+\lspace
+Any vector in the direction of $\mathbf{a}$ must have the form $u\mathbf{a}$, and any vector in the direction of $\mathbf{b}$ must have the form $v\mathbf{b}$ where $u,v$ vary. \pause Pick another point $P$ on our plane. Then there exist $u,v$ such that $\ovec{P_0P}=u\mathbf{a}+v\mathbf{b}$. If $\mathbf{r}$ is the position vector of $P$, then
+\[
+\mathbf{r}=\ovec{OP_0}+\ovec{P_0P}=\mathbf{r_0}+u\mathbf{a}+b\mathbf{b}.
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+\begin{example}
+Find a vector function that represents the plane that passes through the point $P_0$ with position vector $\mathbf{r}_0$ and that contains two nonparallel vectors $\mathbf{a}$ and $\mathbf{b}$.
+
+\lspace
+We can thus write the vector equation of this plane as
+\[
+\mathbf{r}(u,v)=\mathbf{r}_0+u\mathbf{a}+v\mathbf{b}
+\]
+
+where $u,v$ are real numbers. \pause If we write
+
+\[
+\mathbf{r}=\<x,y,z>\pspace \mathbf{r}_0=\<x_0,y_0,z_0>\pspace \mathbf{a}=\<a_1,a_2,a_3>\pspace \mathbf{b}=\<b_1,b_2,b_3>,
+\]
+then we can glean the parametric equations:
+
+\[
+x=x_0+ua_1+vb_1\pspace y=y_0+ua_2+vb_2\pspace z=z_0+ua_3+vb_3.
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+\begin{example}
+Find parametric equations for the sphere centered at the origin with radius $a$.\pause
+
+\lspace
+This one should come as no real surprise; we can use the formulas for spherical coordinates. \pause Setting $\rho=a$ we get
+
+\[
+x=a\sin\phi\cos\theta\pspace y=a\sin\phi\sin\theta \pspace z=a\cos\phi
+\]
+
+for the parametric equations and the vector equation is
+
+\[
+\mathbf{r}(\phi,\theta)=a\sin\phi\cos\theta\mathbf{i}+a\sin\phi\sin\theta\mathbf{j}+a\cos\phi\mathbf{k}.
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+\begin{example}
+Find parametric equations for the sphere centered at the origin with radius $a$.
+
+\lspace
+The figures below illustrate how a rectangle in the $\phi\theta$-plane is mapped to a sphere in $xyz$-space.
+
+\lspace
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{sphere_domain.png}
+\end{center}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{sphere_grid.png}
+\end{center}
+\end{minipage}
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+\begin{example}
+Observe the following computer generated images of a sphere:
+\begin{center}
+\includegraphics[scale=0.5]{sphere3.png}
+\end{center}
+
+\lspace
+The left is graphed by solving for $z$ in $x^2+y^2+z^2=1$ and graphing the top and bottom separately. The right is graphed using the parametric equations we found.
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+\begin{example}
+Find a parametric representation for the surface $z=2\sqrt{x^2+y^2}$, i.e. the top half of the cone $z^2=4x^2+4y^2$.\pause
+
+\lspace
+Here we have two choices: we can use a cartesian parameterization or a polar parameterization. \pause First, choose $x$ and $y$ to be the parameters. \pause Then our parametric equations are
+\[
+x=x\pspace y=y \pspace z=2\sqrt{x^2+y^2},
+\]
+so the vector equation is
+\[
+\mathbf{r}(x,y)=x\mathbf{i}+y\mathbf{j}+2\sqrt{x^2+y^2}\mathbf{k}.
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Parametric Surfaces}
+\small
+\begin{example}
+Find a parametric representation for the surface $z=2\sqrt{x^2+y^2}$, i.e. the top half of the cone $z^2=4x^2+4y^2$.
+
+\lspace
+Instead, we could have expressed the surface in polar form: \pause We have
+
+\[
+z=2\sqrt{x^2+y^2}=2\sqrt{r^2}=2r\aspace x=r\cos\theta, \,y=r\sin\theta, 
+\]
+so we can write
+\[
+\mathbf{r}(r,\theta)=r\cos\theta\mathbf{i}+r\sin\theta\mathbf{j}+2r\mathbf{k}.
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surfaces of Revolution}
+\small
+
+Surfaces of revolution can also be described parametrically, and it's not difficult to see how. \visible<2->{Let $S$ be the surface generated by rotating the curve $y=f(x)$ about the $x$-axis.} \visible<2->{For ease we assume $f(x)\geq 0$.} \visible<3->{Then we can describe the surface with the following parametric equations:}
+\begin{minipage}{0.5\textwidth}
+\centering
+\visible<3->{
+\begin{align*}
+x&=x\\[2mm]
+y&=f(x)\cos\theta\\[2mm]
+z&=f(x)\sin\theta,
+\end{align*}
+or 
+\[
+\boxed{\mathbf{r}(x,\theta)=x\mathbf{i}+f(x)\cos\theta\mathbf{j}+f(x)\sin\theta\mathbf{k}}
+\]}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\centering
+\visible<2->{
+\includegraphics[scale=0.4]{revolution.png}}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Tangent Planes}
+\small
+Let $S$ be the surface generated by $\mathbf{r}(u,v)=x(u,v)\mathbf{i}+y(u,v)\mathbf{j}+z(u,v)\mathbf{k}$. \pause We want to find the tangent plane to this surface at a point $P_0$ with position vector $\mathbf{r}(u_0,v_0)$.\pause 
+
+\lspace
+Set $u=u_0$.Then $\mathbf{r}(u_0,v)$ is a vector function of a single parameter, and it defines a grid curve $C_1$ on $S$. \pause The tangent vector to $C_1$ at $P_0$ is found by taking the derivative of $\mathbf{r}$ with respect to $v$:
+
+\[
+\mathbf{r}_v=\pp{x}{v}(u_0,v_0)\mathbf{i}+\pp{y}{v}(u_0v_0)\mathbf{j}+\pp{z}{v}(u_0,v_0)\mathbf{k}.
+\]\pause
+
+\vspace{2mm}
+We can take a similar approach by fixing $v=v_0$ and computing
+
+\[
+\mathbf{r}_u=\pp{x}{u}(u_0,v_0)\mathbf{i}+\pp{y}{u}(u_0v_0)\mathbf{j}+\pp{z}{u}(u_0,v_0)\mathbf{k}.
+\]
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Tangent Planes}
+\small
+\[
+\mathbf{r}_v=\pp{x}{v}(u_0,v_0)\mathbf{i}+\pp{y}{v}(u_0v_0)\mathbf{j}+\pp{z}{v}(u_0,v_0)\mathbf{k}
+\]
+
+\[
+\mathbf{r}_u=\pp{x}{u}(u_0,v_0)\mathbf{i}+\pp{y}{u}(u_0v_0)\mathbf{j}+\pp{z}{u}(u_0,v_0)\mathbf{k}
+\]
+
+\lspace
+Both of these vectors lie in the tangent plane, so their cross product 
+\begin{center}
+\fbox{$\mathbf{r}_u\times\mathbf{r}_v$ is normal to the tangent plane}
+\end{center}
+and can be used to describe the plane.\pause
+
+\vspace{2mm}
+\begin{definition}
+A surface $S$ is called \textbf{smooth} if $\mathbf{r}_u\times\mathbf{r}_v$ is not $\mathbf{0}$ anywhere on $S$. In other words it has no ``corners'' or cusps.
+\end{definition}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Tangent Planes}
+\small
+\begin{example}
+Find the tangent plane to the surface with parametric equations $x=u^2$, $y=v^2$, $z=u+2v$ at the point $(1,1,3)$.\pause
+
+\lspace
+First we need the tangent vectors:
+
+\[
+\mathbf{r}_u=\pp{x}{u}\mathbf{i}+\pp{y}{u}\mathbf{j}+\pp{z}{u}=2u\mathbf{i}+\mathbf{k}
+\]
+
+\[
+\mathbf{r}_v=\pp{x}{v}\mathbf{i}+\pp{yy}{v}\mathbf{j}+\pp{z}{v}=2v\mathbf{j}+2\mathbf{k}
+\]\pause
+
+Now we compute the cross product:
+
+\[
+\mathbf{r}_u\times\mathbf{r}_v=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\[2mm] 2u & 0 & 1 \\[2mm]0 & 2v & 2\end{vmatrix}=-2u\mathbf{i}-4u\mathbf{j}+4uv\mathbf{k}
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Tangent Planes}
+\small
+\begin{example}
+Find the tangent plane to the surface with parametric equations $x=u^2$, $y=v^2$, $z=u+2v$ at the point $(1,1,3)$.
+
+\lspace
+Notice the point $(1,1,3)$ corresponds to the parameter values $u=1$, $v=1$, so the normal vector there is
+
+\[
+-2(1)\mathbf{i}-4(1)\mathbf{j}+4(1)(1)\mathbf{k}=-2\mathbf{i}-4\mathbf{j}+4\mathbf{k}.
+\]\pause
+
+Thus, an equation of the tangent plane is
+
+\[
+-2(x-1)-4(y-1)+4(z-3)=0\ospace x+2y-2z+3=0.
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area}
+\small
+Now we come to a critical construction that we will need for the rest of our exploration of vector calculus: the surface area of a general parameterized surface. \visible<2->{For ease, start by considering a surface whose parameter domain $D$ is a rectangle that we subdivide into smaller subrectangles $R_{ij}$.} \visible<3->{Let's choose $(u_i^*,v_i^*)$ to be the lower left corner of the subrectangle $R_{ij}$.} \visible<4->{The image $S_{ij}$ of $R_{ij}$ under $\mathbf{r}$ is called a \textbf{patch} and has the point $P_{ij}$ with position vector $\mathbf{r}(u_i^*,v_i^*)$ as one of its corners.} \visible<4->{Write
+\[
+\mathbf{r}_u^*=\mathbf{r}_u(u_i^*,v_i^*)\aspace \mathbf{r}_v^*=\mathbf{r}_v(u_i^*,v_i^*)
+\]}
+\visible<2->{
+\begin{center}
+\includegraphics[scale=0.5]{patch1.png}
+\end{center}}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area}
+\small
+The figure below shows how two edges of the patch can be approximated by the vectors $\Delta u\mathbf{r}_u^*$ and $\Delta v\mathbf{r}_v^*$. (Look familiar?)\visible<2->{The resulting parallelogram gives us a way to approximate the area of the patch.} 
+
+\begin{minipage}{0.5\textwidth}
+\centering
+\includegraphics[scale=0.5]{patch2.png}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\visible<3->{The area of the parallelogram is
+\[
+|(\Delta u\mathbf{r}_u^*)\times(\Delta v\mathbf{r}_v^*)|=|\mathbf{r}_u^*\times\mathbf{r}_v^*|\Delta u\,\Delta v,
+\]}
+
+\visible<4->{so an approximation of the area of $S$ is
+
+\[
+A(S)\approx\sum_{i=1}^m\sum_{j=1}^n|\mathbf{r}_u^*\times\mathbf{r}_v^*|\Delta u\,\Delta v.
+\]}
+
+\visible<5->{You can probably guess where this is \\going...}
+\end{minipage}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area}
+\small
+\begin{definition}
+If a smooth parametric surface $S$ is given by the equation
+
+\[
+\mathbf{r}(u,v)=x(u,v)\mathbf{i}+y(u,v)\mathbf{j}+z(u,v)\mathbf{k},\pspace (u,v)\in D,
+\]
+
+\vspace{3mm}
+and $S$ is covered just once as $(u,v)$ ranges throughout the parameter domain $D$, then the \textbf{surface area} of $S$ is
+
+\[
+\boxed{A(S)=\iint_D|\mathbf{r}_u\times\mathbf{r}_v|\,dA}
+\]
+
+where
+\[
+\mathbf{r}_u=\pp{x}{u}\mathbf{i}+\pp{y}{u}\mathbf{j}+\pp{z}{u}\mathbf{k}\aspace \mathbf{r}_v=\pp{x}{v}\mathbf{i}+\pp{y}{v}\mathbf{j}+\pp{z}{v}\mathbf{k}.
+\]
+\end{definition}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area}
+\small
+\begin{example}
+Find the surface area of the cone $z=\sqrt{x^2+y^2}$ where $-1\leq x,y\leq 1$.\pause
+
+\lspace
+Let's use a polar representation. We have 
+\[
+z=\sqrt{x^2+y^2}=\sqrt{r^2}=r\aspace x=r\cos\theta, \,y=r\sin\theta.
+\]\pause
+Since $-1,\leq x,y\leq 1$, we have $0\leq r\leq 1$ and $0\leq \theta\leq 2\pi$. \pause The vector equation of the cone is
+\[
+\mathbf{r}(r,\theta)=r\cos\theta\mathbf{i}+r\sin\theta\mathbf{j}+r\mathbf{k},
+\]
+and our partial derivative vectors are
+\[
+\mathbf{r}_r=\<\cos\theta,\sin\theta,1>\aspace\mathbf{r}_\theta=\<-r\sin\theta,r\cos\theta,0>.
+\]
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area}
+\small
+\begin{example}
+Find the surface area of the cone $z=\sqrt{x^2+y^2}$ where $-1\leq x,y\leq 1$.
+
+\lspace
+\begin{align*}
+\mathbf{r}_u\times \mathbf{r}_v&=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\[2mm] \cos\theta & \sin\theta & 1\\[2mm] -r\sin\theta & r\cos\theta & 0\end{vmatrix}\\[2mm]
+&=(0-r\cos\theta)\mathbf{i}-(0+r\sin\theta)\mathbf{j}+(r\cos^2\theta+r\sin^2\theta)\mathbf{k}\\[2mm]
+&=-r\cos\theta\mathbf{i}-r\sin\theta\mathbf{j}+r\mathbf{k}.\\[4mm]
+|\mathbf{r}_u\times\mathbf{r}_v|&=\sqrt{r^2\cos^2\theta+r^2\sin^2\theta+r^2}=\sqrt{2}r.
+\end{align*}
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area}
+\small
+\begin{example}
+Find the surface area of the cone $z=\sqrt{x^2+y^2}$ where $-1\leq x,y\leq 1$.
+
+\lspace
+
+\begin{align*}
+A(S)&=\iint_D|\mathbf{r}_u\times\mathbf{r}_v|\,dA=\iint_D\sqrt{2}r\,dA\\[2mm]
+&=\int_0^{2\pi}\int_0^1\sqrt{2}r^2\,dr\,d\theta=\int_0^{2\pi}\,d\theta\int_0^1\sqrt{2}r^2\,dr\\[2mm]
+&=2\pi\cdot\left.\frac{\sqrt{2}}{3}r^3\right|_0^1=\frac{2\sqrt{2}\pi}{3}.
+\end{align*}
+\end{example}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area of a Graph of a Function of Two Variables}
+\small
+Now we can easily derive the surface area formula that we skipped in section 15.5. \pause Suppose we have a surface $S$ described by a function of two variables $z=f(x,y)$ where $(x,y)$ lies in $D$, and that $f$ has continuous partial derivatives. \pause The parametric equations of the surface are
+
+\[
+x=x\pspace y=y\pspace z=f(x,y),\text{ so}
+\]
+
+\[
+\mathbf{r}_x=\mathbf{i}+f_x\mathbf{k}\aspace \mathbf{r}_y=\mathbf{j}+f_y\mathbf{k},\text{ and}
+\]
+
+\[
+\mathbf{r}_x\times\mathbf{r}_y=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\[2mm] 1& 0 & \pp{f}{x}\\[2mm] 0 & 1 & \pp{f}{y}\end{vmatrix}=-\pp{f}{x}\mathbf{i}-\pp{f}{y}\mathbf{j}+\mathbf{k}.
+\]
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area of a Graph of a Function of Two Variables}
+\small
+Thus,
+
+\[
+|\mathbf{r}_x\times \mathbf{r}_y|=\sqrt{\left(\pp{f}{x}\right)^2+\left(\pp{f}{y}\right)^2+1}=\sqrt{1+\left(\pp{z}{x}\right)^2+\left(\pp{z}{y}\right)^2}
+\]
+
+and therefore, the area of the surface is
+
+\[
+\boxed{A(S)=\iint_D\sqrt{1+\left(\pp{z}{x}\right)^2+\left(\pp{z}{y}\right)^2}\,dA.}
+\]
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area of a Graph of a Function of Two Variables}
+\small
+\[
+\boxed{A(S)=\iint_D\sqrt{1+\left(\pp{z}{x}\right)^2+\left(\pp{z}{y}\right)^2}\,dA.}
+\]
+
+\lspace
+Notice the similarity to the arc length formula from Calc II:
+\[
+L(C)=\int_a^b\sqrt{1+\left(\dd{y}{x}\right)^2}\,dx.
+\]\pause
+
+
+Recall the formula for the area of a surface of revolution you derived in Calc II:
+\[
+A(S)=\int_a^b2\pi r(x)\sqrt{1+r'(x)^2}\,dx.
+\]
+\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area of a Graph of a Function of Two Variables}
+\small
+\textbf{Claim.} The general surface area formula derived earlier agrees with the formula derived in Calc II.\pause
+
+\begin{proofs}
+Let $S$ be generated by rotating the curve $y=f(x)$ about the $x$-axis with $f(x)\geq 0$ and $a\leq x\leq b$. \pause We can choose the parametric equations as
+\begin{minipage}{0.4\textwidth}
+
+\begin{align*}
+x&=x\\[2mm]
+y&=f(x)\cos\theta\\[2mm]
+z&=f(x)\sin\theta\\[2mm]
+a&\leq x\leq b\\[2mm]
+0&\leq \theta\leq 2\pi,
+\end{align*}\pause
+\end{minipage}%
+\begin{minipage}{0.6\textwidth}
+and then the necessary tangent vectors are 
+
+\[
+\mathbf{r}_x=\mathbf{i}+f'(x)\cos\theta\mathbf{j}+f'(x)\sin\theta\mathbf{k}
+\]
+
+\[
+\mathbf{r}_\theta=-f(x)\sin\theta\mathbf{i}+f(x)\cos\theta\mathbf{k}.
+\]
+\end{minipage}
+\end{proofs}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area of a Graph of a Function of Two Variables}
+\small
+\begin{proofs}
+
+
+\begin{align*}
+\mathbf{r}_x\times\mathbf{r}_\theta&=\begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\[2mm] 1 & f'(x)\cos\theta & f'(x)\sin\theta\\[2mm] 0 & -f(x)\sin\theta & f(x)\cos\theta\end{vmatrix}\\[2mm]
+&=f(x)f'(x)\mathbf{i}-f(x)\cos\theta\mathbf{j}-f(x)\sin\theta\mathbf{k},\\[8mm]
+|\mathbf{r}_x\times\mathbf{r}_\theta|&=\sqrt{f(x)^2f'(x)^2+f(x)^2\cos^2\theta+f(x)^2\sin^2\theta}\\[2mm]
+&=\sqrt{f(x)^2[1+f'(x)^2]}\\[2mm]
+&=f(x)\sqrt{1+f'(x)^2}.
+\end{align*}
+\end{proofs}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}[t]{Surface Area of a Graph of a Function of Two Variables}
+\small
+\begin{proof}
+Therefore, our formula gives the area of the surface as
+
+\begin{align*}
+A(S)&=\iint_D|\mathbf{r}_x\times\mathbf{r}_\theta|\,dA\\[2mm]
+&=\int_0^{2\pi}\int_a^bf(x)\sqrt{1+f'(x)^2}\,dx\,d\theta\\[2mm]
+&=2\pi \int_a^bf(x)\sqrt{1+f'(x)^2}\,dx\\[2mm]
+&=\int_a^b2\pi f(x)\sqrt{1+f'(x)^2}\,dx.\quad \checkmark
+\end{align*}
+\end{proof}
+\end{frame}
+
+
+
+
+
+
+
+
+
+\end{document}
